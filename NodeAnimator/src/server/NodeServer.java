@@ -15,6 +15,7 @@ import de.hohenheim.modell.RouteSectionMarker;
 import de.hohenheim.modell.Train;
 import de.hohenheim.view.map.NodeMap;
 
+//
 public class NodeServer {
 	public static void main(String args[]) {
 		
