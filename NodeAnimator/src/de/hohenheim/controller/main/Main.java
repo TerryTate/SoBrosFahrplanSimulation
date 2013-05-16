@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.ControllerCanvas;
+import de.hohenheim.view.map.Map;
 import de.hohenheim.view.menu.MenuBar;
 
 public class Main {
