@@ -61,7 +61,7 @@ public class CompositeTrain extends Composite{
 	    
 	    scrollComposite.setContent(getTrainTable());
 		
-		Canvas canvasControl = new Canvas(this, SWT.BORDER);
+		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.BORDER);
 			
 		canvasControl.setBackground(ColorConstants.white);
     	canvasControl.setBounds(0, 0, 800, 0);
@@ -80,5 +80,7 @@ public class CompositeTrain extends Composite{
 		return this.trainTable;
 	}
 	
-	
+	public void loadTableEntry(){
+		
+	}
 }

@@ -15,6 +15,9 @@ import de.hohenheim.view.tab.Tab;
 
 public class Main {
 
+	private static Composite tabComposite;
+	private static Composite bottomComposite;
+	public static CTabFolder cTabFolder;
 	/**
 	 * @param args
 	 */
@@ -40,7 +43,7 @@ public class Main {
 		
 		shell.setMenuBar(MenuBar.createMenu(shell));
 		
-		Composite tabComposite = new Composite(shell, SWT.BORDER );
+		tabComposite = new Composite(shell, SWT.BORDER );
 		tabComposite.setBackground(ColorConstants.lightGray);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -51,15 +54,18 @@ public class Main {
 		tabComposite.setLayout(gridLayout);
 		
 		//Composite muss noch bischen schmaler werden 
-		Composite bottomComposite = new Composite(shell, SWT.BORDER );
+		bottomComposite = new Composite(shell, SWT.BORDER );
 		bottomComposite.setBackground(ColorConstants.lightGray);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
+		gridData.heightHint = 20;
     	bottomComposite.setLayoutData(gridData);
+    	
+
 
 		
-	    CTabFolder cTabFolder = Tab.createTabFolder(tabComposite, display);   
+	    cTabFolder = Tab.createTabFolder(tabComposite, display);   
 	    gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;

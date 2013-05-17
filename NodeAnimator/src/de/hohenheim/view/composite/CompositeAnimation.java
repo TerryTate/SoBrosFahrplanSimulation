@@ -7,6 +7,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import de.hohenheim.view.map.Map;
+import de.hohenheim.view.map.NodeMap;
 
 public class CompositeAnimation extends Composite{
     
@@ -33,11 +34,10 @@ public class CompositeAnimation extends Composite{
 			gridData.verticalAlignment = GridData.FILL;
 			gridData.grabExcessVerticalSpace = true;
 			canvasMap.setLayoutData(gridData);
-			Map.createMap(canvasMap, 1);
+			NodeMap map = Map.createMap(canvasMap, 1);
 			
 			
-	        Canvas canvasControl = new Canvas(this, SWT.BORDER);
-			
+	        AnimationControllerCanvas canvasControl = new AnimationControllerCanvas(this, SWT.BORDER, map);
 			canvasControl.setBackground(ColorConstants.white);
 			canvasControl.setBounds(0, 0, 800, 0);
 			gridData = new GridData();
