@@ -1,19 +1,16 @@
 package de.hohenheim.view.tab;
 
 
-import org.eclipse.draw2d.ColorConstants;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import de.hohenheim.view.composite.CompositeAnimation;
+import de.hohenheim.view.composite.CompositeTrain;
 
 
 
@@ -30,10 +27,13 @@ public class Tab {
 		
 		final CTabFolder cTabFolder = new CTabFolder(tabComposite, SWT.BORDER_SOLID);
 	    
+		
+		
 		// Animation Tab 
 	    CTabItem cTabAnimationItem = new CTabItem(cTabFolder, SWT.NULL );
 	    cTabAnimationItem.setText(tabNamesDE[0]);	
-	    cTabAnimationItem.setControl(CompositeAnimation.createAnimationComposite(cTabFolder));
+	    CompositeAnimation compositeAnimation = new CompositeAnimation(cTabFolder, SWT.NULL);
+	    cTabAnimationItem.setControl(compositeAnimation);
 	    
         // Project Tab	
 	    CTabItem cTabProjectItem = new CTabItem(cTabFolder, SWT.NULL);
@@ -42,6 +42,8 @@ public class Tab {
         // Train Tab
 	    CTabItem cTabTrainItem = new CTabItem(cTabFolder, SWT.NULL);
 	    cTabTrainItem.setText(tabNamesDE[2]);
+	    CompositeTrain compositeTrain = new CompositeTrain(cTabFolder, SWT.NULL);
+	    cTabTrainItem.setControl(compositeTrain);
 	        
         // TimeTable Tab
 	    CTabItem cTabTimeTableItem = new CTabItem(cTabFolder, SWT.NULL);

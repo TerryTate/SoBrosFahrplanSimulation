@@ -8,9 +8,10 @@ import de.hohenheim.modell.RouteSectionMarker;
 public class Map {
 
 	/**
+	 * @param number 
 	 * @param args
 	 */
-	public static NodeMap createMap (Canvas c) {
+	public static NodeMap createMap (Canvas c, int number) {
         
 		NodeMap map = new NodeMap(c);				
 		

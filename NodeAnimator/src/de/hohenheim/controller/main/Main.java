@@ -33,10 +33,10 @@ public class Main {
 		shell.setText("Train animation example");
 		shell.setImage(new Image(null,"img/forklift-truck-logo.png"));
 		shell.setSize(820, 720);
+		
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
-	
-		shell.setLayout(gridLayout);
+	    shell.setLayout(gridLayout);
 		
 		shell.setMenuBar(MenuBar.createMenu(shell));
 		
@@ -75,10 +75,6 @@ public class Main {
 	
 		while (!shell.isDisposed()) {			
 			if (!display.readAndDispatch()) {
-			 
-			    Point size2 = shell.getSize();
-//			    tabComposite.setBounds(5,10,size2.x - 25, size2.y - 90);
-//			    cTabFolder.setSize(size2.x - 40, size2.y - 105);
 			    
 			    display.sleep();
 		   }
