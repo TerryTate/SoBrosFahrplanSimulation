@@ -5,7 +5,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -27,31 +28,57 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
+		Display display = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setText("Train animation example");
 		shell.setImage(new Image(null,"img/forklift-truck-logo.png"));
-		shell.setSize(820, 650);
-		
+		shell.setSize(820, 720);
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 1;
+	
+		shell.setLayout(gridLayout);
 		
 		shell.setMenuBar(MenuBar.createMenu(shell));
 		
-		Composite tabComposite = new Composite(shell, SWT.BORDER);
+		Composite tabComposite = new Composite(shell, SWT.BORDER );
 		tabComposite.setBackground(ColorConstants.lightGray);
-		tabComposite.setBounds(5,10, 710, 460);
-	
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.verticalAlignment = GridData.FILL;
+		gridData.grabExcessVerticalSpace = true;
+		tabComposite.setLayoutData(gridData);
+		tabComposite.setLayout(gridLayout);
 		
-	    CTabFolder cTabFolder = Tab.createTabFolder(tabComposite);   
-	    cTabFolder.setBounds(5, 5, 595, 445);
+		//Composite muss noch bischen schmaler werden 
+		Composite bottomComposite = new Composite(shell, SWT.BORDER );
+		bottomComposite.setBackground(ColorConstants.lightGray);
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+    	bottomComposite.setLayoutData(gridData);
+
 		
+	    CTabFolder cTabFolder = Tab.createTabFolder(tabComposite, display);   
+	    gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.verticalAlignment = GridData.FILL;
+		gridData.grabExcessVerticalSpace = true;
+		cTabFolder.setLayoutData(gridData);
+	   
+	    
+	   
+	    
 	    shell.open();
     
-		Display display = Display.getDefault();
+	
 		while (!shell.isDisposed()) {			
 			if (!display.readAndDispatch()) {
 			 
 			    Point size2 = shell.getSize();
-			    tabComposite.setBounds(5,10,size2.x - 190, size2.y - 90);
-			    cTabFolder.setSize(size2.x - 205, size2.y - 105);
+//			    tabComposite.setBounds(5,10,size2.x - 25, size2.y - 90);
+//			    cTabFolder.setSize(size2.x - 40, size2.y - 105);
 			    
 			    display.sleep();
 		   }
