@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.view.menu.MenuBar;
+import de.hohenheim.view.tab.Tab;
 
 public class Main {
 
@@ -19,23 +20,28 @@ public class Main {
 	
 	Point size;
 	
+	/*
+	 * 
+	 * 
+	 */
+	
 	public static void main(String[] args) {
 		
 		Shell shell = new Shell();
 		shell.setText("Train animation example");
 		shell.setImage(new Image(null,"img/forklift-truck-logo.png"));
-		shell.setSize(800, 550);
+		shell.setSize(820, 650);
+		
 		
 		shell.setMenuBar(MenuBar.createMenu(shell));
 		
 		Composite tabComposite = new Composite(shell, SWT.BORDER);
-		tabComposite.setBackground(ColorConstants.gray);
-		Point size = shell.getSize();
-		tabComposite.setBounds(10,10,size.x - 190, size.y - 70);
+		tabComposite.setBackground(ColorConstants.lightGray);
+		tabComposite.setBounds(5,10, 710, 460);
+	
 		
-	    CTabFolder cTabFolder = Tab.createTabFolder(tabComposite);
-	    size = shell.getSize();
-	    cTabFolder.setSize(size.x - 190, size.y - 70);
+	    CTabFolder cTabFolder = Tab.createTabFolder(tabComposite);   
+	    cTabFolder.setBounds(5, 5, 595, 445);
 		
 	    shell.open();
     
@@ -44,8 +50,8 @@ public class Main {
 			if (!display.readAndDispatch()) {
 			 
 			    Point size2 = shell.getSize();
-			    tabComposite.setBounds(10,10,size2.x - 190, size2.y - 90);
-			    cTabFolder.setSize(size2.x - 190, size2.y - 90);
+			    tabComposite.setBounds(5,10,size2.x - 190, size2.y - 90);
+			    cTabFolder.setSize(size2.x - 205, size2.y - 105);
 			    
 			    display.sleep();
 		   }
