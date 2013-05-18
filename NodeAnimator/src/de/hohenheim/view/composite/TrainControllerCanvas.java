@@ -23,6 +23,8 @@ public class TrainControllerCanvas extends Canvas{
 	public static Text textID;
 	public static Text textSpeed;
 	public static Text textStartStation;
+	public static Group groupAddTrain;
+	public static Group groupControlSmall;
 
 	public TrainControllerCanvas(Composite parent, int style) {
 		super(parent, style);
@@ -31,7 +33,7 @@ public class TrainControllerCanvas extends Canvas{
 
 	private void createContent() {
 		
-		Group groupAddTrain = new Group(this, SWT.SHADOW_ETCHED_IN);
+		groupAddTrain = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    groupAddTrain.setText("Zug Verwaltung");
         GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 3; 
@@ -99,6 +101,31 @@ public class TrainControllerCanvas extends Canvas{
 		
 		groupAddTrain.pack();
 		
+
+		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
+	    groupControlSmall.setText("Zug Verwaltung");
+        GridLayout gridLayout2 = new GridLayout(); 
+        gridLayout.numColumns = 1; 
+	    groupControlSmall.setLayout(gridLayout2);
+
+
+		Button newTrain2 = new Button(groupControlSmall, SWT.NONE);
+		newTrain2.setText("Zug hinzufügen");
+	
+		
+		newTrain.addListener(SWT.Selection, new Listener() {
+			
+			public void handleEvent(Event arg0) {
+				
+			
+				
+			}
+		});
+		
+		
+		
+		groupControlSmall.pack();
+		groupControlSmall.setVisible(false);
 	}
 
 }

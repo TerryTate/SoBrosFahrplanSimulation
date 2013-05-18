@@ -13,6 +13,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
+
+import de.hohenheim.view.composite.TrainControllerCanvas;
+import de.hohenheim.view.composite.TrainControllerCanvasSmall;
 import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.tab.Tab;
 
@@ -22,6 +25,7 @@ public class Main {
 	private static Composite bottomComposite;
 	public static CTabFolder cTabFolder;
 	public static ArrayList<TrainData> trainList = new ArrayList();
+	public static boolean big = true;
 	
 	/**
 	 * @param args
@@ -86,6 +90,24 @@ public class Main {
 	
 		while (!shell.isDisposed()) {			
 			if (!display.readAndDispatch()) {
+				Point sizeshell = shell.getSize();
+				
+				if (sizeshell.y < 300){
+					if(big == true){
+					     TrainControllerCanvas.groupControlSmall.setVisible(true);	
+					     TrainControllerCanvas.groupAddTrain.setVisible(false);
+					     big = false;
+					}			
+				}
+			    else if(sizeshell.y >= 300){
+			    	if(big == false){
+					     TrainControllerCanvas.groupAddTrain.setVisible(true);
+					     TrainControllerCanvas.groupControlSmall.setVisible(false);
+					     big = true;
+					}	
+			    	
+			    }
+			    		
 			    
 			    display.sleep();
 		   }
