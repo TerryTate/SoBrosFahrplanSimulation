@@ -1,5 +1,8 @@
 package de.hohenheim.controller.events;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.TableItem;
+
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.controller.main.TrainData;
 import de.hohenheim.view.composite.CompositeTrain;
@@ -12,23 +15,19 @@ public class TrainEvents {
 	
 	public static void addNewTrain() {
 		
-		String idText = TrainControllerCanvas.textID.getText();
+		String idText = TrainControllerCanvas.getTextID().getText();
 		int id = Integer.parseInt(idText);
-		String speedText = TrainControllerCanvas.textSpeed.getText();
+		String speedText = TrainControllerCanvas.getTextSpeed().getText();
 		int speed = Integer.parseInt(speedText);
-		TrainData train = new TrainData(id, speed, TrainControllerCanvas.textStartStation.getText());
-		Main.trainList.add(train);
-		reloadTrainTable();
-	}
-
-	private static void reloadTrainTable() {
+		TrainData train = new TrainData(id, speed, TrainControllerCanvas.getTextStartStation().getText());
 		
-		CompositeTrain compositeTrain = (CompositeTrain) Main.cTabFolder.getItem(2).getControl();
-		compositeTrain.loadTableEntry();
+		Main.trainListAll.add(train);
+		
+		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
+		item.setText(new String[]{String.valueOf(train.getID()),
+				String.valueOf(train.getSpeed()),
+				train.getStartStation()});
 		
 	}
-	
-	
-	
 
 }

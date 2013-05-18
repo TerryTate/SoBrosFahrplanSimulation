@@ -20,11 +20,12 @@ import de.hohenheim.controller.events.TrainEvents;
 
 public class TrainControllerCanvas extends Canvas{
 
-	public static Text textID;
-	public static Text textSpeed;
-	public static Text textStartStation;
-	public static Group groupAddTrain;
-	public static Group groupControlSmall;
+	private static Text textID;
+	private static Text textSpeed;
+	private static Text textStartStation;
+	private static Group groupAddTrain;
+	private static Group groupControlSmall;
+	private static Group groupEditTrain;
 
 	public TrainControllerCanvas(Composite parent, int style) {
 		super(parent, style);
@@ -32,56 +33,59 @@ public class TrainControllerCanvas extends Canvas{
 	}
 
 	private void createContent() {
+	
+		// Group with all controllers for add a new Train
 		
-		groupAddTrain = new Group(this, SWT.SHADOW_ETCHED_IN);
-	    groupAddTrain.setText("Zug Verwaltung");
+		setGroupAddTrain(new Group(this, SWT.SHADOW_ETCHED_IN));
+	    getGroupAddTrain().setText("Zug hinzufügen");
         GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 3; 
-	    groupAddTrain.setLayout(gridLayout);
+	    getGroupAddTrain().setLayout(gridLayout);
         
 	    
 	    //Train ID
-	    Label label = new Label(groupAddTrain, SWT.NONE); 
+	    Label iD = new Label(getGroupAddTrain(), SWT.NONE); 
 	    GridData gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.END;
-	    label.setText("ID : ");
-	    label.setLayoutData(gridData);
+	    iD.setText("ID : ");
+	    iD.setLayoutData(gridData);
 	    
-	    textID = new Text(groupAddTrain, SWT.BORDER); 
-	    textID.setText("645759"); 
+	    setTextID(new Text(getGroupAddTrain(), SWT.BORDER)); 
+	    getTextID().setText("645759"); 
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2;
-	    textID.setTextLimit(6);
-	    textID.setLayoutData(gridData);
+	    getTextID().setTextLimit(6);
+	    getTextID().setLayoutData(gridData);
 	    
 	    //TrainSpeed
-	    Label trainSpeed = new Label(groupAddTrain, SWT.NONE); 
+	    Label trainSpeed = new Label(getGroupAddTrain(), SWT.NONE); 
 	    trainSpeed.setText("Geschwindigkeit : "); 
 	    
-	    textSpeed = new Text(groupAddTrain, SWT.BORDER); 
-	    textSpeed.setText("300"); 
-	    textID.setTextLimit(6);
-	    textID.setLayoutData(gridData);
+	    setTextSpeed(new Text(getGroupAddTrain(), SWT.BORDER)); 
+	    getTextSpeed().setText("300"); 
+	    getTextID().setTextLimit(6);
+	    getTextID().setLayoutData(gridData);
 	    
-	    Label kmH = new Label(groupAddTrain, SWT.NONE); 
+	    Label kmH = new Label(getGroupAddTrain(), SWT.NONE); 
 	    kmH.setText("km/h"); 
 	    
 	    //Startstation
-	    Label startstation = new Label(groupAddTrain, SWT.NONE); 
+	    
+	    Label startstation = new Label(getGroupAddTrain(), SWT.NONE); 
 	    startstation.setText("Anfangsstation : "); 
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.END;
 	    startstation.setLayoutData(gridData);
 	    
-	    textStartStation = new Text(groupAddTrain, SWT.BORDER); 
-	    textStartStation.setText("München"); 
+	    setTextStartStation(new Text(getGroupAddTrain(), SWT.BORDER)); 
+	    getTextStartStation().setText("München"); 
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2; 
-	    textStartStation.setLayoutData(gridData);
+	    getTextStartStation().setLayoutData(gridData);
 	    
-		Button newTrain = new Button(groupAddTrain, SWT.NONE);
+		Button newTrain = new Button(getGroupAddTrain(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -97,23 +101,54 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
+		getGroupAddTrain().pack();
 		
 		
-		groupAddTrain.pack();
+	// Group with all controllers for edit a existing Train
 		
-
-		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
-	    groupControlSmall.setText("Zug Verwaltung");
+		groupEditTrain = new Group(this, SWT.SHADOW_ETCHED_IN );
+	    groupEditTrain.setText("Zug bearbeiten");
+	    groupEditTrain.setBounds(0, 130, 0, 0);
         GridLayout gridLayout2 = new GridLayout(); 
+        gridLayout.numColumns = 3; 
+	    groupEditTrain.setLayout(gridLayout2);
+        
+	    
+	   
+
+	    
+		Button editTrain = new Button(groupEditTrain, SWT.NONE);
+		editTrain.setText("Zug ändern");
+		gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.CENTER;
+	    gridData.horizontalSpan = 3; 
+	    editTrain.setLayoutData(gridData);
+		
+		editTrain.addListener(SWT.Selection, new Listener() {
+			
+			public void handleEvent(Event arg0) {
+				
+
+				
+			}
+		});
+		
+		groupEditTrain.pack();
+		
+		// Group when the shellHeight < then 300 pixel
+		
+		setGroupControlSmall(new Group(this, SWT.SHADOW_ETCHED_IN));
+	    getGroupControlSmall().setText("Zug Verwaltung");
+        GridLayout gridLayout3 = new GridLayout(); 
         gridLayout.numColumns = 1; 
-	    groupControlSmall.setLayout(gridLayout2);
+	    getGroupControlSmall().setLayout(gridLayout3);
 
 
-		Button newTrain2 = new Button(groupControlSmall, SWT.NONE);
+		Button newTrain2 = new Button(getGroupControlSmall(), SWT.NONE);
 		newTrain2.setText("Zug hinzufügen");
 	
 		
-		newTrain.addListener(SWT.Selection, new Listener() {
+		newTrain2.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
@@ -122,10 +157,67 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
+		 
+		Button editTrain2 = new Button(getGroupControlSmall(), SWT.NONE);
+		editTrain2.setText("Zug ändern");
+		gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.CENTER;
+	    gridData.horizontalSpan = 3; 
+	    editTrain2.setLayoutData(gridData);
+		
+		editTrain2.addListener(SWT.Selection, new Listener() {
+			
+			public void handleEvent(Event arg0) {
+				
+		
+				
+			}
+		});
 		
 		
-		groupControlSmall.pack();
-		groupControlSmall.setVisible(false);
+		
+		getGroupControlSmall().pack();
+		getGroupControlSmall().setVisible(false);
+	}
+
+	public static Text getTextID() {
+		return textID;
+	}
+
+	public static void setTextID(Text textID) {
+		TrainControllerCanvas.textID = textID;
+	}
+
+	public static Group getGroupControlSmall() {
+		return groupControlSmall;
+	}
+
+	public static void setGroupControlSmall(Group groupControlSmall) {
+		TrainControllerCanvas.groupControlSmall = groupControlSmall;
+	}
+
+	public static Group getGroupAddTrain() {
+		return groupAddTrain;
+	}
+
+	public static void setGroupAddTrain(Group groupAddTrain) {
+		TrainControllerCanvas.groupAddTrain = groupAddTrain;
+	}
+
+	public static Text getTextSpeed() {
+		return textSpeed;
+	}
+
+	public static void setTextSpeed(Text textSpeed) {
+		TrainControllerCanvas.textSpeed = textSpeed;
+	}
+
+	public static Text getTextStartStation() {
+		return textStartStation;
+	}
+
+	public static void setTextStartStation(Text textStartStation) {
+		TrainControllerCanvas.textStartStation = textStartStation;
 	}
 
 }

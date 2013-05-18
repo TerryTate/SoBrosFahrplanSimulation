@@ -23,7 +23,7 @@ public class CompositeTrain extends Composite{
 	
 	private ScrolledComposite scrollComposite;
 	private GridLayout gridLayout;
-	private Table trainTable;
+	private static Table trainTable;
 
 	/*
 	 * 
@@ -81,22 +81,8 @@ public class CompositeTrain extends Composite{
 	 * 
 	 */
 	
-	public Table getTrainTable(){
-		return this.trainTable;
+	public static Table getTrainTable(){
+		return trainTable;
 	}
 	
-	public void loadTableEntry(){
-		
-		getTrainTable().removeAll();
-		    
-		for(int i = 0; i < Main.trainList.size(); i++){
-		    TrainData trainData = Main.trainList.get(i);
-			TableItem tableItem = new TableItem(getTrainTable(), SWT.LEFT);
-			tableItem.setText(new String[]{String.valueOf(trainData.getID()),
-					String.valueOf(trainData.getSpeed()),
-					trainData.getStartStation()});
-			
-		}
-		
-	}
 }

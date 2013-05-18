@@ -4,34 +4,28 @@ import java.util.ArrayList;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
-
 import de.hohenheim.view.composite.TrainControllerCanvas;
-import de.hohenheim.view.composite.TrainControllerCanvasSmall;
 import de.hohenheim.view.menu.MenuBar;
-import de.hohenheim.view.tab.Tab;
+import de.hohenheim.view.tab.TabFolder;
 
 public class Main {
 
 	private static Composite tabComposite;
 	private static Composite bottomComposite;
-	public static CTabFolder cTabFolder;
-	public static ArrayList<TrainData> trainList = new ArrayList();
+	private static TabFolder tabFolder;
+	public static ArrayList<TrainData> trainListAll = new ArrayList();
 	public static boolean big = true;
 	
 	/**
 	 * @param args
 	 */
-	
-	Point size;
 	
 	/*
 	 * 
@@ -62,7 +56,7 @@ public class Main {
 		tabComposite.setLayoutData(gridData);
 		tabComposite.setLayout(gridLayout);
 		
-		//Composite muss noch bischen schmaler werden 
+		
 		bottomComposite = new Composite(shell, SWT.BORDER );
 		bottomComposite.setBackground(ColorConstants.lightGray);
 		gridData = new GridData();
@@ -71,20 +65,8 @@ public class Main {
 		gridData.heightHint = 20;
     	bottomComposite.setLayoutData(gridData);
     	
+	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display);   
 
-
-		
-	    cTabFolder = Tab.createTabFolder(tabComposite, display);   
-	    gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.verticalAlignment = GridData.FILL;
-		gridData.grabExcessVerticalSpace = true;
-		cTabFolder.setLayoutData(gridData);
-	   
-	    
-	   
-	    
 	    shell.open();
     
 	
@@ -94,15 +76,15 @@ public class Main {
 				
 				if (sizeshell.y < 300){
 					if(big == true){
-					     TrainControllerCanvas.groupControlSmall.setVisible(true);	
-					     TrainControllerCanvas.groupAddTrain.setVisible(false);
+					     TrainControllerCanvas.getGroupControlSmall().setVisible(true);	
+					     TrainControllerCanvas.getGroupAddTrain().setVisible(false);
 					     big = false;
 					}			
 				}
 			    else if(sizeshell.y >= 300){
 			    	if(big == false){
-					     TrainControllerCanvas.groupAddTrain.setVisible(true);
-					     TrainControllerCanvas.groupControlSmall.setVisible(false);
+					     TrainControllerCanvas.getGroupAddTrain().setVisible(true);
+					     TrainControllerCanvas.getGroupControlSmall().setVisible(false);
 					     big = true;
 					}	
 			    	
@@ -115,6 +97,12 @@ public class Main {
 	
 	}
 
-	
+	public static TabFolder getcTabFolder() {
+		return tabFolder;
+	}
+
+	public static void setTabFolder(TabFolder tabFolder) {
+		Main.tabFolder = tabFolder;
+	}
 
 }
