@@ -1,5 +1,7 @@
 package de.hohenheim.controller.main;
 	
+import java.util.ArrayList;
+
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -9,6 +11,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.tab.Tab;
@@ -18,6 +21,8 @@ public class Main {
 	private static Composite tabComposite;
 	private static Composite bottomComposite;
 	public static CTabFolder cTabFolder;
+	public static ArrayList<TrainData> trainList = new ArrayList();
+	
 	/**
 	 * @param args
 	 */

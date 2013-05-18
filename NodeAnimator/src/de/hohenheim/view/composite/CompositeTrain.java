@@ -9,6 +9,10 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+
+import de.hohenheim.controller.main.Main;
+import de.hohenheim.controller.main.TrainData;
 
 public class CompositeTrain extends Composite{
 	
@@ -27,6 +31,7 @@ public class CompositeTrain extends Composite{
 	 */
 	
 	public CompositeTrain(Composite parent, int style) {
+	
 		super(parent, style);
 		gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
@@ -81,6 +86,17 @@ public class CompositeTrain extends Composite{
 	}
 	
 	public void loadTableEntry(){
+		
+		getTrainTable().removeAll();
+		    
+		for(int i = 0; i < Main.trainList.size(); i++){
+		    TrainData trainData = Main.trainList.get(i);
+			TableItem tableItem = new TableItem(getTrainTable(), SWT.LEFT);
+			tableItem.setText(new String[]{String.valueOf(trainData.getID()),
+					String.valueOf(trainData.getSpeed()),
+					trainData.getStartStation()});
+			
+		}
 		
 	}
 }
