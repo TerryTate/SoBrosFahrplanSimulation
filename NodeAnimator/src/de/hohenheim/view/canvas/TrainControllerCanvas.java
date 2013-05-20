@@ -417,6 +417,29 @@ public class TrainControllerCanvas extends Canvas{
 		TrainControllerCanvas.groupEditTrain = groupEditTrain;
 	}
     
+	public static Group getGroupDeletTrain() {
+		return groupDeletTrain;
+	}
+
+	public static void setGroupDeletTrain(Group groupDeletTrain) {
+		TrainControllerCanvas.groupDeletTrain = groupDeletTrain;
+	}
+
+	public static Group getGroupImportTrain() {
+		return groupImportTrain;
+	}
+
+	public static void setGroupImportTrain(Group groupImportTrain) {
+		TrainControllerCanvas.groupImportTrain = groupImportTrain;
+	}
+
+	public static Group getGroupExportTrain() {
+		return groupExportTrain;
+	}
+
+	public static void setGroupExportTrain(Group groupExportTrain) {
+		TrainControllerCanvas.groupExportTrain = groupExportTrain;
+	}
 	/*
 	 *  Getter and Setter for edit a Train 
 	 * 
@@ -446,28 +469,6 @@ public class TrainControllerCanvas extends Canvas{
 		TrainControllerCanvas.typOfTrain_combo2 = typOfTrain_combo2;
 	}
 
-	public static Group getGroupDeletTrain() {
-		return groupDeletTrain;
-	}
-
-	public static void setGroupDeletTrain(Group groupDeletTrain) {
-		TrainControllerCanvas.groupDeletTrain = groupDeletTrain;
-	}
-
-	public static Group getGroupImportTrain() {
-		return groupImportTrain;
-	}
-
-	public static void setGroupImportTrain(Group groupImportTrain) {
-		TrainControllerCanvas.groupImportTrain = groupImportTrain;
-	}
-
-	public static Group getGroupExportTrain() {
-		return groupExportTrain;
-	}
-
-	public static void setGroupExportTrain(Group groupExportTrain) {
-		TrainControllerCanvas.groupExportTrain = groupExportTrain;
-	}
+	
 	
 }
