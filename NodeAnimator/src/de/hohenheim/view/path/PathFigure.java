@@ -2,8 +2,8 @@ package de.hohenheim.view.path;
 
 import org.eclipse.draw2d.BendpointConnectionRouter;
 import org.eclipse.draw2d.PolylineConnection;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.LineAttributes;
-
 import de.hohenheim.view.mobile.Utility;
 
 /**
@@ -18,16 +18,57 @@ public class PathFigure extends PolylineConnection {
 	   */
 	  public static int LINE_WIDTH = 3; 
 	  
+	  /*
+	   * 
+	   */
+	  
+	  final Color red = new Color(null,200,0,0);
+	  final Color blue = new Color(null,0,200,0);
+	  final Color green = new Color(null,0,0,200);
+	  final Color orange = new Color(null, 255, 127, 0);
+	  final Color lime = new Color(null, 127, 255, 127);
+	  
+	  
 	  /**
 	   * A Object that is connected to this {@link PathFigure} as the modell.
 	   */
 	  private Object modellObject;
+
+	  
 	  /**
 	   * The constructor sets a {@link BendpointConnectionRouter} to draw the path
 	   * as a line.  
+	 * @param pathSpeed 
 	   */
-	  public PathFigure(Object modellObject) {
+	  public PathFigure(Object modellObject, int pathSpeed) {
 		BendpointConnectionRouter router = new BendpointConnectionRouter();
+	    
+		/*
+		 * 
+		 */
+		
+		if(pathSpeed == 100){
+			this.setBackgroundColor(red);
+			this.setForegroundColor(red);
+		}
+		else if(pathSpeed == 150){
+			this.setBackgroundColor(blue);
+			this.setForegroundColor(blue);
+		}
+		else if(pathSpeed == 200){
+			this.setBackgroundColor(green);
+			this.setForegroundColor(green);
+		}
+		else if(pathSpeed == 250){
+			this.setBackgroundColor(orange);
+			this.setForegroundColor(orange);
+		}
+		else if(pathSpeed == 300){
+			this.setBackgroundColor(lime);
+			this.setForegroundColor(lime);
+		}
+		
+		
 	    setConnectionRouter(router);
 	    LineAttributes attr = new LineAttributes(LINE_WIDTH);
 	    this.setLineAttributes(attr);
@@ -35,7 +76,9 @@ public class PathFigure extends PolylineConnection {
 	    
 	  }
 	  
-	  /**
+	  
+
+	/**
 	   * Sets the modellObject for this {@link PathFigure}.
 	   * @param modellObject - The modell object that belongs to this PathFigure.
 	   */

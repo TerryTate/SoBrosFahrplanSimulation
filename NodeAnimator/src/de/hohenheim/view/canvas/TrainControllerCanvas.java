@@ -228,7 +228,7 @@ public class TrainControllerCanvas extends Canvas{
 		Button importTrain = new Button(getGroupImportTrain(), SWT.NONE);
 		importTrain.setText("Zug Importieren");
 		gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
+		
 		importTrain.setLayoutData(gridData);
 		importTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -247,7 +247,7 @@ public class TrainControllerCanvas extends Canvas{
 		getGroupExportTrain().setText("Zug Exportieren");
 		getGroupExportTrain().setBounds(0, 370, 0, 0);
 		getGroupExportTrain().setLayout(gridLayout);
-				
+		
 		Button exportTrain = new Button(getGroupExportTrain(), SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
 		gridData = new GridData();

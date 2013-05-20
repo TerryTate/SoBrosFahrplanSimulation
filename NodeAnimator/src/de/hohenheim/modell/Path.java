@@ -9,9 +9,12 @@ public class Path {
 	private State state;
 	private PathFigure path;
 	
-	public Path(NodeMap map, Node start, Node end) {
-		path = FigureFactory.createPath(map, start.getNodeFigure(), end.getNodeFigure(), this);
+	
+	
+	public Path(NodeMap map, Node start, Node end, int pathSpeed) {
+		path = FigureFactory.createPath(map, start.getNodeFigure(), end.getNodeFigure(), this, pathSpeed);
 		state = new State(this);
+		
 	}
 	
 	public State getState() {

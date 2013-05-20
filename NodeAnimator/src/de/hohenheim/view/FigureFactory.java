@@ -76,10 +76,11 @@ public class FigureFactory {
 	 * @param start - The start room from which the path should be drawn.
 	 * @param end - The end room to which the path should be drawn.
 	 * @param modellObject - The modell object belonging to this PathFigure.
+	 * @param pathSpeed 
 	 * @return {@link PathFigure} - The path after it is created, connected to the rooms and added to the RoomMap.
 	 */
-	public static PathFigure createPath(NodeMap map, NodeFigure start, NodeFigure end, Object modellObject) {
-		  PathFigure path = new PathFigure(modellObject);		  
+	public static PathFigure createPath(NodeMap map, NodeFigure start, NodeFigure end, Object modellObject, int pathSpeed) {
+		  PathFigure path = new PathFigure(modellObject,pathSpeed);		  
 		  path.setSourceAnchor(new CenterAnchor(start)); //new ChopboxAnchor(start)		  
 		  path.setTargetAnchor(new CenterAnchor(end));//new ChopboxAnchor(end)
 		  map.getNodeLayer().add(path);

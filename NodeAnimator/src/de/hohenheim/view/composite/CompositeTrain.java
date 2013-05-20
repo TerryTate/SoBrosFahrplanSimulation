@@ -64,6 +64,7 @@ public class CompositeTrain extends Composite{
 		
 		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.BORDER );	
 		canvasControl.setBackground(ColorConstants.white);
+		
 		gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.grabExcessVerticalSpace = true;

@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import de.hohenheim.view.composite.CompositeAnimation;
+import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 
 
@@ -19,6 +20,7 @@ public class TabFolder extends CTabFolder{
 	
 	private static final String[] tabNamesDE = {"Animation","Projekte","Züge","Fahrpläne"};
 	private static CompositeTrain compositeTrain;
+	private CompositeTimeTable compositeTimeTable;
 	
 	public TabFolder(Composite parent, int style, Display display) {
 		super(parent, style);
@@ -42,6 +44,8 @@ public class TabFolder extends CTabFolder{
         // TimeTable Tab
 	    CTabItem cTabTimeTableItem = new CTabItem(this, SWT.NULL);
 	    cTabTimeTableItem.setText(tabNamesDE[3]);
+	    compositeTimeTable = new CompositeTimeTable(this, SWT.NULL);
+	    cTabTimeTableItem.setControl(compositeTimeTable);
 	     
 	    //cTabFolder.setSimple(false);  Andere Form ist aber dann unterstrichen
 	    
