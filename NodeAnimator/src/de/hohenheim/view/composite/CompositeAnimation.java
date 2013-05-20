@@ -6,6 +6,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
+
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.Map;
 import de.hohenheim.view.map.NodeMap;
 

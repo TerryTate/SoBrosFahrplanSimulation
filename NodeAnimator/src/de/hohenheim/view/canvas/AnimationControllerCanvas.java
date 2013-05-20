@@ -1,4 +1,4 @@
-package de.hohenheim.view.composite;
+package de.hohenheim.view.canvas;
 
 import java.util.Arrays;
 import java.util.Iterator;

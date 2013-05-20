@@ -5,14 +5,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-
-import de.hohenheim.controller.main.Main;
-import de.hohenheim.controller.main.TrainData;
+import de.hohenheim.view.canvas.TrainControllerCanvas;
 
 public class CompositeTrain extends Composite{
 	
@@ -54,19 +50,19 @@ public class CompositeTrain extends Composite{
 		
 		trainTable = new Table(scrollComposite, SWT.FULL_SELECTION);
 	    TableColumn idTrain = new TableColumn(getTrainTable(),SWT.CENTER);
-	    TableColumn tc2 = new TableColumn(getTrainTable(), SWT.CENTER);
-	    TableColumn tc3 = new TableColumn(getTrainTable(), SWT.CENTER);
+	    TableColumn typOfTrain = new TableColumn(getTrainTable(), SWT.CENTER);
+	    TableColumn maxSpeed = new TableColumn(getTrainTable(), SWT.CENTER);
 	    idTrain.setText("ID");
-	    tc2.setText("Last Name");
-	    tc3.setText("Address");
+	    typOfTrain.setText("ZugTyp");
+	    maxSpeed.setText("Höchstgeschwindigkeit");
 	    idTrain.setWidth(70);
-	    tc2.setWidth(70);
-	    tc3.setWidth(80);
+	    typOfTrain.setWidth(70);
+	    maxSpeed.setWidth(80);
 	    getTrainTable().setHeaderVisible(true);
 	    
 	    scrollComposite.setContent(getTrainTable());
 		
-		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.BORDER);	
+		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.BORDER );	
 		canvasControl.setBackground(ColorConstants.white);
 		gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;

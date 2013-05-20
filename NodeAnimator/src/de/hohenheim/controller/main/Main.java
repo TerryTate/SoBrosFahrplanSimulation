@@ -11,7 +11,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import de.hohenheim.view.composite.TrainControllerCanvas;
+import org.eclipse.swt.widgets.TableItem;
+
+import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.TrainControllerCanvas;
+import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.tab.TabFolder;
 
@@ -78,18 +82,39 @@ public class Main {
 					if(big == true){
 					     TrainControllerCanvas.getGroupControlSmall().setVisible(true);	
 					     TrainControllerCanvas.getGroupAddTrain().setVisible(false);
+					     TrainControllerCanvas.getGroupEditTrain().setVisible(false);
+					     TrainControllerCanvas.getGroupDeletTrain().setVisible(false);	
+					     TrainControllerCanvas.getGroupImportTrain().setVisible(false);
+					     TrainControllerCanvas.getGroupExportTrain().setVisible(false);
 					     big = false;
 					}			
 				}
 			    else if(sizeshell.y >= 300){
 			    	if(big == false){
 					     TrainControllerCanvas.getGroupAddTrain().setVisible(true);
+					     TrainControllerCanvas.getGroupEditTrain().setVisible(true);
 					     TrainControllerCanvas.getGroupControlSmall().setVisible(false);
+					     TrainControllerCanvas.getGroupDeletTrain().setVisible(true);	
+					     TrainControllerCanvas.getGroupImportTrain().setVisible(true);
+					     TrainControllerCanvas.getGroupExportTrain().setVisible(true);
 					     big = true;
 					}	
 			    	
 			    }
-			    		
+				TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
+				
+				try{
+				    if (rowData[0] != null){
+					     TrainControllerCanvas.getTextID2().setText(rowData[0].getText(0));
+					     TrainControllerCanvas.getTextSpeed2().setText(rowData[0].getText(2));
+					     TrainControllerCanvas.getTypOfTrain_combo2().setText(rowData[0].getText(1));
+					}
+				}
+				catch(ArrayIndexOutOfBoundsException e){
+					
+				}
+				
+					
 			    
 			    display.sleep();
 		   }
