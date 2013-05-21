@@ -5,24 +5,20 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.TrainEvents;
 
 public class TimeTableControllerCanvas extends Canvas {
 
-	private Group groupAddTimeTable;
-	private Group groupEditTimeTable;
-	private Group groupDeletTimeTable;
-	private Group groupImportTimeTable;
-	private Group groupExportTimeTable;
-	private Group groupControlSmall;
+	private static Group groupAddTimeTable;
+	private static Group groupEditTimeTable;
+	private static Group groupDeletTimeTable;
+	private static Group groupImportTimeTable;
+	private static Group groupExportTimeTable;
+	private static Group groupControlSmall;
 
 	public TimeTableControllerCanvas(Composite parent, int style) {
 		super(parent, style);
@@ -33,18 +29,18 @@ public class TimeTableControllerCanvas extends Canvas {
 		
 		// Group with all controllers for add a new TimeTable
 		
-		groupAddTimeTable = new Group(this, SWT.SHADOW_ETCHED_IN);
-		groupAddTimeTable.setText("Fahrplan hinzufügen");
+		setGroupAddTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN));
+		getGroupAddTimeTable().setText("Fahrplan hinzufügen");
 		GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 3; 
-        groupAddTimeTable.setLayout(gridLayout);
+        getGroupAddTimeTable().setLayout(gridLayout);
         
 	   
 		
 			    
 	    // Add Button
 		    
-		Button newTrain = new Button(groupAddTimeTable, SWT.NONE);
+		Button newTrain = new Button(getGroupAddTimeTable(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
 		GridData gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -60,18 +56,18 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupAddTimeTable.pack();
+		getGroupAddTimeTable().pack();
 				
 	    // Group with all controllers for edit a existing TimeTable
 				
-		groupEditTimeTable = new Group(this, SWT.SHADOW_ETCHED_IN );
-		groupEditTimeTable.setText("Zug bearbeiten");
-		groupEditTimeTable.setBounds(0, 135, 0, 0);
-		groupEditTimeTable.setLayout(gridLayout);
+		setGroupEditTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
+		getGroupEditTimeTable().setText("Zug bearbeiten");
+		getGroupEditTimeTable().setBounds(0, 135, 0, 0);
+		getGroupEditTimeTable().setLayout(gridLayout);
 		        
 			       
 			     
-		Button edit = new Button(groupEditTimeTable, SWT.NONE);
+		Button edit = new Button(getGroupEditTimeTable(), SWT.NONE);
 		edit.setText("Fahrplan ändern");
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -87,16 +83,16 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupEditTimeTable.pack();
+		getGroupEditTimeTable().pack();
 				
 		// Group with all controllers for delete a existing TimeTable
 				
-		groupDeletTimeTable = new Group(this, SWT.SHADOW_ETCHED_IN );
-		groupDeletTimeTable.setText("Fahrplan löschen");
-		groupDeletTimeTable.setBounds(0, 265, 0, 0);
-		groupDeletTimeTable.setLayout(gridLayout);
+		setGroupDeletTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
+		getGroupDeletTimeTable().setText("Fahrplan löschen");
+		getGroupDeletTimeTable().setBounds(0, 265, 0, 0);
+		getGroupDeletTimeTable().setLayout(gridLayout);
 				
-		Button deleteTimeTable = new Button(groupDeletTimeTable, SWT.NONE);
+		Button deleteTimeTable = new Button(getGroupDeletTimeTable(), SWT.NONE);
 		deleteTimeTable.setText("Zug löschen");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -110,16 +106,16 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupDeletTimeTable.pack();
+		getGroupDeletTimeTable().pack();
 				
 		//Group with all controllers for import a TimeTable
 				
-		groupImportTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN ));
-		groupImportTimeTable.setText("Fahrplan Importieren");
-		groupImportTimeTable.setBounds(0, 317, 400, 0);
-		groupImportTimeTable.setLayout(gridLayout);
+		setGroupImportTimeTable((new Group(this, SWT.SHADOW_ETCHED_IN )));
+		getGroupImportTimeTable().setText("Fahrplan Importieren");
+		getGroupImportTimeTable().setBounds(0, 317, 400, 0);
+		getGroupImportTimeTable().setLayout(gridLayout);
 				
-		Button importTimeTable = new Button(groupImportTimeTable, SWT.NONE);
+		Button importTimeTable = new Button(getGroupImportTimeTable(), SWT.NONE);
 		importTimeTable.setText("Fahrplan Importieren");
 		gridData = new GridData();
 				
@@ -133,16 +129,16 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupImportTimeTable.pack();
+		getGroupImportTimeTable().pack();
 				
 		//Group with all controllers for export a TimeTable
 				
-		groupExportTimeTable = new Group(this, SWT.SHADOW_ETCHED_IN );
-		groupExportTimeTable.setText("Fahrplan Exportieren");
-		groupExportTimeTable.setBounds(0, 370, 0, 0);
-		groupExportTimeTable.setLayout(gridLayout);
+		setGroupExportTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
+		getGroupExportTimeTable().setText("Fahrplan Exportieren");
+		getGroupExportTimeTable().setBounds(0, 370, 0, 0);
+		getGroupExportTimeTable().setLayout(gridLayout);
 				
-		Button exportTrain = new Button(groupExportTimeTable, SWT.NONE);
+		Button exportTrain = new Button(getGroupExportTimeTable(), SWT.NONE);
 		exportTrain.setText("Fahrplan Exportieren");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -156,17 +152,17 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupExportTimeTable.pack();
+		getGroupExportTimeTable().pack();
 				
 		// Group when the shellHeight < then 300 pixel
 				
-		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
-		groupControlSmall.setText("Zug Verwaltung");
+		setGroupControlSmall(new Group(this, SWT.SHADOW_ETCHED_IN));
+		getGroupControlSmall().setText("Zug Verwaltung");
 		GridLayout gridLayout3 = new GridLayout(); 
         gridLayout.numColumns = 1; 
-        groupControlSmall.setLayout(gridLayout3);
+        getGroupControlSmall().setLayout(gridLayout3);
 		        
-		Button newTimeTable2 = new Button(groupControlSmall, SWT.NONE);
+		Button newTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		newTimeTable2.setText("Fahrplan hinzufügen");		
 		newTimeTable2.addListener(SWT.Selection, new Listener() {
 					
@@ -178,7 +174,7 @@ public class TimeTableControllerCanvas extends Canvas {
 		});
 				
 				 
-		Button editTimeTable2 = new Button(groupControlSmall, SWT.NONE);
+		Button editTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		editTimeTable2.setText("Fahrplan ändern");
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -194,7 +190,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		Button deleteTimeTable2 = new Button(groupControlSmall, SWT.NONE);
+		Button deleteTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		deleteTimeTable2.setText("Fahrplan löschen");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -208,7 +204,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		Button importTimeTable2 = new Button(groupControlSmall, SWT.NONE);
+		Button importTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		importTimeTable2.setText("Fahrplan Importieren");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -222,7 +218,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		Button exportTimeTable2 = new Button(groupControlSmall, SWT.NONE);
+		Button exportTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		exportTimeTable2.setText("Fahrplan Exportieren");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -236,9 +232,57 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		groupControlSmall.pack();
-		groupControlSmall.setVisible(false);
+		getGroupControlSmall().pack();
+		getGroupControlSmall().setVisible(false);
 		
+	}
+
+	public static Group getGroupControlSmall() {
+		return groupControlSmall;
+	}
+
+	public void setGroupControlSmall(Group groupControlSmall) {
+		this.groupControlSmall = groupControlSmall;
+	}
+
+	public static Group getGroupAddTimeTable() {
+		return groupAddTimeTable;
+	}
+
+	public void setGroupAddTimeTable(Group groupAddTimeTable) {
+		this.groupAddTimeTable = groupAddTimeTable;
+	}
+
+	public static Group getGroupEditTimeTable() {
+		return groupEditTimeTable;
+	}
+
+	public void setGroupEditTimeTable(Group groupEditTimeTable) {
+		this.groupEditTimeTable = groupEditTimeTable;
+	}
+
+	public static Group getGroupDeletTimeTable() {
+		return groupDeletTimeTable;
+	}
+
+	public void setGroupDeletTimeTable(Group groupDeletTimeTable) {
+		this.groupDeletTimeTable = groupDeletTimeTable;
+	}
+
+	public static Group getGroupImportTimeTable() {
+		return groupImportTimeTable;
+	}
+
+	public void setGroupImportTimeTable(Group groupImportTimeTable) {
+		this.groupImportTimeTable = groupImportTimeTable;
+	}
+
+	public static Group getGroupExportTimeTable() {
+		return groupExportTimeTable;
+	}
+
+	public void setGroupExportTimeTable(Group groupExportTimeTable) {
+		this.groupExportTimeTable = groupExportTimeTable;
 	}
 
 }

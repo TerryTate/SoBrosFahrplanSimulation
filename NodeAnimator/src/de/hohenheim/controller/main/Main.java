@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.TimeTableControllerCanvas;
 import de.hohenheim.view.canvas.TrainControllerCanvas;
 import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.menu.MenuBar;
@@ -86,10 +87,17 @@ public class Main {
 					     TrainControllerCanvas.getGroupDeletTrain().setVisible(false);	
 					     TrainControllerCanvas.getGroupImportTrain().setVisible(false);
 					     TrainControllerCanvas.getGroupExportTrain().setVisible(false);
+					     
+					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(true);	
+					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(false);
+					     TimeTableControllerCanvas.getGroupEditTimeTable().setVisible(false);
+					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(false);	
+					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(false);
+					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(false);
 					     big = false;
 					}			
 				}
-			    else if(sizeshell.y >= 300){
+			    else if(sizeshell.y >= 400){
 			    	if(big == false){
 					     TrainControllerCanvas.getGroupAddTrain().setVisible(true);
 					     TrainControllerCanvas.getGroupEditTrain().setVisible(true);
@@ -97,6 +105,13 @@ public class Main {
 					     TrainControllerCanvas.getGroupDeletTrain().setVisible(true);	
 					     TrainControllerCanvas.getGroupImportTrain().setVisible(true);
 					     TrainControllerCanvas.getGroupExportTrain().setVisible(true);
+					     
+					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(false);	
+					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(true);
+					     TimeTableControllerCanvas.getGroupEditTimeTable().setVisible(true);
+					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(true);	
+					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(true);
+					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(true);
 					     big = true;
 					}	
 			    	

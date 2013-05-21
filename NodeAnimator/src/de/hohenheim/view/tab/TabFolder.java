@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import de.hohenheim.view.composite.CompositeAnimation;
+import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 
@@ -21,6 +22,7 @@ public class TabFolder extends CTabFolder{
 	private static final String[] tabNamesDE = {"Animation","Projekte","Züge","Fahrpläne"};
 	private static CompositeTrain compositeTrain;
 	private CompositeTimeTable compositeTimeTable;
+	private CompositeProject compositeProject;
 	
 	public TabFolder(Composite parent, int style, Display display) {
 		super(parent, style);
@@ -34,6 +36,8 @@ public class TabFolder extends CTabFolder{
         // Project Tab	
 	    CTabItem cTabProjectItem = new CTabItem(this, SWT.NULL);
 	    cTabProjectItem.setText(tabNamesDE[1]);
+	    compositeProject = new CompositeProject(this, SWT.NULL);
+	    cTabProjectItem.setControl(compositeProject);
 	        
         // Train Tab
 	    CTabItem cTabTrainItem = new CTabItem(this, SWT.NULL);
