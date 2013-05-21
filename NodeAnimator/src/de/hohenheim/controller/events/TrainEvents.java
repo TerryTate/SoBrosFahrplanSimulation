@@ -25,12 +25,39 @@ public class TrainEvents {
 		
 		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
 		item.setText(new String[]{String.valueOf(train.getID()),
-				train.gettypOfTrain(),
+				train.getTypOfTrain(),
 				String.valueOf(train.getSpeed())});
 		
 	}
 	
 	public static void editTrain() {
-	 
+		
+		TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
+		
+		String idText = TrainControllerCanvas.getTextID2().getText();
+		int id = Integer.parseInt(idText);
+		String speedText = TrainControllerCanvas.getTextSpeed2().getText();
+		int speed = Integer.parseInt(speedText);
+		
+		int idCheck = Integer.parseInt(rowData[0].getText(0));
+		
+		for (TrainData td : Main.trainListAll){
+			
+			if (idCheck == td.getID()){
+				td.setID(id);
+				td.setSpeed(speed);
+				td.setTypOfTrain(TrainControllerCanvas.getTypOfTrain_combo2().getText());
+			}
+		}
+	    
+		rowData[0].setText(0, idText);
+		rowData[0].setText(1, TrainControllerCanvas.getTypOfTrain_combo2().getText());
+		rowData[0].setText(2, speedText);
+		
 	}
+	
+	public static void deleteTrain(){
+		
+	}
+	
 }

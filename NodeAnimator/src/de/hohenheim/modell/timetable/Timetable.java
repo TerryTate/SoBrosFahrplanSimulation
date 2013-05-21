@@ -1,4 +1,4 @@
-package de.hohenheim.view.timetable;
+package de.hohenheim.modell.timetable;
 
 public class Timetable {
 	

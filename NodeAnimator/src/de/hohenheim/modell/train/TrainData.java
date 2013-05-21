@@ -21,8 +21,19 @@ public class TrainData {
 		return speed;
 	}
 	
-	public String gettypOfTrain() {
+	public String getTypOfTrain() {
 		return typOfTrain;
+	}
+
+	public void setID(int id) {
+		this.id = id;	
+	}
+	
+	public void setSpeed(int speed) {
+		this.speed = speed;	
+	}
+	public void setTypOfTrain(String typOfTrain) {
+		this.typOfTrain = typOfTrain;	
 	}
 	
 }

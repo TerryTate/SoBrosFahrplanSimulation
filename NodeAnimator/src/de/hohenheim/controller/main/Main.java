@@ -27,7 +27,8 @@ public class Main {
 	private static TabFolder tabFolder;
 	public static ArrayList<TrainData> trainListAll = new ArrayList();
 	public static boolean big = true;
-	
+	private static boolean fill = false;
+	private static int oldValue = -1;
 	/**
 	 * @param args
 	 */
@@ -80,7 +81,9 @@ public class Main {
 				Point sizeshell = shell.getSize();
 				
 				if (sizeshell.y < 300){
+				
 					if(big == true){
+						
 					     TrainControllerCanvas.getGroupControlSmall().setVisible(true);	
 					     TrainControllerCanvas.getGroupAddTrain().setVisible(false);
 					     TrainControllerCanvas.getGroupEditTrain().setVisible(false);
@@ -95,11 +98,14 @@ public class Main {
 					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(false);
 					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(false);
 					     big = false;
+					     
 					}			
 				}
 			    else if(sizeshell.y >= 400){
+			      
 			    	if(big == false){
-					     TrainControllerCanvas.getGroupAddTrain().setVisible(true);
+					   
+			    		TrainControllerCanvas.getGroupAddTrain().setVisible(true);
 					     TrainControllerCanvas.getGroupEditTrain().setVisible(true);
 					     TrainControllerCanvas.getGroupControlSmall().setVisible(false);
 					     TrainControllerCanvas.getGroupDeletTrain().setVisible(true);	
@@ -113,18 +119,32 @@ public class Main {
 					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(true);
 					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(true);
 					     big = true;
+					     
 					}	
 			    	
 			    }
 				TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
 				
 				try{
-				    if (rowData[0] != null){
-					     TrainControllerCanvas.getTextID2().setText(rowData[0].getText(0));
-					     TrainControllerCanvas.getTextSpeed2().setText(rowData[0].getText(2));
-					     TrainControllerCanvas.getTypOfTrain_combo2().setText(rowData[0].getText(1));
+					int newValue = Integer.parseInt(rowData[0].getText(0));
+					
+					if (newValue != oldValue){
+						fill =false;
+					}
+					
+					if (fill == false){
+						
+				        if (rowData[0] != null){
+					         TrainControllerCanvas.getTextID2().setText(rowData[0].getText(0));
+					         TrainControllerCanvas.getTextSpeed2().setText(rowData[0].getText(2));
+					         TrainControllerCanvas.getTypOfTrain_combo2().setText(rowData[0].getText(1));
+					         oldValue = Integer.parseInt(rowData[0].getText(0));
+					         fill = true;
+				        }
+					         
 					}
 				}
+				
 				catch(ArrayIndexOutOfBoundsException e){
 					
 				}

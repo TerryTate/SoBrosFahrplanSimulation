@@ -3,6 +3,7 @@ package de.hohenheim.view.canvas;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -79,6 +80,7 @@ public class TrainControllerCanvas extends Canvas{
 	    getTextID().setTextLimit(6);
 	    getTextID().setLayoutData(gridData);
 	    
+	    Point size = getGroupAddTrain().getSize(); 
             //TypOfTrain
 	    
 	    Label label_typOfTrain = new Label(getGroupAddTrain(), SWT.NONE); 
@@ -188,7 +190,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-
+                TrainEvents.editTrain();          
 				
 			}
 		});
@@ -201,6 +203,7 @@ public class TrainControllerCanvas extends Canvas{
 		getGroupDeletTrain().setText("Zug löschen");
 		getGroupDeletTrain().setBounds(0, 265, 0, 0);
 		getGroupDeletTrain().setLayout(gridLayout);
+		getGroupDeletTrain().setSize(size.x, 200);
 		
 		Button deleteTrain = new Button(getGroupDeletTrain(), SWT.NONE);
 		deleteTrain.setText("Zug löschen");
@@ -224,6 +227,7 @@ public class TrainControllerCanvas extends Canvas{
 		getGroupImportTrain().setText("Zug Importieren");
 		getGroupImportTrain().setBounds(0, 317, 400, 0);
 		getGroupImportTrain().setLayout(gridLayout);
+		getGroupImportTrain().setSize(size.x, 200);
 		
 		Button importTrain = new Button(getGroupImportTrain(), SWT.NONE);
 		importTrain.setText("Zug Importieren");
@@ -247,12 +251,14 @@ public class TrainControllerCanvas extends Canvas{
 		getGroupExportTrain().setText("Zug Exportieren");
 		getGroupExportTrain().setBounds(0, 370, 0, 0);
 		getGroupExportTrain().setLayout(gridLayout);
+		getGroupExportTrain().setSize(size.x, 200);
 		
 		Button exportTrain = new Button(getGroupExportTrain(), SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
 		gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
+		
 		exportTrain.setLayoutData(gridData);
+		
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {
