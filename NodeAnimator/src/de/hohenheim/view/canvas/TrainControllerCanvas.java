@@ -64,7 +64,7 @@ public class TrainControllerCanvas extends Canvas{
         gridLayout.numColumns = 3; 
 	    getGroupAddTrain().setLayout(gridLayout);
         
-	        //Train ID
+	    //Train ID
 	    
 	    Label iD = new Label(getGroupAddTrain(), SWT.NONE); 
 	    GridData gridData = new GridData();

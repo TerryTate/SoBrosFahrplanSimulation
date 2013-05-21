@@ -1,25 +1,37 @@
 package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
+
 import de.hohenheim.controller.events.TrainEvents;
 
 public class TimeTableControllerCanvas extends Canvas {
-
+	
+	
 	private static Group groupAddTimeTable;
 	private static Group groupEditTimeTable;
 	private static Group groupDeletTimeTable;
 	private static Group groupImportTimeTable;
 	private static Group groupExportTimeTable;
 	private static Group groupControlSmall;
-
+	private Text textName;
+	private Combo startStation_combo;
+	private String [] nodes = {"1","2"};
+	private Combo endStation_combo;
+	private Combo middleStation_combo;
+    
+	
 	public TimeTableControllerCanvas(Composite parent, int style) {
 		super(parent, style);
 		createContent();
@@ -35,14 +47,118 @@ public class TimeTableControllerCanvas extends Canvas {
         gridLayout.numColumns = 3; 
         getGroupAddTimeTable().setLayout(gridLayout);
         
-	   
+	    // ID Timetable
+        
+        Label iD = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        GridData gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    iD.setText("ID : ");
+	    iD.setLayoutData(gridData);
+	    
+	    textName = new Text(getGroupAddTimeTable(), SWT.BORDER); 
+	    textName.setText(""); 
+	    gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.FILL;
+	    gridData.horizontalSpan = 2;
+	    textName.setTextLimit(6);
+	    textName.setLayoutData(gridData);
 		
-			    
+        // Name Timetable
+        
+        Label name = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    name.setText("Fahrplanname : ");
+	    name.setLayoutData(gridData);
+	    
+	    textName = new Text(getGroupAddTimeTable(), SWT.BORDER); 
+	    textName.setText(""); 
+	    gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.FILL;
+	    gridData.horizontalSpan = 2;
+	    textName.setTextLimit(6);
+	    textName.setLayoutData(gridData);
+	    
+	    // Driving Days 
+	    
+	    Label drivingDays = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    drivingDays.setText("Fahrtage : ");
+	    drivingDays.setLayoutData(gridData); 
+	    
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Montag");
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Dienstag");
+	    Label room = new Label(getGroupAddTimeTable(), SWT.NONE); 
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Mittwoch");
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Donnerstag");
+	    Label room2 = new Label(getGroupAddTimeTable(), SWT.NONE);
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Freitag");
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Samstag");
+	    Label room3 = new Label(getGroupAddTimeTable(), SWT.NONE);
+	    new Button(getGroupAddTimeTable(), SWT.CHECK).setText("Sontag");
+	    Label room4 = new Label(getGroupAddTimeTable(), SWT.NONE);
+		
+	    // Startstation
+	    
+	    Label startstation = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    startstation.setText("Anfangsstation : ");
+	    startstation.setLayoutData(gridData); 
+	    
+	    startStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
+	    startStation_combo.setBounds(5,45,150, 25);
+	    startStation_combo.setItems(nodes);
+		gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.FILL;
+	    gridData.horizontalSpan = 2; 
+	    startStation_combo.setLayoutData(gridData);
+	    
+	    // Endstation
+	    
+	    Label endstation = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    endstation.setText("Endstation : ");
+	    endstation.setLayoutData(gridData); 
+	    
+	    
+	    endStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
+	    endStation_combo.setBounds(5,45,150, 25);
+	    endStation_combo.setItems(nodes);
+		gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.FILL;
+	    gridData.horizontalSpan = 2; 
+	    endStation_combo.setLayoutData(gridData);
+	    
+	    // Middlestations
+	    
+	    Label middlestations = new Label(getGroupAddTimeTable(), SWT.NONE); 
+        gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.END;
+	    middlestations.setText("Zwischenstationen : ");
+	    middlestations.setLayoutData(gridData); 
+	    
+	    middleStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
+	    middleStation_combo.setBounds(5,45,150, 25);
+	    middleStation_combo.setItems(nodes);
+		gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.FILL;
+	    middleStation_combo.setLayoutData(gridData);
+	    
+	    Canvas buttonsCanvas = new Canvas(getGroupAddTimeTable(),SWT.NONE);
+	    buttonsCanvas.setLayout(new FillLayout());
+	   
+	    Button addMiddleStation = new Button(buttonsCanvas, SWT.None);
+	    addMiddleStation.setText("+");
+	    Button removeMiddleStation = new Button(buttonsCanvas, SWT.NONE);
+	    removeMiddleStation.setText("-");
 	    // Add Button
 		    
 		Button newTrain = new Button(getGroupAddTimeTable(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
-		GridData gridData = new GridData();
+		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    gridData.horizontalSpan = 3; 
 	    newTrain.setLayoutData(gridData);
