@@ -1,6 +1,8 @@
 package de.hohenheim.view.canvas;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -30,6 +32,7 @@ public class TimeTableControllerCanvas extends Canvas {
 	private String [] nodes = {"1","2"};
 	private Combo endStation_combo;
 	private Combo middleStation_combo;
+	private ScrolledComposite scrolledComposite;
     
 	
 	public TimeTableControllerCanvas(Composite parent, int style) {
@@ -154,7 +157,18 @@ public class TimeTableControllerCanvas extends Canvas {
 	    addMiddleStation.setText("+");
 	    Button removeMiddleStation = new Button(buttonsCanvas, SWT.NONE);
 	    removeMiddleStation.setText("-");
-	    // Add Button
+	    
+	    Label room5 = new Label(getGroupAddTimeTable(), SWT.NONE);
+	    
+	    scrolledComposite = new ScrolledComposite(getGroupAddTimeTable(), SWT.V_SCROLL  );
+	    scrolledComposite.setVisible(true);
+	    scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setBackground(ColorConstants.blue);
+	    gridData = new GridData();
+	    gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		gridData.grabExcessHorizontalSpace = true;
+		scrolledComposite.setLayoutData(gridData);
 		    
 		Button newTrain = new Button(getGroupAddTimeTable(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");

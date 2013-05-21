@@ -82,7 +82,7 @@ public class Main {
 			if (!display.readAndDispatch()) {
 				Point sizeshell = shell.getSize();
 				
-				if (sizeshell.y < 300){
+				if (sizeshell.y < 400){
 				
 					if(big == true){
 						
