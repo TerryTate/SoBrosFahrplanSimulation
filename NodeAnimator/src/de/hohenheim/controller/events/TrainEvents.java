@@ -1,5 +1,7 @@
 package de.hohenheim.controller.events;
 
+import java.io.IOException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -10,15 +12,44 @@ import de.hohenheim.view.composite.CompositeTrain;
 
 
 
-
+/**
+ * Java-Class that contains methods to handle the train events, such as
+ * add a new train to the list of trains, edit or remove it.
+ * It also allows the user to import and export trains.
+ * @author SoBros
+ *
+ */
 public class TrainEvents {
 	
+	
+	
+	
+	
+	/**
+	 * This method adds a new train to the ArrayList trainListAll in the Main class
+	 * with the trains id, speed and typeOfTrain delivered by the controller canvas
+	 */
 	public static void addNewTrain() {
 		
+		/**
+		 * String that contains the text written in the "ID text field" of the Canvas.
+		 */
 		String idText = TrainControllerCanvas.getTextID().getText();
-		int id = Integer.parseInt(idText);
+		
+		
+		
+		/**
+		 * String that contains the text written in the "Speed text field" of the Canvas.
+		 */
 		String speedText = TrainControllerCanvas.getTextSpeed().getText();
+		
+		
+		//Als Lokale Variablen deklarieren und dann des parsen als Integer mit Try/Catch umgeben!!
+		int id = Integer.parseInt(idText);
 		int speed = Integer.parseInt(speedText);
+		
+		
+		
 		TrainData train = new TrainData(id, speed, TrainControllerCanvas.getTypOfTrain_combo().getText());
 		
 		Main.trainListAll.add(train);
@@ -30,6 +61,17 @@ public class TrainEvents {
 		
 	}
 	
+	
+	
+	
+	
+	
+	/**
+	 * This method provides the ability to chance single trains in in the ArrayList
+	 * trainListAll of the Main class.
+	 * By the id this methods checks whether it is the same train you want to reedit or not.
+	 * 
+	 */
 	public static void editTrain() {
 		
 		TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
@@ -56,8 +98,16 @@ public class TrainEvents {
 		
 	}
 	
-	public static void deleteTrain(){
+	/**
+	 * Method to delete single trains and remove them from the trainListAll in the 
+	 * Main class.
+	 */
+	public static void deleteTrain() {
 		
+	  //TO-DO
+		
+		
+
 	}
 	
 }
