@@ -39,16 +39,29 @@ public class CompositeTimeTable extends Composite {
 		gridData.grabExcessVerticalSpace = true;
 		scrollComposite.setLayoutData(gridData);
 		
-		timeTableTable = new Table(scrollComposite, SWT.FULL_SELECTION);
+        timeTableTable = new Table(scrollComposite, SWT.FULL_SELECTION);
+		
 	    TableColumn idTimeTable = new TableColumn(timeTableTable,SWT.CENTER);
 	    TableColumn timeTableName = new TableColumn(timeTableTable, SWT.CENTER);
 	    TableColumn drivingDays = new TableColumn(timeTableTable, SWT.CENTER);
+	    TableColumn startStation = new TableColumn(timeTableTable,SWT.CENTER);
+	    TableColumn endStation = new TableColumn(timeTableTable, SWT.CENTER);
+	    TableColumn middleStation = new TableColumn(timeTableTable, SWT.CENTER);
+	    
 	    idTimeTable.setText("ID");
 	    timeTableName.setText("Fahrplanname");
 	    drivingDays.setText("Fahrtage");
+	    startStation.setText("Startstation");
+	    endStation.setText("Endstation");
+	    middleStation.setText("Zwischenstation");
+	    
 	    idTimeTable.setWidth(70);
 	    timeTableName.setWidth(70);
 	    drivingDays.setWidth(80);
+	    startStation.setWidth(80);
+	    endStation.setWidth(80);
+	    middleStation.setWidth(80);
+	    
 	    timeTableTable.setHeaderVisible(true);
 	    
 	    scrollComposite.setContent(timeTableTable);

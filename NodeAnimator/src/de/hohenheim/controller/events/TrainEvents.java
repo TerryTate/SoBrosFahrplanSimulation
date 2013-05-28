@@ -104,9 +104,19 @@ public class TrainEvents {
 	 */
 	public static void deleteTrain() {
 		
-	  //TO-DO
+
+		int i = 0;
+	
+		TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
+			
+		while((rowData[0].getText(0)) == (String.valueOf(Main.trainListAll.get(i).getID()))){
+			i++;
+		}
 		
+		Main.trainListAll.remove(i);
 		
+		CompositeTrain.getTrainTable().remove(CompositeTrain.getTrainTable().getSelectionIndices());  
+			
 
 	}
 	
