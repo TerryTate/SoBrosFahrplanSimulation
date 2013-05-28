@@ -4,6 +4,7 @@ package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -199,22 +200,19 @@ public class TrainControllerCanvas extends Canvas{
 		
         // Group with all controllers for delete a existing Train
 		
-		setGroupDeletTrain((new Group(this, SWT.SHADOW_ETCHED_IN )));
+		setGroupDeletTrain((new Group(this, SWT.SHADOW_ETCHED_IN | SWT.FILL)));
 		getGroupDeletTrain().setText("Zug löschen");
 		getGroupDeletTrain().setBounds(0, 265, 0, 0);
 		getGroupDeletTrain().setLayout(gridLayout);
-		getGroupDeletTrain().setSize(size.x, 200);
 		
 		Button deleteTrain = new Button(getGroupDeletTrain(), SWT.NONE);
 		deleteTrain.setText("Zug löschen");
-		gridData = new GridData();
-		gridData.horizontalAlignment = SWT.FILL;
-		deleteTrain.setLayoutData(gridData);
+		
 		deleteTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
-			
+			    TrainEvents.deleteTrain();
 				
 			}
 		});

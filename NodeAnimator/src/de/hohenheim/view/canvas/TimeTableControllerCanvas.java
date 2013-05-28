@@ -13,9 +13,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
+import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.events.TrainEvents;
 
 public class TimeTableControllerCanvas extends Canvas {
@@ -31,8 +33,9 @@ public class TimeTableControllerCanvas extends Canvas {
 	private Combo startStation_combo;
 	private String [] nodes = {"1","2"};
 	private Combo endStation_combo;
-	private Combo middleStation_combo;
+	private static Combo middleStation_combo;
 	private ScrolledComposite scrolledComposite;
+	private static List middleStationList;
     
 	
 	public TimeTableControllerCanvas(Composite parent, int style) {
@@ -143,20 +146,37 @@ public class TimeTableControllerCanvas extends Canvas {
 	    middlestations.setText("Zwischenstationen : ");
 	    middlestations.setLayoutData(gridData); 
 	    
-	    middleStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
-	    middleStation_combo.setBounds(5,45,150, 25);
-	    middleStation_combo.setItems(nodes);
+	    setMiddleStation_combo((new Combo(getGroupAddTimeTable(), SWT.READ_ONLY)));
+	    getMiddleStation_combo().setBounds(5,45,150, 25);
+	    getMiddleStation_combo().setItems(nodes);
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
-	    middleStation_combo.setLayoutData(gridData);
+	    getMiddleStation_combo().setLayoutData(gridData);
 	    
 	    Canvas buttonsCanvas = new Canvas(getGroupAddTimeTable(),SWT.NONE);
 	    buttonsCanvas.setLayout(new FillLayout());
 	   
 	    Button addMiddleStation = new Button(buttonsCanvas, SWT.None);
 	    addMiddleStation.setText("+");
+	    addMiddleStation.addListener(SWT.Selection, new Listener(){
+	    	
+	    	public void handleEvent(Event arg0){
+	    		
+	    		TimeTableEvents.addMiddleStation();
+	    		
+	    	}
+	    });
+	    
 	    Button removeMiddleStation = new Button(buttonsCanvas, SWT.NONE);
 	    removeMiddleStation.setText("-");
+	    removeMiddleStation.addListener(SWT.Selection, new Listener(){
+	    	
+	    	public void handleEvent(Event arg0){
+	    		
+	    		TimeTableEvents.removeMiddleStation();
+	    		
+	    	}
+	    });
 	    
 	    Label room5 = new Label(getGroupAddTimeTable(), SWT.NONE);
 	    
@@ -169,6 +189,14 @@ public class TimeTableControllerCanvas extends Canvas {
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		scrolledComposite.setLayoutData(gridData);
+		scrolledComposite.setLayout(new FillLayout());
+		
+		setMiddleStationList(new List(scrolledComposite, SWT.NONE));
+		getMiddleStationList().setVisible(true);
+		
+		getMiddleStationList().pack();
+	
+
 		    
 		Button newTrain = new Button(getGroupAddTimeTable(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
@@ -413,6 +441,22 @@ public class TimeTableControllerCanvas extends Canvas {
 
 	public void setGroupExportTimeTable(Group groupExportTimeTable) {
 		this.groupExportTimeTable = groupExportTimeTable;
+	}
+
+	public static List getMiddleStationList() {
+		return middleStationList;
+	}
+
+	public static void setMiddleStationList(List middleStationList) {
+		TimeTableControllerCanvas.middleStationList = middleStationList;
+	}
+
+	public static Combo getMiddleStation_combo() {
+		return middleStation_combo;
+	}
+
+	public void setMiddleStation_combo(Combo middleStation_combo) {
+		this.middleStation_combo = middleStation_combo;
 	}
 
 }
