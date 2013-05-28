@@ -95,7 +95,6 @@ public class Main {
 					     
 					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(true);	
 					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(false);
-					     TimeTableControllerCanvas.getGroupEditTimeTable().setVisible(false);
 					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(false);	
 					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(false);
 					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(false);
@@ -116,7 +115,6 @@ public class Main {
 					     
 					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(false);	
 					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(true);
-					     TimeTableControllerCanvas.getGroupEditTimeTable().setVisible(true);
 					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(true);	
 					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(true);
 					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(true);

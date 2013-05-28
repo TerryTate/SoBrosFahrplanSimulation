@@ -16,25 +16,23 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.TimeTableEvents;
-import de.hohenheim.controller.events.TrainEvents;
 
 public class TimeTableControllerCanvas extends Canvas {
 	
 	
 	private static Group groupAddTimeTable;
-	private static Group groupEditTimeTable;
 	private static Group groupDeletTimeTable;
 	private static Group groupImportTimeTable;
 	private static Group groupExportTimeTable;
 	private static Group groupControlSmall;
-	private Text textName;
-	private Combo startStation_combo;
+	private static Text textName;
+	private static Combo startStation_combo;
 	private String [] nodes = {"1","2"};
-	private Combo endStation_combo;
+	private static Combo endStation_combo;
 	private static Combo middleStation_combo;
 	private ScrolledComposite scrolledComposite;
+	private static Text textID;
 	private static List middleStationList;
     
 	
@@ -47,7 +45,7 @@ public class TimeTableControllerCanvas extends Canvas {
 		
 		// Group with all controllers for add a new TimeTable
 		
-		setGroupAddTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN));
+		groupAddTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN));
 		getGroupAddTimeTable().setText("Fahrplan hinzufügen");
 		GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 3; 
@@ -61,13 +59,13 @@ public class TimeTableControllerCanvas extends Canvas {
 	    iD.setText("ID : ");
 	    iD.setLayoutData(gridData);
 	    
-	    textName = new Text(getGroupAddTimeTable(), SWT.BORDER); 
-	    textName.setText(""); 
+	    setTextID(new Text(getGroupAddTimeTable(), SWT.BORDER)); 
+	    getTextID().setText(""); 
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2;
-	    textName.setTextLimit(6);
-	    textName.setLayoutData(gridData);
+	    getTextID().setTextLimit(6);
+	    getTextID().setLayoutData(gridData);
 		
         // Name Timetable
         
@@ -77,13 +75,13 @@ public class TimeTableControllerCanvas extends Canvas {
 	    name.setText("Fahrplanname : ");
 	    name.setLayoutData(gridData);
 	    
-	    textName = new Text(getGroupAddTimeTable(), SWT.BORDER); 
-	    textName.setText(""); 
+	    setTextName(new Text(getGroupAddTimeTable(), SWT.BORDER)); 
+	    getTextName().setText(""); 
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2;
-	    textName.setTextLimit(6);
-	    textName.setLayoutData(gridData);
+	    getTextName().setTextLimit(6);
+	    getTextName().setLayoutData(gridData);
 	    
 	    // Driving Days 
 	    
@@ -113,13 +111,13 @@ public class TimeTableControllerCanvas extends Canvas {
 	    startstation.setText("Anfangsstation : ");
 	    startstation.setLayoutData(gridData); 
 	    
-	    startStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
-	    startStation_combo.setBounds(5,45,150, 25);
-	    startStation_combo.setItems(nodes);
+	    startStation_combo = ((new Combo(getGroupAddTimeTable(), SWT.READ_ONLY)));
+	    getStartStation_combo().setBounds(5,45,150, 25);
+	    getStartStation_combo().setItems(nodes);
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2; 
-	    startStation_combo.setLayoutData(gridData);
+	    getStartStation_combo().setLayoutData(gridData);
 	    
 	    // Endstation
 	    
@@ -130,13 +128,13 @@ public class TimeTableControllerCanvas extends Canvas {
 	    endstation.setLayoutData(gridData); 
 	    
 	    
-	    endStation_combo = (new Combo(getGroupAddTimeTable(), SWT.READ_ONLY));
-	    endStation_combo.setBounds(5,45,150, 25);
-	    endStation_combo.setItems(nodes);
+	    endStation_combo = ((new Combo(getGroupAddTimeTable(), SWT.READ_ONLY)));
+	    getEndStation_combo().setBounds(5,45,150, 25);
+	    getEndStation_combo().setItems(nodes);
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    gridData.horizontalSpan = 2; 
-	    endStation_combo.setLayoutData(gridData);
+	    getEndStation_combo().setLayoutData(gridData);
 	    
 	    // Middlestations
 	    
@@ -146,7 +144,7 @@ public class TimeTableControllerCanvas extends Canvas {
 	    middlestations.setText("Zwischenstationen : ");
 	    middlestations.setLayoutData(gridData); 
 	    
-	    setMiddleStation_combo((new Combo(getGroupAddTimeTable(), SWT.READ_ONLY)));
+	    middleStation_combo = ((new Combo(getGroupAddTimeTable(), SWT.READ_ONLY)));
 	    getMiddleStation_combo().setBounds(5,45,150, 25);
 	    getMiddleStation_combo().setItems(nodes);
 		gridData = new GridData();
@@ -199,7 +197,7 @@ public class TimeTableControllerCanvas extends Canvas {
 
 		    
 		Button newTrain = new Button(getGroupAddTimeTable(), SWT.NONE);
-		newTrain.setText("Zug hinzufügen");
+		newTrain.setText("Fahrplan hinzufügen");
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    gridData.horizontalSpan = 3; 
@@ -209,23 +207,13 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				TrainEvents.addNewTrain();
+				TimeTableEvents.addTimeTable();
 						
 			}
 		});
 				
-		getGroupAddTimeTable().pack();
-				
-	    // Group with all controllers for edit a existing TimeTable
-				
-		setGroupEditTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
-		getGroupEditTimeTable().setText("Zug bearbeiten");
-		getGroupEditTimeTable().setBounds(0, 135, 0, 0);
-		getGroupEditTimeTable().setLayout(gridLayout);
-		        
-			       
 			     
-		Button edit = new Button(getGroupEditTimeTable(), SWT.NONE);
+		Button edit = new Button(getGroupAddTimeTable(), SWT.NONE);
 		edit.setText("Fahrplan ändern");
 		gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -236,16 +224,16 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-
+                 TimeTableEvents.editTimeTable();
 						
 			}
 		});
 				
-		getGroupEditTimeTable().pack();
-				
+
+		getGroupAddTimeTable().pack();		
 		// Group with all controllers for delete a existing TimeTable
 				
-		setGroupDeletTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
+		groupDeletTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN ));
 		getGroupDeletTimeTable().setText("Fahrplan löschen");
 		getGroupDeletTimeTable().setBounds(0, 265, 0, 0);
 		getGroupDeletTimeTable().setLayout(gridLayout);
@@ -268,7 +256,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		//Group with all controllers for import a TimeTable
 				
-		setGroupImportTimeTable((new Group(this, SWT.SHADOW_ETCHED_IN )));
+		groupImportTimeTable = ((new Group(this, SWT.SHADOW_ETCHED_IN )));
 		getGroupImportTimeTable().setText("Fahrplan Importieren");
 		getGroupImportTimeTable().setBounds(0, 317, 400, 0);
 		getGroupImportTimeTable().setLayout(gridLayout);
@@ -291,7 +279,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		//Group with all controllers for export a TimeTable
 				
-		setGroupExportTimeTable(new Group(this, SWT.SHADOW_ETCHED_IN ));
+		groupExportTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN ));
 		getGroupExportTimeTable().setText("Fahrplan Exportieren");
 		getGroupExportTimeTable().setBounds(0, 370, 0, 0);
 		getGroupExportTimeTable().setLayout(gridLayout);
@@ -314,7 +302,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		// Group when the shellHeight < then 300 pixel
 				
-		setGroupControlSmall(new Group(this, SWT.SHADOW_ETCHED_IN));
+		groupControlSmall = (new Group(this, SWT.SHADOW_ETCHED_IN));
 		getGroupControlSmall().setText("Zug Verwaltung");
 		GridLayout gridLayout3 = new GridLayout(); 
         gridLayout.numColumns = 1; 
@@ -399,48 +387,20 @@ public class TimeTableControllerCanvas extends Canvas {
 		return groupControlSmall;
 	}
 
-	public void setGroupControlSmall(Group groupControlSmall) {
-		this.groupControlSmall = groupControlSmall;
-	}
-
 	public static Group getGroupAddTimeTable() {
 		return groupAddTimeTable;
-	}
-
-	public void setGroupAddTimeTable(Group groupAddTimeTable) {
-		this.groupAddTimeTable = groupAddTimeTable;
-	}
-
-	public static Group getGroupEditTimeTable() {
-		return groupEditTimeTable;
-	}
-
-	public void setGroupEditTimeTable(Group groupEditTimeTable) {
-		this.groupEditTimeTable = groupEditTimeTable;
 	}
 
 	public static Group getGroupDeletTimeTable() {
 		return groupDeletTimeTable;
 	}
 
-	public void setGroupDeletTimeTable(Group groupDeletTimeTable) {
-		this.groupDeletTimeTable = groupDeletTimeTable;
-	}
-
 	public static Group getGroupImportTimeTable() {
 		return groupImportTimeTable;
 	}
 
-	public void setGroupImportTimeTable(Group groupImportTimeTable) {
-		this.groupImportTimeTable = groupImportTimeTable;
-	}
-
 	public static Group getGroupExportTimeTable() {
 		return groupExportTimeTable;
-	}
-
-	public void setGroupExportTimeTable(Group groupExportTimeTable) {
-		this.groupExportTimeTable = groupExportTimeTable;
 	}
 
 	public static List getMiddleStationList() {
@@ -455,8 +415,30 @@ public class TimeTableControllerCanvas extends Canvas {
 		return middleStation_combo;
 	}
 
-	public void setMiddleStation_combo(Combo middleStation_combo) {
-		this.middleStation_combo = middleStation_combo;
+	public static Text getTextID() {
+		return textID;
 	}
+
+	public static void setTextID(Text textID) {
+		TimeTableControllerCanvas.textID = textID;
+	}
+
+	public static Text getTextName() {
+		return textName;
+	}
+
+	public static void setTextName(Text textName) {
+		TimeTableControllerCanvas.textName = textName;
+	}
+
+	public static Combo getStartStation_combo() {
+		return startStation_combo;
+	}
+
+	public static Combo getEndStation_combo() {
+		return endStation_combo;
+	}
+
+
 
 }

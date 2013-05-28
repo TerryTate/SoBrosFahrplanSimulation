@@ -39,14 +39,14 @@ public class CompositeTimeTable extends Composite {
 		gridData.grabExcessVerticalSpace = true;
 		scrollComposite.setLayoutData(gridData);
 		
-        timeTableTable = new Table(scrollComposite, SWT.FULL_SELECTION);
+        setTimeTableTable(new Table(scrollComposite, SWT.FULL_SELECTION));
 		
-	    TableColumn idTimeTable = new TableColumn(timeTableTable,SWT.CENTER);
-	    TableColumn timeTableName = new TableColumn(timeTableTable, SWT.CENTER);
-	    TableColumn drivingDays = new TableColumn(timeTableTable, SWT.CENTER);
-	    TableColumn startStation = new TableColumn(timeTableTable,SWT.CENTER);
-	    TableColumn endStation = new TableColumn(timeTableTable, SWT.CENTER);
-	    TableColumn middleStation = new TableColumn(timeTableTable, SWT.CENTER);
+	    TableColumn idTimeTable = new TableColumn(getTimeTableTable(),SWT.CENTER);
+	    TableColumn timeTableName = new TableColumn(getTimeTableTable(), SWT.CENTER);
+	    TableColumn drivingDays = new TableColumn(getTimeTableTable(), SWT.CENTER);
+	    TableColumn startStation = new TableColumn(getTimeTableTable(),SWT.CENTER);
+	    TableColumn endStation = new TableColumn(getTimeTableTable(), SWT.CENTER);
+	    TableColumn middleStation = new TableColumn(getTimeTableTable(), SWT.CENTER);
 	    
 	    idTimeTable.setText("ID");
 	    timeTableName.setText("Fahrplanname");
@@ -62,9 +62,9 @@ public class CompositeTimeTable extends Composite {
 	    endStation.setWidth(80);
 	    middleStation.setWidth(80);
 	    
-	    timeTableTable.setHeaderVisible(true);
+	    getTimeTableTable().setHeaderVisible(true);
 	    
-	    scrollComposite.setContent(timeTableTable);
+	    scrollComposite.setContent(getTimeTableTable());
 		
 		TimeTableControllerCanvas canvasControl = new TimeTableControllerCanvas(this, SWT.BORDER );	
 		canvasControl.setBackground(ColorConstants.white);
@@ -73,6 +73,14 @@ public class CompositeTimeTable extends Composite {
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.grabExcessVerticalSpace = true;
 		canvasControl.setLayoutData(gridData);
+	}
+
+	public static Table getTimeTableTable() {
+		return timeTableTable;
+	}
+
+	public static void setTimeTableTable(Table timeTableTable) {
+		CompositeTimeTable.timeTableTable = timeTableTable;
 	}
 
 }
