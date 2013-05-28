@@ -192,6 +192,8 @@ public class TimeTableControllerCanvas extends Canvas {
 		setMiddleStationList(new List(scrolledComposite, SWT.NONE));
 		getMiddleStationList().setVisible(true);
 		
+		scrolledComposite.setContent(getMiddleStationList());
+		
 		getMiddleStationList().pack();
 	
 
@@ -235,11 +237,11 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		groupDeletTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN ));
 		getGroupDeletTimeTable().setText("Fahrplan löschen");
-		getGroupDeletTimeTable().setBounds(0, 265, 0, 0);
+		getGroupDeletTimeTable().setBounds(0, 372, 0, 0);
 		getGroupDeletTimeTable().setLayout(gridLayout);
 				
 		Button deleteTimeTable = new Button(getGroupDeletTimeTable(), SWT.NONE);
-		deleteTimeTable.setText("Zug löschen");
+		deleteTimeTable.setText("Fahrplan löschen");
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteTimeTable.setLayoutData(gridData);
@@ -247,7 +249,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-					
+				TimeTableEvents.deleteTimeTable();	
 						
 			}
 		});
@@ -258,7 +260,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		groupImportTimeTable = ((new Group(this, SWT.SHADOW_ETCHED_IN )));
 		getGroupImportTimeTable().setText("Fahrplan Importieren");
-		getGroupImportTimeTable().setBounds(0, 317, 400, 0);
+		getGroupImportTimeTable().setBounds(0, 423, 400, 0);
 		getGroupImportTimeTable().setLayout(gridLayout);
 				
 		Button importTimeTable = new Button(getGroupImportTimeTable(), SWT.NONE);
@@ -281,7 +283,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		groupExportTimeTable = (new Group(this, SWT.SHADOW_ETCHED_IN ));
 		getGroupExportTimeTable().setText("Fahrplan Exportieren");
-		getGroupExportTimeTable().setBounds(0, 370, 0, 0);
+		getGroupExportTimeTable().setBounds(0, 475, 0, 0);
 		getGroupExportTimeTable().setLayout(gridLayout);
 				
 		Button exportTrain = new Button(getGroupExportTimeTable(), SWT.NONE);
