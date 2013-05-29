@@ -31,6 +31,7 @@ public class Main {
 	public static boolean big = true;
 	private static boolean fill = false;
 	private static int oldValue = -1;
+	private static Shell shell;
 	/**
 	 * @param args
 	 */
@@ -43,18 +44,19 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Display display = Display.getDefault();
-		Shell shell = new Shell();
-		shell.setText("Train animation example");
-		shell.setImage(new Image(null,"img/forklift-truck-logo.png"));
-		shell.setSize(820, 720);
+       
+		setShell(new Shell());
+		getShell().setText("Train animation example");
+		getShell().setImage(new Image(null,"img/forklift-truck-logo.png"));
+		getShell().setSize(820, 720);
 		
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
-	    shell.setLayout(gridLayout);
+	    getShell().setLayout(gridLayout);
 		
-		shell.setMenuBar(MenuBar.createMenu(shell));
+		getShell().setMenuBar(MenuBar.createMenu(getShell()));
 		
-		tabComposite = new Composite(shell, SWT.BORDER );
+		tabComposite = new Composite(getShell(), SWT.BORDER );
 		tabComposite.setBackground(ColorConstants.lightGray);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -65,7 +67,7 @@ public class Main {
 		tabComposite.setLayout(gridLayout);
 		
 		
-		bottomComposite = new Composite(shell, SWT.BORDER );
+		bottomComposite = new Composite(getShell(), SWT.BORDER );
 		bottomComposite.setBackground(ColorConstants.lightGray);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -75,12 +77,12 @@ public class Main {
     	
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display);   
 
-	    shell.open();
+	    getShell().open();
     
 	
-		while (!shell.isDisposed()) {			
+		while (!getShell().isDisposed()) {			
 			if (!display.readAndDispatch()) {
-				Point sizeshell = shell.getSize();
+				Point sizeshell = getShell().getSize();
 				
 				if (sizeshell.y < 400){
 				
@@ -163,6 +165,14 @@ public class Main {
 
 	public static void setTabFolder(TabFolder tabFolder) {
 		Main.tabFolder = tabFolder;
+	}
+
+	public static Shell getShell() {
+		return shell;
+	}
+
+	public static void setShell(Shell shell) {
+		Main.shell = shell;
 	}
 
 }
