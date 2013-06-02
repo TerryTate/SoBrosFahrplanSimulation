@@ -1,13 +1,24 @@
 package de.hohenheim.controller.events;
 
+import org.eclipse.swt.SWT;
+
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.dialouge.TimetableAddDialog;
+import de.hohenheim.view.dialouge.TimetableDeletDialog;
+import de.hohenheim.view.dialouge.TimetableEditDialog;
+import de.hohenheim.view.dialouge.TrainAddDialog;
+import de.hohenheim.view.dialouge.TrainDeletDialog;
+import de.hohenheim.view.dialouge.TrainEditDialog;
+
 
 public class MenuBarEvents {
 
 	public static void closeProgramm() {
 		
 		Main.getShell().close();
-		Main.getShell().getDisplay().dispose();
+		
+		// Nicht sicher ob man das einfach weglassen kann  
+		//Main.getShell().getDisplay().dispose();
 		
 	}
 
@@ -32,6 +43,41 @@ public class MenuBarEvents {
 	public static void changeLookToTimetable() {
 		
 		Main.getcTabFolder().setSelection(3);
+		
+	}
+
+	public static void addTrain() {
+		
+		new TrainAddDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
+
+	public static void editTrain() {
+	    
+		new TrainEditDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
+	
+    public static void deletTrain() {
+	    
+		new TrainDeletDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
+
+	public static void addTimeTable() {
+		
+		new TimetableAddDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
+
+	public static void edtitTimetable() {
+		
+		new TimetableEditDialog(Main.getShell(), SWT.NONE).open();
+	}
+
+	public static void deletTimetable() {
+		
+		new TimetableDeletDialog(Main.getShell(), SWT.NONE).open();
 		
 	}
 

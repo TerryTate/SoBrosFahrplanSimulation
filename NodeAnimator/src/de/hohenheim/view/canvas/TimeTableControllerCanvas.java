@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
+import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.TimeTableEvents;
+
 
 public class TimeTableControllerCanvas extends Canvas {
 	
@@ -316,7 +319,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-					
+			    MenuBarEvents.addTimeTable();		
 						
 			}
 		});
@@ -333,7 +336,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				
+				 MenuBarEvents.edtitTimetable();	
 						
 			}
 		});
@@ -347,7 +350,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-					
+				MenuBarEvents.deletTimetable();		
 						
 			}
 		});

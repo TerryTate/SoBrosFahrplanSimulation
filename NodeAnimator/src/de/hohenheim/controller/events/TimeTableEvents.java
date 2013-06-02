@@ -1,4 +1,4 @@
-package de.hohenheim.view.canvas;
+package de.hohenheim.controller.events;
 
 public class TimeTableEvents {
 

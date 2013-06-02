@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import de.hohenheim.controller.events.MenuBarEvents;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.view.composite.CompositeTrain;
 
@@ -286,7 +287,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-			
+				 MenuBarEvents.addTrain();
 				
 			}
 		});
@@ -304,7 +305,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-		
+				 MenuBarEvents.editTrain();
 				
 			}
 		});
@@ -318,7 +319,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-			
+				 MenuBarEvents.deletTrain();
 				
 			}
 		});
