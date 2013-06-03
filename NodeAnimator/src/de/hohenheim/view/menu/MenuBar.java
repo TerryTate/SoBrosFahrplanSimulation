@@ -175,7 +175,7 @@ public class MenuBar {
            
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.editTrain();
+	    		MenuBarEvents.editTrain(true);
                 
             }
         });

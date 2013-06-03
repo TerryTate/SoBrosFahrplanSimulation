@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
+import de.hohenheim.view.canvas.ProjektControllerCanvas;
 import de.hohenheim.view.canvas.TimeTableControllerCanvas;
 
 public class CompositeProject extends Composite {
@@ -61,7 +62,7 @@ public class CompositeProject extends Composite {
 	    
 	    scrollComposite.setContent(projectTable);
 		
-		TimeTableControllerCanvas canvasControl = new TimeTableControllerCanvas(this, SWT.BORDER );	
+		ProjektControllerCanvas canvasControl = new ProjektControllerCanvas(this, SWT.BORDER );	
 		canvasControl.setBackground(ColorConstants.white);
 		
 		gridData = new GridData();

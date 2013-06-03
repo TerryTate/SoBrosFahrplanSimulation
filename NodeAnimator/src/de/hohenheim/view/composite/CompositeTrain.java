@@ -52,12 +52,21 @@ public class CompositeTrain extends Composite{
 	    TableColumn idTrain = new TableColumn(getTrainTable(),SWT.CENTER);
 	    TableColumn typOfTrain = new TableColumn(getTrainTable(), SWT.CENTER);
 	    TableColumn maxSpeed = new TableColumn(getTrainTable(), SWT.CENTER);
+	    TableColumn priority = new TableColumn(getTrainTable(), SWT.CENTER);
+	    TableColumn ladung = new TableColumn(getTrainTable(), SWT.CENTER);
+	    
 	    idTrain.setText("ID");
 	    typOfTrain.setText("ZugTyp");
 	    maxSpeed.setText("Höchstgeschwindigkeit");
+	    priority.setText("Priorität");
+	    ladung.setText("Ladung");
+	    
 	    idTrain.setWidth(70);
 	    typOfTrain.setWidth(70);
 	    maxSpeed.setWidth(80);
+	    priority.setWidth(70);
+	    ladung.setWidth(80);
+	    
 	    getTrainTable().setHeaderVisible(true);
 	    
 	    scrollComposite.setContent(getTrainTable());

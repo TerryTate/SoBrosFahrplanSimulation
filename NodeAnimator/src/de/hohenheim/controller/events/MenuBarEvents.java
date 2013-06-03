@@ -52,9 +52,9 @@ public class MenuBarEvents {
 		
 	}
 
-	public static void editTrain() {
+	public static void editTrain(boolean menu) {
 	    
-		new TrainEditDialog(Main.getShell(), SWT.NONE).open();
+		new TrainEditDialog(Main.getShell(), SWT.NONE).open(menu);
 		
 	}
 	

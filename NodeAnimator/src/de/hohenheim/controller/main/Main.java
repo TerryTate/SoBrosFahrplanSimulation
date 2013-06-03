@@ -82,80 +82,11 @@ public class Main {
 	
 		while (!getShell().isDisposed()) {			
 			if (!display.readAndDispatch()) {
-				Point sizeshell = getShell().getSize();
-				
-				if (sizeshell.y < 400){
-				
-					if(big == true){
-						
-					     TrainControllerCanvas.getGroupControlSmall().setVisible(true);	
-					     TrainControllerCanvas.getGroupAddTrain().setVisible(false);
-					     TrainControllerCanvas.getGroupEditTrain().setVisible(false);
-					     TrainControllerCanvas.getGroupDeletTrain().setVisible(false);	
-					     TrainControllerCanvas.getGroupImportTrain().setVisible(false);
-					     TrainControllerCanvas.getGroupExportTrain().setVisible(false);
-					     
-					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(true);	
-					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(false);
-					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(false);	
-					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(false);
-					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(false);
-					     big = false;
-					     
-					}			
-				}
-			    else if(sizeshell.y >= 400){
-			      
-			    	if(big == false){
-					   
-			    		TrainControllerCanvas.getGroupAddTrain().setVisible(true);
-					     TrainControllerCanvas.getGroupEditTrain().setVisible(true);
-					     TrainControllerCanvas.getGroupControlSmall().setVisible(false);
-					     TrainControllerCanvas.getGroupDeletTrain().setVisible(true);	
-					     TrainControllerCanvas.getGroupImportTrain().setVisible(true);
-					     TrainControllerCanvas.getGroupExportTrain().setVisible(true);
-					     
-					     TimeTableControllerCanvas.getGroupControlSmall().setVisible(false);	
-					     TimeTableControllerCanvas.getGroupAddTimeTable().setVisible(true);
-					     TimeTableControllerCanvas.getGroupDeletTimeTable().setVisible(true);	
-					     TimeTableControllerCanvas.getGroupImportTimeTable().setVisible(true);
-					     TimeTableControllerCanvas.getGroupExportTimeTable().setVisible(true);
-					     big = true;
-					     
-					}	
-			    	
-			    }
-				TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
-				
-				try{
-					int newValue = Integer.parseInt(rowData[0].getText(0));
-					
-					if (newValue != oldValue){
-						fill =false;
-					}
-					
-					if (fill == false){
-						
-				        if (rowData[0] != null){
-					         TrainControllerCanvas.getTextID2().setText(rowData[0].getText(0));
-					         TrainControllerCanvas.getTextSpeed2().setText(rowData[0].getText(2));
-					         TrainControllerCanvas.getTypOfTrain_combo2().setText(rowData[0].getText(1));
-					         oldValue = Integer.parseInt(rowData[0].getText(0));
-					         fill = true;
-				        }
-					         
-					}
-				}
-				
-				catch(ArrayIndexOutOfBoundsException e){
-					
-				}
-				
-					
-			    
+	    
 			    display.sleep();
 		   }
-		 }
+	
+		}
 	
 	}
 

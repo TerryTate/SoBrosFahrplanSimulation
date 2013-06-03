@@ -18,6 +18,8 @@ public class TrainDeletDialog extends Dialog {
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(220, 310);
 	    dialog.setText("Zug löschen");
+	    
+	    
 		
 	    
 	    dialog.open();

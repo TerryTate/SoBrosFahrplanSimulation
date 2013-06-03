@@ -9,6 +9,8 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.TrainControllerCanvas;
 import de.hohenheim.view.composite.CompositeTrain;
+import de.hohenheim.view.dialouge.TrainAddDialog;
+import de.hohenheim.view.dialouge.TrainEditDialog;
 
 
 
@@ -34,14 +36,14 @@ public class TrainEvents {
 		/**
 		 * String that contains the text written in the "ID text field" of the Canvas.
 		 */
-		String idText = TrainControllerCanvas.getTextID().getText();
+		String idText = TrainAddDialog.idText.getText();
 		
 		
 		
 		/**
 		 * String that contains the text written in the "Speed text field" of the Canvas.
 		 */
-		String speedText = TrainControllerCanvas.getTextSpeed().getText();
+		String speedText = TrainAddDialog.comboSpeed.getText();
 		
 		
 		//Als Lokale Variablen deklarieren und dann des parsen als Integer mit Try/Catch umgeben!!
@@ -50,14 +52,16 @@ public class TrainEvents {
 		
 		
 		
-		TrainData train = new TrainData(id, speed, TrainControllerCanvas.getTypOfTrain_combo().getText());
+		TrainData train = new TrainData(id, speed, TrainAddDialog.comboTypOfTrain.getText(), TrainAddDialog.comboLadungen.getText(), TrainAddDialog.comboPriority.getText() );
 		
 		Main.trainListAll.add(train);
 		
 		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
 		item.setText(new String[]{String.valueOf(train.getID()),
 				train.getTypOfTrain(),
-				String.valueOf(train.getSpeed())});
+				String.valueOf(train.getSpeed()), train.getPriority(), train.getLadung()});
+		
+		TrainAddDialog.dialog.close();
 		
 	}
 	
@@ -72,29 +76,48 @@ public class TrainEvents {
 	 * By the id this methods checks whether it is the same train you want to reedit or not.
 	 * 
 	 */
-	public static void editTrain() {
+	public static void editTrain(boolean menu) {
 		
-		TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
+		if (menu == false){
 		
-		String idText = TrainControllerCanvas.getTextID2().getText();
-		int id = Integer.parseInt(idText);
-		String speedText = TrainControllerCanvas.getTextSpeed2().getText();
-		int speed = Integer.parseInt(speedText);
+			TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
 		
-		int idCheck = Integer.parseInt(rowData[0].getText(0));
+	    	String idText = TrainEditDialog.idText.getText();
+		    int id = Integer.parseInt(idText);
 		
-		for (TrainData td : Main.trainListAll){
+		    String speedText = TrainEditDialog.comboSpeed.getText();
+		    int speed = Integer.parseInt(speedText);
+		
+	    	int idCheck = Integer.parseInt(rowData[0].getText(0));
+		
+		    for (TrainData td : Main.trainListAll){
 			
-			if (idCheck == td.getID()){
-				td.setID(id);
-				td.setSpeed(speed);
-				td.setTypOfTrain(TrainControllerCanvas.getTypOfTrain_combo2().getText());
-			}
-		}
+			    if (idCheck == td.getID()){
+				    td.setID(id);
+				    td.setSpeed(speed);
+				    td.setTypOfTrain(TrainEditDialog.comboTypOfTrain.getText());
+				    td.setLadung(TrainEditDialog.comboLadungen.getText());
+				    td.setPriority(TrainEditDialog.comboPriority.getText());
+		    	}
+		    }
 	    
-		rowData[0].setText(0, idText);
-		rowData[0].setText(1, TrainControllerCanvas.getTypOfTrain_combo2().getText());
-		rowData[0].setText(2, speedText);
+		    rowData[0].setText(0, idText);
+		    rowData[0].setText(1, TrainEditDialog.comboTypOfTrain.getText());
+	 	    rowData[0].setText(2, speedText);
+	 	    rowData[0].setText(3, TrainEditDialog.comboPriority.getText());
+	 	    rowData[0].setText(4, TrainEditDialog.comboLadungen.getText());
+	 	    
+	 	   TrainEditDialog.dialog.close();
+		
+		}else if (menu == true){
+			
+			
+	     
+	 	   TrainEditDialog.dialog.close();
+			
+		}
+		
+		
 		
 	}
 	

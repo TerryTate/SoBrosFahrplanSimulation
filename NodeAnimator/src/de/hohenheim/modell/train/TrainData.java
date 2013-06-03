@@ -5,11 +5,16 @@ public class TrainData {
 	int id; 
 	int speed; 
 	String typOfTrain; 
+	private String ladung;
+	private String priority;
 	
-	public TrainData (int id, int speed, String typOfTrain){
+	
+	public TrainData (int id, int speed, String typOfTrain, String ladung, String priority){
 		this.id = id;
 		this.speed = speed;
 		this.typOfTrain = typOfTrain; 
+		this.setLadung(ladung);
+		this.setPriority(priority);
 		
 	}
 
@@ -34,6 +39,22 @@ public class TrainData {
 	}
 	public void setTypOfTrain(String typOfTrain) {
 		this.typOfTrain = typOfTrain;	
+	}
+
+	public String getLadung() {
+		return ladung;
+	}
+
+	public void setLadung(String ladung) {
+		this.ladung = ladung;
+	}
+
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 	
 }
