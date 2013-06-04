@@ -3,6 +3,7 @@ package de.hohenheim.controller.events;
 import org.eclipse.swt.SWT;
 
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
@@ -79,6 +80,11 @@ public class MenuBarEvents {
 		
 		new TimetableDeletDialog(Main.getShell(), SWT.NONE).open();
 		
+	}
+
+	public static void showHelp() {
+		
+		new HelpDialog(Main.getShell(), SWT.NONE).open();
 	}
 
 }
