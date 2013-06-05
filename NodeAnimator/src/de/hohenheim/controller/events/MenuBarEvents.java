@@ -1,7 +1,10 @@
 package de.hohenheim.controller.events;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.MessageBox;
 
+import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
@@ -16,10 +19,13 @@ public class MenuBarEvents {
 
 	public static void closeProgramm() {
 		
-		Main.getShell().close();
-		
-		// Nicht sicher ob man das einfach weglassen kann  
-		//Main.getShell().getDisplay().dispose();
+		 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_QUESTION
+		            | SWT.YES | SWT.NO);
+		 messageBox.setMessage("Wollen Sie das Programm wirklich beenden ?");
+		 messageBox.setText("Programm Beenden");
+		 int response = messageBox.open();
+		 if (response == SWT.YES)
+		 System.exit(0);
 		
 	}
 
@@ -61,7 +67,7 @@ public class MenuBarEvents {
 	
     public static void deletTrain() {
 	    
-		new TrainDeletDialog(Main.getShell(), SWT.NONE).open();
+		new TrainDeletDialog(Main.getShell(), SWT.NONE).open(true);
 		
 	}
 
@@ -85,6 +91,32 @@ public class MenuBarEvents {
 	public static void showHelp() {
 		
 		new HelpDialog(Main.getShell(), SWT.NONE).open();
+	}
+
+	public static void saveTrain() {
+	
+		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
+        fd.setText("Zug Exportieren");
+        fd.setFilterPath("C:/");
+        String[] filterExt = { "*.xml" };
+        fd.setFilterExtensions(filterExt);
+        String selected = fd.open(); 
+        XmlWriter.writeToXML(selected);
+        
+        System.out.println(selected);
+		
+	}
+
+	public static void openTrain() {
+		
+		 FileDialog fd = new FileDialog(Main.getShell(), SWT.OPEN);
+	     fd.setText("Zug Importieren");
+	     fd.setFilterPath("C:/");
+	     String[] filterExt = { "*.xml"};
+	     fd.setFilterExtensions(filterExt);
+	     String selected = fd.open();
+	     XmlWriter.writeToXML(selected);
+		
 	}
 
 }
