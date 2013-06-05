@@ -2,6 +2,7 @@ package de.hohenheim.controller;
 
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,99 +24,82 @@ import de.hohenheim.modell.train.TrainData;
  */
 public class XmlWriter {
 
-	// Methode muss static sein damit man kein XMLWriter Objekt
 	/**
 	 * Static method to write XML-file that provides the trains and time tables
 	 * (train schedules) we want to save. Is static so you don't have to
 	 * instantiate the XmlWriter as object to use this method.
 	 * 
-	 * (Note: DOM = Document Object Model)
+	 * (Note: JDOM = Document Object Model)
 	 * 
 	 * @param fileName
 	 *            Name of the saved XML-File as String, importent to distinguish
 	 *            the different trains and time tables.
 	 */
 	public static void writeToXML(String fileName) {
-
-		try {
-
-			DocumentBuilderFactory factory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-
+		
+		
+		/*
+		 * Root Element of the JDOM Tree to attach all other Elements
+		 * Going through the list of all trains
+		 */
+		org.jdom2.Element rootTrain = new org.jdom2.Element("Train");
+		for (TrainData tD : Main.trainListAll){
+			
+			org.jdom2.Element iD = new org.jdom2.Element("ID");
+			rootTrain.addContent(iD);
+			iD.setText(String.valueOf(tD.getID()));
+			
+			
+			org.jdom2.Element typeOfTrain = new org.jdom2.Element("TrainType");
+			rootTrain.addContent(typeOfTrain);
+			typeOfTrain.setText(String.valueOf(tD.getTypOfTrain()));
+			
+			
+			org.jdom2.Element priority = new org.jdom2.Element("Priority");
+			rootTrain.addContent(priority);
+			priority.setText(String.valueOf(tD.getPriority()));
+			
+			
+			org.jdom2.Element speed = new org.jdom2.Element("Speed");
+			rootTrain.addContent(speed);
+			speed.setText(String.valueOf(tD.getSpeed()));
+			
+			
+			org.jdom2.Element ladung = new org.jdom2.Element("Lading");
+			rootTrain.addContent(iD);
+			ladung.setText(String.valueOf(tD.getLadung()));
+			
 			/*
-			 * DOM Document
+			 * XML Document gets instantiated
 			 */
-			Document document = builder.newDocument();
-
-			/*
-			 * Root Element of DOM-Tree 
-			 * 
-			 * (@Arthur, falls das hier nicht klappt kanns
-			 * daran liegen das dies Element-type schwierigkeiten macht)
-			 */
-			org.w3c.dom.Element root = document.createElement("TrainSimultion ");
+			org.jdom2.Document doc = new org.jdom2.Document(rootTrain);
 			
 			
 			/*
-			 * TRAINS
-			 * ------
-			 * Node elements get attached to the root element
-			 * Root -> AllTrains -> Train -> ID -> TypeOfTrain -> etc.
-			 * 
-			 * Every "smaller" element gets attached as child node
+			 * FileOutputStream with Name of  the file + ID
+			 * XMLOutputter with "prettyFormat"
 			 */
-			
-			org.w3c.dom.Element allTrains = document.createElement("Trains_Overview");
-			root.appendChild(allTrains);
-			
-			//loop for all trains
-			for (TrainData tD : Main.trainListAll) {
-				
-				Element train = document.createElement("Train");
-				allTrains.appendChild(train);
-				
-				Element iD = document.createElement("ID");
-				train.appendChild(iD);
-				iD.setTextContent(String.valueOf(tD.getID()));
-				//iD.setTextContent(tD.getID().getString);
-				
-				Element trainType = document.createElement("TrainType");
-				train.appendChild(trainType);
-				trainType.setTextContent(String.valueOf(tD.getTypOfTrain()));
-				
-				Element priority = document.createElement("Priority");
-				train.appendChild(priority);
-				priority.setTextContent(String.valueOf(tD.getPriority()));
-				
-				Element speed = document.createElement("Speed");
-				train.appendChild(speed);
-				speed.setTextContent(String.valueOf(tD.getSpeed()));
-				
-				Element payLoad = document.createElement("Payload");
-				train.appendChild(payLoad);
-				payLoad.setTextContent(String.valueOf(tD.getLadung()));
-				
-				
-				
-				
-				
-				FileOutputStream out = new FileOutputStream(fileName);
-				
-				//@Arthur Funktioniert anscheinend so, XML Output Factory hab ich auch probiert...kp
-				
-				XMLOutputter serializer = new XMLOutputter(Format.getPrettyFormat());
-				serializer.output(document, out);
-				out.flush();
-				out.close();
-				
+			try {
+				FileOutputStream fileOut = new FileOutputStream(fileName + String.valueOf(tD.getID()));
+				XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
+				xmlOutputter.output(doc, fileOut);
+				fileOut.flush();
+				fileOut.close();
+			} catch (IOException e) {
+				System.err.println(e);
+				e.fillInStackTrace();
 			}
 			
 		
-		} catch (Exception e) {
-			e.fillInStackTrace();
+			
+			
+			
 		}
+	
 		
 		
 	}
-}
+	
+	}
+
+		
