@@ -1,8 +1,12 @@
 package de.hohenheim.view.dialouge;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -13,6 +17,8 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
@@ -25,12 +31,18 @@ import de.hohenheim.view.composite.CompositeTrain;
 public class TimetableAddDialog extends Dialog{
 	
 	Shell parent;
-	private Text idText;
-	private Text fahrplannameText;
-	private Combo comboStartstation;
-	private Combo comboEndstation;
-	private Combo comboMiddlestation; 
-
+	public static Shell dialog;
+	public static Text idText;
+	public static Text fahrplannameText;
+	public static Combo comboStartstation;
+	public static Combo comboEndstation;
+	public static Combo comboMiddlestation; 
+	public static Table midlestationTable;
+	
+	public static String [] Test = {"1", "2"};
+	final int TEXT_MARGIN = 3;
+	
+	
 	public TimetableAddDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
@@ -38,11 +50,11 @@ public class TimetableAddDialog extends Dialog{
     
 	 public void open() {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(370, 310);
+		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	    dialog.setSize(370, 340);
 	    dialog.setText("Fahrplan hinzufügen");
 	    GridLayout gridLayout = new GridLayout();
-	    gridLayout.numColumns = 4; 
+	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
 	    
 	    TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
@@ -55,7 +67,7 @@ public class TimetableAddDialog extends Dialog{
 	    idText = new Text(dialog, SWT.NONE);
 	     
 	    GridData gridData = new GridData();
-	    gridData.horizontalSpan = 3;
+	    gridData.horizontalSpan = 2;
 	
 	    idText.setLayoutData(gridData);
 	    
@@ -69,8 +81,7 @@ public class TimetableAddDialog extends Dialog{
 	    gridData = new GridData();
 	    gridData.horizontalSpan = 3;
 	    fahrplannameText.setLayoutData(gridData);
-	   
-	    Label room6 = new Label(dialog, SWT.NONE);
+	  
 	    
 	    
 	    // Timetable drivingDays 
@@ -80,15 +91,16 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    new Button(dialog, SWT.CHECK).setText("Montag"); 
 	    new Button(dialog, SWT.CHECK).setText("Dienstag");
-	    new Button(dialog, SWT.CHECK).setText("Mittwoch");
 	    Label room = new Label(dialog, SWT.NONE);
+	    new Button(dialog, SWT.CHECK).setText("Mittwoch");
         new Button(dialog, SWT.CHECK).setText("Donerstag");
+        Label room1 = new Label(dialog, SWT.NONE);
 	    new Button(dialog, SWT.CHECK).setText("Freitag");
 	    new Button(dialog, SWT.CHECK).setText("Samstag");
 	    Label room3 = new Label(dialog, SWT.NONE);
 	    new Button(dialog, SWT.CHECK).setText("Sontag");
 	    new Button(dialog, SWT.CHECK).setText("Alle");
-	    Label room2 = new Label(dialog, SWT.NONE);
+	   
 	    
 	    // Titmetable Startstation
 	    
@@ -96,10 +108,10 @@ public class TimetableAddDialog extends Dialog{
 	    startstation.setText("Startstation : "); 
 	    
         comboStartstation = new Combo(dialog, SWT.READ_ONLY);
-        gridData.horizontalSpan = 3;
+        gridData.horizontalSpan = 2;
 	   
 	    comboStartstation.setLayoutData(gridData);
-	  //  comboStartstation.setItems(speeds);
+	    comboStartstation.setItems(Test);
 	       
 	    // Timetable Endstation
 	    
@@ -107,56 +119,66 @@ public class TimetableAddDialog extends Dialog{
 	    endstation.setText("Endstation : "); 
 	    
 	    comboEndstation = new Combo(dialog, SWT.READ_ONLY);
-	  //  comboEndstation.setItems(priorities);  
+	    comboEndstation.setItems(Test);  
 	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
 	    comboEndstation.setLayoutData(gridData);
 	    
 	    // Timetable Middlestation
-	    
+	      
 	    Label middlestation = new Label(dialog, SWT.NONE); 
 	    middlestation.setText("Zwischenstationen : "); 
 	    
 	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
-	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
-	    comboMiddlestation.setLayoutData(gridData);
-	   // comboMiddlestation.setItems("");
+        comboMiddlestation.setItems(Test);
 	  
+	    
+	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
+	    middlestationButtonC.setLayout(new FillLayout());
+	    
+	    
         //Add Button 
 	    
-	    Button addButton = new Button(dialog, SWT.NONE);
+	    Button addButton = new Button(middlestationButtonC, SWT.NONE);
 		addButton.setText("ADD");
-	    gridData = new GridData();
-	    gridData.horizontalAlignment = SWT.CENTER;
-	    addButton.setLayoutData(gridData);
-		
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
-			   
+			    TimeTableEvents.addMiddleStation();   
 				
 			}
 		});
 	    
 	    // Remove Button
 		
-		Button removeButton = new Button(dialog, SWT.NONE);
+		Button removeButton = new Button(middlestationButtonC, SWT.NONE);
 		removeButton.setText("Remove");
-	    gridData = new GridData();
-	    gridData.horizontalAlignment = SWT.CENTER;
-	    removeButton.setLayoutData(gridData);
-		
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
-			  
+			    TimeTableEvents.removeMiddleStation();  
 				
 			}
 		});
-	
+		
+		Label room6 = new Label(dialog, SWT.NONE);
+	    
+		Composite tableComposite = new Composite(dialog, SWT.NONE);
+		gridData = new GridData();
+		gridData.horizontalSpan = 2; 
+		gridData.horizontalAlignment = SWT.FILL;
+		tableComposite.setLayoutData(gridData);
+		tableComposite.setLayout(new FillLayout());
+		
+		midlestationTable = new Table(tableComposite, SWT.NONE);
+		
+		midlestationTable.setLinesVisible(true);
+
+		TableColumn midleStations = new TableColumn(midlestationTable, SWT.None);
+		
+		midleStations.setWidth(180);
+		
 	    // Buttonn Composite
 	    
 	    Composite buttonComposite = new Composite(dialog, SWT.NONE);

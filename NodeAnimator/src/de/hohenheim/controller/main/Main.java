@@ -22,7 +22,7 @@ import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.tab.TabFolder;
 
 public class Main {
-
+	
 	private static Composite tabComposite;
 	private static Composite bottomComposite;
 	private static TabFolder tabFolder;

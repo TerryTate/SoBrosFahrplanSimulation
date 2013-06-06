@@ -1,19 +1,21 @@
 package de.hohenheim.modell.timetable;
 
+import java.util.ArrayList;
+
 public class Timetable {
 	
 	private int id;
 	private String name;
-	String[] drivingdays;
+	private ArrayList<String> drivingdays;
 	private int startstation;
 	private int endstation;
-	int [] middlestations; 
+	ArrayList<Integer> middlestations; 
 	
 	
-	public Timetable (int id, String[] drivingdays, String name, int startstation, int endstation, int[] middlestations){
+	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations){
 		
 		this.setId(id);
-		this.drivingdays = drivingdays;
+		this.setDrivingdays(drivingdays);
 		this.setName(name); 
 		this.setStartstation(startstation);
 		this.setEndstation(endstation);
@@ -59,6 +61,16 @@ public class Timetable {
 
 	public void setEndstation(int endstation) {
 		this.endstation = endstation;
+	}
+
+
+	public ArrayList<String> getDrivingdays() {
+		return drivingdays;
+	}
+
+
+	public void setDrivingdays(ArrayList<String> drivingdays) {
+		this.drivingdays = drivingdays;
 	}
 
 }
