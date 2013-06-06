@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.dialouge.HelpDialog;
+import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
@@ -116,6 +117,13 @@ public class MenuBarEvents {
 	     fd.setFilterExtensions(filterExt);
 	     String selected = fd.open();
 	     XmlWriter.writeToXML(selected);
+		
+	}
+
+	public static void addProject() {
+		
+		new ProjectAddDialog(Main.getShell(), SWT.NONE).open();
+		
 		
 	}
 

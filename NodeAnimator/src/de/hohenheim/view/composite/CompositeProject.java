@@ -44,11 +44,11 @@ public class CompositeProject extends Composite {
 		gridData.grabExcessVerticalSpace = true;
 		scrollComposite.setLayoutData(gridData);
 		
-		projectTable = new Table(scrollComposite, SWT.FULL_SELECTION);
-	    TableColumn idProject = new TableColumn(projectTable,SWT.CENTER);
-	    TableColumn projectName = new TableColumn(projectTable, SWT.CENTER);
-	    TableColumn idtrains = new TableColumn(projectTable, SWT.CENTER);
-	    TableColumn idtimeTable = new TableColumn(projectTable, SWT.CENTER);
+		setProjectTable(new Table(scrollComposite, SWT.FULL_SELECTION));
+	    TableColumn idProject = new TableColumn(getProjectTable(),SWT.CENTER);
+	    TableColumn projectName = new TableColumn(getProjectTable(), SWT.CENTER);
+	    TableColumn idtrains = new TableColumn(getProjectTable(), SWT.CENTER);
+	    TableColumn idtimeTable = new TableColumn(getProjectTable(), SWT.CENTER);
 	    idProject.setText("ID");
 	    projectName.setText("Projekt Name");
 	    idtrains.setText("ID Züge");
@@ -57,10 +57,10 @@ public class CompositeProject extends Composite {
 	    projectName.setWidth(70);
 	    idtrains.setWidth(80);
 	    idtimeTable.setWidth(80);
-	    projectTable.setHeaderVisible(true);
-	    projectTable.setLinesVisible(true);
+	    getProjectTable().setHeaderVisible(true);
+	    getProjectTable().setLinesVisible(true);
 	    
-	    scrollComposite.setContent(projectTable);
+	    scrollComposite.setContent(getProjectTable());
 		
 		ProjektControllerCanvas canvasControl = new ProjektControllerCanvas(this, SWT.BORDER );	
 		canvasControl.setBackground(ColorConstants.white);
@@ -70,6 +70,14 @@ public class CompositeProject extends Composite {
 		gridData.grabExcessVerticalSpace = true;
 		canvasControl.setLayoutData(gridData);
 		
+	}
+
+	public static Table getProjectTable() {
+		return projectTable;
+	}
+
+	public static void setProjectTable(Table projectTable) {
+		CompositeProject.projectTable = projectTable;
 	}
 
 }
