@@ -42,6 +42,15 @@ public class TimetableAddDialog extends Dialog{
 	public static String [] Test = {"1", "2"};
 	final int TEXT_MARGIN = 3;
 	
+	public static Button dienstag;
+	public static Button mittwoch;
+	public static Button donerstag;
+	public static Button freitag;
+	public static Button samstag;
+	public static Button sontag;
+	public static Button alle;
+	public static Button montag;
+	
 	
 	public TimetableAddDialog(Shell parent, int style) {
 		super(parent, style);
@@ -49,30 +58,27 @@ public class TimetableAddDialog extends Dialog{
 	}
     
 	 public void open() {
-			
+		
+		// Set a new dialog with a GridLayout wit 3 columns 
+		 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(370, 340);
 	    dialog.setText("Fahrplan hinzufügen");
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
-	    
-	    TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
-	      
-        // Train ID
+	         
+        // Set the Label and a Textfield for Timetable ID 
 	    
 	    Label id = new Label(dialog, SWT.NONE); 
 	    id.setText("ID : ");
 	    
-	    idText = new Text(dialog, SWT.NONE);
-	     
+	    idText = new Text(dialog, SWT.NONE); 
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
-	
 	    idText.setLayoutData(gridData);
 	    
-	    
-	    // TimetableName
+	    // Set the Label and a Textfield for Timetable Name 
 	    
 	    Label timeTableName = new Label(dialog, SWT.NONE); 
 	    timeTableName.setText("Fahrplanname : "); 
@@ -82,27 +88,38 @@ public class TimetableAddDialog extends Dialog{
 	    gridData.horizontalSpan = 3;
 	    fahrplannameText.setLayoutData(gridData);
 	  
-	    
-	    
-	    // Timetable drivingDays 
+	    // Timetable drivingDays --> Label drivingdays and Checkboxes
 	    
 	    Label drivingDays = new Label(dialog, SWT.NONE); 
 	    drivingDays.setText("Fahrtage : ");  
 	    
-	    new Button(dialog, SWT.CHECK).setText("Montag"); 
-	    new Button(dialog, SWT.CHECK).setText("Dienstag");
-	    Label room = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Mittwoch");
-        new Button(dialog, SWT.CHECK).setText("Donerstag");
-        Label room1 = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Freitag");
-	    new Button(dialog, SWT.CHECK).setText("Samstag");
-	    Label room3 = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Sontag");
-	    new Button(dialog, SWT.CHECK).setText("Alle");
-	   
+	    montag = new Button(dialog, SWT.CHECK);
+	    montag.setText("Montag");
+	    dienstag = new Button(dialog, SWT.CHECK);
+	    dienstag.setText("Dienstag");
 	    
-	    // Titmetable Startstation
+	    Label room = new Label(dialog, SWT.NONE);
+	    
+	    mittwoch = new Button(dialog, SWT.CHECK);
+	    mittwoch.setText("Mittwoch");
+        donerstag = new Button(dialog, SWT.CHECK);
+        donerstag.setText("Donerstag");
+        
+        Label room1 = new Label(dialog, SWT.NONE);
+        
+	    freitag = new Button(dialog, SWT.CHECK);
+	    freitag.setText("Freitag");
+	    samstag = new Button(dialog, SWT.CHECK);
+	    samstag.setText("Samstag");
+	    
+	    Label room3 = new Label(dialog, SWT.NONE);
+	    
+	    sontag = new Button(dialog, SWT.CHECK);
+	    sontag.setText("Sontag");
+	    alle = new Button(dialog, SWT.CHECK);
+	    alle.setText("Alle");
+	   
+	    // Set Label and combo for Startstation
 	    
 	    Label startstation = new Label(dialog, SWT.NONE); 
 	    startstation.setText("Startstation : "); 
@@ -113,7 +130,7 @@ public class TimetableAddDialog extends Dialog{
 	    comboStartstation.setLayoutData(gridData);
 	    comboStartstation.setItems(Test);
 	       
-	    // Timetable Endstation
+	    // Set Label and combo for Endstation
 	    
 	    Label endstation = new Label(dialog, SWT.NONE); 
 	    endstation.setText("Endstation : "); 

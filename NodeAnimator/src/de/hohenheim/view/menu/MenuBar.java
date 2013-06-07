@@ -139,7 +139,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                
+	    		MenuBarEvents.open();
                 
             }
         });
@@ -148,7 +148,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                   
+	    		MenuBarEvents.save();
                 
             }
         });
@@ -193,7 +193,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.openTrain();
+	    		MenuBarEvents.open();
 	    		
             }
         });
@@ -202,7 +202,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.saveTrain();
+	    		MenuBarEvents.save();
                 
             }
         });
@@ -220,7 +220,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.edtitTimetable();
+	    		MenuBarEvents.edtitTimetable(true);
                 
             }
         });
@@ -238,7 +238,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                  
+	    		MenuBarEvents.open();
                 
             }
         });
@@ -247,7 +247,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                
+	    		MenuBarEvents.save();
                 
             }
         });

@@ -78,9 +78,9 @@ public class MenuBarEvents {
 		
 	}
 
-	public static void edtitTimetable() {
+	public static void edtitTimetable(boolean menu) {
 		
-		new TimetableEditDialog(Main.getShell(), SWT.NONE).open();
+		new TimetableEditDialog(Main.getShell(), SWT.NONE).open(menu);
 	}
 
 	public static void deletTimetable() {
@@ -94,7 +94,7 @@ public class MenuBarEvents {
 		new HelpDialog(Main.getShell(), SWT.NONE).open();
 	}
 
-	public static void saveTrain() {
+	public static void save() {
 	
 		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
         fd.setText("Zug Exportieren");
@@ -108,7 +108,7 @@ public class MenuBarEvents {
 		
 	}
 
-	public static void openTrain() {
+	public static void open() {
 		
 		 FileDialog fd = new FileDialog(Main.getShell(), SWT.OPEN);
 	     fd.setText("Zug Importieren");

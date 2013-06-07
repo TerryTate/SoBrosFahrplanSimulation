@@ -64,7 +64,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				 MenuBarEvents.edtitTimetable();	
+				 MenuBarEvents.edtitTimetable(false);	
 						
 			}
 		});
