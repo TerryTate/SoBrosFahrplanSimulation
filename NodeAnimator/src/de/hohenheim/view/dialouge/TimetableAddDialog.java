@@ -3,6 +3,7 @@ package de.hohenheim.view.dialouge;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -38,95 +39,100 @@ public class TimetableAddDialog extends Dialog{
     
 	 public void open() {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(370, 310);
-	    dialog.setText("Fahrplan hinzufügen");
+		final Shell addTimeTable = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	    addTimeTable.setSize(370, 310);
+	    addTimeTable.setLocation(500, 200);
+	    addTimeTable.setText("Fahrplan hinzufügen");
+	    addTimeTable.setImage(new Image(null, "img/add.png"));
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 4; 
-	    dialog.setLayout(gridLayout);
+	    addTimeTable.setLayout(gridLayout);
 	    
 	    TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
 	      
         // Train ID
 	    
-	    Label id = new Label(dialog, SWT.NONE); 
-	    id.setText("ID : ");
+	    Label id = new Label(addTimeTable, SWT.NONE); 
+	    id.setText("ID :   ");
 	    
-	    idText = new Text(dialog, SWT.NONE);
-	     
+	    idText = new Text(addTimeTable, SWT.NONE);
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 3;
-	
 	    idText.setLayoutData(gridData);
 	    
 	    
 	    // TimetableName
 	    
-	    Label timeTableName = new Label(dialog, SWT.NONE); 
+	    Label timeTableName = new Label(addTimeTable, SWT.NONE); 
 	    timeTableName.setText("Fahrplanname : "); 
 	    
-	    fahrplannameText = new Text(dialog, SWT.NONE); 
+	    fahrplannameText = new Text(addTimeTable, SWT.NONE); 
 	    gridData = new GridData();
 	    gridData.horizontalSpan = 3;
 	    fahrplannameText.setLayoutData(gridData);
 	   
-	    Label room6 = new Label(dialog, SWT.NONE);
-	    
+	  
 	    
 	    // Timetable drivingDays 
 	    
-	    Label drivingDays = new Label(dialog, SWT.NONE); 
+	    Label drivingDays = new Label(addTimeTable, SWT.NONE); 
 	    drivingDays.setText("Fahrtage : ");  
 	    
-	    new Button(dialog, SWT.CHECK).setText("Montag"); 
-	    new Button(dialog, SWT.CHECK).setText("Dienstag");
-	    new Button(dialog, SWT.CHECK).setText("Mittwoch");
-	    Label room = new Label(dialog, SWT.NONE);
-        new Button(dialog, SWT.CHECK).setText("Donerstag");
-	    new Button(dialog, SWT.CHECK).setText("Freitag");
-	    new Button(dialog, SWT.CHECK).setText("Samstag");
-	    Label room3 = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Sontag");
-	    new Button(dialog, SWT.CHECK).setText("Alle");
-	    Label room2 = new Label(dialog, SWT.NONE);
+	    new Button(addTimeTable, SWT.CHECK).setText("Montag"); 
+	    new Button(addTimeTable, SWT.CHECK).setText("Dienstag");
+	    new Button(addTimeTable, SWT.CHECK).setText("Mittwoch");
+	    Label room = new Label(addTimeTable, SWT.NONE);
+        new Button(addTimeTable, SWT.CHECK).setText("Donerstag");
+	    new Button(addTimeTable, SWT.CHECK).setText("Freitag");
+	    new Button(addTimeTable, SWT.CHECK).setText("Samstag");
+	    Label room3 = new Label(addTimeTable, SWT.NONE);
+	    new Button(addTimeTable, SWT.CHECK).setText("Sontag");
+	    new Button(addTimeTable, SWT.CHECK).setText("Alle");
+	    Label room2 = new Label(addTimeTable, SWT.NONE);
 	    
 	    // Titmetable Startstation
 	    
-	    Label startstation = new Label(dialog, SWT.NONE); 
+	    Label startstation = new Label(addTimeTable, SWT.NONE); 
 	    startstation.setText("Startstation : "); 
 	    
-        comboStartstation = new Combo(dialog, SWT.READ_ONLY);
+        comboStartstation = new Combo(addTimeTable, SWT.READ_ONLY);
         gridData.horizontalSpan = 3;
 	   
 	    comboStartstation.setLayoutData(gridData);
 	  //  comboStartstation.setItems(speeds);
 	       
+
+	    
 	    // Timetable Endstation
 	    
-	    Label endstation = new Label(dialog, SWT.NONE); 
+	    Label endstation = new Label(addTimeTable, SWT.NONE); 
 	    endstation.setText("Endstation : "); 
 	    
-	    comboEndstation = new Combo(dialog, SWT.READ_ONLY);
+	    comboEndstation = new Combo(addTimeTable, SWT.READ_ONLY);
 	  //  comboEndstation.setItems(priorities);  
-	    gridData.horizontalSpan = 2;
+	    gridData.horizontalSpan = 3;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboEndstation.setLayoutData(gridData);
+
 	    
 	    // Timetable Middlestation
 	    
-	    Label middlestation = new Label(dialog, SWT.NONE); 
+	    Label middlestation = new Label(addTimeTable, SWT.NONE); 
 	    middlestation.setText("Zwischenstationen : "); 
 	    
-	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
-	    gridData.horizontalSpan = 2;
+	    comboMiddlestation = new Combo(addTimeTable, SWT.READ_ONLY);
+	    gridData.horizontalSpan = 3;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboMiddlestation.setLayoutData(gridData);
 	   // comboMiddlestation.setItems("");
 	  
+	  
+	    
         //Add Button 
 	    
-	    Button addButton = new Button(dialog, SWT.NONE);
-		addButton.setText("ADD");
+	    Button addButton = new Button(addTimeTable, SWT.NONE);
+		addButton.setText("Add");
+		addButton.setImage(new Image(null,"img/add24.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    addButton.setLayoutData(gridData);
@@ -135,15 +141,16 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			   
+				TimeTableEvents.addTimeTable();
 				
 			}
 		});
 	    
 	    // Remove Button
 		
-		Button removeButton = new Button(dialog, SWT.NONE);
+		Button removeButton = new Button(addTimeTable, SWT.NONE);
 		removeButton.setText("Remove");
+		removeButton.setImage(new Image(null,"img/Clear.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    removeButton.setLayoutData(gridData);
@@ -152,22 +159,23 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			  
+				TimeTableEvents.editTimeTable();
 				
 			}
 		});
 	
-	    // Buttonn Composite
+	    // Button Composite
 	    
-	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
+	    Composite buttonComposite = new Composite(addTimeTable, SWT.NONE);
 	    GridLayout gridLayout2 = new GridLayout();
 	    gridLayout2.numColumns = 2;
 	    buttonComposite.setLayout(gridLayout2);
 	    
 	    // OK Button 
 	    
-	    Button okButton = new Button(dialog, SWT.NONE);
+	    Button okButton = new Button(addTimeTable, SWT.NONE);
 		okButton.setText("OK");
+		okButton.setImage(new Image(null,"img/Ok.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -183,8 +191,9 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    // Cancel Button
 		
-		Button cancelButton = new Button(dialog, SWT.NONE);
+		Button cancelButton = new Button(addTimeTable, SWT.NONE);
 		cancelButton.setText("Cancel");
+		cancelButton.setImage(new Image(null,"img/Cancel.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);
@@ -193,12 +202,12 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			   dialog.close();
+			   addTimeTable.close();
 				
 			}
 		});
 	    
-	    dialog.open();
+	    addTimeTable.open();
 	}
 
 }

@@ -1,8 +1,16 @@
 package de.hohenheim.view.dialouge;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
+
 import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+
 import org.eclipse.swt.widgets.Shell;
+
+import de.hohenheim.controller.main.Main;
+
 
 public class HelpDialog extends Dialog{
 
@@ -15,12 +23,17 @@ public class HelpDialog extends Dialog{
     
 	 public void open() {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
-	    dialog.setText("Help");
-			
 		    
-		dialog.open();
+			//Message Box of HelpDialog
+			 
+		    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_QUESTION);
+		    messageBox.setMessage("Bitte wenden Sie sich an Ihren Hersteller" + "\r\n" +
+		            "\r\n" + "(c) Copyright SoBros");
+		    messageBox.setText("Help");
+		    messageBox.open();
+		    
+		    
 	}
 
+	   
 }

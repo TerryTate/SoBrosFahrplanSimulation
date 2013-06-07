@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -46,9 +47,10 @@ public class Main {
 		Display display = Display.getDefault();
        
 		setShell(new Shell());
-		getShell().setText("Train animation example");
-		getShell().setImage(new Image(null,"img/forklift-truck-logo.png"));
+		getShell().setText("Fahrplan Animation");
+		getShell().setImage(new Image(null,"img/trainTab.png"));
 		getShell().setSize(820, 720);
+		getShell().setLocation(250, 20);
 		
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;

@@ -15,12 +15,12 @@ public class TimetableDeletDialog extends Dialog {
 
 	public void open() {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
-	    dialog.setText("Fahrplan löschen");
+		final Shell deleteTimeTable = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	    deleteTimeTable.setSize(220, 310);
+	    deleteTimeTable.setText("Fahrplan löschen");
 			
 		    
-		dialog.open();
+		deleteTimeTable.open();
 	}
 
 }

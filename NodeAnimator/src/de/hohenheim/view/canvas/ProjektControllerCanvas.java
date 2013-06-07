@@ -1,6 +1,7 @@
 package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
@@ -26,13 +27,14 @@ public class ProjektControllerCanvas extends Canvas {
 		// Group 
 		
 		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
-	    groupControlSmall.setText("Zug Verwaltung");
+	    groupControlSmall.setText("Projekt Verwaltung");
 	    groupControlSmall.setLayout(new FillLayout(SWT.VERTICAL));
        
         // Add Button
 	    
 		Button newProject = new Button(groupControlSmall, SWT.NONE);
 		newProject.setText("Projekt hinzufügen");
+		newProject.setImage(new Image(null,"img/add.png"));
 	
 		newProject.addListener(SWT.Selection, new Listener() {
 			
@@ -46,6 +48,7 @@ public class ProjektControllerCanvas extends Canvas {
 		 
 		Button editProject = new Button(groupControlSmall, SWT.NONE);
 		editProject.setText("Project ändern");
+		editProject.setImage(new Image(null,"img/Edit.png"));
 		
 		editProject.addListener(SWT.Selection, new Listener() {
 			
@@ -58,7 +61,8 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		Button deleteProject = new Button(groupControlSmall, SWT.NONE);
 		deleteProject.setText("Project löschen");
-
+		deleteProject.setImage(new Image(null,"img/Delete.png"));
+		
 		deleteProject.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -70,6 +74,7 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		Button importTrain = new Button(groupControlSmall, SWT.NONE);
 		importTrain.setText("Zug Importieren");
+		importTrain.setImage(new Image(null,"img/Import.png"));
 		
 		importTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -82,7 +87,8 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		Button exportTrain = new Button(groupControlSmall, SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
-	
+		exportTrain.setImage(new Image(null,"img/export.png"));
+		
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {

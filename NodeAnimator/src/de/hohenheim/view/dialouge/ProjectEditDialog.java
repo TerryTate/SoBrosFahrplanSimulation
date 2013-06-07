@@ -3,6 +3,7 @@ package de.hohenheim.view.dialouge;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -14,7 +15,7 @@ import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeProject;
-import de.hohenheim.view.composite.CompositeTrain;
+
 
 public class ProjectEditDialog extends Dialog{
 	
@@ -37,7 +38,9 @@ public class ProjectEditDialog extends Dialog{
 			
 		    dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		    dialog.setSize(220, 310);
+		    dialog.setLocation(500, 200);
 		    dialog.setText("Zug bearbeiten");
+		    dialog.setImage(new Image(null, "img/Edit2.png"));
 		    GridLayout gridLayout = new GridLayout();
 		    gridLayout.numColumns = 3; 
 		    dialog.setLayout(gridLayout);

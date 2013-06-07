@@ -1,11 +1,13 @@
 package de.hohenheim.controller.events;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 
 import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.dialouge.AboutUsDialog;
 import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
@@ -17,6 +19,8 @@ import de.hohenheim.view.dialouge.TrainEditDialog;
 
 
 public class MenuBarEvents {
+
+	private static Composite dialog;
 
 	public static void closeProgramm() {
 		
@@ -92,6 +96,11 @@ public class MenuBarEvents {
 	public static void showHelp() {
 		
 		new HelpDialog(Main.getShell(), SWT.NONE).open();
+	}
+	
+	public static void aboutUs (){
+		
+		new AboutUsDialog(Main.getShell(), SWT.NONE).open();
 	}
 
 	public static void saveTrain() {

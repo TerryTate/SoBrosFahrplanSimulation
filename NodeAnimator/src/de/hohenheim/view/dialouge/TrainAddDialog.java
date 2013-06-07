@@ -2,6 +2,7 @@ package de.hohenheim.view.dialouge;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -25,7 +26,7 @@ public class TrainAddDialog extends Dialog{
 	String[] priorities = {"Sehr wichtig", "Wichtig", "Normal", "Irrelevant"};
 	String[] ladung = {"keine", "Rohstoffe", "Müll", "Fertige Produkte", "Brennstoffe"};
 	
-	public static Shell dialog;
+	public static Shell trainAdd;
 	public static Combo comboTypOfTrain;
 	public static Combo comboLadungen;
 	public static Combo comboPriority;
@@ -40,19 +41,21 @@ public class TrainAddDialog extends Dialog{
 
 	public void open() {
 		
-		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
-	    dialog.setText("Zug erstellen");
+		trainAdd = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	    trainAdd.setSize(320, 310);
+	    trainAdd.setLocation(500, 200);
+	    trainAdd.setText("Zug erstellen");
+	    trainAdd.setImage(new Image(null, "img/add.png"));
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
-	    dialog.setLayout(gridLayout);
+	    trainAdd.setLayout(gridLayout);
 	    
 	    // Train ID
 	    
-	    Label id = new Label(dialog, SWT.NONE); 
+	    Label id = new Label(trainAdd, SWT.NONE); 
 	    id.setText("ID : ");
 	    
-	    idText = new Text(dialog, SWT.NONE);
+	    idText = new Text(trainAdd, SWT.NONE);
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
@@ -60,10 +63,10 @@ public class TrainAddDialog extends Dialog{
 	    
 	    // Train Typ
 	    
-	    Label typOfTrain = new Label(dialog, SWT.NONE); 
+	    Label typOfTrain = new Label(trainAdd, SWT.NONE); 
 	    typOfTrain.setText("ZugTyp : "); 
 	    
-	    comboTypOfTrain = new Combo(dialog, SWT.READ_ONLY);
+	    comboTypOfTrain = new Combo(trainAdd, SWT.READ_ONLY);
 	    comboTypOfTrain.setItems(typs);
 	    gridData = new GridData();
 	    gridData.horizontalSpan = 2;
@@ -72,21 +75,21 @@ public class TrainAddDialog extends Dialog{
 
 	    //Train Speed
 	    
-	    Label trainSpeed = new Label(dialog, SWT.NONE); 
+	    Label trainSpeed = new Label(trainAdd, SWT.NONE); 
 	    trainSpeed.setText("Geschwindigkeit : "); 
 	    
-        comboSpeed = new Combo(dialog, SWT.READ_ONLY);
+        comboSpeed = new Combo(trainAdd, SWT.READ_ONLY);
 	    comboSpeed.setItems(speeds);
 	    
-	    Label kmH = new Label(dialog, SWT.NONE); 
+	    Label kmH = new Label(trainAdd, SWT.NONE); 
 	    kmH.setText("km/h"); 
 	    
 	    //Train Priority
 	    
-	    Label priority = new Label(dialog, SWT.NONE); 
+	    Label priority = new Label(trainAdd, SWT.NONE); 
 	    priority.setText("Priorität : "); 
 	    
-	    comboPriority = new Combo(dialog, SWT.READ_ONLY);
+	    comboPriority = new Combo(trainAdd, SWT.READ_ONLY);
 	    comboPriority.setItems(priorities);
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
@@ -94,26 +97,27 @@ public class TrainAddDialog extends Dialog{
 	    
 	    //Train Ladung
 	    
-	    Label ladungen = new Label(dialog, SWT.NONE); 
+	    Label ladungen = new Label(trainAdd, SWT.NONE); 
 	    ladungen.setText("Ladung : "); 
 	    
-	    comboLadungen = new Combo(dialog, SWT.READ_ONLY);
+	    comboLadungen = new Combo(trainAdd, SWT.READ_ONLY);
 	    comboLadungen.setItems(ladung);
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboLadungen.setLayoutData(gridData);
 	
-	    // Buttonn Composite
+	    // Button Composite
 	    
-	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
+	    Composite buttonComposite = new Composite(trainAdd, SWT.NONE);
 	    GridLayout gridLayout2 = new GridLayout();
 	    gridLayout2.numColumns = 2;
 	    buttonComposite.setLayout(gridLayout2);
 	    
 	    // OK Button 
 	    
-	    Button okButton = new Button(dialog, SWT.NONE);
+	    Button okButton = new Button(trainAdd, SWT.NONE);
 		okButton.setText("OK");
+		okButton.setImage(new Image(null, "img/Ok.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -129,8 +133,9 @@ public class TrainAddDialog extends Dialog{
 	    
 	    // Cancel Button
 		
-		Button cancelButton = new Button(dialog, SWT.NONE);
+		Button cancelButton = new Button(trainAdd, SWT.NONE);
 		cancelButton.setText("Cancel");
+		cancelButton.setImage(new Image(null, "img/Cancel.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);
@@ -139,12 +144,12 @@ public class TrainAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			   dialog.close();
+			   trainAdd.close();
 				
 			}
 		});
 	    
-	    dialog.open();
+	    trainAdd.open();
 	}
 
 }

@@ -62,7 +62,7 @@ public class TrainEvents {
 				train.getTypOfTrain(),
 				String.valueOf(train.getSpeed()), train.getPriority(), train.getLadung()});
 		
-		TrainAddDialog.dialog.close();
+		TrainAddDialog.trainAdd.close();
 		
 	}
 	
@@ -108,13 +108,13 @@ public class TrainEvents {
 	 	    rowData[0].setText(3, TrainEditDialog.comboPriority.getText());
 	 	    rowData[0].setText(4, TrainEditDialog.comboLadungen.getText());
 	 	    
-	 	   TrainEditDialog.dialog.close();
+	 	   TrainEditDialog.trainEdit.close();
 		
 		}else if (menu == true){
 			
 			
 	     
-	 	   TrainEditDialog.dialog.close();
+	 	   TrainEditDialog.trainEdit.close();
 			
 		}
 		

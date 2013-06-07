@@ -1,8 +1,6 @@
 package de.hohenheim.view.dialouge;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -15,7 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.train.TrainData;
+
 
 public class TrainDeletDialog extends Dialog {
 	
@@ -32,7 +30,7 @@ public class TrainDeletDialog extends Dialog {
     public void open(final boolean menu) {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
+	    dialog.setSize(320, 310);
 	    dialog.setText("Zug löschen");
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 

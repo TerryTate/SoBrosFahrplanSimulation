@@ -15,11 +15,12 @@ public class TimetableEditDialog extends Dialog{
 	
 	 public void open() {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
-	    dialog.setText("Fahrplan bearbeiten");
+		final Shell editTimeTable = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	    editTimeTable.setSize(220, 310);
+	    editTimeTable.setLocation(500, 200);
+	    editTimeTable.setText("Fahrplan bearbeiten");
 			
 		    
-		dialog.open();
+		editTimeTable.open();
 	}
 }

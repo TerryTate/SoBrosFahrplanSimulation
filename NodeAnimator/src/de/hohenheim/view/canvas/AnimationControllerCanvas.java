@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
@@ -27,6 +28,8 @@ public class AnimationControllerCanvas extends Canvas{
 		super(parent, style);
 		this.map = map;
 		createContents();
+		
+	    
 	}
 
 	private void createContents() {
@@ -50,6 +53,31 @@ public class AnimationControllerCanvas extends Canvas{
 	    train_combo.setBounds(5,90,150, 25);
 		String[] fitems = getMobileObjects();
 		train_combo.setItems(fitems);
+		
+		
+		//Play-Animation Button
+		
+		Button animationPlay = new Button(group, SWT.NONE);
+		animationPlay.setBounds(6, 170, 150, 60);
+		animationPlay.setText("Play Animation ");
+		animationPlay.setImage(new Image(null, "img/Play (48px).png"));
+		
+		//Pause-Animation Button
+		
+		Button animationPause = new Button(group, SWT.NONE);
+		animationPause.setBounds(6, 230, 150,70);
+		animationPause.setText("Pause Animation ");
+		animationPause.setImage(new Image(null, "img/Pause (48px).png"));
+		
+		//Stop-Animation Button
+		
+		Button animationStop = new Button(group, SWT.NONE);
+		animationStop.setBounds(6, 300, 150,80);
+		animationStop.setText("Stop Animation ");
+		animationStop.setImage(new Image(null, "img/Stop (48px).png"));
+		
+		
+	
 		
 		Button walkto = new Button(group, SWT.NONE);
 		walkto.setBounds(5, 120, 150,25);
@@ -76,14 +104,15 @@ public class AnimationControllerCanvas extends Canvas{
 					f.walkTo(map.getNodes().get(node));					
 					f.startAnimation();
 				}
+				
 			}
+			
 		});
-		
-		
-		
+
 		group.pack();
-		
 	}
+
+
 	private String[] getNodeNames() {
 		Object[] names = map.getNodes().keySet().toArray();
 		String[] n = new String[names.length];
