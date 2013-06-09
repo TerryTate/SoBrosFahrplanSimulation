@@ -2,6 +2,7 @@ package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
@@ -27,7 +28,7 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    groupControlSmall.setText("Zug Verwaltung");
-	    groupControlSmall.setLayout(new FillLayout(SWT.VERTICAL));
+	    groupControlSmall.setLayout(new GridLayout());
        
         // Add Button
 	    

@@ -41,7 +41,7 @@ public class TrainAddDialog extends Dialog{
 	public void open() {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
+	    dialog.setSize(220, 200);
 	    dialog.setText("Zug erstellen");
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 

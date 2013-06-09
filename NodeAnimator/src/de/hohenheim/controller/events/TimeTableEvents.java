@@ -73,7 +73,7 @@ public class TimeTableEvents {
 	    	middlestation.add(Integer.parseInt(TimetableAddDialog.midlestationTable.getItem(i).getText(0)));
 	    }
 			
-		Timetable timetable = new Timetable(id, drivingdays, name, startstation, endstation, middlestation);
+		Timetable timetable = new Timetable(id, drivingdays, name, startstation, endstation, middlestation, 0, 0);
 		Main.timetableListAll.add(timetable);
 		
 		String drivingdaysItem = "";

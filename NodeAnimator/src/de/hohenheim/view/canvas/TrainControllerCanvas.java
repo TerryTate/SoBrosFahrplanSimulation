@@ -4,6 +4,7 @@ package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
@@ -34,7 +35,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		setGroupControlSmall(new Group(this, SWT.SHADOW_ETCHED_IN));
 	    getGroupControlSmall().setText("Zug Verwaltung");
-	    getGroupControlSmall().setLayout(new FillLayout(SWT.VERTICAL));
+	    getGroupControlSmall().setLayout(new GridLayout());
        
         // Add Button
 		Button newTrain = new Button(getGroupControlSmall(), SWT.NONE);

@@ -10,9 +10,11 @@ public class Timetable {
 	private int startstation;
 	private int endstation;
 	ArrayList<Integer> middlestations; 
+	private int startHouer;
+	private	int startMinutes;
 	
 	
-	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations){
+	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes){
 		
 		this.setId(id);
 		this.setDrivingdays(drivingdays);
@@ -20,6 +22,8 @@ public class Timetable {
 		this.setStartstation(startstation);
 		this.setEndstation(endstation);
 		this.middlestations = middlestations;
+		this.startHouer = startHouer;
+		this.startMinutes = startMinutes;
 			
 	}
 
