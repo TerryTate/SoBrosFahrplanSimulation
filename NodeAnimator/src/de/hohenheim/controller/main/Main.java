@@ -46,8 +46,7 @@ public class Main {
 		Display display = Display.getDefault();
        
 		setShell(new Shell());
-		getShell().setText("Train animation example");
-		getShell().setImage(new Image(null,"img/forklift-truck-logo.png"));
+		getShell().setText("Fahrplan Animation");
 		getShell().setSize(820, 720);
 		
 		GridLayout gridLayout = new GridLayout();

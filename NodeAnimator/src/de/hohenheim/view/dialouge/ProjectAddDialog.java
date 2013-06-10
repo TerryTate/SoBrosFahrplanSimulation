@@ -2,13 +2,20 @@ package de.hohenheim.view.dialouge;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import de.hohenheim.controller.events.TrainEvents;
 
 public class ProjectAddDialog extends Dialog {
 	
@@ -32,6 +39,7 @@ public class ProjectAddDialog extends Dialog {
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(220, 310);
 	    dialog.setText("Projekt hinzufügen");
+	    dialog.setImage(new Image(null, "img/add.png"));
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -84,6 +92,53 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    //Linked List
 		    
+	    
+	    //Linked List
+		    
+// Buttonn Composite
+	    
+	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
+	    GridLayout gridLayout2 = new GridLayout();
+	    gridLayout2.numColumns = 2;
+	    buttonComposite.setLayout(gridLayout2);
+	    
+	    // OK Button 
+	    
+	    Button okButton = new Button(dialog, SWT.NONE);
+		okButton.setText("OK");
+		okButton.setImage(new Image(null, "img/Ok.png"));
+		okButton.setImage(new Image(null, "img/add.png"));
+	    gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.CENTER;
+	    okButton.setLayoutData(gridData);
+		
+		okButton.addListener(SWT.Selection, new Listener() {
+			
+			public void handleEvent(Event arg0) {
+				
+			    TrainEvents.addNewTrain();
+				
+			}
+		});
+	    
+	    // Cancel Button
+		
+		Button cancelButton = new Button(dialog, SWT.NONE);
+		cancelButton.setText("Cancel");
+		cancelButton.setImage(new Image(null, "img/Cancel.png"));
+	    gridData = new GridData();
+	    gridData.horizontalAlignment = SWT.CENTER;
+	    cancelButton.setLayoutData(gridData);
+		
+		cancelButton.addListener(SWT.Selection, new Listener() {
+			
+			public void handleEvent(Event arg0) {
+				
+			   dialog.close();
+				
+			}
+		});
+	    
 		dialog.open(); 
 	}
 

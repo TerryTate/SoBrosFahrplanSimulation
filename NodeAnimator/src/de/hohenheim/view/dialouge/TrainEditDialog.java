@@ -3,6 +3,7 @@ package de.hohenheim.view.dialouge;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -51,8 +52,9 @@ public class TrainEditDialog extends Dialog{
     public void open(final boolean menu) {
 		
 	    dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(220, 310);
+	    dialog.setSize(300, 260);
 	    dialog.setText("Zug bearbeiten");
+	    dialog.setImage(new Image(null,"img/Edit2.png"));
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -169,6 +171,7 @@ public class TrainEditDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
+		okButton.setImage(new Image(null,"img/Ok.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -186,6 +189,7 @@ public class TrainEditDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
+		cancelButton.setImage(new Image(null,"img/Cancel.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);

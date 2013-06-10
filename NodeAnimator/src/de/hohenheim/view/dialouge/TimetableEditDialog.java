@@ -3,6 +3,7 @@ package de.hohenheim.view.dialouge;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -47,6 +48,7 @@ public class TimetableEditDialog extends Dialog{
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(320, 360);
 	    dialog.setText("Fahrplan bearbeiten");
+	    dialog.setImage(new Image(null, "img/Edit2.png"));
 		
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
@@ -178,6 +180,7 @@ public class TimetableEditDialog extends Dialog{
 		
 		Button removeButton = new Button(middlestationButtonC, SWT.NONE);
 		removeButton.setText("Remove");
+		removeButton.setImage(new Image(null,"img/Clear.png"));
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -225,6 +228,7 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
+		okButton.setImage(new Image(null,"img/OK.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -242,6 +246,7 @@ public class TimetableEditDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
+		cancelButton.setImage(new Image(null,"img/Cancel.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);

@@ -1,15 +1,11 @@
 package de.hohenheim.view.dialouge;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
@@ -17,16 +13,16 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.train.TrainData;
 
-public class TrainDeletDialog extends Dialog {
+public class TrainImportDialog {
 	
+
 	Shell parent;
 	public static Combo comboTrains;
 	public static Shell dialog;
 
-	public TrainDeletDialog(Shell parent, int style) {
-		super(parent, style);
+	public TrainImportDialog(Shell parent, int style) {
+		super();
 		parent = this.parent;
 		
 	}
@@ -35,7 +31,7 @@ public class TrainDeletDialog extends Dialog {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(215, 130);
-	    dialog.setText("Zug löschen");
+	    dialog.setText("Zug exportieren");
 	    dialog.setImage(new Image(null,"img/Delete.png"));
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
@@ -66,7 +62,6 @@ public class TrainDeletDialog extends Dialog {
 			
 			public void handleEvent(Event arg0) {
 				
-			    TrainEvents.deleteTrain(menu);
 				
 			}
 		});
@@ -105,3 +100,6 @@ public class TrainDeletDialog extends Dialog {
 		return trainsID;
 	}
 }
+
+
+

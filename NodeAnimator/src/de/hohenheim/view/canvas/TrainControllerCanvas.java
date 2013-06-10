@@ -3,6 +3,7 @@ package de.hohenheim.view.canvas;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -40,6 +41,7 @@ public class TrainControllerCanvas extends Canvas{
         // Add Button
 		Button newTrain = new Button(getGroupControlSmall(), SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
+		newTrain.setImage(new Image(null,"img/add.png"));
 	
 		newTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -53,6 +55,7 @@ public class TrainControllerCanvas extends Canvas{
 		 
 		Button editTrain = new Button(getGroupControlSmall(), SWT.NONE);
 		editTrain.setText("Zug ändern");
+		editTrain.setImage(new Image(null,"img/Edit.png"));
 		
 		editTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -65,6 +68,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button deleteTrain = new Button(getGroupControlSmall(), SWT.NONE);
 		deleteTrain.setText("Zug löschen");
+		deleteTrain.setImage(new Image(null,"img/Delete.png"));
 
 		deleteTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -77,6 +81,8 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button importTrain = new Button(getGroupControlSmall(), SWT.NONE);
 		importTrain.setText("Zug Importieren");
+		importTrain.setImage(new Image(null,"img/Import.png"));
+		
 		
 		importTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -89,6 +95,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button exportTrain = new Button(getGroupControlSmall(), SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
+		exportTrain.setImage(new Image(null,"img/export.png"));
 	
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					

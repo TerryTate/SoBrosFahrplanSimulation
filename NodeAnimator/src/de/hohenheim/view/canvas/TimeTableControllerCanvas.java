@@ -3,6 +3,7 @@ package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Image;
 
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -42,7 +43,8 @@ public class TimeTableControllerCanvas extends Canvas {
         getGroupControlSmall().setLayout(gridLayout);
 		        
 		Button newTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
-		newTimeTable2.setText("Fahrplan hinzufügen");		
+		newTimeTable2.setText("Fahrplan hinzufügen");	
+		newTimeTable2.setImage(new Image(null,"img/add.png"));
 		newTimeTable2.addListener(SWT.Selection, new Listener() {
 					
 			public void handleEvent(Event arg0) {
@@ -55,6 +57,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				 
 		Button editTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		editTimeTable2.setText("Fahrplan ändern");
+		editTimeTable2.setImage(new Image(null,"img/Edit.png"));
 		GridData gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 		gridData.horizontalAlignment = SWT.FILL;
@@ -71,6 +74,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button deleteTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		deleteTimeTable2.setText("Fahrplan löschen");
+		deleteTimeTable2.setImage(new Image(null,"img/Delete.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteTimeTable2.setLayoutData(gridData);
@@ -85,6 +89,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button importTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		importTimeTable2.setText("Fahrplan Importieren");
+		importTimeTable2.setImage(new Image(null,"img/Import.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		importTimeTable2.setLayoutData(gridData);
@@ -99,6 +104,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button exportTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
 		exportTimeTable2.setText("Fahrplan Exportieren");
+		exportTimeTable2.setImage(new Image(null,"img/export.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		exportTimeTable2.setLayoutData(gridData);

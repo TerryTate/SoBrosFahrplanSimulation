@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -30,24 +31,28 @@ public class TabFolder extends CTabFolder{
 		// Animation Tab 
 	    CTabItem cTabAnimationItem = new CTabItem(this, SWT.NULL );
 	    cTabAnimationItem.setText(tabNamesDE[0]);	
+	    cTabAnimationItem.setImage(new Image(null,"img/Animation.png"));
 	    CompositeAnimation compositeAnimation = new CompositeAnimation(this, SWT.NULL);
 	    cTabAnimationItem.setControl(compositeAnimation);
 	    
         // Project Tab	
 	    CTabItem cTabProjectItem = new CTabItem(this, SWT.NULL);
 	    cTabProjectItem.setText(tabNamesDE[1]);
+	    cTabProjectItem.setImage(new Image(null,"img/Projekt.png"));
 	    compositeProject = new CompositeProject(this, SWT.NULL);
 	    cTabProjectItem.setControl(compositeProject);
 	        
         // Train Tab
 	    CTabItem cTabTrainItem = new CTabItem(this, SWT.NULL);
 	    cTabTrainItem.setText(tabNamesDE[2]);
+	    cTabTrainItem.setImage(new Image(null,"img/Train.png"));
 	    compositeTrain = new CompositeTrain(this, SWT.NULL);
 	    cTabTrainItem.setControl(compositeTrain);
 	        
         // TimeTable Tab
 	    CTabItem cTabTimeTableItem = new CTabItem(this, SWT.NULL);
 	    cTabTimeTableItem.setText(tabNamesDE[3]);
+	    cTabTimeTableItem.setImage(new Image(null,"img/TimeTable.png"));
 	    compositeTimeTable = new CompositeTimeTable(this, SWT.NULL);
 	    cTabTimeTableItem.setControl(compositeTimeTable);
 	     
