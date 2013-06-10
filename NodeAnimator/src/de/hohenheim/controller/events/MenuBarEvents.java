@@ -2,10 +2,14 @@ package de.hohenheim.controller.events;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.TableItem;
 
 import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
@@ -94,7 +98,7 @@ public class MenuBarEvents {
 		new HelpDialog(Main.getShell(), SWT.NONE).open();
 	}
 
-	public static void save() {
+	public static void save(boolean menu) {
 	
 		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
         fd.setText("Zug Exportieren");
@@ -102,7 +106,25 @@ public class MenuBarEvents {
         String[] filterExt = { "*.xml" };
         fd.setFilterExtensions(filterExt);
         String selected = fd.open(); 
-        XmlWriter.writeToXML(selected);
+        
+        if (menu == false){
+        	
+        	TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
+        	TrainData td = Main.trainListAll.get(0);
+        	int i = 0; 
+        	
+        	while(Integer.parseInt(rowData[0].getText(0)) != td.getID()){
+        		i++;
+        		td = Main.trainListAll.get(i);
+        	}
+        		
+        	XmlWriter.saveSingleTrain(selected,  td);
+        
+        }else if (menu == true){
+        	
+        }
+        
+      
         
         System.out.println(selected);
 		

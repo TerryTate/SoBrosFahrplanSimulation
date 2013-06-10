@@ -148,7 +148,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save();
+	    		MenuBarEvents.save(true);
                 
             }
         });
@@ -202,7 +202,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save();
+	    		MenuBarEvents.save(true);
                 
             }
         });
@@ -247,7 +247,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save();
+	    		MenuBarEvents.save(true);
                 
             }
         });
