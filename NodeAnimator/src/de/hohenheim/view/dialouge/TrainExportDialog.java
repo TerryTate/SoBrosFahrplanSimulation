@@ -49,6 +49,7 @@ public class TrainExportDialog {
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboTrains.setLayoutData(gridData);
+	    comboTrains.select(0);
 	    
         // OK Button 
 	    

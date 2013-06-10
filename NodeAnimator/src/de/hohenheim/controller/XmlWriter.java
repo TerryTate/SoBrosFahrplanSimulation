@@ -90,7 +90,7 @@ public class XmlWriter {
 		} catch (IOException e) {
 			System.err.println(e);
 			e.fillInStackTrace();
-		}
+	    } 
 		
 	}
 	

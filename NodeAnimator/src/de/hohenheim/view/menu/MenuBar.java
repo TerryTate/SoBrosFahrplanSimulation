@@ -255,7 +255,7 @@ public class MenuBar {
            
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.deletTimetable();
+	    		MenuBarEvents.deletTimetable(true);
                 
             }
         });
@@ -327,7 +327,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                
+	    		MenuBarEvents.showInfo();
                 
             }
         });

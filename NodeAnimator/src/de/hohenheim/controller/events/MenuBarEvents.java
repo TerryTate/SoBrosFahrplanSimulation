@@ -10,6 +10,7 @@ import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeTrain;
+import de.hohenheim.view.dialouge.AboutUsDialog;
 import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
@@ -67,15 +68,36 @@ public class MenuBarEvents {
 	}
 
 	public static void editTrain(boolean menu) {
+		
+		if (Main.trainListAll.size() > 0){
+			
+			new TrainEditDialog(Main.getShell(), SWT.NONE).open(menu);
+			
+		}else{
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Es gibt keine Züge die Bearbeitet werden können.");    
+	        messageBox.open();
+			
+		}
 	    
-		new TrainEditDialog(Main.getShell(), SWT.NONE).open(menu);
+		
 		
 	}
 	
     public static void deletTrain() {
-	    
-		new TrainDeletDialog(Main.getShell(), SWT.NONE).open(true);
+    	
+    	if (Main.trainListAll.size() > 0){
+		    
+    		new TrainDeletDialog(Main.getShell(), SWT.NONE).open(true);
 		
+        }else{
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Es gibt keine Züge die Gelöscht werden können.");    
+	        messageBox.open();
+			
+		}	
 	}
 
 	public static void addTimeTable() {
@@ -89,9 +111,9 @@ public class MenuBarEvents {
 		new TimetableEditDialog(Main.getShell(), SWT.NONE).open(menu);
 	}
 
-	public static void deletTimetable() {
+	public static void deletTimetable(boolean menu) {
 		
-		new TimetableDeletDialog(Main.getShell(), SWT.NONE).open();
+		new TimetableDeletDialog(Main.getShell(), SWT.NONE).open(menu);
 		
 	}
 
@@ -164,7 +186,24 @@ public class MenuBarEvents {
 
 	public static void exportTrain() {
 		
-		new TrainExportDialog(Main.getShell(),SWT.CENTER).open(true);
+        if (Main.trainListAll.size() > 0){
+        	
+        	new TrainExportDialog(Main.getShell(),SWT.NONE).open(true);
+    				
+        }else{
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Es gibt keine Züge die Exportiert werden können.");    
+	        messageBox.open();
+			
+		}	
+		
+		
+	}
+
+	public static void showInfo() {
+		
+		new AboutUsDialog(Main.getShell(), SWT.NONE).open();
 		
 	}
 

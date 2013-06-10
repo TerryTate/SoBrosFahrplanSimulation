@@ -37,14 +37,17 @@ public class TimeTableControllerCanvas extends Canvas {
 		// Group when the shellHeight < then 300 pixel
 				
 		groupControlSmall = (new Group(this, SWT.SHADOW_ETCHED_IN));
-		getGroupControlSmall().setText("Zug Verwaltung");
+		groupControlSmall.setText("Zug Verwaltung");
 		GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 1; 
-        getGroupControlSmall().setLayout(gridLayout);
+        groupControlSmall.setLayout(gridLayout);
 		        
-		Button newTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
+		Button newTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		newTimeTable2.setText("Fahrplan hinzufügen");	
 		newTimeTable2.setImage(new Image(null,"img/add.png"));
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		newTimeTable2.setLayoutData(gridData);
 		newTimeTable2.addListener(SWT.Selection, new Listener() {
 					
 			public void handleEvent(Event arg0) {
@@ -55,13 +58,11 @@ public class TimeTableControllerCanvas extends Canvas {
 		});
 				
 				 
-		Button editTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
+		Button editTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		editTimeTable2.setText("Fahrplan ändern");
 		editTimeTable2.setImage(new Image(null,"img/Edit.png"));
-		GridData gridData = new GridData();
-	    gridData.horizontalAlignment = SWT.CENTER;
+		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
-	    gridData.horizontalSpan = 3; 
 		editTimeTable2.setLayoutData(gridData);
 		editTimeTable2.addListener(SWT.Selection, new Listener() {
 					
@@ -72,7 +73,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		Button deleteTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
+		Button deleteTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		deleteTimeTable2.setText("Fahrplan löschen");
 		deleteTimeTable2.setImage(new Image(null,"img/Delete.png"));
 		gridData = new GridData();
@@ -82,12 +83,12 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				MenuBarEvents.deletTimetable();		
+				TimeTableEvents.deleteTimeTable(false);		
 						
 			}
 		});
 				
-		Button importTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
+		Button importTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		importTimeTable2.setText("Fahrplan Importieren");
 		importTimeTable2.setImage(new Image(null,"img/Import.png"));
 		gridData = new GridData();
@@ -102,7 +103,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		Button exportTimeTable2 = new Button(getGroupControlSmall(), SWT.NONE);
+		Button exportTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		exportTimeTable2.setText("Fahrplan Exportieren");
 		exportTimeTable2.setImage(new Image(null,"img/export.png"));
 		gridData = new GridData();
@@ -117,13 +118,10 @@ public class TimeTableControllerCanvas extends Canvas {
 			}
 		});
 				
-		getGroupControlSmall().pack();
-		getGroupControlSmall().setVisible(true);
+		groupControlSmall.pack();
+		
 		
 	}
 
-	public static Group getGroupControlSmall() {
-		return groupControlSmall;
-	}
 
 }

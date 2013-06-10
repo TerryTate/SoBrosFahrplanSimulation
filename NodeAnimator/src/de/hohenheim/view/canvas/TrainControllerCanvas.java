@@ -5,6 +5,7 @@ package de.hohenheim.view.canvas;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
@@ -12,8 +13,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
+
 import de.hohenheim.controller.events.MenuBarEvents;
 import de.hohenheim.controller.events.TrainEvents;
+import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.composite.CompositeTrain;
 
 
 
@@ -34,14 +39,19 @@ public class TrainControllerCanvas extends Canvas{
 
 		// Group 
 		
-		setGroupControlSmall(new Group(this, SWT.SHADOW_ETCHED_IN));
-	    getGroupControlSmall().setText("Zug Verwaltung");
-	    getGroupControlSmall().setLayout(new GridLayout());
+		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
+		groupControlSmall.setText("Zug Verwaltung");
+		GridLayout gridLayout = new GridLayout(); 
+        gridLayout.numColumns = 1; 
+        groupControlSmall.setLayout(gridLayout);
        
         // Add Button
-		Button newTrain = new Button(getGroupControlSmall(), SWT.NONE);
+		Button newTrain = new Button(groupControlSmall, SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
 		newTrain.setImage(new Image(null,"img/add.png"));
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		newTrain.setLayoutData(gridData);
 	
 		newTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -53,9 +63,12 @@ public class TrainControllerCanvas extends Canvas{
 		});
 		
 		 
-		Button editTrain = new Button(getGroupControlSmall(), SWT.NONE);
+		Button editTrain = new Button(groupControlSmall, SWT.NONE);
 		editTrain.setText("Zug ändern");
 		editTrain.setImage(new Image(null,"img/Edit.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		editTrain.setLayoutData(gridData);
 		
 		editTrain.addListener(SWT.Selection, new Listener() {
 			
@@ -66,57 +79,77 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
-		Button deleteTrain = new Button(getGroupControlSmall(), SWT.NONE);
+		Button deleteTrain = new Button(groupControlSmall, SWT.NONE);
 		deleteTrain.setText("Zug löschen");
 		deleteTrain.setImage(new Image(null,"img/Delete.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		deleteTrain.setLayoutData(gridData);
 
 		deleteTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
-				 TrainEvents.deleteTrain(false);
-				
+				 if(Main.trainListAll.size() < 1){
+				        MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					    messageBox.setMessage("Es existieren keine Züge die gelöscht werden können.");    
+				        messageBox.open();
+			     }
+			         
+			           
+			    for(int i = 0; i < Main.trainListAll.size(); i++){
+			        	
+			        if(CompositeTrain.getTrainTable().isSelected(i)){
+			            TrainEvents.deleteTrain(false);
+			        } 
+			    }    
+			    
+			   
 			}
 		});
 		
-		Button importTrain = new Button(getGroupControlSmall(), SWT.NONE);
+		Button importTrain = new Button(groupControlSmall, SWT.NONE);
 		importTrain.setText("Zug Importieren");
 		importTrain.setImage(new Image(null,"img/Import.png"));
-		
-		
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		importTrain.setLayoutData(gridData);
 		importTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
-			
+			    
 				
 			}
 		});
 		
-		Button exportTrain = new Button(getGroupControlSmall(), SWT.NONE);
+		Button exportTrain = new Button(groupControlSmall, SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
 		exportTrain.setImage(new Image(null,"img/export.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		exportTrain.setLayoutData(gridData);
 	
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {
-						
-					MenuBarEvents.save(false);
-						
+					
+		         for(int i = 0; i < Main.trainListAll.size(); i++){
+		        	
+		        	 if(CompositeTrain.getTrainTable().isSelected(i)){
+		        		 MenuBarEvents.save(false);
+		        	 } 
+		         }
+		         
+		         MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		         messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
+		         messageBox.open();
+		         
 			}
 		});
 		
-		getGroupControlSmall().pack();
+		groupControlSmall.pack();
 		
-	}
-
-	
-	public static Group getGroupControlSmall() {
-		return groupControlSmall;
-	}
-
-	public static void setGroupControlSmall(Group groupControlSmall) {
-		TrainControllerCanvas.groupControlSmall = groupControlSmall;
 	}
 		
 }

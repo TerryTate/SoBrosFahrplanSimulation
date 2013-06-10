@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
@@ -39,7 +40,7 @@ public class TrainEditDialog extends Dialog{
 	public static Combo comboPriority;
 	public static Combo comboLadungen;
 
-	private Combo comboTrains;
+	public static Combo comboTrains;
 
 	public static Shell dialog;
 
@@ -70,7 +71,7 @@ public class TrainEditDialog extends Dialog{
 	    	comboTrains = new Combo(dialog, SWT.READ_ONLY);
 	    	String[] trainsID = new String [Main.trainListAll.size()];
 		    comboTrains.setItems(loadTrainList(trainsID));
-		    
+		    comboTrains.select(0);
 		    comboTrains.addSelectionListener(new SelectionListener() {
 		       
 		    	public void widgetSelected(SelectionEvent e) {
@@ -147,13 +148,21 @@ public class TrainEditDialog extends Dialog{
 	    comboLadungen.setItems(ladung);
 	    
         if(menu == false){
-	    	
+	    	try{
         	idText.setText(rowData[0].getText(0));
         	comboTypOfTrain.setText(rowData[0].getText(1));
         	comboSpeed.setText(rowData[0].getText(2));
         	comboPriority.setText(rowData[0].getText(3));
 	        comboLadungen.setText(rowData[0].getText(4));
-	        
+	    	}
+	    	catch(ArrayIndexOutOfBoundsException e){
+	    		
+				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        messageBox.setMessage("Sie haben keinen Zug zum Bearbeiten ausgewählt. \n" +
+		        		"Wählen Sie einen Zug aus und versuchen Sie es erneut.");    
+		        messageBox.open();
+		
+	    	}
 	    }   
 	    
 	    gridData.horizontalSpan = 2;

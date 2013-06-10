@@ -105,6 +105,7 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    houre = new Spinner(timeComposite, SWT.NONE);
 	    houre.setMaximum(23);
+	   
 	    
 	    Label h = new Label(timeComposite, SWT.NONE);
 	    h.setText("  h");
@@ -190,7 +191,7 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.addMiddleStation();   
+			    TimeTableEvents.addMiddleStation(true);   
 				
 			}
 		});
@@ -204,7 +205,7 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.removeMiddleStation();  
+			    TimeTableEvents.removeMiddleStation(true);  
 				
 			}
 		});

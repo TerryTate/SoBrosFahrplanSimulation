@@ -3,6 +3,7 @@ package de.hohenheim.controller.events;
 import java.io.IOException;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 
 import de.hohenheim.controller.main.Main;
@@ -46,9 +47,8 @@ public class TrainEvents {
 		 */
 		String speedText = TrainAddDialog.comboSpeed.getText();
 		
-		
-		//Als Lokale Variablen deklarieren und dann des parsen als Integer mit Try/Catch umgeben!!
 		int id = Integer.parseInt(idText);
+		
 		int speed = Integer.parseInt(speedText);
 		
 		
@@ -113,8 +113,38 @@ public class TrainEvents {
 		}else if (menu == true){
 			
 			
+			 for (TrainData td : Main.trainListAll){
+			
+			    if (Integer.parseInt(TrainEditDialog.comboTrains.getText()) == td.getID()){
+				  
+			    	td.setID(Integer.parseInt(TrainEditDialog.idText.getText()));
+				    td.setSpeed(Integer.parseInt(TrainEditDialog.comboSpeed.getText()));
+				    td.setTypOfTrain(TrainEditDialog.comboTypOfTrain.getText());
+				    td.setLadung(TrainEditDialog.comboLadungen.getText());
+				    td.setPriority(TrainEditDialog.comboPriority.getText());
+				    
+		    	}
+		    }
+			  
+		    TableItem [] items = CompositeTrain.getTrainTable().getItems();
+		   	TableItem item = items[0]; 
+		   	int i = 0;
+		   	
+		   	while( Integer.parseInt(TrainEditDialog.comboTrains.getText()) != Integer.parseInt(item.getText(i))){
+		   		i++;
+		   		item = items[i];
+		   		
+		   	}
+			
+		   	item.setText(0, TrainEditDialog.idText.getText());
+		   	item.setText(1, TrainEditDialog.comboTypOfTrain.getText());
+		   	item.setText(2, TrainEditDialog.comboSpeed.getText());
+		   	item.setText(3, TrainEditDialog.comboPriority.getText());
+		   	item.setText(4, TrainEditDialog.comboLadungen.getText());
+			
+			
 	     
-	 	   TrainEditDialog.dialog.close();
+	 	    TrainEditDialog.dialog.close();
 			
 		}
 		
@@ -163,7 +193,7 @@ public class TrainEvents {
 	    		j++;
 	    		item = items[j];
 	    	}
-	    	System.out.println(j);
+	    	
 	    	CompositeTrain.getTrainTable().remove(j);
 	    	
 	    	TrainDeletDialog.dialog.close();

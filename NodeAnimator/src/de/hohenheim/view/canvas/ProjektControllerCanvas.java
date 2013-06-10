@@ -3,6 +3,7 @@ package de.hohenheim.view.canvas;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
@@ -29,13 +30,18 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    groupControlSmall.setText("Projekt Verwaltung");
-	    groupControlSmall.setLayout(new GridLayout());
+	    GridLayout gridLayout = new GridLayout(); 
+        gridLayout.numColumns = 1; 
+        groupControlSmall.setLayout(gridLayout);
        
         // Add Button
 	    
 		Button newProject = new Button(groupControlSmall, SWT.NONE);
 		newProject.setText("Projekt hinzufügen");
 		newProject.setImage(new Image(null,"img/add.png"));
+		GridData gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		newProject.setLayoutData(gridData);
 	
 		newProject.addListener(SWT.Selection, new Listener() {
 			
@@ -50,6 +56,9 @@ public class ProjektControllerCanvas extends Canvas {
 		Button editProject = new Button(groupControlSmall, SWT.NONE);
 		editProject.setText("Project ändern");
 		editProject.setImage(new Image(null,"img/Edit.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		editProject.setLayoutData(gridData);
 		
 		editProject.addListener(SWT.Selection, new Listener() {
 			
@@ -63,6 +72,9 @@ public class ProjektControllerCanvas extends Canvas {
 		Button deleteProject = new Button(groupControlSmall, SWT.NONE);
 		deleteProject.setText("Project löschen");
 		deleteProject.setImage(new Image(null,"img/Delete.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		deleteProject.setLayoutData(gridData);
 
 		deleteProject.addListener(SWT.Selection, new Listener() {
 			
@@ -73,11 +85,14 @@ public class ProjektControllerCanvas extends Canvas {
 			}
 		});
 		
-		Button importTrain = new Button(groupControlSmall, SWT.NONE);
-		importTrain.setText("Zug Importieren");
-		importTrain.setImage(new Image(null,"img/Import.png"));
+		Button importProject = new Button(groupControlSmall, SWT.NONE);
+		importProject.setText("Zug Importieren");
+		importProject.setImage(new Image(null,"img/Import.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		importProject.setLayoutData(gridData);
 		
-		importTrain.addListener(SWT.Selection, new Listener() {
+		importProject.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
 				
@@ -86,11 +101,14 @@ public class ProjektControllerCanvas extends Canvas {
 			}
 		});
 		
-		Button exportTrain = new Button(groupControlSmall, SWT.NONE);
-		exportTrain.setText("Zug Exportieren");
-		exportTrain.setImage(new Image(null,"img/export.png"));
+		Button exportProject = new Button(groupControlSmall, SWT.NONE);
+		exportProject.setText("Zug Exportieren");
+		exportProject.setImage(new Image(null,"img/export.png"));
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.FILL;
+		exportProject.setLayoutData(gridData);
 	
-		exportTrain.addListener(SWT.Selection, new Listener() {
+		exportProject.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {
 						

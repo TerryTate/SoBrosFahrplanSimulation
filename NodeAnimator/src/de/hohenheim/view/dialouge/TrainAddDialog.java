@@ -12,10 +12,12 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.TrainEvents;
+import de.hohenheim.controller.main.Main;
 
 public class TrainAddDialog extends Dialog{
 	
@@ -59,6 +61,7 @@ public class TrainAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    idText.setLayoutData(gridData);
+	    idText.setTextLimit(6);
 	    
 	    // Train Typ
 	    
@@ -71,6 +74,7 @@ public class TrainAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboTypOfTrain.setLayoutData(gridData);
+	    comboTypOfTrain.select(0);
 
 	    //Train Speed
 	    
@@ -79,6 +83,7 @@ public class TrainAddDialog extends Dialog{
 	    
         comboSpeed = new Combo(dialog, SWT.READ_ONLY);
 	    comboSpeed.setItems(speeds);
+	    comboSpeed.select(0);
 	    
 	    Label kmH = new Label(dialog, SWT.NONE); 
 	    kmH.setText("km/h"); 
@@ -93,6 +98,7 @@ public class TrainAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboPriority.setLayoutData(gridData);
+	    comboPriority.select(0);
 	    
 	    //Train Ladung
 	    
@@ -104,7 +110,8 @@ public class TrainAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboLadungen.setLayoutData(gridData);
-	
+	    comboLadungen.select(0);
+	    
 	    // Buttonn Composite
 	    
 	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
@@ -125,7 +132,13 @@ public class TrainAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TrainEvents.addNewTrain();
+				if (trainIdCheck()){
+					TrainEvents.addNewTrain();
+				}
+					
+					
+				
+			    
 				
 			}
 		});
@@ -149,6 +162,34 @@ public class TrainAddDialog extends Dialog{
 		});
 	    
 	    dialog.open();
+	}
+
+	protected boolean trainIdCheck() {
+				
+		try{
+		    int id = Integer.parseInt(idText.getText());
+		    for(int j = 0; j < Main.trainListAll.size(); j++){
+			    if(id == Main.trainListAll.get(j).getID()){
+			    	MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        messageBox.setMessage("Die eingegebene Zug ID ist bereits vorhanden bitte  \n " +
+			        		" geben sie eine andere 6 stellige Ziffer ein \n " +
+			        		"und versuchen sie es erneut. ");    
+			        messageBox.open();
+			    	return false;
+			    }
+		    }
+		
+		}catch(NumberFormatException e){
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!");    
+	        messageBox.open();
+			
+			return false;
+		}
+		
+		return true;
 	}
 
 }

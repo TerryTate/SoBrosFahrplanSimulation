@@ -31,23 +31,24 @@ import de.hohenheim.view.composite.CompositeTrain;
 public class TimetableEditDialog extends Dialog{
 	
 	Shell parent;
-	private Text idText;
-	private Text fahrplannameText;
-	private Combo comboStartstation;
-	private Combo comboEndstation;
-	private Combo comboMiddlestation;
-	private Table midlestationTable;
-	private Combo comboTimetable;
-	private Spinner houre;
-	private Spinner minutes;
-	private Button montag;
-	private Button dienstag;
-	private Button mittwoch;
-	private Button donerstag;
-	private Button freitag;
-	private Button samstag;
-	private Button sontag;
-	private Button alle;
+	public static Shell dialog;
+	public static Text idText;
+	public static Text fahrplannameText;
+	public static Combo comboStartstation;
+	public static Combo comboEndstation;
+	public static Combo comboMiddlestation;
+	public static Table midlestationTable;
+	public static Combo comboTimetable;
+	public static Spinner houre;
+	public static Spinner minutes;
+	public static Button montag;
+	public static Button dienstag;
+	public static Button mittwoch;
+	public static Button donerstag;
+	public static Button freitag;
+	public static Button samstag;
+	public static Button sontag;
+	public static Button alle;
 	
 	public static String [] Test = {"1", "2"};
 
@@ -58,7 +59,7 @@ public class TimetableEditDialog extends Dialog{
 	
 	 public void open(final boolean menu) {
 			
-		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(400, 440);
 	    dialog.setText("Fahrplan bearbeiten");
 	    dialog.setImage(new Image(null, "img/Edit2.png"));
@@ -219,7 +220,7 @@ public class TimetableEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.addMiddleStation();   
+			    TimeTableEvents.addMiddleStation(false);   
 				
 			}
 		});
@@ -233,7 +234,7 @@ public class TimetableEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.removeMiddleStation();  
+			    TimeTableEvents.removeMiddleStation(false);  
 				
 			}
 		});
@@ -285,7 +286,7 @@ public class TimetableEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.addTimeTable();
+			    TimeTableEvents.editTimeTable(menu);
 				
 			}
 		});
@@ -320,10 +321,13 @@ public class TimetableEditDialog extends Dialog{
 			if (Integer.valueOf(comboTimetable.getText()) == tt.getId()){
 				
 				Integer id = Integer.valueOf(tt.getId());
+				Integer startstation = Integer.valueOf(tt.getStartstation());
+				Integer endstation = Integer.valueOf(tt.getEndstation());
 	
 				idText.setText(id.toString());
 				fahrplannameText.setText(tt.getName());
-				
+				houre.setSelection(tt.getStartHouer());
+				minutes.setSelection(tt.getStartMinutes());
 				for(int j = 0; j < tt.getDrivingdays().size(); j++){
 					
 				    if( tt.getDrivingdays().get(j).equalsIgnoreCase("Mo")){
@@ -355,6 +359,18 @@ public class TimetableEditDialog extends Dialog{
 				    	sontag.setSelection(true);
 				    	
 				    }
+				}
+				comboStartstation.setText(startstation.toString());
+				comboEndstation.setText(endstation.toString());
+			
+				Integer middlestation; 
+			
+				for(int j = 0; j < tt.getMiddlestations().size(); j++){
+					
+					middlestation =  Integer.valueOf(tt.getMiddlestations().get(j));
+					 
+					TableItem item = new TableItem(TimetableEditDialog.midlestationTable, SWT.NONE);
+					item.setText(middlestation.toString());
 				}
 	        		
 			}
