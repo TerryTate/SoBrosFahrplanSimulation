@@ -2,6 +2,7 @@ package de.hohenheim.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +13,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
 /**
@@ -90,6 +92,57 @@ public class XmlWriter {
 			e.fillInStackTrace();
 		}
 		
+	}
+	
+	
+	
+	public static void saveSingleTimeTable(String fileName, Timetable tD){
+		
+		Element root = new Element("Train");
+		
+		Element iD = new Element("ID");
+		root.addContent(iD);
+		iD.setText(String.valueOf(tD.getId()));
+		
+		Element name = new Element("Name");
+		root.addContent(name);
+		name.setText(String.valueOf(tD.getName()));
+		
+		Element drivingdays = new Element("DrivingDays");
+		root.addContent(drivingdays);
+		//drivingdays.setT
+		
+		Element rootStations = new Element("Stations");
+		root.addContent(rootStations);
+		
+		
+		Element startstation = new Element("StartStation");
+		rootStations.addContent(startstation);
+		startstation.setText(String.valueOf(tD.getStartstation()));
+		
+		Element middlestations = new Element("MiddleStations");
+		rootStations.addContent(middlestations);
+		//middlestations.setText(String.valueOf(tD))
+		
+		Element endstation = new Element("EndStation");
+		rootStations.addContent(endstation);
+		endstation.setText(String.valueOf(tD.getEndstation()));
+		
+		
+		
+		
+		Element rootTime = new Element("Time");
+		root.addContent(rootTime);
+		
+		
+		Element startHouer = new Element("StartHouer");
+		rootTime.addContent(startHouer);
+		startHouer.setText(String.valueOf(tD.getStartHouer()));
+		
+		Element startMinutes = new Element("StarMinutes");
+		rootTime.addContent(startMinutes);
+		startMinutes.setText(String.valueOf(tD.getStartMinutes()));
+
 	}
 
 }
