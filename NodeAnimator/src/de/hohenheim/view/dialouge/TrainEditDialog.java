@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
@@ -201,8 +202,16 @@ public class TrainEditDialog extends Dialog{
 				
 			}
 		});
-	    
+		
 	    trainEdit.open();
+	    
+//	    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_ERROR
+//	            | SWT.OK);
+//	    messageBox.setMessage("Sie müssen erst einen Fahrplan hinzufügen!"); 
+//		messageBox.setText("Achtung");
+//	    int response = messageBox.open();
+//	    if (response == SWT.OK)
+//	    	System.exit(0);
 	}
 
 
