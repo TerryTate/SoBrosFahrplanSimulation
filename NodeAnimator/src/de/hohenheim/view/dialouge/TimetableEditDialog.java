@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -22,6 +23,8 @@ import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.timetable.Timetable;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 
@@ -35,6 +38,16 @@ public class TimetableEditDialog extends Dialog{
 	private Combo comboMiddlestation;
 	private Table midlestationTable;
 	private Combo comboTimetable;
+	private Spinner houre;
+	private Spinner minutes;
+	private Button montag;
+	private Button dienstag;
+	private Button mittwoch;
+	private Button donerstag;
+	private Button freitag;
+	private Button samstag;
+	private Button sontag;
+	private Button alle;
 	
 	public static String [] Test = {"1", "2"};
 
@@ -46,7 +59,7 @@ public class TimetableEditDialog extends Dialog{
 	 public void open(final boolean menu) {
 			
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(320, 360);
+	    dialog.setSize(400, 440);
 	    dialog.setText("Fahrplan bearbeiten");
 	    dialog.setImage(new Image(null, "img/Edit2.png"));
 		
@@ -106,9 +119,30 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    fahrplannameText = new Text(dialog, SWT.NONE); 
 	    gridData = new GridData();
-	    gridData.horizontalSpan = 3;
+	    gridData.horizontalSpan = 2;
 	    fahrplannameText.setLayoutData(gridData);
-	  
+	    
+	    //Set the Label and a spinner for the Starttime
+	    Label starttime = new Label(dialog, SWT.NONE);
+	    starttime.setText("Start Uhrzeit : ");
+	    
+	    Composite timeComposite = new Composite(dialog, SWT.NONE);
+	    timeComposite.setLayout(new FillLayout());
+	    gridData = new GridData();
+	    gridData.horizontalSpan = 2;
+	    timeComposite.setLayoutData(gridData);
+	    
+	    houre = new Spinner(timeComposite, SWT.NONE);
+	    houre.setMaximum(23);
+	    
+	    Label h = new Label(timeComposite, SWT.NONE);
+	    h.setText("  h");
+	    
+	    minutes = new Spinner(timeComposite, SWT.NONE);
+	    minutes.setMaximum(59);
+	    
+	    Label m = new Label(timeComposite, SWT.NONE);
+	    m.setText("  m");
 	    
 	    
 	    // Timetable drivingDays 
@@ -116,17 +150,31 @@ public class TimetableEditDialog extends Dialog{
 	    Label drivingDays = new Label(dialog, SWT.NONE); 
 	    drivingDays.setText("Fahrtage : ");  
 	    
-	    new Button(dialog, SWT.CHECK).setText("Montag"); 
-	    new Button(dialog, SWT.CHECK).setText("Dienstag");
+	    montag = new Button(dialog, SWT.CHECK);
+	    montag.setText("Montag");
+	    dienstag = new Button(dialog, SWT.CHECK);
+	    dienstag.setText("Dienstag");
+	    
 	    Label room = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Mittwoch");
-        new Button(dialog, SWT.CHECK).setText("Donerstag");
+	    
+	    mittwoch = new Button(dialog, SWT.CHECK);
+	    mittwoch.setText("Mittwoch");
+        donerstag = new Button(dialog, SWT.CHECK);
+        donerstag.setText("Donerstag");
+        
         Label room1 = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Freitag");
-	    new Button(dialog, SWT.CHECK).setText("Samstag");
+        
+	    freitag = new Button(dialog, SWT.CHECK);
+	    freitag.setText("Freitag");
+	    samstag = new Button(dialog, SWT.CHECK);
+	    samstag.setText("Samstag");
+	    
 	    Label room3 = new Label(dialog, SWT.NONE);
-	    new Button(dialog, SWT.CHECK).setText("Sontag");
-	    new Button(dialog, SWT.CHECK).setText("Alle");
+	    
+	    sontag = new Button(dialog, SWT.CHECK);
+	    sontag.setText("Sontag");
+	    alle = new Button(dialog, SWT.CHECK);
+	    alle.setText("Alle");
 	   
 	    
 	    // Titmetable Startstation
@@ -264,7 +312,53 @@ public class TimetableEditDialog extends Dialog{
 	}
 
 	protected void setText() {
-		// TODO Auto-generated method stub
+        
+		for(int i = 0; i < Main.timetableListAll.size(); i++ ){
+			
+			Timetable tt = Main.timetableListAll.get(i);
+			
+			if (Integer.valueOf(comboTimetable.getText()) == tt.getId()){
+				
+				Integer id = Integer.valueOf(tt.getId());
+	
+				idText.setText(id.toString());
+				fahrplannameText.setText(tt.getName());
+				
+				for(int j = 0; j < tt.getDrivingdays().size(); j++){
+					
+				    if( tt.getDrivingdays().get(j).equalsIgnoreCase("Mo")){
+				    	
+				    	montag.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Di")){
+				    	
+				    	dienstag.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Mi")){
+				    	
+				    	mittwoch.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Do")){
+				    	
+				    	donerstag.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Fr")){
+				    	
+				    	freitag.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Sa")){
+				    	
+				    	samstag.setSelection(true);
+				    	
+				    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("So")){
+				    	
+				    	sontag.setSelection(true);
+				    	
+				    }
+				}
+	        		
+			}
+		}
 		
 	}
 

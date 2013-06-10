@@ -33,6 +33,10 @@ public class TimeTableEvents {
 		
 		String name = TimetableAddDialog.fahrplannameText.getText();
 		
+		int h = Integer.parseInt(TimetableAddDialog.houre.getText());
+		
+		int m = Integer.parseInt(TimetableAddDialog.minutes.getText());
+		
 		ArrayList<String> drivingdays = new ArrayList<String>();
 		if(TimetableAddDialog.montag.getSelection() == true){
 			 drivingdays.add("Mo");
@@ -73,7 +77,7 @@ public class TimeTableEvents {
 	    	middlestation.add(Integer.parseInt(TimetableAddDialog.midlestationTable.getItem(i).getText(0)));
 	    }
 			
-		Timetable timetable = new Timetable(id, drivingdays, name, startstation, endstation, middlestation, 0, 0);
+		Timetable timetable = new Timetable(id, drivingdays, name, startstation, endstation, middlestation, h, m);
 		Main.timetableListAll.add(timetable);
 		
 		String drivingdaysItem = "";
@@ -96,7 +100,7 @@ public class TimeTableEvents {
 		TableItem item = new TableItem(CompositeTimeTable.getTimeTableTable(), SWT.NONE);
 		
 		item.setText(new String[]{String.valueOf(timetable.getId()),
-				timetable.getName(),drivingdaysItem
+				timetable.getName(),TimetableAddDialog.houre.getText() + " : " + TimetableAddDialog.minutes.getText(), drivingdaysItem
 				, String.valueOf(timetable.getStartstation()), String.valueOf(timetable.getEndstation()), middleStationItems});
 		
 		TimetableAddDialog.dialog.close();

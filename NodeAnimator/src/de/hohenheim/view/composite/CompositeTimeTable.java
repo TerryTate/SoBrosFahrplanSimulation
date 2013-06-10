@@ -43,6 +43,7 @@ public class CompositeTimeTable extends Composite {
 		
 	    TableColumn idTimeTable = new TableColumn(getTimeTableTable(),SWT.CENTER);
 	    TableColumn timeTableName = new TableColumn(getTimeTableTable(), SWT.CENTER);
+	    TableColumn startTime = new TableColumn(getTimeTableTable(), SWT.CENTER);
 	    TableColumn drivingDays = new TableColumn(getTimeTableTable(), SWT.CENTER);
 	    TableColumn startStation = new TableColumn(getTimeTableTable(),SWT.CENTER);
 	    TableColumn endStation = new TableColumn(getTimeTableTable(), SWT.CENTER);
@@ -50,6 +51,7 @@ public class CompositeTimeTable extends Composite {
 	    
 	    idTimeTable.setText("ID");
 	    timeTableName.setText("Fahrplanname");
+	    startTime.setText("Start Uhrzeit");
 	    drivingDays.setText("Fahrtage");
 	    startStation.setText("Startstation");
 	    endStation.setText("Endstation");
@@ -57,6 +59,7 @@ public class CompositeTimeTable extends Composite {
 	    
 	    idTimeTable.setWidth(70);
 	    timeTableName.setWidth(70);
+	    startTime.setWidth(80);
 	    drivingDays.setWidth(80);
 	    startStation.setWidth(80);
 	    endStation.setWidth(80);

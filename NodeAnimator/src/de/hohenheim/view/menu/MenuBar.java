@@ -219,7 +219,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		//MenuBarEvents.exportTrain();
+	    		MenuBarEvents.open();
 	    		
             }
         });
@@ -228,7 +228,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save(true);
+	    		MenuBarEvents.exportTrain();
                 
             }
         });

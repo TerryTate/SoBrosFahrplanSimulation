@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -42,6 +43,8 @@ public class TimetableAddDialog extends Dialog{
 	
 	public static String [] Test = {"1", "2"};
 	final int TEXT_MARGIN = 3;
+	public static Spinner houre;
+	public static Spinner minutes;
 	
 	public static Button dienstag;
 	public static Button mittwoch;
@@ -63,7 +66,7 @@ public class TimetableAddDialog extends Dialog{
 		// Set a new dialog with a GridLayout wit 3 columns 
 		 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(370, 340);
+	    dialog.setSize(400, 410);
 	    dialog.setText("Fahrplan hinzufügen");
 	    dialog.setImage(new Image(null, "img/add.png"));
 	    GridLayout gridLayout = new GridLayout();
@@ -87,9 +90,32 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    fahrplannameText = new Text(dialog, SWT.NONE); 
 	    gridData = new GridData();
-	    gridData.horizontalSpan = 3;
+	    gridData.horizontalSpan = 2;
 	    fahrplannameText.setLayoutData(gridData);
-	  
+	    
+	    //Set the Label and a spinner for the Starttime
+	    Label starttime = new Label(dialog, SWT.NONE);
+	    starttime.setText("Start Uhrzeit : ");
+	    
+	    Composite timeComposite = new Composite(dialog, SWT.NONE);
+	    timeComposite.setLayout(new FillLayout());
+	    gridData = new GridData();
+	    gridData.horizontalSpan = 2;
+	    timeComposite.setLayoutData(gridData);
+	    
+	    houre = new Spinner(timeComposite, SWT.NONE);
+	    houre.setMaximum(23);
+	    
+	    Label h = new Label(timeComposite, SWT.NONE);
+	    h.setText("  h");
+	    
+	    minutes = new Spinner(timeComposite, SWT.NONE);
+	    minutes.setMaximum(59);
+	    
+	    Label m = new Label(timeComposite, SWT.NONE);
+	    m.setText("  m");
+	    
+	    
 	    // Timetable drivingDays --> Label drivingdays and Checkboxes
 	    
 	    Label drivingDays = new Label(dialog, SWT.NONE); 

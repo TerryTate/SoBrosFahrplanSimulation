@@ -18,6 +18,8 @@ import de.hohenheim.view.dialouge.TimetableEditDialog;
 import de.hohenheim.view.dialouge.TrainAddDialog;
 import de.hohenheim.view.dialouge.TrainDeletDialog;
 import de.hohenheim.view.dialouge.TrainEditDialog;
+import de.hohenheim.view.dialouge.TrainExportDialog;
+
 
 
 public class MenuBarEvents {
@@ -122,6 +124,17 @@ public class MenuBarEvents {
         
         }else if (menu == true){
         	
+        	String idCheck = TrainExportDialog.comboTrains.getText();
+        	TrainData td = Main.trainListAll.get(0);
+        	int i = 0; 
+        	
+        	while(Integer.parseInt(idCheck) != td.getID()){
+        		i++;
+        		td = Main.trainListAll.get(i);
+        	}
+        	
+        	XmlWriter.saveSingleTrain(selected,  td);
+        	TrainExportDialog.dialog.close();
         }
         
       
@@ -148,5 +161,13 @@ public class MenuBarEvents {
 		
 		
 	}
+
+	public static void exportTrain() {
+		
+		new TrainExportDialog(Main.getShell(),SWT.CENTER).open(true);
+		
+	}
+
+	
 
 }

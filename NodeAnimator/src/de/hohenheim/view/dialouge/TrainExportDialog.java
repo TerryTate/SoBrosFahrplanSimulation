@@ -11,17 +11,18 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
+import de.hohenheim.controller.events.MenuBarEvents;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 
-public class TrainImportDialog {
+public class TrainExportDialog {
 	
 
 	Shell parent;
 	public static Combo comboTrains;
 	public static Shell dialog;
 
-	public TrainImportDialog(Shell parent, int style) {
+	public TrainExportDialog(Shell parent, int style) {
 		super();
 		parent = this.parent;
 		
@@ -62,6 +63,7 @@ public class TrainImportDialog {
 			
 			public void handleEvent(Event arg0) {
 				
+				MenuBarEvents.save(menu);
 				
 			}
 		});
