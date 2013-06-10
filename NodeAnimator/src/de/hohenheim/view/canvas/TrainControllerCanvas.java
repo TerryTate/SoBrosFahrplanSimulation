@@ -101,7 +101,7 @@ public class TrainControllerCanvas extends Canvas{
 					
 		     public void handleEvent(Event arg0) {
 						
-					
+					MenuBarEvents.save(false);
 						
 			}
 		});
