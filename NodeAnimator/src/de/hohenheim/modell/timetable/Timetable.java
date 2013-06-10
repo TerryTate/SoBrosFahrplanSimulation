@@ -14,6 +14,36 @@ public class Timetable {
 	private	int startMinutes;
 	
 	
+	public ArrayList<Integer> getMiddlestations() {
+		return middlestations;
+	}
+
+
+	public void setMiddlestations(ArrayList<Integer> middlestations) {
+		this.middlestations = middlestations;
+	}
+
+
+	public int getStartHouer() {
+		return startHouer;
+	}
+
+
+	public void setStartHouer(int startHouer) {
+		this.startHouer = startHouer;
+	}
+
+
+	public int getStartMinutes() {
+		return startMinutes;
+	}
+
+
+	public void setStartMinutes(int startMinutes) {
+		this.startMinutes = startMinutes;
+	}
+
+
 	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes){
 		
 		this.setId(id);
