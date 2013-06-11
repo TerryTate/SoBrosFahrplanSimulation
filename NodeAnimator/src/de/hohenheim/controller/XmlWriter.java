@@ -40,10 +40,6 @@ public class XmlWriter {
 
 	}
 
-	
-	
-	
-	
 	/**
 	 * Method to save single selected Trains in one XML File
 	 * 
@@ -53,34 +49,33 @@ public class XmlWriter {
 	 *            The user selected train which will be saved in the XML File
 	 */
 	public static void saveSingleTrain(String fileName, TrainData tD) {
-		
-		Element root = new Element("Train");
-		
+
+		Element rootSingleTrain = new Element("Train");
+
 		Element id = new Element("ID");
-		root.addContent(id);
+		rootSingleTrain.addContent(id);
 		id.setText(String.valueOf(tD.getID()));
-		
+
 		Element typeOfTrain = new Element("TypeOfTrain");
-		root.addContent(typeOfTrain);
+		rootSingleTrain.addContent(typeOfTrain);
 		typeOfTrain.setText(String.valueOf(tD.getTypOfTrain()));
-		
+
 		Element priority = new Element("Priority");
-		root.addContent(priority);
+		rootSingleTrain.addContent(priority);
 		priority.setText(String.valueOf(tD.getPriority()));
-		
+
 		Element speed = new Element("Speed");
-		root.addContent(speed);
+		rootSingleTrain.addContent(speed);
 		speed.setText(String.valueOf(tD.getSpeed()));
-		
+
 		Element ladung = new Element("Ladung");
-		root.addContent(ladung);
+		rootSingleTrain.addContent(ladung);
 		ladung.setText(String.valueOf(tD.getLadung()));
-		
-		//Document with attached root element
-		Document doc = new Document(root);
-		
-		
-		//FileOutPutStream with fileName given from Method
+
+		// Document with attached root element
+		Document doc = new Document(rootSingleTrain);
+
+		// FileOutPutStream with fileName given from Method
 		try {
 			FileOutputStream out = new FileOutputStream(fileName);
 			XMLOutputter serializer = new XMLOutputter(Format.getPrettyFormat());
@@ -90,58 +85,71 @@ public class XmlWriter {
 		} catch (IOException e) {
 			System.err.println(e);
 			e.fillInStackTrace();
-	    } 
-		
+		}
+
 	}
-	
-	
-	
-	public static void saveSingleTimeTable(String fileName, Timetable tD){
-		
-		Element root = new Element("Train");
-		
+
+	public static void saveSingleTimeTable(String fileName, Timetable tD) {
+
+		Element rootTimeTable = new Element("Train");
+
 		Element iD = new Element("ID");
-		root.addContent(iD);
+		rootTimeTable.addContent(iD);
 		iD.setText(String.valueOf(tD.getId()));
-		
+
 		Element name = new Element("Name");
-		root.addContent(name);
+		rootTimeTable.addContent(name);
 		name.setText(String.valueOf(tD.getName()));
-		
+
 		Element drivingdays = new Element("DrivingDays");
-		root.addContent(drivingdays);
-		//drivingdays.setT
-		
+		rootTimeTable.addContent(drivingdays);
+		for (int i = 0; i <= tD.getDrivingdays().size(); i++) {
+			drivingdays.setText(String.valueOf(tD.getDrivingdays().get(i)));
+		}
+
 		Element rootStations = new Element("Stations");
-		root.addContent(rootStations);
-		
-		
+		rootTimeTable.addContent(rootStations);
+
 		Element startstation = new Element("StartStation");
 		rootStations.addContent(startstation);
 		startstation.setText(String.valueOf(tD.getStartstation()));
-		
+
 		Element middlestations = new Element("MiddleStations");
 		rootStations.addContent(middlestations);
-		//middlestations.setText(String.valueOf(tD))
-		
+		for (int i = 0; i <= tD.getMiddlestations().size(); i++) {
+			middlestations.setText(String
+					.valueOf(tD.getMiddlestations().get(i)));
+		}
+
 		Element endstation = new Element("EndStation");
 		rootStations.addContent(endstation);
 		endstation.setText(String.valueOf(tD.getEndstation()));
-		
-		
-		
-		
+
 		Element rootTime = new Element("Time");
-		root.addContent(rootTime);
-		
-		
+		rootTimeTable.addContent(rootTime);
+
 		Element startHouer = new Element("StartHouer");
 		rootTime.addContent(startHouer);
 		startHouer.setText(String.valueOf(tD.getStartHouer()));
-		
+
 		Element startMinutes = new Element("StarMinutes");
 		rootTime.addContent(startMinutes);
 		startMinutes.setText(String.valueOf(tD.getStartMinutes()));
+
+		// Document with attached root element
+		Document docTimeTable = new Document(rootTimeTable);
+
+		// FileOutPutStream with fileName given from Method
+		try {
+			FileOutputStream out = new FileOutputStream(fileName);
+			XMLOutputter serializer = new XMLOutputter(Format.getPrettyFormat());
+			serializer.output(docTimeTable, out);
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			System.err.println(e);
+			e.fillInStackTrace();
+		}
 
 	}
 
