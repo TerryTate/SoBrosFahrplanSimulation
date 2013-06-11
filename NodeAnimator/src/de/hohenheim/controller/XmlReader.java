@@ -7,6 +7,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
 /**
@@ -66,4 +67,15 @@ public class XmlReader {
 		
 		return returnTrain;
 	}
+	
+	
+	
+	public static Timetable loadSingleTimeTable(String fileName){
+		
+		Timetable returnTimeTable = null;
+		
+		return returnTimeTable;
+		
+	}
+	
 }
