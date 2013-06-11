@@ -165,7 +165,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.open();
+	    	//	MenuBarEvents.open();
                 
             }
         });
@@ -174,7 +174,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save(true);
+	    	//	MenuBarEvents.save(true);
                 
             }
         });
@@ -219,7 +219,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.open();
+	    		MenuBarEvents.openTrain();
 	    		
             }
         });
@@ -264,7 +264,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.open();
+	    	//	MenuBarEvents.open();
                 
             }
         });
@@ -273,7 +273,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.save(true);
+	    		MenuBarEvents.exportTimetable();
                 
             }
         });

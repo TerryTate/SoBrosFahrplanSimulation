@@ -1,8 +1,10 @@
 package de.hohenheim.controller.main;
 	
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -32,8 +34,10 @@ public class Main {
         
 		setShell(new Shell());
 		getShell().setText("Fahrplan Animation");
+		int screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		getShell().setSize(820, 720);
-		
+		getShell().setLocation( screenWidth/2 - 410, screenHeight/2 - 360);
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
 	    getShell().setLayout(gridLayout);
@@ -62,11 +66,13 @@ public class Main {
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display);   
         
 	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
-        animation.setSize(800, 720);
-        //animation.setImage(image);
+        animation.setSize(600, 400);
+        
+        animation.setBackgroundImage(new Image(null, "img/Logo.png"));
+        animation.setLocation( screenWidth/2 - 300, screenHeight/2 - 200 );
         
         ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
-        bar.setBounds (10, 10, 200, 32);
+        bar.setBounds (0, 370, 600, 15);
         
         animation.open();
         for (int i=0; i<=bar.getMaximum (); i++) {

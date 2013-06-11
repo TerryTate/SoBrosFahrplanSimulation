@@ -176,5 +176,17 @@ public class TrainEvents {
 	    	
 	    }
 	}
+
+
+	public static void importTrain(TrainData td) {
+	
+		Main.trainListAll.add(td);
+		
+		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
+		item.setText(new String[]{String.valueOf(td.getID()),
+				td.getTypOfTrain(),
+				String.valueOf(td.getSpeed()), td.getPriority(), td.getLadung()});
+		
+	}
 	
 }

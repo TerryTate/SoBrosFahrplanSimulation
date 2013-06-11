@@ -4,9 +4,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
+
+import de.hohenheim.controller.XmlReader;
 import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.AboutUsDialog;
 import de.hohenheim.view.dialouge.HelpDialog;
@@ -15,6 +19,7 @@ import de.hohenheim.view.dialouge.ProjectEditDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
+import de.hohenheim.view.dialouge.TimetableExportDialog;
 import de.hohenheim.view.dialouge.TrainAddDialog;
 import de.hohenheim.view.dialouge.TrainDeletDialog;
 import de.hohenheim.view.dialouge.TrainEditDialog;
@@ -117,7 +122,7 @@ public class MenuBarEvents {
 		new HelpDialog(Main.getShell(), SWT.NONE).open();
 	}
 
-	public static void save(boolean menu) {
+	public static void saveTrain(boolean menu) {
 	
 		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
         fd.setText("Zug Exportieren");
@@ -153,14 +158,10 @@ public class MenuBarEvents {
         	XmlWriter.saveSingleTrain(selected,  td);
         	TrainExportDialog.dialog.close();
         }
-        
-      
-        
-        System.out.println(selected);
-		
+        	
 	}
 
-	public static void open() {
+	public static void openTrain() {
 		
 		 FileDialog fd = new FileDialog(Main.getShell(), SWT.OPEN);
 	     fd.setText("Zug Importieren");
@@ -168,7 +169,8 @@ public class MenuBarEvents {
 	     String[] filterExt = { "*.xml"};
 	     fd.setFilterExtensions(filterExt);
 	     String selected = fd.open();
-	     XmlWriter.writeToXML(selected);
+	     TrainData td = XmlReader.loadSingleTrain(selected);
+	     TrainEvents.importTrain(td);
 		
 	}
 
@@ -205,6 +207,61 @@ public class MenuBarEvents {
 	public static void editProject() {
 		
 		new ProjectEditDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
+
+	public static void saveTimetable(boolean menu) {
+		
+		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
+        fd.setText("Fahrplan Exportieren");
+        fd.setFilterPath("C:/");
+        String[] filterExt = { "*.xml" };
+        fd.setFilterExtensions(filterExt);
+        String selected = fd.open(); 
+        
+        if (menu == false){
+        	
+        	TableItem [] rowData = CompositeTimeTable.getTimeTableTable().getSelection();
+        	Timetable tt = Main.timetableListAll.get(0);
+        	int i = 0; 
+        	
+        	while(Integer.parseInt(rowData[0].getText(0)) != tt.getId()){
+        		i++;
+        		tt = Main.timetableListAll.get(i);
+        	}
+        		
+        	XmlWriter.saveSingleTimeTable(selected, tt);
+        
+        }else if (menu == true){
+        	
+        	String idCheck = TimetableExportDialog.comboTimetables.getText();
+        	Timetable tt = Main.timetableListAll.get(0);
+        	int i = 0; 
+        	
+        	while(Integer.parseInt(idCheck) != tt.getId()){
+        		i++;
+        		tt = Main.timetableListAll.get(i);
+        	}
+        	
+        	XmlWriter.saveSingleTimeTable(selected,  tt);
+        	TimetableExportDialog.dialog.close();
+        }
+		
+	}
+
+	public static void exportTimetable() {
+		
+		  if (Main.timetableListAll.size() > 0){
+	        	
+	        	new TimetableExportDialog(Main.getShell(),SWT.NONE).open(true);
+	    				
+	        }else{
+				
+				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        messageBox.setMessage("Es gibt keine Fahrpläne die Exportiert werden können.");    
+		        messageBox.open();
+				
+			}	
 		
 	}
 

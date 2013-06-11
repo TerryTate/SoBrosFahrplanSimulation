@@ -12,17 +12,15 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.events.MenuBarEvents;
-import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 
-public class TrainExportDialog {
-	
+public class TimetableExportDialog {
 
 	Shell parent;
-	public static Combo comboTrains;
+	public static Combo comboTimetables;
 	public static Shell dialog;
 
-	public TrainExportDialog(Shell parent, int style) {
+	public TimetableExportDialog(Shell parent, int style) {
 		super();
 		parent = this.parent;
 		
@@ -39,17 +37,17 @@ public class TrainExportDialog {
 	    dialog.setLayout(gridLayout);
 	    
 	   
-    	Label chooseTrain = new Label(dialog, SWT.NONE);
-    	chooseTrain.setText("Wähle Zug ID : ");
+    	Label chooseTimetable = new Label(dialog, SWT.NONE);
+    	chooseTimetable.setText("Wähle Fahrplan ID : ");
     	
-    	comboTrains = new Combo(dialog, SWT.READ_ONLY);
-    	String[] trainsID = new String [Main.trainListAll.size()];
-	    comboTrains.setItems(loadTrainList(trainsID));
+    	comboTimetables = new Combo(dialog, SWT.READ_ONLY);
+    	String[] timetablesID = new String [Main.timetableListAll.size()];
+	    comboTimetables.setItems(loadTimetableList(timetablesID));
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
-	    comboTrains.setLayoutData(gridData);
-	    comboTrains.select(0);
+	    comboTimetables.setLayoutData(gridData);
+	    comboTimetables.select(0);
 	    
         // OK Button 
 	    
@@ -64,7 +62,7 @@ public class TrainExportDialog {
 			
 			public void handleEvent(Event arg0) {
 				
-				MenuBarEvents.saveTrain(menu);
+				MenuBarEvents.saveTimetable(menu);
 				
 			}
 		});
@@ -92,17 +90,14 @@ public class TrainExportDialog {
 	}
 
 
-	private String[] loadTrainList(String[] trainsID) {
+	private String[] loadTimetableList(String[] timetablesID) {
 	
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
-			trainsID[i] = id.toString();
+		for(int i=0; i < Main.timetableListAll.size(); i++) {
+			Integer id = Main.timetableListAll.get(i).getId();
+			timetablesID[i] = id.toString();
 		}
 		
 	
-		return trainsID;
+		return timetablesID;
 	}
 }
-
-
-

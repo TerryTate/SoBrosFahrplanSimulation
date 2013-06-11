@@ -16,10 +16,13 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.MenuBarEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
+import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.composite.CompositeTimeTable;
 
 
 public class TimeTableControllerCanvas extends Canvas {
@@ -113,7 +116,22 @@ public class TimeTableControllerCanvas extends Canvas {
 							
 			public void handleEvent(Event arg0) {
 								
-							
+				
+                boolean showText = false;
+		    	 
+		         for(int i = 0; i < Main.timetableListAll.size(); i++){
+		        	
+		        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
+		        		 MenuBarEvents.saveTimetable(false);
+		        		 showText = true;
+		        	 } 
+		         }
+		         
+		         if(showText == false){
+		        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			         messageBox.setMessage("Sie haben keinen Fahrplan Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+			         messageBox.open();
+		         }		
 								
 			}
 		});

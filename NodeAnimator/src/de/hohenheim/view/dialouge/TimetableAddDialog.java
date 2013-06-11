@@ -303,9 +303,15 @@ public class TimetableAddDialog extends Dialog{
 		boolean name = true;
 		boolean startend = true;
 		boolean endmiddle = true;
+		boolean drivingday = true;
 		
 		message = "";
-		
+		    
+		    if((montag.getSelection() == false) && (dienstag.getSelection() == false) && (mittwoch.getSelection() == false) && (donerstag.getSelection() == false) && 
+		       (freitag.getSelection() == false) && (samstag.getSelection() == false) && (sontag.getSelection() == false) && (alle.getSelection() == false)){
+		    	message = message + "Es muss mindestens ein Fahrtag gewählt werden !\n";
+		    	drivingday = false;
+		    }
 		
 			if(fahrplannameText.getText().equalsIgnoreCase("")){
 				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
@@ -347,7 +353,7 @@ public class TimetableAddDialog extends Dialog{
 			
 		}
 		
-		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false)){
+		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false) || (drivingday == false)){
 			return false;
 		}else{
 			return true;

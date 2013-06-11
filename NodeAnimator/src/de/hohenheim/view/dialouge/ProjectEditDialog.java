@@ -23,6 +23,9 @@ import org.eclipse.swt.widgets.Text;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.project.Project;
+import de.hohenheim.modell.timetable.Timetable;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.composite.CompositeTrain;
 
@@ -37,7 +40,7 @@ public class ProjectEditDialog extends Dialog{
 	
 	private Shell dialog;
 	private Combo comboProject;
-	private Table linkTable; 
+	public static Table linkTable; 
 
 	public ProjectEditDialog(Shell parent, int style) {
 		super(parent, style);
@@ -115,7 +118,8 @@ public class ProjectEditDialog extends Dialog{
 	    chooseTrain.setText("Zug wählen : ");
 	    
 	    comboChooseTrain = new Combo(dialog, SWT.READ_ONLY);
-	    //comboChooseTrain.setItems(typs);
+	    String[] trainsID = new String [Main.trainListAll.size()];
+	    comboChooseTrain.setItems(loadTrainList(trainsID));
 	    gridData = new GridData();
 	    
 	    gridData.horizontalAlignment = SWT.FILL;
@@ -135,19 +139,20 @@ public class ProjectEditDialog extends Dialog{
 			}
 		});
 	    
-	    //Choose TimeTable (Fahrplan)	
+	    //Choose TimeTable	
 	    
 	    Label chooseTimeTable = new Label(dialog, SWT.NONE);
 	    chooseTimeTable.setText("Fahrplan wählen : ");
 	    
 	    comboChooseTimeTable = new Combo(dialog, SWT.READ_ONLY);
-	    //comboChooseTimeTable.setItems(typs);
+	    String[] timetableID2 = new String [Main.timetableListAll.size()];
+	    comboChooseTimeTable.setItems(loadTimetableList(timetableID2));
 	    gridData = new GridData();
 	
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboChooseTimeTable.setLayoutData(gridData);
 	    
- // Remove Button
+        // Remove Button
 		
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
@@ -181,7 +186,7 @@ public class ProjectEditDialog extends Dialog{
 		trains.setWidth(100);  
 		timetable.setWidth(100);
 		
- // Buttonn Composite
+        // Buttonn Composite
 	    
 	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
 	    GridLayout gridLayout2 = new GridLayout();
@@ -224,8 +229,60 @@ public class ProjectEditDialog extends Dialog{
 				
 			}
 		});
+		
+		//if (menu == false){
+		for(int i = 0; i < Main.projectListAll.size(); i++ ){
+			
+			Project p = Main.projectListAll.get(i);
+			
+			if (Integer.parseInt(rowData[0].getText()) == p.getId()){
+				
+				Integer idProject = Integer.valueOf(p.getId());
+				
+				idText.setText(idProject.toString());
+				nameText.setText(p.getName());
+				
+				Integer trainID;
+				Integer timetableID;
+			
+				for(int j = 0; j < p.getTraindataProjectList().size(); j++){
+				
+					TrainData td =  p.getTraindataProjectList().get(j);
+					trainID =  Integer.valueOf(td.getID());
+					
+					TableItem item = new TableItem(linkTable, SWT.NONE);
+					item.setText(0, trainID.toString());
+					
+					Timetable tt = p.getTimeTableProjectList().get(j);
+					timetableID = Integer.valueOf(tt.getId());
+					item.setText(1, timetableID.toString());
+				}
+	        		
+			}
+		}	
+		//}
 		    
 		dialog.open();
+	}
+
+	private String[] loadTrainList(String[] trainsID) {
+		for(int i=0; i < Main.trainListAll.size(); i++) {
+			Integer id = Main.trainListAll.get(i).getID();
+			trainsID[i] = id.toString();
+		}
+		
+	
+		return trainsID;
+	}
+
+	private String[] loadTimetableList(String[] timetableID2) {
+		
+		for(int i=0; i < Main.timetableListAll.size(); i++) {
+			Integer id = Main.timetableListAll.get(i).getId();
+			timetableID2[i] = id.toString();
+		}
+		
+		return timetableID2;
 	}
 
 	protected void setText() {

@@ -40,7 +40,7 @@ public class XmlReader {
 			e.printStackTrace();
 		}
 		
-		TrainData returnTrain = null;
+		TrainData returnTrain = new TrainData(0, 0, null, null, null);
 		
 		Element id = root.getChild("ID");
 		int iDValue = Integer.parseInt(id.getValue());

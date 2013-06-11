@@ -113,7 +113,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-			    
+			    MenuBarEvents.openTrain();
 				
 			}
 		});
@@ -135,7 +135,7 @@ public class TrainControllerCanvas extends Canvas{
 		         for(int i = 0; i < Main.trainListAll.size(); i++){
 		        	
 		        	 if(CompositeTrain.getTrainTable().isSelected(i)){
-		        		 MenuBarEvents.save(false);
+		        		 MenuBarEvents.saveTrain(false);
 		        		 showText = true;
 		        	 } 
 		         }
