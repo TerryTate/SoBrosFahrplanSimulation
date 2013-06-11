@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 
 import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TrainEvents;
 
 public class ProjektControllerCanvas extends Canvas {
@@ -64,7 +65,7 @@ public class ProjektControllerCanvas extends Canvas {
 			
 			public void handleEvent(Event arg0) {
 				
-				 
+				 MenuBarEvents.editProject();
 				
 			}
 		});
@@ -80,7 +81,7 @@ public class ProjektControllerCanvas extends Canvas {
 			
 			public void handleEvent(Event arg0) {
 				
-				 
+				 ProjectEvents.deletProject();
 				
 			}
 		});

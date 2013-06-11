@@ -1,12 +1,7 @@
 package de.hohenheim.view.dialouge;
 
-import java.util.ArrayList;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -17,23 +12,20 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.TimeTableEvents;
-import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
-import de.hohenheim.view.composite.CompositeTrain;
 
 public class TimetableAddDialog extends Dialog{
 	
 	Shell parent;
+	String message = "";
 	public static Shell dialog;
 	public static Text idText;
 	public static Text fahrplannameText;
@@ -41,10 +33,8 @@ public class TimetableAddDialog extends Dialog{
 	public static Combo comboEndstation;
 	public static Combo comboMiddlestation; 
 	public static Table midlestationTable;
-	
 	public static Spinner houre;
 	public static Spinner minutes;
-	
 	public static Button dienstag;
 	public static Button mittwoch;
 	public static Button donerstag;
@@ -82,6 +72,7 @@ public class TimetableAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    idText.setLayoutData(gridData);
+	    idText.setTextLimit(6);
 	    
 	    // Set the Label and a Textfield for Timetable Name 
 	    
@@ -93,6 +84,7 @@ public class TimetableAddDialog extends Dialog{
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    fahrplannameText.setLayoutData(gridData);
+	    fahrplannameText.setText("Unbenannt");
 	    
 	    //Set the Label and a spinner for the Starttime
 	    Label starttime = new Label(dialog, SWT.NONE);
@@ -160,6 +152,7 @@ public class TimetableAddDialog extends Dialog{
 	    comboStartstation.setLayoutData(gridData);
 	    String[] items = AnimationControllerCanvas.getNodeNames();
 	    comboStartstation.setItems(items);
+	    comboStartstation.select(0);
 	       
 	    // Set Label and combo for Endstation
 	    
@@ -170,6 +163,7 @@ public class TimetableAddDialog extends Dialog{
 	    comboEndstation.setItems(items);  
 	    gridData.horizontalSpan = 2;
 	    comboEndstation.setLayoutData(gridData);
+	    comboEndstation.select(0);
 	    
 	    // Timetable Middlestation
 	      
@@ -192,9 +186,13 @@ public class TimetableAddDialog extends Dialog{
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    TimeTableEvents.addMiddleStation(true);   
-				
+				if(middleStationCheck()){
+			        TimeTableEvents.addMiddleStation(true);   
+				}else{
+					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
+				}
 			}
 		});
 	    
@@ -249,7 +247,14 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.addTimeTable();
+				if(trainCheck()){
+				  
+					TimeTableEvents.addTimeTable();
+				}else{
+					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
+				}
 				
 			}
 		});
@@ -273,6 +278,80 @@ public class TimetableAddDialog extends Dialog{
 		});
 	    
 	    dialog.open();
+	}
+
+	protected boolean middleStationCheck() {
+		message = "";
+		if(midlestationTable.getItemCount() > 0){
+		    if(comboMiddlestation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
+		    	message = message + "Es können keine zwei gleiche Stationen nacheinander hinzugefügt werden";
+		    	return false;
+		    }
+		}else{
+		    if(comboMiddlestation.getText().equalsIgnoreCase(comboStartstation.getText())){
+                message = message + "Der erste Station in die Zwischenstationen muss \n" +
+                		            "eine andere als die Startstation sein !";
+                return false;		
+		    }
+		}
+		return true;
+	}
+
+	protected boolean trainCheck() {
+		
+		boolean idCheck = true;
+		boolean name = true;
+		boolean startend = true;
+		boolean endmiddle = true;
+		
+		message = "";
+		
+		
+			if(fahrplannameText.getText().equalsIgnoreCase("")){
+				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
+				name = false;
+			}
+			
+			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
+				message = message + "Die Startstation und Endstation dürfen nur die \n" +
+						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
+				startend = false;
+			}
+		try{	
+			if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
+				message = message + "Die letzte Zwischenstation darf nicht die \n" +
+						            "selbe sein wie die Endstation !\n";
+				
+				endmiddle = false;
+			}
+		}catch(IllegalArgumentException e){
+			
+		}
+		try{	
+		    int id = Integer.parseInt(idText.getText());
+		    for(int j = 0; j < Main.timetableListAll.size(); j++){
+			    if(id == Main.timetableListAll.get(j).getId()){
+			    	message = message + "Die eingegebene Fahrplan ID ist bereits vorhanden bitte \n" +
+			        		"geben sie eine andere 1 - 6 stellige Ziffer ein \n" +
+			        		"und versuchen sie es erneut.";
+			    	idCheck = false;
+			    	
+			    }
+		    }
+		
+    	}catch(NumberFormatException e){
+			
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
+	        		"und muss mindestens eine Ziffer haben! \n";
+			
+			
+		}
+		
+		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false)){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 }

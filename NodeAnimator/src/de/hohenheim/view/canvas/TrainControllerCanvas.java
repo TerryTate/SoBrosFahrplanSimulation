@@ -1,10 +1,7 @@
 package de.hohenheim.view.canvas;
 
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -14,13 +11,10 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
-
 import de.hohenheim.controller.events.MenuBarEvents;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeTrain;
-
-
 
 public class TrainControllerCanvas extends Canvas{
 	
@@ -35,8 +29,6 @@ public class TrainControllerCanvas extends Canvas{
 
 	private void createContent() {
 	
-
-
 		// Group 
 		
 		groupControlSmall = new Group(this, SWT.SHADOW_ETCHED_IN);
@@ -46,13 +38,13 @@ public class TrainControllerCanvas extends Canvas{
         groupControlSmall.setLayout(gridLayout);
        
         // Add Button
+        
 		Button newTrain = new Button(groupControlSmall, SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
 		newTrain.setImage(new Image(null,"img/add.png"));
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		newTrain.setLayoutData(gridData);
-	
 		newTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -62,14 +54,14 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
-		 
+		// Edit Train Button
+		
 		Button editTrain = new Button(groupControlSmall, SWT.NONE);
 		editTrain.setText("Zug bearbeiten");
 		editTrain.setImage(new Image(null,"img/Edit.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		editTrain.setLayoutData(gridData);
-		
 		editTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -79,13 +71,14 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
+		// Delete Train Button
+		
 		Button deleteTrain = new Button(groupControlSmall, SWT.NONE);
 		deleteTrain.setText("Zug löschen");
 		deleteTrain.setImage(new Image(null,"img/Delete.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteTrain.setLayoutData(gridData);
-
 		deleteTrain.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -108,6 +101,8 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
+		// Import Train Button
+		
 		Button importTrain = new Button(groupControlSmall, SWT.NONE);
 		importTrain.setText("Zug Importieren");
 		importTrain.setImage(new Image(null,"img/Import.png"));
@@ -123,27 +118,33 @@ public class TrainControllerCanvas extends Canvas{
 			}
 		});
 		
+		// Export Train Button
+		
 		Button exportTrain = new Button(groupControlSmall, SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
 		exportTrain.setImage(new Image(null,"img/export.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		exportTrain.setLayoutData(gridData);
-	
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {
-					
+				 
+		    	 boolean showText = false;
+		    	 
 		         for(int i = 0; i < Main.trainListAll.size(); i++){
 		        	
 		        	 if(CompositeTrain.getTrainTable().isSelected(i)){
 		        		 MenuBarEvents.save(false);
+		        		 showText = true;
 		        	 } 
 		         }
 		         
-		         MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-		         messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
-		         messageBox.open();
+		         if(showText == false){
+		        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			         messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
+			         messageBox.open();
+		         }
 		         
 			}
 		});

@@ -5,15 +5,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeTimeTable;
-import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
-import de.hohenheim.view.dialouge.TrainDeletDialog;
-import de.hohenheim.view.dialouge.TrainEditDialog;
-
 
 public class TimeTableEvents {
 
@@ -32,8 +27,6 @@ public class TimeTableEvents {
 			
 		}
 		
-		
-		
 	}
 
 	public static void removeMiddleStation(boolean add) {
@@ -44,7 +37,6 @@ public class TimeTableEvents {
 			TimetableEditDialog.midlestationTable.remove(TimetableEditDialog.midlestationTable.getSelectionIndex());
 		}
 	
-		
 	}
 
 	public static void addTimeTable() {
@@ -58,27 +50,7 @@ public class TimeTableEvents {
 		int m = Integer.parseInt(TimetableAddDialog.minutes.getText());
 		
 		ArrayList<String> drivingdays = new ArrayList<String>();
-		if(TimetableAddDialog.montag.getSelection() == true){
-			 drivingdays.add("Mo");
-		}
-        if(TimetableAddDialog.dienstag.getSelection() == true){
-        	drivingdays.add("Di");
-		}
-        if(TimetableAddDialog.mittwoch.getSelection() == true){
-        	drivingdays.add("Mi");
-        }
-        if(TimetableAddDialog.donerstag.getSelection() == true){
-        	drivingdays.add("Do");
-        }
-        if(TimetableAddDialog.freitag.getSelection() == true){
-        	drivingdays.add("Fr");
-        }
-        if(TimetableAddDialog.samstag.getSelection() == true){
-        	drivingdays.add("Sa");
-        }
-        if(TimetableAddDialog.sontag.getSelection() == true){
-        	drivingdays.add("So");
-        }
+		
         if(TimetableAddDialog.alle.getSelection() == true){
         	drivingdays.add("Mo");
         	drivingdays.add("Di");
@@ -87,6 +59,28 @@ public class TimeTableEvents {
         	drivingdays.add("Fr");
         	drivingdays.add("Sa");
         	drivingdays.add("So");
+        }else{
+        	if(TimetableAddDialog.montag.getSelection() == true){
+   			 drivingdays.add("Mo");
+   		    }
+            if(TimetableAddDialog.dienstag.getSelection() == true){
+           	drivingdays.add("Di");
+   		    }
+            if(TimetableAddDialog.mittwoch.getSelection() == true){
+           	drivingdays.add("Mi");
+            }
+            if(TimetableAddDialog.donerstag.getSelection() == true){
+           	drivingdays.add("Do");
+            }
+            if(TimetableAddDialog.freitag.getSelection() == true){
+           	drivingdays.add("Fr");
+            }
+            if(TimetableAddDialog.samstag.getSelection() == true){
+           	drivingdays.add("Sa");
+            }
+            if(TimetableAddDialog.sontag.getSelection() == true){
+           	drivingdays.add("So");
+            }
         }
 		
 		int startstation = Integer.parseInt(TimetableAddDialog.comboStartstation.getText());

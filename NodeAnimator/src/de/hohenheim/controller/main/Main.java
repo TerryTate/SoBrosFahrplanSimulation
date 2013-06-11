@@ -1,24 +1,17 @@
 package de.hohenheim.controller.main;
 	
 import java.util.ArrayList;
-
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TableItem;
-
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
-import de.hohenheim.view.canvas.TimeTableControllerCanvas;
-import de.hohenheim.view.canvas.TrainControllerCanvas;
-import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.tab.TabFolder;
 
@@ -30,23 +23,13 @@ public class Main {
 	public static ArrayList<TrainData> trainListAll = new ArrayList();
 	public static ArrayList<Timetable> timetableListAll = new ArrayList();
 	public static ArrayList<Project>  projectListAll = new ArrayList();
-	public static boolean big = true;
-	private static boolean fill = false;
-	private static int oldValue = -1;
 	private static Shell shell;
-	/**
-	 * @param args
-	 */
 	
-	/*
-	 * 
-	 * 
-	 */
 	
 	public static void main(String[] args) {
 		
 		Display display = Display.getDefault();
-       
+        
 		setShell(new Shell());
 		getShell().setText("Fahrplan Animation");
 		getShell().setSize(820, 720);
@@ -77,7 +60,23 @@ public class Main {
     	bottomComposite.setLayoutData(gridData);
     	
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display);   
-
+        
+	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
+        animation.setSize(800, 720);
+        //animation.setImage(image);
+        
+        ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
+        bar.setBounds (10, 10, 200, 32);
+        
+        animation.open();
+        for (int i=0; i<=bar.getMaximum (); i++) {
+            try {Thread.sleep (100);} catch (Throwable th) {}
+            bar.setSelection (i);
+        }
+        
+        animation.close();
+        animation.dispose();
+        
 	    getShell().open();
     
 	

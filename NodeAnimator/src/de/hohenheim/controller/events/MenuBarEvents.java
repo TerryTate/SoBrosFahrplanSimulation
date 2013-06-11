@@ -2,10 +2,8 @@ package de.hohenheim.controller.events;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
-
 import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
@@ -13,6 +11,7 @@ import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.AboutUsDialog;
 import de.hohenheim.view.dialouge.HelpDialog;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
+import de.hohenheim.view.dialouge.ProjectEditDialog;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
@@ -20,8 +19,6 @@ import de.hohenheim.view.dialouge.TrainAddDialog;
 import de.hohenheim.view.dialouge.TrainDeletDialog;
 import de.hohenheim.view.dialouge.TrainEditDialog;
 import de.hohenheim.view.dialouge.TrainExportDialog;
-
-
 
 public class MenuBarEvents {
 
@@ -81,8 +78,6 @@ public class MenuBarEvents {
 			
 		}
 	    
-		
-		
 	}
 	
     public static void deletTrain() {
@@ -207,6 +202,10 @@ public class MenuBarEvents {
 		
 	}
 
-	
+	public static void editProject() {
+		
+		new ProjectEditDialog(Main.getShell(), SWT.NONE).open();
+		
+	}
 
 }

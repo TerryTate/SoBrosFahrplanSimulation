@@ -1,31 +1,29 @@
 package de.hohenheim.controller.events;
 
 import java.util.ArrayList;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableItem;
-
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
-import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
-import de.hohenheim.view.dialouge.TimetableAddDialog;
-
 
 public class ProjectEvents {
 
 	public static void addLink() {
 		
 		TableItem item = new TableItem(ProjectAddDialog.linkTable, SWT.NONE);
-		
 		item.setText(0, ProjectAddDialog.comboChooseTrain.getText());
 		item.setText(1, ProjectAddDialog.comboChooseTimeTable.getText());
 		
 	}
 
+	public static void removeLink(){
+		
+	}
+	
 	public static void addProject() {
 		
 		int id = Integer.parseInt(ProjectAddDialog.idText.getText());
@@ -77,6 +75,26 @@ public class ProjectEvents {
 		
 		ProjectAddDialog.dialog.close();
 		
+		
+	}
+
+	public static void editProject(){
+		
+	}
+	
+	public static void deletProject() {
+		
+		int i = 0;
+    	
+		TableItem [] rowData = CompositeProject.getProjectTable().getSelection();
+		
+    	while(Integer.parseInt((rowData[0].getText(0))) != ((Main.projectListAll.get(i).getId()))){
+	    	i++;
+    	}
+	
+	    Main.projectListAll.remove(i);
+	
+    	CompositeProject.getProjectTable().remove(CompositeProject.getProjectTable().getSelectionIndices()); 
 		
 	}
 

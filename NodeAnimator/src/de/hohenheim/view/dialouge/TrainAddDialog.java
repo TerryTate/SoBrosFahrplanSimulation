@@ -135,11 +135,7 @@ public class TrainAddDialog extends Dialog{
 				if (trainIdCheck()){
 					TrainEvents.addNewTrain();
 				}
-					
-					
-				
-			    
-				
+						
 			}
 		});
 	    

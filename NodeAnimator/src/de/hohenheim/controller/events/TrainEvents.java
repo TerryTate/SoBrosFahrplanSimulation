@@ -1,20 +1,13 @@
 package de.hohenheim.controller.events;
 
-import java.io.IOException;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
-
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
-import de.hohenheim.view.canvas.TrainControllerCanvas;
 import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.TrainAddDialog;
 import de.hohenheim.view.dialouge.TrainDeletDialog;
 import de.hohenheim.view.dialouge.TrainEditDialog;
-
-
 
 /**
  * Java-Class that contains methods to handle the train events, such as
@@ -23,12 +16,9 @@ import de.hohenheim.view.dialouge.TrainEditDialog;
  * @author SoBros
  *
  */
+
 public class TrainEvents {
-	
-	
-	
-	
-	
+		
 	/**
 	 * This method adds a new train to the ArrayList trainListAll in the Main class
 	 * with the trains id, speed and typeOfTrain delivered by the controller canvas
@@ -39,9 +29,7 @@ public class TrainEvents {
 		 * String that contains the text written in the "ID text field" of the Canvas.
 		 */
 		String idText = TrainAddDialog.idText.getText();
-		
-		
-		
+			
 		/**
 		 * String that contains the text written in the "Speed text field" of the Canvas.
 		 */
@@ -50,8 +38,6 @@ public class TrainEvents {
 		int id = Integer.parseInt(idText);
 		
 		int speed = Integer.parseInt(speedText);
-		
-		
 		
 		TrainData train = new TrainData(id, speed, TrainAddDialog.comboTypOfTrain.getText(), TrainAddDialog.comboLadungen.getText(), TrainAddDialog.comboPriority.getText() );
 		
@@ -65,10 +51,6 @@ public class TrainEvents {
 		TrainAddDialog.dialog.close();
 		
 	}
-	
-	
-	
-	
 	
 	
 	/**
@@ -111,8 +93,7 @@ public class TrainEvents {
 	 	   TrainEditDialog.dialog.close();
 		
 		}else if (menu == true){
-			
-			
+				
 			 for (TrainData td : Main.trainListAll){
 			
 			    if (Integer.parseInt(TrainEditDialog.comboTrains.getText()) == td.getID()){
@@ -132,8 +113,7 @@ public class TrainEvents {
 		   	
 		   	while( Integer.parseInt(TrainEditDialog.comboTrains.getText()) != Integer.parseInt(item.getText(i))){
 		   		i++;
-		   		item = items[i];
-		   		
+		   		item = items[i];	
 		   	}
 			
 		   	item.setText(0, TrainEditDialog.idText.getText());
@@ -141,14 +121,10 @@ public class TrainEvents {
 		   	item.setText(2, TrainEditDialog.comboSpeed.getText());
 		   	item.setText(3, TrainEditDialog.comboPriority.getText());
 		   	item.setText(4, TrainEditDialog.comboLadungen.getText());
-			
-			
-	     
+			     
 	 	    TrainEditDialog.dialog.close();
 			
 		}
-		
-		
 		
 	}
 	
