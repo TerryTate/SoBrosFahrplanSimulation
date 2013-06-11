@@ -25,6 +25,7 @@ import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 
@@ -49,8 +50,6 @@ public class TimetableEditDialog extends Dialog{
 	public static Button samstag;
 	public static Button sontag;
 	public static Button alle;
-	
-	public static String [] Test = {"1", "2"};
 
 	public TimetableEditDialog(Shell parent, int style) {
 		super(parent, style);
@@ -187,7 +186,10 @@ public class TimetableEditDialog extends Dialog{
         gridData.horizontalSpan = 2;
 	   
 	    comboStartstation.setLayoutData(gridData);
-	    comboStartstation.setItems(Test);
+	    
+	    String[] items = AnimationControllerCanvas.getNodeNames();
+	    comboStartstation.setItems(items);
+	  
 	       
 	    // Timetable Endstation
 	    
@@ -195,7 +197,7 @@ public class TimetableEditDialog extends Dialog{
 	    endstation.setText("Endstation : "); 
 	    
 	    comboEndstation = new Combo(dialog, SWT.READ_ONLY);
-	    comboEndstation.setItems(Test);  
+	    comboEndstation.setItems(items);  
 	    gridData.horizontalSpan = 2;
 	    comboEndstation.setLayoutData(gridData);
 	    
@@ -205,7 +207,7 @@ public class TimetableEditDialog extends Dialog{
 	    middlestation.setText("Zwischenstationen : "); 
 	    
 	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
-        comboMiddlestation.setItems(Test);
+        comboMiddlestation.setItems(items);
 	  
 	    
 	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
@@ -215,7 +217,8 @@ public class TimetableEditDialog extends Dialog{
         //Add Button 
 	    
 	    Button addButton = new Button(middlestationButtonC, SWT.NONE);
-		addButton.setText("ADD");
+		addButton.setText("Add");
+		addButton.setImage(new Image (null, "img/add.png"));
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -258,11 +261,67 @@ public class TimetableEditDialog extends Dialog{
 		
 		 if(menu == false){
 		    	
-	        idText.setText(rowData[0].getText(0));
-	       	fahrplannameText.setText(rowData[0].getText(1));
-	       	comboStartstation.setText(rowData[0].getText(3));
-	       	comboEndstation.setText(rowData[0].getText(4));
-	      //  midlestationTable.setText(rowData[0].getText(4));
+			 for(int i = 0; i < Main.timetableListAll.size(); i++ ){
+					
+					Timetable tt = Main.timetableListAll.get(i);
+					
+					if (Integer.parseInt(rowData[0].getText()) == tt.getId()){
+						
+						Integer idTimetable= Integer.valueOf(tt.getId());
+						Integer startstationTimetable = Integer.valueOf(tt.getStartstation());
+						Integer endstationTimetable = Integer.valueOf(tt.getEndstation());
+			
+						idText.setText(idTimetable.toString());
+						fahrplannameText.setText(tt.getName());
+						houre.setSelection(tt.getStartHouer());
+						minutes.setSelection(tt.getStartMinutes());
+						for(int j = 0; j < tt.getDrivingdays().size(); j++){
+							
+						    if( tt.getDrivingdays().get(j).equalsIgnoreCase("Mo")){
+						    	
+						    	montag.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Di")){
+						    	
+						    	dienstag.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Mi")){
+						    	
+						    	mittwoch.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Do")){
+						    	
+						    	donerstag.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Fr")){
+						    	
+						    	freitag.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("Sa")){
+						    	
+						    	samstag.setSelection(true);
+						    	
+						    }else if(tt.getDrivingdays().get(j).equalsIgnoreCase("So")){
+						    	
+						    	sontag.setSelection(true);
+						    	
+						    }
+						}
+						comboStartstation.setText(startstationTimetable.toString());
+						comboEndstation.setText(endstationTimetable.toString());
+					
+						Integer middle; 
+					
+						for(int j = 0; j < tt.getMiddlestations().size(); j++){
+							
+							middle =  Integer.valueOf(tt.getMiddlestations().get(j));
+							 
+							TableItem item = new TableItem(TimetableEditDialog.midlestationTable, SWT.NONE);
+							item.setText(middle.toString());
+						}
+			        		
+					}
+				}
 		        
 		}   
 		

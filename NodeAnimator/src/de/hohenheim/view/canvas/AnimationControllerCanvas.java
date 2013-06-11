@@ -21,7 +21,7 @@ import de.hohenheim.view.mobile.TrainFigure;
 
 public class AnimationControllerCanvas extends Canvas{
 
-	private NodeMap map;
+	private static NodeMap map;
 
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
@@ -84,16 +84,22 @@ public class AnimationControllerCanvas extends Canvas{
 		group.pack();
 		
 	}
-	private String[] getNodeNames() {
+	public static String[] getNodeNames() {
 		Object[] names = map.getNodes().keySet().toArray();
 		String[] n = new String[names.length];
 		for(int i=0; i<names.length; i++) {
 			n[i]=names[i].toString();
 		}
+		//bubblesort(n);
 		Arrays.sort(n);
 		return n;
 	}
 	
+	private static void bubblesort(String[] n) {
+		//Bubblesort implementieren 
+		
+	}
+
 	private String[] getMobileObjects() {
 		String[] s = new String[map.getMobileObjects().size()];
 		map.getMobileObjects().keySet().toArray(s);

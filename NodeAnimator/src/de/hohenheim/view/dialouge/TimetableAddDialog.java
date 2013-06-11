@@ -28,6 +28,7 @@ import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeTrain;
 
 public class TimetableAddDialog extends Dialog{
@@ -41,8 +42,6 @@ public class TimetableAddDialog extends Dialog{
 	public static Combo comboMiddlestation; 
 	public static Table midlestationTable;
 	
-	public static String [] Test = {"1", "2"};
-	final int TEXT_MARGIN = 3;
 	public static Spinner houre;
 	public static Spinner minutes;
 	
@@ -81,6 +80,7 @@ public class TimetableAddDialog extends Dialog{
 	    idText = new Text(dialog, SWT.NONE); 
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
+	    gridData.horizontalAlignment = SWT.FILL;
 	    idText.setLayoutData(gridData);
 	    
 	    // Set the Label and a Textfield for Timetable Name 
@@ -91,6 +91,7 @@ public class TimetableAddDialog extends Dialog{
 	    fahrplannameText = new Text(dialog, SWT.NONE); 
 	    gridData = new GridData();
 	    gridData.horizontalSpan = 2;
+	    gridData.horizontalAlignment = SWT.FILL;
 	    fahrplannameText.setLayoutData(gridData);
 	    
 	    //Set the Label and a spinner for the Starttime
@@ -157,7 +158,8 @@ public class TimetableAddDialog extends Dialog{
         gridData.horizontalSpan = 2;
 	   
 	    comboStartstation.setLayoutData(gridData);
-	    comboStartstation.setItems(Test);
+	    String[] items = AnimationControllerCanvas.getNodeNames();
+	    comboStartstation.setItems(items);
 	       
 	    // Set Label and combo for Endstation
 	    
@@ -165,7 +167,7 @@ public class TimetableAddDialog extends Dialog{
 	    endstation.setText("Endstation : "); 
 	    
 	    comboEndstation = new Combo(dialog, SWT.READ_ONLY);
-	    comboEndstation.setItems(Test);  
+	    comboEndstation.setItems(items);  
 	    gridData.horizontalSpan = 2;
 	    comboEndstation.setLayoutData(gridData);
 	    
@@ -175,7 +177,7 @@ public class TimetableAddDialog extends Dialog{
 	    middlestation.setText("Zwischenstationen : "); 
 	    
 	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
-        comboMiddlestation.setItems(Test);
+        comboMiddlestation.setItems(items);
 	  
 	    
 	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);

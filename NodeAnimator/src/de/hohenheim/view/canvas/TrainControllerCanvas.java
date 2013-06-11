@@ -64,7 +64,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		 
 		Button editTrain = new Button(groupControlSmall, SWT.NONE);
-		editTrain.setText("Zug ändern");
+		editTrain.setText("Zug bearbeiten");
 		editTrain.setImage(new Image(null,"img/Edit.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;

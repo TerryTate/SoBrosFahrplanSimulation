@@ -13,6 +13,8 @@ import de.hohenheim.view.map.NodeMap;
 
 public class CompositeAnimation extends Composite{
     
+	private NodeMap map;
+
 	/*
 	 * 
 	 * 
@@ -36,7 +38,7 @@ public class CompositeAnimation extends Composite{
 			gridData.verticalAlignment = GridData.FILL;
 			gridData.grabExcessVerticalSpace = true;
 			canvasMap.setLayoutData(gridData);
-			NodeMap map = Map.createMap(canvasMap, 1);
+			map = Map.createMap(canvasMap, 1);
 			
 			
 	        AnimationControllerCanvas canvasControl = new AnimationControllerCanvas(this, SWT.BORDER, map);

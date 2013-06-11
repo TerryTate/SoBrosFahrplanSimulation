@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 
+import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.TimeTableControllerCanvas;
@@ -28,6 +29,7 @@ public class Main {
 	private static TabFolder tabFolder;
 	public static ArrayList<TrainData> trainListAll = new ArrayList();
 	public static ArrayList<Timetable> timetableListAll = new ArrayList();
+	public static ArrayList<Project>  projectListAll = new ArrayList();
 	public static boolean big = true;
 	private static boolean fill = false;
 	private static int oldValue = -1;

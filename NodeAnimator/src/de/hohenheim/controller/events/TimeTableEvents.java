@@ -129,6 +129,89 @@ public class TimeTableEvents {
 		
 		if (menu == false){
 			
+			ArrayList<String> drivingdays = new ArrayList<String>();
+			ArrayList<Integer> middlestation = new ArrayList<Integer>();
+			
+			TableItem [] rowData = CompositeTimeTable.getTimeTableTable().getSelection();
+			
+	    	String idText = TimetableEditDialog.idText.getText();
+		    int id = Integer.parseInt(idText);
+		
+	    	int idCheck = Integer.parseInt(rowData[0].getText(0));
+		
+		    for (Timetable tt : Main.timetableListAll){
+			
+			    if (idCheck == tt.getId()){
+				    tt.setId(id);
+				    tt.setName(TimetableEditDialog.fahrplannameText.getText());
+				    tt.setStartHouer(Integer.parseInt(TimetableEditDialog.houre.getText()));
+				    tt.setStartMinutes(Integer.parseInt(TimetableEditDialog.minutes.getText()));
+				    if(TimetableEditDialog.montag.getSelection() == true){
+						 drivingdays.add("Mo");
+					}
+			        if(TimetableEditDialog.dienstag.getSelection() == true){
+			        	drivingdays.add("Di");
+					}
+			        if(TimetableEditDialog.mittwoch.getSelection() == true){
+			        	drivingdays.add("Mi");
+			        }
+			        if(TimetableEditDialog.donerstag.getSelection() == true){
+			        	drivingdays.add("Do");
+			        }
+			        if(TimetableEditDialog.freitag.getSelection() == true){
+			        	drivingdays.add("Fr");
+			        }
+			        if(TimetableEditDialog.samstag.getSelection() == true){
+			        	drivingdays.add("Sa");
+			        }
+			        if(TimetableEditDialog.sontag.getSelection() == true){
+			        	drivingdays.add("So");
+			        }
+			        if(TimetableEditDialog.alle.getSelection() == true){
+			        	drivingdays.add("Mo");
+			        	drivingdays.add("Di");
+			        	drivingdays.add("Mi");
+			        	drivingdays.add("Do");
+			        	drivingdays.add("Fr");
+			        	drivingdays.add("Sa");
+			        	drivingdays.add("So");
+			        }
+				    tt.setDrivingdays(drivingdays);
+				    tt.setStartstation(Integer.parseInt(TimetableEditDialog.comboStartstation.getText()));
+				    tt.setEndstation(Integer.parseInt(TimetableEditDialog.comboEndstation.getText()));
+				    for(int i = 0; i < TimetableEditDialog.midlestationTable.getItemCount(); i++){
+						
+				    	middlestation.add(Integer.parseInt(TimetableEditDialog.midlestationTable.getItem(i).getText(0)));
+				    }
+				    tt.setMiddlestations(middlestation);
+		    	}
+		    }
+	    
+		    rowData[0].setText(0, idText);
+		    rowData[0].setText(1, TimetableEditDialog.fahrplannameText.getText());
+	 	    rowData[0].setText(2, TimetableEditDialog.houre.getText() + " : " + TimetableEditDialog.minutes.getText());
+	 		String drivingdaysItem = "";
+			for( int j = 0; j < drivingdays.size(); j++){
+				
+				drivingdaysItem = drivingdaysItem + drivingdays.get(j) + "; " ;
+			}
+	 	    rowData[0].setText(3, drivingdaysItem);
+	 	    rowData[0].setText(4, TimetableEditDialog.comboStartstation.getText());
+	 	    rowData[0].setText(5, TimetableEditDialog.comboEndstation.getText());
+	 	    
+	 	    String middleStationItems = "";
+			
+	        for( int k = 0; k < middlestation.size(); k++){
+				
+				middleStationItems = middleStationItems + middlestation.get(k) + " --> " ;
+		
+			} 
+	 	    rowData[0].setText(6, middleStationItems);
+	 	    
+	 	   TimetableEditDialog.dialog.close();
+			
+			
+			
 		}else if(menu == true){
 			
 			ArrayList<String> drivingdays = new ArrayList<String>();
@@ -178,7 +261,7 @@ public class TimeTableEvents {
 				    
 				   
 				    for(int i = 0; i < TimetableEditDialog.midlestationTable.getItemCount(); i++){
-				    	System.out.println(TimetableEditDialog.midlestationTable.getItem(i).getText(0));
+		
 				    	middlestation.add(Integer.parseInt(TimetableEditDialog.midlestationTable.getItem(i).getText(0)));
 				    }
 				    

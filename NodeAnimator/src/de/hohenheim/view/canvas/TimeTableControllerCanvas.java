@@ -59,7 +59,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 				 
 		Button editTimeTable2 = new Button(groupControlSmall, SWT.NONE);
-		editTimeTable2.setText("Fahrplan ändern");
+		editTimeTable2.setText("Fahrplan bearbeiten");
 		editTimeTable2.setImage(new Image(null,"img/Edit.png"));
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
