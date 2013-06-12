@@ -34,7 +34,8 @@ public class TrainAddDialog extends Dialog{
 	public static Combo comboPriority;
 	public static Combo comboSpeed;
 	public static Text idText;
-
+    String message = "";
+	
 	public TrainAddDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
@@ -134,6 +135,11 @@ public class TrainAddDialog extends Dialog{
 				
 				if (trainIdCheck()){
 					TrainEvents.addNewTrain();
+				}else{
+					
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
 				}
 						
 			}
@@ -161,31 +167,32 @@ public class TrainAddDialog extends Dialog{
 	}
 
 	protected boolean trainIdCheck() {
-				
+		message = "";	
+		boolean idCheck = true;
 		try{
 		    int id = Integer.parseInt(idText.getText());
+		    if (id < 0){
+		    	message = message + "Die Zug ID muss eine Positive Zahl sein!";
+		    	idCheck = false;
+		    }
 		    for(int j = 0; j < Main.trainListAll.size(); j++){
 			    if(id == Main.trainListAll.get(j).getID()){
-			    	MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			        messageBox.setMessage("Die eingegebene Zug ID ist bereits vorhanden bitte  \n " +
+			    
+			        message = message + "Die eingegebene Zug ID ist bereits vorhanden bitte  \n " +
 			        		" geben sie eine andere 6 stellige Ziffer ein \n " +
-			        		"und versuchen sie es erneut. ");    
-			        messageBox.open();
-			    	return false;
+			        		"und versuchen sie es erneut. "; 
+			    	idCheck = false;
 			    }
 		    }
 		
 		}catch(NumberFormatException e){
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!";
 			
-			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-	        messageBox.setMessage("Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!");    
-	        messageBox.open();
-			
-			return false;
+			idCheck = false;
 		}
-		
-		return true;
+		 
+		return idCheck;
 	}
 
 }

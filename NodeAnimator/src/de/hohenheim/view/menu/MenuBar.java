@@ -3,13 +3,12 @@ package de.hohenheim.view.menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
-import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.CentralEventController;
 
 public class MenuBar {
     
@@ -156,7 +155,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                  MenuBarEvents.addProject();
+                  CentralEventController.openAddDialog(2);
                 
             }
         });
@@ -165,7 +164,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    	//	MenuBarEvents.open();
+	    	
                 
             }
         });
@@ -174,7 +173,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    	//	MenuBarEvents.save(true);
+	    	
                 
             }
         });
@@ -183,7 +182,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                MenuBarEvents.closeProgramm();    
+                CentralEventController.closeProgramm();    
                 
             }
         });
@@ -192,7 +191,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                MenuBarEvents.addTrain();   
+                CentralEventController.openAddDialog(0);   
                 
             }
         });
@@ -201,7 +200,7 @@ public class MenuBar {
            
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.editTrain(true);
+	    		CentralEventController.openEditDialog(true, 0);
                 
             }
         });
@@ -210,7 +209,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.deletTrain();  
+	    		CentralEventController.openDeleteDialog(true, 0);  
                 
             }
         });
@@ -219,7 +218,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.openTrain();
+	    		CentralEventController.openTrain();
 	    		
             }
         });
@@ -228,7 +227,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.exportTrain();
+	    		CentralEventController.openExportDialog(0);
                 
             }
         });
@@ -237,7 +236,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.addTimeTable();
+	    		CentralEventController.openAddDialog(1);
                 
             }
         });
@@ -246,7 +245,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.edtitTimetable(true);
+	    		CentralEventController.openEditDialog(true, 1);
                 
             }
         });
@@ -255,7 +254,7 @@ public class MenuBar {
            
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.deletTimetable(true);
+	    		CentralEventController.openDeleteDialog(true, 1);
                 
             }
         });
@@ -273,7 +272,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.exportTimetable();
+	    		CentralEventController.openExportDialog(1);
                 
             }
         });
@@ -282,7 +281,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		 MenuBarEvents.changeLookToAnimation();        
+	    		 CentralEventController.changeLook(0);        
                 
             }
         });
@@ -291,7 +290,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-                MenuBarEvents.changeLookToProject();    
+                CentralEventController.changeLook(1);    
                 
             }
         });
@@ -300,7 +299,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		 MenuBarEvents.changeLookToTrain();    
+	    		 CentralEventController.changeLook(2);    
                 
             }
         });
@@ -309,7 +308,7 @@ public class MenuBar {
            
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		 MenuBarEvents.changeLookToTimetable(); 
+	    		 CentralEventController.changeLook(3); 
                 
             }
         });
@@ -318,7 +317,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-               MenuBarEvents.showHelp();      
+               CentralEventController.showHelp();      
                 
             }
         });
@@ -327,7 +326,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		MenuBarEvents.showInfo();
+	    		CentralEventController.showInfo();
                 
             }
         });

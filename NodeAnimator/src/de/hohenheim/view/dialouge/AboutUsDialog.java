@@ -1,30 +1,15 @@
 package de.hohenheim.view.dialouge;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.view.composite.CompositeTrain;
-
-
 
 public class AboutUsDialog extends Dialog{
 
 	Shell parent;
-	private GridData gridData;
-	private Text idText;
+	
 
 	public AboutUsDialog(Shell parent, int style) {
 		super(parent, style);

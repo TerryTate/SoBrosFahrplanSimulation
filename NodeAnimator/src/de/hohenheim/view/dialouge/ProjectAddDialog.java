@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -20,7 +21,6 @@ import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
-import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 
 public class ProjectAddDialog extends Dialog {
@@ -33,7 +33,7 @@ public class ProjectAddDialog extends Dialog {
 	public static Combo comboChooseTrain;
 	public static Combo comboChooseTimeTable;
 
-
+    String message = "";
 
 	public static Table linkTable; 
 
@@ -73,6 +73,7 @@ public class ProjectAddDialog extends Dialog {
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    nameText.setLayoutData(gridData);
+	    nameText.setText("Unbennant");
 	    
 	    //Choose Train
 	    
@@ -86,6 +87,7 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboChooseTrain.setLayoutData(gridData);
+	    comboChooseTrain.select(0);
 	    
         //Add Button 
 	    
@@ -96,7 +98,7 @@ public class ProjectAddDialog extends Dialog {
 			
 			public void handleEvent(Event arg0) {
 				
-			    ProjectEvents.addLink();   
+			    ProjectEvents.addLink(true);   
 				
 			}
 		});
@@ -112,6 +114,7 @@ public class ProjectAddDialog extends Dialog {
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboChooseTimeTable.setLayoutData(gridData);
+	    comboChooseTimeTable.select(0);
 	    
 	    // Remove Button
 		
@@ -130,6 +133,7 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    //Linked List
         Label room6 = new Label(dialog, SWT.NONE);
+        room6.setText("");
 	    
 		Composite tableComposite = new Composite(dialog, SWT.NONE);
 		gridData = new GridData();
@@ -168,9 +172,13 @@ public class ProjectAddDialog extends Dialog {
 		okButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    ProjectEvents.addProject();
-				
+				if (projectCheckOk()){
+			        ProjectEvents.addProject();
+				}else{
+					 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+			         messageBox.setMessage(message);    
+			         messageBox.open();
+				}
 			}
 		});
 	    
@@ -193,6 +201,48 @@ public class ProjectAddDialog extends Dialog {
 		});
 	    
 		dialog.open(); 
+	}
+
+	protected boolean projectCheckOk() {
+		
+		message = "";	
+		boolean check = true;
+		
+		try{
+			if (linkTable.getItemCount() < 1){
+				message = message + "Es muss mindestens ein Zug/Fahrplan paar \n" +
+						"eingetragen sein !\n";
+				check = false;
+			}
+			
+			if (nameText.getText().equalsIgnoreCase("")){
+				message = message + "Sie haben keinen Projekt Namen Eingegeben !\n";
+				check = false;
+			}
+			
+		    int id = Integer.parseInt(idText.getText());
+		    if (id < 0){
+		    	message = message + "Die Projekt ID muss eine Positive Zahl sein!";
+		    	check = false;
+		    }
+		    for(int j = 0; j < Main.projectListAll.size(); j++){
+			    if(id == Main.projectListAll.get(j).getId()){
+			    
+			        message = message + "Die eingegebene Projekt ID ist bereits vorhanden bitte  \n " +
+			        		" geben sie eine andere 6 stellige Ziffer ein \n " +
+			        		"und versuchen sie es erneut. "; 
+			    	check = false;
+			    }
+		    }
+		
+		}catch(NumberFormatException e){
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!";
+			
+			check = false;
+		}
+		 
+		return check;
 	}
 
 	private String[] loadTrainList(String[] trainsID) {

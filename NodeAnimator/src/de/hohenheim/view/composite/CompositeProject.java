@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 import de.hohenheim.view.canvas.ProjektControllerCanvas;
-import de.hohenheim.view.canvas.TimeTableControllerCanvas;
+
 
 public class CompositeProject extends Composite {
 	

@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
@@ -43,7 +42,8 @@ public class TrainEditDialog extends Dialog{
 	public static Combo comboTrains;
 
 	public static Shell dialog;
-
+    String message = "";
+    
 	public TrainEditDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
@@ -183,6 +183,11 @@ public class TrainEditDialog extends Dialog{
 				if (idCheckOk()){
 					
                     TrainEvents.editTrain(menu);
+				}else{
+
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
 				}
 			}
 		});
@@ -214,20 +219,24 @@ public class TrainEditDialog extends Dialog{
 
 
 	protected boolean idCheckOk() {
+		message = "";	
+		boolean idCheck = true;
 		try{
 		    int id = Integer.parseInt(idText.getText());
+		    if (id < 0){
+		    	message = message + "Die Zug ID muss eine Positive Zahl sein!";
+		    	idCheck = false;
+		    }
+		   
 		
 		}catch(NumberFormatException e){
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!";
 			
-			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-	        messageBox.setMessage("Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!");    
-	        messageBox.open();
-			
-			return false;
+			idCheck = false;
 		}
-		
-		return true;
+		 
+		return idCheck;
 	}
 
 	protected void setText() {

@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
-import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeTrain;
@@ -49,7 +49,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-				 MenuBarEvents.addTrain();
+				 CentralEventController.openAddDialog(0);
 				
 			}
 		});
@@ -73,7 +73,7 @@ public class TrainControllerCanvas extends Canvas{
 		             for(int i = 0; i < Main.trainListAll.size(); i++){
 		        	
 		        	     if(CompositeTrain.getTrainTable().isSelected(i)){
-		        		     MenuBarEvents.editTrain(false);
+		        		     CentralEventController.openEditDialog(false, 0);
 		        		     showText = true;
 		        	     } 
 		             }
@@ -143,7 +143,7 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-			    MenuBarEvents.openTrain();
+			    CentralEventController.openTrain();
 				
 			}
 		});
@@ -166,7 +166,7 @@ public class TrainControllerCanvas extends Canvas{
 		             for(int i = 0; i < Main.trainListAll.size(); i++){
 		        	
 		        	     if(CompositeTrain.getTrainTable().isSelected(i)){
-		        		     MenuBarEvents.saveTrain(false);
+		        		     CentralEventController.save(false, 0);
 		        		     showText = true;
 		        	     } 
 		             }
