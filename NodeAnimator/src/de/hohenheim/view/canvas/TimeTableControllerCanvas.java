@@ -2,26 +2,21 @@ package de.hohenheim.view.canvas;
 
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.graphics.Image;
-
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Text;
 
-import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
+
 import de.hohenheim.view.composite.CompositeTimeTable;
 
 
@@ -55,7 +50,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-			    MenuBarEvents.addTimeTable();		
+			    CentralEventController.openAddDialog(1);		
 						
 			}
 		});
@@ -77,7 +72,7 @@ public class TimeTableControllerCanvas extends Canvas {
 			         for(int i = 0; i < Main.timetableListAll.size(); i++){
 			        	
 			        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
-			        		 MenuBarEvents.edtitTimetable(false);
+			        		 CentralEventController.openEditDialog(false, 1);
 			        		 showText = true;
 			        	 } 
 			         }
@@ -162,7 +157,7 @@ public class TimeTableControllerCanvas extends Canvas {
 		         for(int i = 0; i < Main.timetableListAll.size(); i++){
 		        	
 		        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
-		        		 MenuBarEvents.saveTimetable(false);
+		        		 CentralEventController.save(false, 1);
 		        		 showText = true;
 		        	 } 
 		         }

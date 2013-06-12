@@ -2,7 +2,6 @@ package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -11,10 +10,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Listener;
-
-import de.hohenheim.controller.events.MenuBarEvents;
+import org.eclipse.swt.widgets.MessageBox;
+import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.ProjectEvents;
-import de.hohenheim.controller.events.TrainEvents;
+import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.composite.CompositeProject;
+
 
 public class ProjektControllerCanvas extends Canvas {
 
@@ -48,7 +49,7 @@ public class ProjektControllerCanvas extends Canvas {
 			
 			public void handleEvent(Event arg0) {
 				
-				 MenuBarEvents.addProject();
+				 CentralEventController.openAddDialog(2);
 				
 			}
 		});
@@ -64,8 +65,29 @@ public class ProjektControllerCanvas extends Canvas {
 		editProject.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-				 MenuBarEvents.editProject();
+				if(Main.projectListAll.size() > 0){	
+	                 boolean showText = false;
+			    	 
+			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			        	
+			        	 if(CompositeProject.getProjectTable().isSelected(i)){
+			        		 CentralEventController.openEditDialog(false, 2);
+			        		 showText = true;
+			        	 } 
+			         }
+			         
+			         if(showText == false){
+			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.open();
+			         }
+				   }else{
+					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Es gibt keine Projekte die Bearbeitet werden können !");    
+				         messageBox.open();
+				   }
+				 
+			
 				
 			}
 		});
@@ -80,8 +102,29 @@ public class ProjektControllerCanvas extends Canvas {
 		deleteProject.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-				 ProjectEvents.deletProject();
+				 
+				if(Main.projectListAll.size() > 0){	
+	                 boolean showText = false;
+			    	 
+			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			        	
+			        	 if(CompositeProject.getProjectTable().isSelected(i)){
+			        		 ProjectEvents.deletProject();
+			        		 showText = true;
+			        	 } 
+			         }
+			         
+			         if(showText == false){
+			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.open();
+			         }
+				   }else{
+					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Es gibt keine Projekte die Bearbeitet werden können !");    
+				         messageBox.open();
+				   }
+				 
 				
 			}
 		});
@@ -113,7 +156,27 @@ public class ProjektControllerCanvas extends Canvas {
 					
 		     public void handleEvent(Event arg0) {
 						
-					
+		    	 if(Main.projectListAll.size() > 0){	
+	                 boolean showText = false;
+			    	 
+			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			        	
+			        	 if(CompositeProject.getProjectTable().isSelected(i)){
+			        		 
+			        		 showText = true;
+			        	 } 
+			         }
+			         
+			         if(showText == false){
+			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.open();
+			         }
+				   }else{
+					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Es gibt keine Projekte die Exportiert werden können !");    
+				         messageBox.open();
+				   }
 						
 			}
 		});

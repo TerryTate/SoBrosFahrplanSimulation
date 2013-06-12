@@ -1,8 +1,6 @@
 package de.hohenheim.view.dialouge;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -14,6 +12,7 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -23,11 +22,13 @@ import org.eclipse.swt.widgets.Text;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
+
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+
 import de.hohenheim.view.composite.CompositeProject;
-import de.hohenheim.view.composite.CompositeTrain;
+
 
 public class ProjectEditDialog extends Dialog{
 	
@@ -35,11 +36,11 @@ public class ProjectEditDialog extends Dialog{
 	Shell parent;
 	private Text idText;
 	private Text nameText;
-	private Combo comboChooseTrain;
-	private Combo comboChooseTimeTable;
-	
+	public static Combo comboChooseTrain;
+	public static Combo comboChooseTimeTable;
+	String message = "";
 	private Shell dialog;
-	private Combo comboProject;
+	
 	public static Table linkTable; 
 
 	public ProjectEditDialog(Shell parent, int style) {
@@ -59,37 +60,6 @@ public class ProjectEditDialog extends Dialog{
 		    
 		    TableItem [] rowData = CompositeProject.getProjectTable().getSelection();
 		    
-//		    if (menu == true){
-//		    	
-//				System.out.println("Test");
-//		    	Label chooseTrain = new Label(dialog, SWT.NONE);
-//		    	chooseTrain.setText("Wähle Zug ID : ");
-//		    	
-//		    	comboProject = new Combo(dialog, SWT.READ_ONLY);
-//		    	String[] trainsID = new String [Main.trainListAll.size()];
-//			    comboProject.setItems(loadProjectList(trainsID));
-//			    
-//			    comboProject.addSelectionListener(new SelectionListener() {
-//			       
-//			    	public void widgetSelected(SelectionEvent e) {
-//			          
-//			    	    setText();
-//			    		
-//			        }
-//
-//			        public void widgetDefaultSelected(SelectionEvent e) {
-//			         
-//			        }
-//			      });
-//			    
-//			    GridData gridData = new GridData();
-//			    gridData.horizontalSpan = 2;
-//			    gridData.horizontalAlignment = SWT.FILL;
-//			    comboProject.setLayoutData(gridData);
-//			    
-//		    	
-//			}
-		
 	    //Project ID
 	    
 	    Label id = new Label(dialog, SWT.NONE);
@@ -134,7 +104,7 @@ public class ProjectEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    ProjectEvents.addLink();   
+			    ProjectEvents.addLink(false);   
 				
 			}
 		});
@@ -169,7 +139,8 @@ public class ProjectEditDialog extends Dialog{
 	    
 	    //Linked List
         Label room6 = new Label(dialog, SWT.NONE);
-	    
+	    room6.setText("");
+        
 		Composite tableComposite = new Composite(dialog, SWT.NONE);
 		gridData = new GridData();
 		gridData.horizontalSpan = 2; 
@@ -206,9 +177,13 @@ public class ProjectEditDialog extends Dialog{
 		okButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    ProjectEvents.addProject();
-				
+				if (projectCheckOk()){
+			        ProjectEvents.editProject();
+				}else{
+					 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+			         messageBox.setMessage(message);    
+			         messageBox.open();
+				}
 			}
 		});
 	    
@@ -260,7 +235,7 @@ public class ProjectEditDialog extends Dialog{
 	        		
 			}
 		}	
-		//}
+		
 		    
 		dialog.open();
 	}
@@ -285,14 +260,37 @@ public class ProjectEditDialog extends Dialog{
 		return timetableID2;
 	}
 
-	protected void setText() {
-		// TODO Auto-generated method stub
+    protected boolean projectCheckOk() {
 		
+		message = "";	
+		boolean check = true;
+		
+		try{
+			if (linkTable.getItemCount() < 1){
+				message = message + "Es muss mindestens ein Zug/Fahrplan paar \n" +
+						"eingetragen sein !\n";
+				check = false;
+			}
+			
+			if (nameText.getText().equalsIgnoreCase("")){
+				message = message + "Sie haben keinen Projekt Namen Eingegeben !\n";
+				check = false;
+			}
+			
+		    int id = Integer.parseInt(idText.getText());
+		    if (id < 0){
+		    	message = message + "Die Projekt ID muss eine Positive Zahl sein!";
+		    	check = false;
+		    }
+		
+		}catch(NumberFormatException e){
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!";
+			
+			check = false;
+		}
+		 
+		return check;
 	}
-
-	private String[] loadProjectList(String[] trainsID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

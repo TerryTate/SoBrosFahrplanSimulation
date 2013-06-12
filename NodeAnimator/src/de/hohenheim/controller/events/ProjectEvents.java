@@ -9,15 +9,24 @@ import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
+import de.hohenheim.view.dialouge.ProjectEditDialog;
 
 public class ProjectEvents {
 
-	public static void addLink() {
+	public static void addLink(boolean add) {
 		
-		TableItem item = new TableItem(ProjectAddDialog.linkTable, SWT.NONE);
-		item.setText(0, ProjectAddDialog.comboChooseTrain.getText());
-		item.setText(1, ProjectAddDialog.comboChooseTimeTable.getText());
-		
+		if(add == true){
+			
+		    TableItem item = new TableItem(ProjectAddDialog.linkTable, SWT.NONE);
+		    item.setText(0, ProjectAddDialog.comboChooseTrain.getText());
+		    item.setText(1, ProjectAddDialog.comboChooseTimeTable.getText());
+		    
+		}else{
+			
+			 TableItem item = new TableItem(ProjectEditDialog.linkTable, SWT.NONE);
+			    item.setText(0, ProjectEditDialog.comboChooseTrain.getText());
+			    item.setText(1, ProjectEditDialog.comboChooseTimeTable.getText());
+		}
 	}
 
 	public static void removeLink(){

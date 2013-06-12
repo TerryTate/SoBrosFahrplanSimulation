@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
-import de.hohenheim.controller.events.MenuBarEvents;
+import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.main.Main;
 
 public class TimetableExportDialog {
@@ -62,7 +62,7 @@ public class TimetableExportDialog {
 			
 			public void handleEvent(Event arg0) {
 				
-				MenuBarEvents.saveTimetable(menu);
+				CentralEventController.save(menu, 1);
 				
 			}
 		});
