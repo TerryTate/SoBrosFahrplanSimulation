@@ -65,23 +65,23 @@ public class Main {
     	
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display);   
         
-	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
-        animation.setSize(600, 400);
-        
-        animation.setBackgroundImage(new Image(null, "img/Logo.png"));
-        animation.setLocation( screenWidth/2 - 300, screenHeight/2 - 200 );
-        
-        ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
-        bar.setBounds (0, 370, 600, 15);
-        
-        animation.open();
-        for (int i=0; i<=bar.getMaximum (); i++) {
-            try {Thread.sleep (100);} catch (Throwable th) {}
-            bar.setSelection (i);
-        }
-        
-        animation.close();
-        animation.dispose();
+//	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
+//        animation.setSize(600, 400);
+//        
+//        animation.setBackgroundImage(new Image(null, "img/Logo.png"));
+//        animation.setLocation( screenWidth/2 - 300, screenHeight/2 - 200 );
+//        
+//        ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
+//        bar.setBounds (0, 370, 600, 15);
+//        
+//        animation.open();
+//        for (int i=0; i<=bar.getMaximum (); i++) {
+//            try {Thread.sleep (100);} catch (Throwable th) {}
+//            bar.setSelection (i);
+//        }
+//        
+//        animation.close();
+//        animation.dispose();
         
 	    getShell().open();
     

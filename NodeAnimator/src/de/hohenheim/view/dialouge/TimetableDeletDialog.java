@@ -47,6 +47,7 @@ public class TimetableDeletDialog extends Dialog {
 	    gridData.horizontalSpan = 2;
 	    gridData.horizontalAlignment = SWT.FILL;
 	    comboTimetables.setLayoutData(gridData);
+	    comboTimetables.select(0);
 	    
         // OK Button 
 	    

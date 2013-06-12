@@ -108,12 +108,32 @@ public class MenuBarEvents {
 
 	public static void edtitTimetable(boolean menu) {
 		
-		new TimetableEditDialog(Main.getShell(), SWT.NONE).open(menu);
+        if (Main.timetableListAll.size() > 0){
+		    
+        	new TimetableEditDialog(Main.getShell(), SWT.NONE).open(menu);
+		
+        }else{
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Es gibt keine Fahrpläne die Bearbeitet werden können.");    
+	        messageBox.open();
+			
+		}	
 	}
 
 	public static void deletTimetable(boolean menu) {
 		
-		new TimetableDeletDialog(Main.getShell(), SWT.NONE).open(menu);
+		if (Main.timetableListAll.size() > 0){
+			    
+			new TimetableDeletDialog(Main.getShell(), SWT.NONE).open(menu);
+			
+	    }else{
+				
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			messageBox.setMessage("Es gibt keine Fahrpläne die Gelöscht werden können.");    
+		    messageBox.open();
+				
+    	}	
 		
 	}
 

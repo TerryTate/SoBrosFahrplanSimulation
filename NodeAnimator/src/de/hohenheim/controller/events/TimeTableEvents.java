@@ -105,7 +105,7 @@ public class TimeTableEvents {
 		
         for( int i = 0; i < middlestation.size(); i++){
 			
-			middleStationItems = middleStationItems + middlestation.get(0) + " --> " ;
+			middleStationItems = middleStationItems + middlestation.get(i) + " --> " ;
 	
 		}
 		
@@ -140,28 +140,8 @@ public class TimeTableEvents {
 				    tt.setName(TimetableEditDialog.fahrplannameText.getText());
 				    tt.setStartHouer(Integer.parseInt(TimetableEditDialog.houre.getText()));
 				    tt.setStartMinutes(Integer.parseInt(TimetableEditDialog.minutes.getText()));
-				    if(TimetableEditDialog.montag.getSelection() == true){
-						 drivingdays.add("Mo");
-					}
-			        if(TimetableEditDialog.dienstag.getSelection() == true){
-			        	drivingdays.add("Di");
-					}
-			        if(TimetableEditDialog.mittwoch.getSelection() == true){
-			        	drivingdays.add("Mi");
-			        }
-			        if(TimetableEditDialog.donerstag.getSelection() == true){
-			        	drivingdays.add("Do");
-			        }
-			        if(TimetableEditDialog.freitag.getSelection() == true){
-			        	drivingdays.add("Fr");
-			        }
-			        if(TimetableEditDialog.samstag.getSelection() == true){
-			        	drivingdays.add("Sa");
-			        }
-			        if(TimetableEditDialog.sontag.getSelection() == true){
-			        	drivingdays.add("So");
-			        }
-			        if(TimetableEditDialog.alle.getSelection() == true){
+				   
+				    if(TimetableEditDialog.alle.getSelection() == true){
 			        	drivingdays.add("Mo");
 			        	drivingdays.add("Di");
 			        	drivingdays.add("Mi");
@@ -169,6 +149,37 @@ public class TimeTableEvents {
 			        	drivingdays.add("Fr");
 			        	drivingdays.add("Sa");
 			        	drivingdays.add("So");
+				    }else{
+				    	
+				    
+				        if(TimetableEditDialog.montag.getSelection() == true){
+						    drivingdays.add("Mo");
+					    }
+				        
+			            if(TimetableEditDialog.dienstag.getSelection() == true){
+			        	    drivingdays.add("Di");
+					    }
+			        
+			            if(TimetableEditDialog.mittwoch.getSelection() == true){
+			        	    drivingdays.add("Mi");
+			            }
+			            
+			            if(TimetableEditDialog.donerstag.getSelection() == true){
+			        	    drivingdays.add("Do");
+			            }
+			        
+			            if(TimetableEditDialog.freitag.getSelection() == true){
+			        	    drivingdays.add("Fr");
+			            }
+			        
+			            if(TimetableEditDialog.samstag.getSelection() == true){
+			        	    drivingdays.add("Sa");
+			            }
+			         
+			            if(TimetableEditDialog.sontag.getSelection() == true){
+			        	    drivingdays.add("So");
+			            }
+			        
 			        }
 				    tt.setDrivingdays(drivingdays);
 				    tt.setStartstation(Integer.parseInt(TimetableEditDialog.comboStartstation.getText()));
@@ -219,28 +230,7 @@ public class TimeTableEvents {
 				    tt.setName(TimetableEditDialog.fahrplannameText.getText());
 				    
 				   
-					if(TimetableEditDialog.montag.getSelection() == true){
-						 drivingdays.add("Mo");
-					}
-			        if(TimetableEditDialog.dienstag.getSelection() == true){
-			        	drivingdays.add("Di");
-					}
-			        if(TimetableEditDialog.mittwoch.getSelection() == true){
-			        	drivingdays.add("Mi");
-			        }
-			        if(TimetableEditDialog.donerstag.getSelection() == true){
-			        	drivingdays.add("Do");
-			        }
-			        if(TimetableEditDialog.freitag.getSelection() == true){
-			        	drivingdays.add("Fr");
-			        }
-			        if(TimetableEditDialog.samstag.getSelection() == true){
-			        	drivingdays.add("Sa");
-			        }
-			        if(TimetableEditDialog.sontag.getSelection() == true){
-			        	drivingdays.add("So");
-			        }
-			        if(TimetableEditDialog.alle.getSelection() == true){
+				    if(TimetableEditDialog.alle.getSelection() == true){
 			        	drivingdays.add("Mo");
 			        	drivingdays.add("Di");
 			        	drivingdays.add("Mi");
@@ -248,6 +238,37 @@ public class TimeTableEvents {
 			        	drivingdays.add("Fr");
 			        	drivingdays.add("Sa");
 			        	drivingdays.add("So");
+				    }else{
+				    	
+				    
+				        if(TimetableEditDialog.montag.getSelection() == true){
+						    drivingdays.add("Mo");
+					    }
+				        
+			            if(TimetableEditDialog.dienstag.getSelection() == true){
+			        	    drivingdays.add("Di");
+					    }
+			        
+			            if(TimetableEditDialog.mittwoch.getSelection() == true){
+			        	    drivingdays.add("Mi");
+			            }
+			            
+			            if(TimetableEditDialog.donerstag.getSelection() == true){
+			        	    drivingdays.add("Do");
+			            }
+			        
+			            if(TimetableEditDialog.freitag.getSelection() == true){
+			        	    drivingdays.add("Fr");
+			            }
+			        
+			            if(TimetableEditDialog.samstag.getSelection() == true){
+			        	    drivingdays.add("Sa");
+			            }
+			         
+			            if(TimetableEditDialog.sontag.getSelection() == true){
+			        	    drivingdays.add("So");
+			            }
+			        
 			        }
 				    tt.setDrivingdays(drivingdays);
 				    tt.setStartstation(Integer.parseInt(TimetableEditDialog.comboStartstation.getText()));

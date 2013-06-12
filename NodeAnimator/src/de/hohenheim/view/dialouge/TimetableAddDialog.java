@@ -172,8 +172,8 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
         comboMiddlestation.setItems(items);
+        comboMiddlestation.select(0);
 	  
-	    
 	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
 	    middlestationButtonC.setLayout(new FillLayout());
 	    
@@ -247,9 +247,10 @@ public class TimetableAddDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-				if(trainCheck()){
+				if(timetableCheck()){
 				  
 					TimeTableEvents.addTimeTable();
+					
 				}else{
 					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
 			        messageBox.setMessage(message);    
@@ -297,7 +298,7 @@ public class TimetableAddDialog extends Dialog{
 		return true;
 	}
 
-	protected boolean trainCheck() {
+	protected boolean timetableCheck() {
 		
 		boolean idCheck = true;
 		boolean name = true;
@@ -323,35 +324,37 @@ public class TimetableAddDialog extends Dialog{
 						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
 				startend = false;
 			}
-		try{	
-			if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
-				message = message + "Die letzte Zwischenstation darf nicht die \n" +
+			try{	
+			    int id = Integer.parseInt(idText.getText());
+			    for(int j = 0; j < Main.timetableListAll.size(); j++){
+				    if(id == Main.timetableListAll.get(j).getId()){
+				    	message = message + "Die eingegebene Fahrplan ID ist bereits vorhanden bitte \n" +
+				        		"geben sie eine andere 1 - 6 stellige Ziffer ein \n" +
+				        		"und versuchen sie es erneut.";
+				    	idCheck = false;
+				    	
+				    }
+			    }
+			
+	    	}catch(NumberFormatException e){
+				
+				message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
+		        		"und muss mindestens eine Ziffer haben! \n";
+				idCheck = false;
+				
+			}	
+			
+		    try{	
+		    	if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
+		     		message = message + "Die letzte Zwischenstation darf nicht die \n" +
 						            "selbe sein wie die Endstation !\n";
 				
-				endmiddle = false;
-			}
+			    	endmiddle = false;
+			    }
 		}catch(IllegalArgumentException e){
 			
 		}
-		try{	
-		    int id = Integer.parseInt(idText.getText());
-		    for(int j = 0; j < Main.timetableListAll.size(); j++){
-			    if(id == Main.timetableListAll.get(j).getId()){
-			    	message = message + "Die eingegebene Fahrplan ID ist bereits vorhanden bitte \n" +
-			        		"geben sie eine andere 1 - 6 stellige Ziffer ein \n" +
-			        		"und versuchen sie es erneut.";
-			    	idCheck = false;
-			    	
-			    }
-		    }
 		
-    	}catch(NumberFormatException e){
-			
-			message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
-	        		"und muss mindestens eine Ziffer haben! \n";
-			
-			
-		}
 		
 		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false) || (drivingday == false)){
 			return false;

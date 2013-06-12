@@ -148,21 +148,13 @@ public class TrainEditDialog extends Dialog{
 	    comboLadungen.setItems(ladung);
 	    
         if(menu == false){
-	    	try{
+	    	
         	idText.setText(rowData[0].getText(0));
         	comboTypOfTrain.setText(rowData[0].getText(1));
         	comboSpeed.setText(rowData[0].getText(2));
         	comboPriority.setText(rowData[0].getText(3));
 	        comboLadungen.setText(rowData[0].getText(4));
-	    	}
-	    	catch(ArrayIndexOutOfBoundsException e){
-	    		
-				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-		        messageBox.setMessage("Sie haben keinen Zug zum Bearbeiten ausgewählt. \n" +
-		        		"Wählen Sie einen Zug aus und versuchen Sie es erneut.");    
-		        messageBox.open();
-		
-	    	}
+	    	
 	    }   
 	    
 	    gridData.horizontalSpan = 2;
@@ -188,9 +180,10 @@ public class TrainEditDialog extends Dialog{
 		okButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    TrainEvents.editTrain(menu);
-				
+				if (idCheckOk()){
+					
+                    TrainEvents.editTrain(menu);
+				}
 			}
 		});
 	    
@@ -211,10 +204,31 @@ public class TrainEditDialog extends Dialog{
 				
 			}
 		});
+		if (menu == true){
+			
+		    setText();
+		}
 	    
 	    dialog.open();
 	}
 
+
+	protected boolean idCheckOk() {
+		try{
+		    int id = Integer.parseInt(idText.getText());
+		
+		}catch(NumberFormatException e){
+			
+			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Die Zug ID darf nur aus Zahlen bestehen ! \n" +
+	        		"und muss mindestens eine Ziffer haben!");    
+	        messageBox.open();
+			
+			return false;
+		}
+		
+		return true;
+	}
 
 	protected void setText() {
 		

@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
@@ -50,6 +51,7 @@ public class TimetableEditDialog extends Dialog{
 	public static Button samstag;
 	public static Button sontag;
 	public static Button alle;
+	String message = "";
 
 	public TimetableEditDialog(Shell parent, int style) {
 		super(parent, style);
@@ -77,7 +79,9 @@ public class TimetableEditDialog extends Dialog{
 	    	comboTimetable = new Combo(dialog, SWT.READ_ONLY);
 	    	String[] timetableID = new String [Main.timetableListAll.size()];
 		    comboTimetable.setItems(loadTimetableList(timetableID));
+		    comboTimetable.select(0);
 		    
+
 		    comboTimetable.addSelectionListener(new SelectionListener() {
 		       
 		    	public void widgetSelected(SelectionEvent e) {
@@ -208,7 +212,7 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
         comboMiddlestation.setItems(items);
-	  
+	    comboMiddlestation.select(0);
 	    
 	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
 	    middlestationButtonC.setLayout(new FillLayout());
@@ -222,9 +226,15 @@ public class TimetableEditDialog extends Dialog{
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    TimeTableEvents.addMiddleStation(false);   
-				
+
+                if(middleStationCheck()){
+			        TimeTableEvents.addMiddleStation(false);   
+				}else{
+					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
+				}
+			
 			}
 		});
 	    
@@ -345,8 +355,13 @@ public class TimetableEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.editTimeTable(menu);
-				
+				if (checkOk()){
+			        TimeTableEvents.editTimeTable(menu);
+				}else{
+					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        messageBox.setMessage(message);    
+			        messageBox.open();
+				}
 			}
 		});
 	    
@@ -367,8 +382,82 @@ public class TimetableEditDialog extends Dialog{
 				
 			}
 		});
+		if (menu == true){
+			setText();
+		}
 		    
 		dialog.open();
+	}
+
+	protected boolean middleStationCheck() {
+		message = "";
+		if(midlestationTable.getItemCount() > 0){
+		    if(comboMiddlestation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
+		    	message = message + "Es können keine zwei gleiche Stationen nacheinander hinzugefügt werden";
+		    	return false;
+		    }
+		}else{
+		    if(comboMiddlestation.getText().equalsIgnoreCase(comboStartstation.getText())){
+                message = message + "Der erste Station in die Zwischenstationen muss \n" +
+                		            "eine andere als die Startstation sein !";
+                return false;		
+		    }
+		}
+		return true;
+		
+	}
+
+	protected boolean checkOk() {
+		boolean idCheck = true;
+		boolean name = true;
+		boolean startend = true;
+		boolean endmiddle = true;
+		boolean drivingday = true;
+		
+		message = "";
+		    
+		    if((montag.getSelection() == false) && (dienstag.getSelection() == false) && (mittwoch.getSelection() == false) && (donerstag.getSelection() == false) && 
+		       (freitag.getSelection() == false) && (samstag.getSelection() == false) && (sontag.getSelection() == false) && (alle.getSelection() == false)){
+		    	message = message + "Es muss mindestens ein Fahrtag gewählt werden !\n";
+		    	drivingday = false;
+		    }
+		
+			if(fahrplannameText.getText().equalsIgnoreCase("")){
+				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
+				name = false;
+			}
+			
+			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
+				message = message + "Die Startstation und Endstation dürfen nur die \n" +
+						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
+				startend = false;
+			}
+		try{	
+			if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
+				message = message + "Die letzte Zwischenstation darf nicht die \n" +
+						            "selbe sein wie die Endstation !\n";
+				
+				endmiddle = false;
+			}
+		}catch(IllegalArgumentException e){
+			
+		}
+		try{	
+		    int id = Integer.parseInt(idText.getText());
+		    
+    	}catch(NumberFormatException e){
+			
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
+	        		"und muss mindestens eine Ziffer haben! \n";
+			idCheck = false;
+			
+		}
+		
+		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false) || (drivingday == false)){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 	protected void setText() {
@@ -382,7 +471,7 @@ public class TimetableEditDialog extends Dialog{
 				Integer id = Integer.valueOf(tt.getId());
 				Integer startstation = Integer.valueOf(tt.getStartstation());
 				Integer endstation = Integer.valueOf(tt.getEndstation());
-	
+				
 				idText.setText(id.toString());
 				fahrplannameText.setText(tt.getName());
 				houre.setSelection(tt.getStartHouer());
@@ -433,8 +522,9 @@ public class TimetableEditDialog extends Dialog{
 				}
 	        		
 			}
+		    
 		}
-		
+  		
 	}
 
 	private String[] loadTimetableList(String[] timetableID) {

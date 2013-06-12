@@ -38,6 +38,8 @@ public class XmlReader {
 			e.printStackTrace();
 		} catch (JDOMException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e){
+		
 		}
 		
 		TrainData returnTrain = new TrainData(0, 0, null, null, null);
@@ -63,7 +65,7 @@ public class XmlReader {
 		Element ladung = root.getChild("Ladung");
 		String ladungValue = ladung.getValue();
 		returnTrain.setLadung(ladungValue);
-
+		
 		
 		return returnTrain;
 	}
