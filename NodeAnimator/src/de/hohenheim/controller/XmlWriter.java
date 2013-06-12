@@ -108,9 +108,9 @@ public class XmlWriter {
 		rootTimeTable.addContent(name);
 		name.setText(String.valueOf(tD.getName()));
 
-		Element drivingdays = new Element("DrivingDays");
-		rootTimeTable.addContent(drivingdays);
 		for (int i = 0; i < tD.getDrivingdays().size(); i++) {
+		Element drivingdays = new Element("DrivingDay:" + i++);
+		rootTimeTable.addContent(drivingdays);
 			drivingdays.setText(String.valueOf(tD.getDrivingdays().get(i)));
 		}
 
@@ -121,9 +121,9 @@ public class XmlWriter {
 		rootStations.addContent(startstation);
 		startstation.setText(String.valueOf(tD.getStartstation()));
 
-		Element middlestations = new Element("MiddleStations");
-		rootStations.addContent(middlestations);
 		for (int i = 0; i < tD.getMiddlestations().size(); i++) {
+		Element middlestations = new Element("MiddleStation" + i++);
+		rootStations.addContent(middlestations);
 			middlestations.setText(String
 					.valueOf(tD.getMiddlestations().get(i)));
 		}
