@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Combo;
@@ -13,6 +16,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 
+import de.hohenheim.controller.events.AnimationEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
@@ -23,6 +27,7 @@ import de.hohenheim.view.mobile.TrainFigure;
 public class AnimationControllerCanvas extends Canvas{
 
 	private static NodeMap map;
+	public static Combo comboProjects;
 
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
@@ -33,14 +38,27 @@ public class AnimationControllerCanvas extends Canvas{
 	private void createContents() {
 		Group group = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    group.setText("Animations Einstellungen");
-
+        group.setLayout(new GridLayout());
+	    
 	    //Nodes, e.g. rooms or haltestellen or anything
 		Label choseProject = new Label(group, SWT.NONE);
 		choseProject.setText("Project ID wählen:");
 		
-		final Combo comboProjects = new Combo(group, SWT.READ_ONLY);
+		comboProjects = new Combo(group, SWT.READ_ONLY);
 		String[] projectIDs = new String [Main.projectListAll.size()];
 		comboProjects.setItems(loadProjectIDs(projectIDs));
+		comboProjects.addSelectionListener(new SelectionListener() {
+		       
+	    	public void widgetSelected(SelectionEvent e) {
+	          
+	    	    AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
+	    		
+	        }
+
+	        public void widgetDefaultSelected(SelectionEvent e) {
+	         
+	        }
+	      });
 		
 		//Trains
 		Label train_label = new Label(group, SWT.NONE);
@@ -84,10 +102,10 @@ public class AnimationControllerCanvas extends Canvas{
 		group.pack();
 		
 	}
-	private String[] loadProjectIDs(String[] projectIDs) {
+	public static String[] loadProjectIDs(String[] projectIDs) {
 	    
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
+		for(int i=0; i < Main.projectListAll.size(); i++) {
+			Integer id = Main.projectListAll.get(i).getId();
 			projectIDs[i] = id.toString();
 		}
 		

@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 
 public class ProjectAddDialog extends Dialog {
 	
@@ -174,6 +175,8 @@ public class ProjectAddDialog extends Dialog {
 			public void handleEvent(Event arg0) {
 				if (projectCheckOk()){
 			        ProjectEvents.addProject();
+			        String[] projectIDs = new String [Main.projectListAll.size()];
+			        AnimationControllerCanvas.comboProjects.setItems(AnimationControllerCanvas.loadProjectIDs(projectIDs));
 				}else{
 					 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
 			         messageBox.setMessage(message);    
