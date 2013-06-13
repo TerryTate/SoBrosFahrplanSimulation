@@ -139,7 +139,7 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-					
+			    CentralEventController.open(1);		
 						
 			}
 		});

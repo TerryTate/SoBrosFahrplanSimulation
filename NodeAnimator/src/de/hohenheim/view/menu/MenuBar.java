@@ -238,7 +238,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    		CentralEventController.openTrain();
+	    		CentralEventController.open(0);
 	    		
             }
         });
@@ -283,7 +283,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    	//	MenuBarEvents.open();
+	    		CentralEventController.open(1);
                 
             }
         });

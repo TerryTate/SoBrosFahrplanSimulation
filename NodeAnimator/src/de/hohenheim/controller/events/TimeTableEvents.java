@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.view.composite.CompositeTimeTable;
+import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
@@ -369,6 +370,39 @@ public class TimeTableEvents {
 			
 		}
 		
+		
+	}
+
+	public static void importTimetable(Timetable tt) {
+		
+        Main.timetableListAll.add(tt);
+		
+        String drivingdaysItem = "";
+        
+		for( int j = 0; j < tt.getDrivingdays().size(); j++){
+			
+			drivingdaysItem = drivingdaysItem + tt.getDrivingdays().get(j) + "; " ;
+		}
+        
+		String middleStationItems = "";
+		
+		//if (tt.getMiddlestations() != null){
+			
+		    
+		
+            for( int i = 0; i < tt.getMiddlestations().size(); i++){
+			
+			middleStationItems = middleStationItems + tt.getMiddlestations().get(i) + " --> " ;
+	
+		    }
+            
+		//}
+		
+		TableItem item = new TableItem(CompositeTimeTable.getTimeTableTable(), SWT.NONE);
+		item.setText(new String[]{String.valueOf((tt.getId())), tt.getName(),
+				                  String.valueOf(tt.getStartHouer()) + ":" + String.valueOf(tt.getStartMinutes()), 
+				                  drivingdaysItem, String.valueOf(tt.getStartstation()), 
+				                  String.valueOf(tt.getEndstation()), middleStationItems});
 		
 	}
 

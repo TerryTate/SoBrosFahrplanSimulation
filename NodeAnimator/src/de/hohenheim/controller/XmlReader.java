@@ -43,8 +43,9 @@ public class XmlReader {
 		
 		}
 		
-		TrainData returnTrain = new TrainData(0, 0, null, null, null);
 		
+		TrainData returnTrain = new TrainData(0, 0, null, null, null);
+		try{
 		Element id = root.getChild("ID");
 		int iDValue = Integer.parseInt(id.getValue());
 		returnTrain.setID(iDValue);
@@ -67,6 +68,9 @@ public class XmlReader {
 		String ladungValue = ladung.getValue();
 		returnTrain.setLadung(ladungValue);
 		
+		}catch (NullPointerException e){
+			
+		}
 		
 		return returnTrain;
 	}
@@ -86,6 +90,7 @@ public class XmlReader {
 			e.fillInStackTrace();
 		}
 		
+		
 		Timetable returnTimeTable = new Timetable(0, null, null, 0, 0, null, 0, 0); 
 		
 		Element iD = root.getChild("ID");
@@ -100,9 +105,15 @@ public class XmlReader {
 		ArrayList<String> drivingdays = new ArrayList<String>();
 		for (int i = 0; i <= 7; i++){
 			Element singleDay = root.getChild("DrivingDay" + (i + 1));
+			try{
 			String singleDayValue = singleDay.getValue();
 			drivingdays.add(singleDayValue);
+			}catch(NullPointerException e){
+				
+			}
+			
 		}
+	
 		returnTimeTable.setDrivingdays(drivingdays);
 		
 		
@@ -115,8 +126,8 @@ public class XmlReader {
 		returnTimeTable.setEndstation(endstationValue);
 		
 		ArrayList<Integer> middlestations = new ArrayList<Integer>(); 
-		for (int i = 0; i <=7; i++){
-			Element singleMStation = root.getChild("MiddleStation" + (i + 1));
+		for (int j = 0; j <=7; j++){
+			Element singleMStation = root.getChild("MiddleStation" + (j + 1));
 			int singleMStationValue = Integer.parseInt(singleMStation.getValue());
 			middlestations.add(singleMStationValue);
 		}
@@ -129,7 +140,7 @@ public class XmlReader {
 		Element startMinutes = root.getChild("StarMinutes");
 		Integer startMinutesValue = Integer.parseInt(startMinutes.getValue());
 		returnTimeTable.setStartMinutes(startMinutesValue);
-	
+		
 		
 		return returnTimeTable;
 		

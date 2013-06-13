@@ -171,7 +171,7 @@ public class CentralEventController {
         	
         	title = "Fahrplan Exportieren";
         	
-        }else if(saveDialog == 3){
+        }else if(saveDialog == 2){
         	
         	title = "Projekt Exportieren";
         	
@@ -248,16 +248,52 @@ public class CentralEventController {
         }
 	}
 
-	public static void openTrain() {
-		
+	public static void open(int openDialog) {
+		 String title = "";
+	        
+	     if (openDialog == 0){
+	        
+	        title = "Zug Importieren";
+	        	
+	     }else if(openDialog == 1){
+	        	
+	        title = "Fahrplan Importieren";
+	        	
+	     }else if(openDialog == 2){
+	        	
+	        title = "Projekt Importieren";
+	        	
+	     }
+	     
 		 FileDialog fd = new FileDialog(Main.getShell(), SWT.OPEN);
-	     fd.setText("Zug Importieren");
+	     fd.setText(title);
 	     fd.setFilterPath("C:/");
 	     String[] filterExt = { "*.xml"};
 	     fd.setFilterExtensions(filterExt);
 	     String selected = fd.open();
-	     TrainData td = XmlReader.loadSingleTrain(selected);
-	     TrainEvents.importTrain(td);
+	     
+	     if(openDialog == 0){
+	    	 
+	    	 TrainData td = XmlReader.loadSingleTrain(selected);
+		     
+	    	 if (td.getLadung() != null){
+		    
+	    		 TrainEvents.importTrain(td); 
+		     }
+	           
+	     }else if(openDialog == 1){
+	         
+	    	 Timetable tt = XmlReader.loadSingleTimeTable(selected);
+	    	 
+	         if (tt.getDrivingdays() != null){
+	        	 
+	        	 TimeTableEvents.importTimetable(tt);
+	        	 
+	         }
+	    	 
+	     }else if(openDialog == 2){
+	        	
+	     }
 		
 	}
 
