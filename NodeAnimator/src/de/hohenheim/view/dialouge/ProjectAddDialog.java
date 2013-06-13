@@ -26,6 +26,7 @@ import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class ProjectAddDialog extends Dialog {
 	
@@ -49,7 +50,7 @@ public class ProjectAddDialog extends Dialog {
 	 public void open() {
 			
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(300, 310);
+	    dialog.setSize(340, 310);
 	    
 	  //Fenster  mittig setzen 
 	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
@@ -105,7 +106,7 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
-		addButton.setImage(new Image(null,"img/add24.png"));
+		addButton.setImage(ImageHelper.add);
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {

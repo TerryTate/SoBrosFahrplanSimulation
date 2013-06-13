@@ -263,7 +263,7 @@ public class TimetableAddDialog extends Dialog{
 					TimeTableEvents.addTimeTable();
 					
 				}else{
-					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
 			        messageBox.setMessage(message);    
 			        messageBox.open();
 				}
@@ -311,38 +311,39 @@ public class TimetableAddDialog extends Dialog{
 
 	protected boolean timetableCheck() {
 		
-		boolean idCheck = true;
-		boolean name = true;
-		boolean startend = true;
-		boolean endmiddle = true;
-		boolean drivingday = true;
+		boolean check = true;
+		
 		
 		message = "";
 		    
 		    if((montag.getSelection() == false) && (dienstag.getSelection() == false) && (mittwoch.getSelection() == false) && (donerstag.getSelection() == false) && 
 		       (freitag.getSelection() == false) && (samstag.getSelection() == false) && (sontag.getSelection() == false) && (alle.getSelection() == false)){
 		    	message = message + "Es muss mindestens ein Fahrtag gewählt werden !\n";
-		    	drivingday = false;
+		    	check = false;
 		    }
 		
 			if(fahrplannameText.getText().equalsIgnoreCase("")){
 				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
-				name = false;
+				check = false;
 			}
 			
 			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
 				message = message + "Die Startstation und Endstation dürfen nur die \n" +
 						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
-				startend = false;
+				check = false;
 			}
 			try{	
 			    int id = Integer.parseInt(idText.getText());
+			    
+			    if(id < 0){
+			    	message = message + "Die Fahrplan ID muss eine positive Zahl sein!\n";
+			    }
 			    for(int j = 0; j < Main.timetableListAll.size(); j++){
 				    if(id == Main.timetableListAll.get(j).getId()){
 				    	message = message + "Die eingegebene Fahrplan ID ist bereits vorhanden bitte \n" +
 				        		"geben sie eine andere 1 - 6 stellige Ziffer ein \n" +
 				        		"und versuchen sie es erneut.";
-				    	idCheck = false;
+				    	check = false;
 				    	
 				    }
 			    }
@@ -351,7 +352,7 @@ public class TimetableAddDialog extends Dialog{
 				
 				message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
 		        		"und muss mindestens eine Ziffer haben! \n";
-				idCheck = false;
+				check = false;
 				
 			}	
 			
@@ -360,18 +361,15 @@ public class TimetableAddDialog extends Dialog{
 		     		message = message + "Die letzte Zwischenstation darf nicht die \n" +
 						            "selbe sein wie die Endstation !\n";
 				
-			    	endmiddle = false;
+			    	check = false;
 			    }
 		}catch(IllegalArgumentException e){
 			
 		}
 		
 		
-		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false) || (drivingday == false)){
-			return false;
-		}else{
-			return true;
-		}
+	    return check;
+		
 	}
 
 }

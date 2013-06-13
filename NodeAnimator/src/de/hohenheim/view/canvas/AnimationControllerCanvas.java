@@ -119,14 +119,29 @@ public class AnimationControllerCanvas extends Canvas{
 		for(int i=0; i<names.length; i++) {
 			n[i]=names[i].toString();
 		}
-		//bubblesort(n);
-		Arrays.sort(n);
+		bubblesort(n);
+		//Arrays.sort(n);
 		return n;
 	}
 	
-//	private static void bubblesort(String[] n) {
-
-
+	private static void bubblesort(String[] n) {
+	boolean unsortiert=true;
+	String temp;
+	
+	while (unsortiert){
+		unsortiert = false;
+		for (int i=0; i < n.length-1; i++){
+		    if(Integer.parseInt(n[i]) >= Integer.parseInt(n[i+1])){
+			    temp = n[i];
+			    n[i] = n[i+1];
+			    n[i+1] = temp;
+			    unsortiert = true;
+			
+		    }
+		}    
+	}
+	}
+	
 	private String[] getMobileObjects() {
 		String[] s = new String[map.getMobileObjects().size()];
 		map.getMobileObjects().keySet().toArray(s);

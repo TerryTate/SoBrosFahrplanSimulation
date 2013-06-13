@@ -10,8 +10,11 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 
+import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.State;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.constants.Constants;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.animation.AnimationFinishedQueueObserver;
@@ -69,7 +72,7 @@ public class TrainFigure extends AnimationFigure {
 	    Rectangle r = bounds;
 	     
 	    g.setForegroundColor(ColorConstants.white);	    
-	    g.drawImage(ImageHelper.train, r.x,r.y);
+	    g.drawImage(getTrainImage(figure_id), r.x,r.y);
 	    
 	    Font f = this.getFont();
 	    Dimension dim_text = FigureUtilities.getTextExtents(""+getFigureId(), f);
@@ -83,6 +86,32 @@ public class TrainFigure extends AnimationFigure {
 	    }	   
 	}
 	
+	private Image getTrainImage(int id) {
+		
+		Image trainImg = null;
+		for(int j = 0; j < Main.trainListAll.size(); j++){
+			TrainData td = Main.trainListAll.get(j);
+			if (td.getID() == id){
+				if (td.getTypOfTrain().equalsIgnoreCase("S-Bahn")){
+					trainImg = ImageHelper.sBahn;
+				}else if (td.getTypOfTrain().equalsIgnoreCase("ICE")){ 
+					trainImg = ImageHelper.ice;
+				}else if (td.getTypOfTrain().equalsIgnoreCase("IC")){ 
+					trainImg = ImageHelper.ic;
+				}else if (td.getTypOfTrain().equalsIgnoreCase("Dampflock")){ 
+					trainImg = ImageHelper.dampflock;
+				}else if (td.getTypOfTrain().equalsIgnoreCase("RegioBahn")){ 
+					trainImg = ImageHelper.regioBahn;
+				}else if (td.getTypOfTrain().equalsIgnoreCase("Güterzug")){ 
+					trainImg = ImageHelper.gueterZug;
+				}
+						
+			}
+		}
+		
+		return trainImg;
+	}
+
 	/**
 	 * An animation from the current position to a room.
 	 * The mobile object must be in a room or on a path which is connected to the room it wants to go.

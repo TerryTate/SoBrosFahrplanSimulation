@@ -74,7 +74,7 @@ public class ProjectEvents {
 		
         for( int i = 0; i < timetableList.size(); i++){
 			
-			timetableItem = timetableItem + timetableList.get(0).getId() + "; " ;
+			timetableItem = timetableItem + timetableList.get(i).getId() + "; " ;
 	
 		}
 		
