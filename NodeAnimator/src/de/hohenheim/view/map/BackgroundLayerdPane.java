@@ -26,6 +26,7 @@ public class BackgroundLayerdPane extends LayeredPane {
 		Rectangle r = this.getBounds();
 		graphics.setForegroundColor(ColorConstants.titleGradient);
 		graphics.setBackgroundColor(ColorConstants.white);
+	
 		
 		graphics.fillRectangle(r);
 		
@@ -34,7 +35,7 @@ public class BackgroundLayerdPane extends LayeredPane {
 			Point p1= new Point(i,0);
 			Point p2= new Point(i,r.height);
 			graphics.drawLine(p1, p2);
-			graphics.setForegroundColor(ColorConstants.red);
+			graphics.setForegroundColor(ColorConstants.black);
 			graphics.drawText(i+"", p1);
 			graphics.setForegroundColor(ColorConstants.titleGradient);
 		}
@@ -42,18 +43,18 @@ public class BackgroundLayerdPane extends LayeredPane {
 			Point p1= new Point(0,i);
 			Point p2= new Point(r.width,i);
 			graphics.drawLine(p1, p2);
-			graphics.setForegroundColor(ColorConstants.red);
+			graphics.setForegroundColor(ColorConstants.black);
 			graphics.drawText(i+"", p1);
 			graphics.setForegroundColor(ColorConstants.titleGradient);
 		}
 		
 		
 		
-		graphics.drawImage(new Image(null,  "img/Transparent.png"), 420,20);
-		//#2269B5
+		graphics.drawImage(new Image(null, "img/Backi3.png"), 20,20);
+//		#2269B5
 		Color c = new Color(null, new RGB(22, 69, 120));
 		graphics.setForegroundColor(c);
-		//graphics.setAlpha(50);
+//		graphics.setAlpha(50);
 		
 		super.paint(graphics);
 	}	

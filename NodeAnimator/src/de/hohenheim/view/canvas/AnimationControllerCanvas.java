@@ -107,9 +107,7 @@ public class AnimationControllerCanvas extends Canvas{
 	}
 	
 //	private static void bubblesort(String[] n) {
-//		//Bubblesort implementieren 
-//		
-//	}
+
 
 	private String[] getMobileObjects() {
 		String[] s = new String[map.getMobileObjects().size()];

@@ -1,5 +1,8 @@
 package de.hohenheim.view.dialouge;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -56,6 +59,14 @@ public class TimetableAddDialog extends Dialog{
 		 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(400, 410);
+	    
+	    //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    	           	   (int)((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
+	    
 	    dialog.setText("Fahrplan hinzufügen");
 	    dialog.setImage(new Image(null, "img/add.png"));
 	    GridLayout gridLayout = new GridLayout();

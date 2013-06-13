@@ -1,5 +1,8 @@
 package de.hohenheim.view.dialouge;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -62,6 +65,14 @@ public class TimetableEditDialog extends Dialog{
 			
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(400, 440);
+	    
+	  //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    			       (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
+	    
 	    dialog.setText("Fahrplan bearbeiten");
 	    dialog.setImage(new Image(null, "img/Edit2.png"));
 		

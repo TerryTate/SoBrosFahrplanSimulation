@@ -1,6 +1,10 @@
 package de.hohenheim.view.dialouge;
 
 
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -43,14 +47,22 @@ public class TrainAddDialog extends Dialog{
 	}
 
 	public void open() {
-		
+
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(300, 240);
+	    
+	    //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
 	    dialog.setText("Zug erstellen");
 	    dialog.setImage(new Image(null,"img/add.png"));
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
+	    
 	    
 	    // Train ID
 	    
@@ -164,8 +176,10 @@ public class TrainAddDialog extends Dialog{
 		});
 	    
 	    dialog.open();
+	    
+	    
 	}
-
+	
 	protected boolean trainIdCheck() {
 		message = "";	
 		boolean idCheck = true;
