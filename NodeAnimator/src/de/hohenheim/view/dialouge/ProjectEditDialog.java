@@ -63,7 +63,7 @@ public class ProjectEditDialog extends Dialog{
 		    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
 		    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
 		    
-		    dialog.setText("Zug bearbeiten");
+		    dialog.setText("Projekt bearbeiten");
 		    dialog.setImage(ImageHelper.edit);
 		    GridLayout gridLayout = new GridLayout();
 		    gridLayout.numColumns = 3; 
@@ -115,7 +115,17 @@ public class ProjectEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    ProjectEvents.addLink(false);   
+                if (linkTableCheckOk()){
+					
+					ProjectEvents.addLink(false); 
+			       
+				}else{
+					
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+			         messageBox.setMessage(message);    
+			         messageBox.open();
+			         
+				}
 				
 			}
 		});
@@ -142,7 +152,7 @@ public class ProjectEditDialog extends Dialog{
 			
 			public void handleEvent(Event arg0) {
 				
-			    TimeTableEvents.removeMiddleStation(true);  
+				 ProjectEvents.removeLink(false);  
 				
 			}
 		});
@@ -269,7 +279,30 @@ public class ProjectEditDialog extends Dialog{
 		
 		return timetableID2;
 	}
-
+	
+	protected boolean linkTableCheckOk() {
+		message = "";
+		boolean check = true;
+		
+		for(int j = 0; j < linkTable.getItemCount(); j++){
+			
+			if(Integer.parseInt(comboChooseTimeTable.getText()) == Integer.parseInt(linkTable.getItem(j).getText(0))){
+				
+				message = message + "Der ausgewählte Zug ist schon vorhanden !\n";
+				check = false;
+			}
+			
+            if(Integer.parseInt(comboChooseTimeTable.getText()) == Integer.parseInt(linkTable.getItem(j).getText(1))){
+				
+            	message = message + "Der ausgewählte Fahrplan ist schon vorhanden !\n";
+            	check = false;
+			}
+			
+		}
+		
+		return check;
+	}
+	
     protected boolean projectCheckOk() {
 		
 		message = "";	

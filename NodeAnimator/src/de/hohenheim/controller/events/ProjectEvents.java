@@ -29,7 +29,16 @@ public class ProjectEvents {
 		}
 	}
 
-	public static void removeLink(){
+	public static void removeLink(boolean add){
+		
+        if(add == true){
+			
+        	ProjectAddDialog.linkTable.remove(ProjectAddDialog.linkTable.getSelectionIndex());
+		    
+		}else{
+			
+			ProjectEditDialog.linkTable.remove(ProjectEditDialog.linkTable.getSelectionIndex());
+		}
 		
 	}
 	

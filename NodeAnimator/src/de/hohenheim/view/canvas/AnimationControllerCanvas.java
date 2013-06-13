@@ -6,6 +6,8 @@ import java.util.Iterator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
@@ -15,6 +17,8 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Scale;
+import org.eclipse.swt.widgets.Spinner;
 
 import de.hohenheim.controller.events.AnimationEvents;
 import de.hohenheim.controller.main.Main;
@@ -28,6 +32,9 @@ public class AnimationControllerCanvas extends Canvas{
 
 	private static NodeMap map;
 	public static Combo comboProjects;
+	private Spinner houre;
+	private Spinner minutes;
+	private Combo comboDrivingday;
 
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
@@ -38,15 +45,21 @@ public class AnimationControllerCanvas extends Canvas{
 	private void createContents() {
 		Group group = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    group.setText("Animations Einstellungen");
-        group.setLayout(new GridLayout());
+        GridLayout gridLayout = new GridLayout();
+        gridLayout.numColumns = 3;
+	    group.setLayout(gridLayout);
 	    
-	    //Nodes, e.g. rooms or haltestellen or anything
+	    //Project
+	    
 		Label choseProject = new Label(group, SWT.NONE);
 		choseProject.setText("Project ID wählen:");
 		
 		comboProjects = new Combo(group, SWT.READ_ONLY);
 		String[] projectIDs = new String [Main.projectListAll.size()];
 		comboProjects.setItems(loadProjectIDs(projectIDs));
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		comboProjects.setLayoutData(gridData);
 		comboProjects.addSelectionListener(new SelectionListener() {
 		       
 	    	public void widgetSelected(SelectionEvent e) {
@@ -60,44 +73,50 @@ public class AnimationControllerCanvas extends Canvas{
 	        }
 	      });
 		
-		//Trains
-		Label train_label = new Label(group, SWT.NONE);
-		train_label.setText("Zug");
-		train_label .setBounds(5,75,150, 15);
-	    final Combo train_combo = new Combo(group, SWT.READ_ONLY);
-	    train_combo.setBounds(5,90,150, 25);
-		String[] fitems = getMobileObjects();
-		train_combo.setItems(fitems);
+		//Time
 		
-		Button walkto = new Button(group, SWT.NONE);
-		walkto.setBounds(5, 120, 150,25);
-		walkto.setText("Go To");
-		walkto.addListener(SWT.Selection, new Listener() {
-			
-			public void handleEvent(Event arg0) {
-//				int i_node = node_combo.getSelectionIndex();
-//				String node = node_combo.getItem(i_node);
-				int i_mobile = train_combo.getSelectionIndex();
-				String train = train_combo.getItem(i_mobile);				
-				AnimationFigure fig = map.getMobileObjects().get(train);
-				if(fig instanceof TrainFigure) {
-					TrainFigure f = (TrainFigure)fig;
-					Train ft = (Train)f.getModelObject(); 	
-					f.stopAnimation();
-					f.clearAnimations();
-					Iterator<State> it = ft.getBlockedStates();
-					while(it.hasNext()) {
-						it.next().setState(State.UNBLOCKED);	
-					}
-					
-//					f.waitFor(State.statemap.get(node));					
-//					f.walkTo(map.getNodes().get(node));					
-					f.startAnimation();
-				}
-			}
-		});
+		Label starttime = new Label(group, SWT.NONE);
+		starttime.setText("Start Uhrzeit : ");
+		    
+		Composite timeComposite = new Composite(group, SWT.NONE);
+	    timeComposite.setLayout(new FillLayout());
+	    gridData = new GridData();
+    	gridData.horizontalSpan = 2;
+	    timeComposite.setLayoutData(gridData);
+		    
+		houre = new Spinner(timeComposite, SWT.NONE);
+		houre.setMaximum(23);
+		    
+		Label h = new Label(timeComposite, SWT.NONE);
+		h.setText("  h");
+		    
+		minutes = new Spinner(timeComposite, SWT.NONE);
+		minutes.setMaximum(59);
+		    
+		Label m = new Label(timeComposite, SWT.NONE);
+		m.setText("  m");
 		
+		//
 		
+		Label drivingday = new Label(group, SWT.NONE);
+		drivingday.setText("Fahrtag wählen:");
+		
+		comboDrivingday = new Combo(group, SWT.READ_ONLY);
+		
+		//comboProjects.setItems(loadProjectIDs(projectIDs));
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		comboDrivingday.setLayoutData(gridData);
+		
+		//
+		
+		Label animationSpeed= new Label(group, SWT.NONE);
+		animationSpeed.setText("Animationsgeschwindigkeit:");
+		
+		Scale scaleAnimationSpeed = new Scale(group, SWT.HORIZONTAL);
+		scaleAnimationSpeed.setMinimum(0);
+		scaleAnimationSpeed.setMaximum(100);
+	
 		
 		group.pack();
 		

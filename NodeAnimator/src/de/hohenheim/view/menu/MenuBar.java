@@ -35,14 +35,17 @@ public class MenuBar {
 	    
 	    MenuItem fileNewProjectItem = new MenuItem(fileMenu, SWT.PUSH);
 	    fileNewProjectItem.setText("&Neues Projekt\tStrg + N");
+	    fileNewProjectItem.setAccelerator(SWT.MOD1  + 'N');
 	    fileNewProjectItem.setImage(ImageHelper.newProjekt);
 	    
 	    MenuItem fileLoadItem = new MenuItem(fileMenu, SWT.PUSH);
 	    fileLoadItem.setText("&Projekt Öffnen ...\tStrg + O");
+	    fileLoadItem.setAccelerator(SWT.MOD1  + 'O');
 	    fileLoadItem.setImage(ImageHelper.openFolder);;
 
 	    MenuItem fileSaveItem = new MenuItem(fileMenu, SWT.PUSH);
 	    fileSaveItem.setText("&Projekt Speichern ...\tStrg + S");
+	    fileSaveItem.setAccelerator(SWT.MOD1  + 'S');
 	    fileSaveItem.setImage(ImageHelper.save);
 
 	    MenuItem fileExitItem = new MenuItem(fileMenu, SWT.PUSH);	
@@ -60,22 +63,27 @@ public class MenuBar {
 	    
 	    MenuItem addTrainItem = new MenuItem(trainMenu, SWT.PUSH);
 	    addTrainItem.setText("&Zug hinzufügen\tStrg + Z");
+	    addTrainItem.setAccelerator(SWT.MOD1  + 'Z');
 	    addTrainItem.setImage(ImageHelper.add);
 	    
 	    MenuItem editTrainItem = new MenuItem(trainMenu, SWT.PUSH);
 	    editTrainItem.setText("&Zug bearbeiten\tStrg + E");
+	    editTrainItem.setAccelerator(SWT.MOD1  + 'E');
 	    editTrainItem.setImage(ImageHelper.editF);
 	    
 	    MenuItem removeTrainItem = new MenuItem(trainMenu, SWT.PUSH);
 	    removeTrainItem.setText("&Zug löschen\tStrg + D");
+	    removeTrainItem.setAccelerator(SWT.MOD1  + 'D');
 	    removeTrainItem.setImage(ImageHelper.delete);
 
 	    MenuItem importTrainItem = new MenuItem(trainMenu, SWT.PUSH);	
 	    importTrainItem.setText("&Zug importieren\tStrg + I");
+	    importTrainItem.setAccelerator(SWT.MOD1  + 'I');
 	    importTrainItem.setImage(ImageHelper.importPic);
 	    
 	    MenuItem exportTrainItem = new MenuItem(trainMenu, SWT.PUSH);	
 	    exportTrainItem.setText("&Zug exportieren\tStrg + X");
+	    exportTrainItem.setAccelerator(SWT.MOD1  + 'X');
 	    exportTrainItem.setImage(ImageHelper.export);
 	    
 	    // Menu Timetable 
@@ -89,22 +97,27 @@ public class MenuBar {
 	    
 	    MenuItem addTimetableItem = new MenuItem(fahrplanMenu, SWT.PUSH);
 	    addTimetableItem.setText("&Fahrplan hinzufügen\tStrg + F");
+	    addTimetableItem.setAccelerator(SWT.MOD1  + 'F');
 	    addTimetableItem.setImage(ImageHelper.add);
 	    
 	    MenuItem editTimetableItem = new MenuItem(fahrplanMenu, SWT.PUSH);
 	    editTimetableItem.setText("&Fahrplan bearbeiten\tStrg + Alt + E");
+	    editTimetableItem.setAccelerator(SWT.MOD1  + SWT.ALT + 'E');
 	    editTimetableItem.setImage(ImageHelper.editF);;
 
 	    MenuItem removeTimetableItem = new MenuItem(fahrplanMenu, SWT.PUSH);
 	    removeTimetableItem.setText("&Fahrplan löschen\tStrg + Alt + D");
+	    removeTimetableItem.setAccelerator(SWT.MOD1  + SWT.ALT + 'D');
 	    removeTimetableItem.setImage(ImageHelper.delete);
 
 	    MenuItem importTimetableItem = new MenuItem(fahrplanMenu, SWT.PUSH);	
 	    importTimetableItem.setText("&Fahrplan importieren\tStrg + Alt + I");
+	    importTimetableItem.setAccelerator(SWT.MOD1  + SWT.ALT + 'I');
 	    importTimetableItem.setImage(ImageHelper.importPic);
 	    
 	    MenuItem exportTimetableItem = new MenuItem(fahrplanMenu, SWT.PUSH);	
 	    exportTimetableItem.setText("&Fahrplan exportieren\tStrg + Alt + X");
+	    exportTimetableItem.setAccelerator(SWT.MOD1  + SWT.ALT + 'X');
 	    exportTimetableItem.setImage(ImageHelper.export);
 
 	    // Menu look
@@ -119,18 +132,22 @@ public class MenuBar {
 	    
 	    MenuItem animationLookItem = new MenuItem(lookMenu, SWT.PUSH);
 	    animationLookItem.setText("&Animation\tStrg + A");
+	    animationLookItem.setAccelerator(SWT.MOD1  + 'A');
 	    animationLookItem.setImage(ImageHelper.animation);
 	    
 	    MenuItem projektLookItem = new MenuItem(lookMenu, SWT.PUSH);
 	    projektLookItem.setText("&Projekte\tStrg + P");
+	    projektLookItem.setAccelerator(SWT.MOD1  + 'P');
 	    projektLookItem.setImage(ImageHelper.project);
 
 	    MenuItem trainLookItem = new MenuItem(lookMenu, SWT.PUSH);
 	    trainLookItem.setText("&Züge\tStrg + T");
+	    trainLookItem.setAccelerator(SWT.MOD1  + 'T');
 	    trainLookItem.setImage(ImageHelper.train);
 
 	    MenuItem timetableLookItem = new MenuItem(lookMenu, SWT.PUSH);	
 	    timetableLookItem.setText("&Fahrpläne\tStrg + Alt + T");
+	    timetableLookItem.setAccelerator(SWT.MOD1  + SWT.ALT + 'T');
 	    timetableLookItem.setImage(ImageHelper.timeTable);
 	    
 	    // Menu Help
@@ -144,10 +161,12 @@ public class MenuBar {
 
 	    MenuItem helpItem = new MenuItem(helpMenu, SWT.PUSH);
 	    helpItem.setText("&Hilfe\tStrg + H");
+	    helpItem.setAccelerator(SWT.MOD1  + 'H');
 	    helpItem.setImage(ImageHelper.help);
 	    
 	    MenuItem helpInfoItem = new MenuItem(helpMenu, SWT.PUSH);
 	    helpInfoItem.setText("&Über SoBros\tStrg + U");
+	    helpInfoItem.setAccelerator(SWT.MOD1  + 'U');
 	    helpInfoItem.setImage(ImageHelper.aboutUs);
 	    
 	    //SelectionListener for the diffent menuItems
