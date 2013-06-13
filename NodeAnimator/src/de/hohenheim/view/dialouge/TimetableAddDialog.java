@@ -337,6 +337,7 @@ public class TimetableAddDialog extends Dialog{
 			    
 			    if(id < 0){
 			    	message = message + "Die Fahrplan ID muss eine positive Zahl sein!\n";
+			    	check = false;
 			    }
 			    for(int j = 0; j < Main.timetableListAll.size(); j++){
 				    if(id == Main.timetableListAll.get(j).getId()){
@@ -355,6 +356,17 @@ public class TimetableAddDialog extends Dialog{
 				check = false;
 				
 			}	
+			
+			for(int j = 0; j < (midlestationTable.getItemCount()-1); j++){
+				
+				if(midlestationTable.getItem(j).getText().equalsIgnoreCase(midlestationTable.getItem(j + 1).getText())){
+				    message = message + "Es existieren zwei gleiche Zwischenstationen nacheinander ! \n" +
+				    		"Löschen sie eine dieser beiden Stationen!\n";
+				    check = false;
+				}
+				
+			}
+				
 			
 		    try{	
 		    	if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){

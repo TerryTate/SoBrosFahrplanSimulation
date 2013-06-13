@@ -25,6 +25,8 @@ import de.hohenheim.modell.train.TrainData;
  */
 public class XmlWriter {
 
+	private static Element drivingdays;
+
 	/**
 	 * Static method to write XML-file that provides the trains and time tables
 	 * (train schedules) we want to save. Is static so you don't have to
@@ -109,8 +111,8 @@ public class XmlWriter {
 		name.setText(String.valueOf(tD.getName()));
 
 		for (int i = 0; i < tD.getDrivingdays().size(); i++) {
-		Element drivingdays = new Element("DrivingDay:" + i++);
-		rootTimeTable.addContent(drivingdays);
+	        drivingdays = new Element("DrivingDay" + (i + 1));
+		    rootTimeTable.addContent(drivingdays);
 			drivingdays.setText(String.valueOf(tD.getDrivingdays().get(i)));
 		}
 
@@ -122,7 +124,7 @@ public class XmlWriter {
 		startstation.setText(String.valueOf(tD.getStartstation()));
 
 		for (int i = 0; i < tD.getMiddlestations().size(); i++) {
-		Element middlestations = new Element("MiddleStation" + i++);
+		Element middlestations = new Element("MiddleStation" + (i + 1));
 		rootStations.addContent(middlestations);
 			middlestations.setText(String
 					.valueOf(tD.getMiddlestations().get(i)));

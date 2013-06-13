@@ -419,56 +419,66 @@ public class TimetableEditDialog extends Dialog{
 	}
 
 	protected boolean checkOk() {
-		boolean idCheck = true;
-		boolean name = true;
-		boolean startend = true;
-		boolean endmiddle = true;
-		boolean drivingday = true;
+		
+		boolean check = true;
 		
 		message = "";
 		    
 		    if((montag.getSelection() == false) && (dienstag.getSelection() == false) && (mittwoch.getSelection() == false) && (donerstag.getSelection() == false) && 
 		       (freitag.getSelection() == false) && (samstag.getSelection() == false) && (sontag.getSelection() == false) && (alle.getSelection() == false)){
 		    	message = message + "Es muss mindestens ein Fahrtag gewählt werden !\n";
-		    	drivingday = false;
+		    	check = false;
 		    }
 		
 			if(fahrplannameText.getText().equalsIgnoreCase("")){
 				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
-				name = false;
+				check = false;
 			}
 			
 			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
 				message = message + "Die Startstation und Endstation dürfen nur die \n" +
 						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
-				startend = false;
+				check = false;
+			}
+			
+            for(int j = 0; j < (midlestationTable.getItemCount()-1); j++){
+				
+				if(midlestationTable.getItem(j).getText().equalsIgnoreCase(midlestationTable.getItem(j + 1).getText())){
+				    message = message + "Es existieren zwei gleiche Zwischenstationen nacheinander ! \n" +
+				    		"Löschen sie eine dieser beiden Stationen!\n";
+				    check = false;
+				}
+				
 			}
 		try{	
 			if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
 				message = message + "Die letzte Zwischenstation darf nicht die \n" +
 						            "selbe sein wie die Endstation !\n";
 				
-				endmiddle = false;
+				check = false;
 			}
 		}catch(IllegalArgumentException e){
 			
 		}
 		try{	
 		    int id = Integer.parseInt(idText.getText());
+		   
+		    if(id < 0){
+		    	message = message + "Die Fahrplan ID muss eine positive Zahl sein!\n";
+		    	check = false;
+		    }
 		    
     	}catch(NumberFormatException e){
 			
 			message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
 	        		"und muss mindestens eine Ziffer haben! \n";
-			idCheck = false;
+			check = false;
 			
 		}
 		
-		if((idCheck == false) || (name == false) || (startend == false) || (endmiddle == false) || (drivingday == false)){
-			return false;
-		}else{
-			return true;
-		}
+		
+	    return check;
+		
 	}
 
 	protected void setText() {

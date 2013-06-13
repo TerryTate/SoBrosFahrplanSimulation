@@ -1,6 +1,7 @@
 package de.hohenheim.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -72,9 +73,63 @@ public class XmlReader {
 	
 	
 	
-	public static Timetable loadSingleTimeTable(String fileName){
+	public static Timetable loadSingleTimeTable(String fileName) throws NullPointerException{
 		
-		Timetable returnTimeTable = null;
+		SAXBuilder saxBuilder = new SAXBuilder();
+		Element root = null;
+		Document doc = new Document();
+		
+		try {
+			doc = saxBuilder.build(fileName);
+			root = doc.getRootElement();
+		}catch (Exception e){
+			e.fillInStackTrace();
+		}
+		
+		Timetable returnTimeTable = new Timetable(0, null, null, 0, 0, null, 0, 0); 
+		
+		Element iD = root.getChild("ID");
+		int iDValue = Integer.parseInt(iD.getValue());
+		returnTimeTable.setId(iDValue);
+		
+		Element name = root.getChild("Name");
+		String nameValue = name.getValue();
+		returnTimeTable.setName(nameValue);
+		
+		
+		ArrayList<String> drivingdays = new ArrayList<String>();
+		for (int i = 0; i <= 7; i++){
+			Element singleDay = root.getChild("DrivingDay" + (i + 1));
+			String singleDayValue = singleDay.getValue();
+			drivingdays.add(singleDayValue);
+		}
+		returnTimeTable.setDrivingdays(drivingdays);
+		
+		
+		Element startstation = root.getChild("StartStation");
+		Integer startStationValue = Integer.parseInt(startstation.getValue());
+		returnTimeTable.setStartstation(startStationValue);
+		
+		Element endstation = root.getChild("EndStation");
+		Integer endstationValue = Integer.parseInt(endstation.getValue());
+		returnTimeTable.setEndstation(endstationValue);
+		
+		ArrayList<Integer> middlestations = new ArrayList<Integer>(); 
+		for (int i = 0; i <=7; i++){
+			Element singleMStation = root.getChild("MiddleStation" + (i + 1));
+			int singleMStationValue = Integer.parseInt(singleMStation.getValue());
+			middlestations.add(singleMStationValue);
+		}
+		returnTimeTable.setMiddlestations(middlestations);
+		
+		Element startHouer = root.getChild("StartHour");
+		Integer startHourValue = Integer.parseInt(startHouer.getValue());
+		returnTimeTable.setStartHouer(startHourValue);
+		
+		Element startMinutes = root.getChild("StarMinutes");
+		Integer startMinutesValue = Integer.parseInt(startMinutes.getValue());
+		returnTimeTable.setStartMinutes(startMinutesValue);
+	
 		
 		return returnTimeTable;
 		
