@@ -1,5 +1,8 @@
 package de.hohenheim.view.dialouge;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -13,6 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TimetableExportDialog {
 
@@ -30,8 +34,15 @@ public class TimetableExportDialog {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(215, 130);
+	    
+	  //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
 	    dialog.setText("Zug exportieren");
-	    dialog.setImage(new Image(null,"img/Delete.png"));
+	    dialog.setImage(ImageHelper.export);
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -53,7 +64,7 @@ public class TimetableExportDialog {
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null,"img/Ok.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -71,7 +82,7 @@ public class TimetableExportDialog {
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null,"img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);

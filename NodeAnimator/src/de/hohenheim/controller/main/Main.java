@@ -15,6 +15,7 @@ import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.menu.MenuBar;
+import de.hohenheim.view.mobile.ImageHelper;
 import de.hohenheim.view.tab.TabFolder;
 
 public class Main {
@@ -34,7 +35,7 @@ public class Main {
         
 		setShell(new Shell());
 		getShell().setText("Fahrplan Animation");
-		getShell().setImage(new Image(null, "img/trainTab.png"));
+		getShell().setImage(ImageHelper.trainTab);
 		int screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		getShell().setSize(820, 720);
@@ -46,6 +47,8 @@ public class Main {
 		getShell().setMenuBar(MenuBar.createMenu(getShell()));
 		
 		tabComposite = new Composite(getShell(), SWT.BORDER );
+		
+		/////////// innerer Rand
 		tabComposite.setBackground(ColorConstants.lightGray);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -68,25 +71,25 @@ public class Main {
 	    
 	    
 	    //Animation SoBros mit ProgressBar
-        
-	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
-        animation.setSize(600, 400);
-        
-        animation.setBackgroundImage(new Image(null, "img/Logo.png"));
-        animation.setLocation( screenWidth/2 - 300, screenHeight/2 - 200 );
-        
-        ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
-        bar.setBounds (0, 370, 600, 15);
-        
-        animation.open();
-        for (int i=0; i<=bar.getMaximum (); i++) {
-            try {Thread.sleep (100);} catch (Throwable th) {}
-            bar.setSelection (i);
-        }
-        
-        animation.close();
-        animation.dispose();
-        
+//        
+//	    Shell animation = new Shell(display, SWT.NO_TRIM | SWT.ON_TOP| SWT.CENTER);
+//        animation.setSize(600, 400);
+//        
+//        animation.setBackgroundImage(ImageHelper.logo);
+//        animation.setLocation( screenWidth/2 - 300, screenHeight/2 - 200 );
+//        
+//        ProgressBar bar = new ProgressBar (animation, SWT.SMOOTH);
+//        bar.setBounds (0, 370, 600, 15);
+//        
+//        animation.open();
+//        for (int i=0; i<=bar.getMaximum (); i++) {
+//            try {Thread.sleep (100);} catch (Throwable th) {}
+//            bar.setSelection (i);
+//        }
+//        
+//        animation.close();
+//        animation.dispose();
+//        
 	    getShell().open();
     
 	

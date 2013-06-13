@@ -1,5 +1,8 @@
 package de.hohenheim.view.dialouge;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -18,6 +21,7 @@ import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TrainDeletDialog extends Dialog {
 	
@@ -35,8 +39,15 @@ public class TrainDeletDialog extends Dialog {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(215, 130);
+	    
+	  //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
 	    dialog.setText("Zug löschen");
-	    dialog.setImage(new Image(null,"img/Delete.png"));
+	    dialog.setImage(ImageHelper.delete);
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -58,7 +69,7 @@ public class TrainDeletDialog extends Dialog {
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null,"img/Ok.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -76,7 +87,7 @@ public class TrainDeletDialog extends Dialog {
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null,"img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);

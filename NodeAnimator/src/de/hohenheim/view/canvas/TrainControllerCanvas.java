@@ -15,6 +15,7 @@ import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeTrain;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TrainControllerCanvas extends Canvas{
 	
@@ -41,7 +42,7 @@ public class TrainControllerCanvas extends Canvas{
         
 		Button newTrain = new Button(groupControlSmall, SWT.NONE);
 		newTrain.setText("Zug hinzufügen");
-		newTrain.setImage(new Image(null,"img/add.png"));
+		newTrain.setImage(ImageHelper.add);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		newTrain.setLayoutData(gridData);
@@ -58,7 +59,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button editTrain = new Button(groupControlSmall, SWT.NONE);
 		editTrain.setText("Zug bearbeiten");
-		editTrain.setImage(new Image(null,"img/Edit.png"));
+		editTrain.setImage(ImageHelper.editF);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		editTrain.setLayoutData(gridData);
@@ -80,12 +81,12 @@ public class TrainControllerCanvas extends Canvas{
 		         
 		             if(showText == false){
 		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			             messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
-			             messageBox.open();
+			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
+	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok.");messageBox.open();
 		             }
 				 }else{
 					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-		             messageBox.setMessage("Es existieren keine Züge die Bearbeitet werden können !");    
+		             messageBox.setMessage("Es sind keine Züge vorhanden, die bearbeitet werden können!");    
 		             messageBox.open();
 				 }
 				
@@ -96,7 +97,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button deleteTrain = new Button(groupControlSmall, SWT.NONE);
 		deleteTrain.setText("Zug löschen");
-		deleteTrain.setImage(new Image(null,"img/Delete.png"));
+		deleteTrain.setImage(ImageHelper.delete);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteTrain.setLayoutData(gridData);
@@ -118,12 +119,13 @@ public class TrainControllerCanvas extends Canvas{
 		         
 		             if(showText == false){
 		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			             messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
+			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
+	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok."); 
 			             messageBox.open();
 		             }
 				 }else{
 					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-		             messageBox.setMessage("Es existieren keine Züge die Gelöscht werden können !");    
+		             messageBox.setMessage("Es sind keine Züge vorhanden, die gelöscht werden können!");    
 		             messageBox.open();
 				 }  
 			    
@@ -135,7 +137,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button importTrain = new Button(groupControlSmall, SWT.NONE);
 		importTrain.setText("Zug Importieren");
-		importTrain.setImage(new Image(null,"img/Import.png"));
+		importTrain.setImage(ImageHelper.importPic);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		importTrain.setLayoutData(gridData);
@@ -152,7 +154,7 @@ public class TrainControllerCanvas extends Canvas{
 		
 		Button exportTrain = new Button(groupControlSmall, SWT.NONE);
 		exportTrain.setText("Zug Exportieren");
-		exportTrain.setImage(new Image(null,"img/export.png"));
+		exportTrain.setImage(ImageHelper.export);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		exportTrain.setLayoutData(gridData);
@@ -173,12 +175,13 @@ public class TrainControllerCanvas extends Canvas{
 		         
 		             if(showText == false){
 		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			             messageBox.setMessage("Sie haben keinen Zug Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Zug aus.");    
+			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
+	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok."); 
 			             messageBox.open();
 		             }
 				 }else{
 					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-		             messageBox.setMessage("Es existieren keine Züge die Exportiert werden können !");    
+		             messageBox.setMessage("Es sind keine Züge vorhanden, die exportiert werden können!");    
 		             messageBox.open();
 				 }
 				 

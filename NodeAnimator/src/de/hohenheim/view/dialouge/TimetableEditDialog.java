@@ -32,6 +32,7 @@ import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TimetableEditDialog extends Dialog{
 	
@@ -74,7 +75,7 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    
 	    dialog.setText("Fahrplan bearbeiten");
-	    dialog.setImage(new Image(null, "img/Edit2.png"));
+	    dialog.setImage(ImageHelper.edit);
 		
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
@@ -233,7 +234,7 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    Button addButton = new Button(middlestationButtonC, SWT.NONE);
 		addButton.setText("Add");
-		addButton.setImage(new Image (null, "img/add.png"));
+		addButton.setImage(ImageHelper.add);;
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -241,7 +242,7 @@ public class TimetableEditDialog extends Dialog{
                 if(middleStationCheck()){
 			        TimeTableEvents.addMiddleStation(false);   
 				}else{
-					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
 			        messageBox.setMessage(message);    
 			        messageBox.open();
 				}
@@ -253,7 +254,7 @@ public class TimetableEditDialog extends Dialog{
 		
 		Button removeButton = new Button(middlestationButtonC, SWT.NONE);
 		removeButton.setText("Remove");
-		removeButton.setImage(new Image(null,"img/Clear.png"));
+		removeButton.setImage(ImageHelper.remove);
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -357,7 +358,7 @@ public class TimetableEditDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null,"img/OK.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -380,7 +381,7 @@ public class TimetableEditDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null,"img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);
@@ -404,13 +405,14 @@ public class TimetableEditDialog extends Dialog{
 		message = "";
 		if(midlestationTable.getItemCount() > 0){
 		    if(comboMiddlestation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
-		    	message = message + "Es können keine zwei gleiche Stationen nacheinander hinzugefügt werden";
+		    	message = message + "Es sind zwei identische Zwischenstationen vorhanden. " +
+		    						"Dies ist leider nicht möglich!\n"+"\r\n";
 		    	return false;
 		    }
 		}else{
 		    if(comboMiddlestation.getText().equalsIgnoreCase(comboStartstation.getText())){
-                message = message + "Der erste Station in die Zwischenstationen muss \n" +
-                		            "eine andere als die Startstation sein !";
+                message = message + "Die Zwischenstation ist identisch mit der Startstation. \n" +
+                					"Bitte geben Sie eine andere, nicht identische Zwischenstation ein!\n"+"\r\n";
                 return false;		
 		    }
 		}
@@ -426,12 +428,12 @@ public class TimetableEditDialog extends Dialog{
 		    
 		    if((montag.getSelection() == false) && (dienstag.getSelection() == false) && (mittwoch.getSelection() == false) && (donerstag.getSelection() == false) && 
 		       (freitag.getSelection() == false) && (samstag.getSelection() == false) && (sontag.getSelection() == false) && (alle.getSelection() == false)){
-		    	message = message + "Es muss mindestens ein Fahrtag gewählt werden !\n";
+		    	message = message + "Bitte wählen Sie mindestens einen Fahrtag aus!\n"+"\r\n";
 		    	check = false;
 		    }
 		
 			if(fahrplannameText.getText().equalsIgnoreCase("")){
-				message = message + "Es wurde kein Name für den Fahrplan angegeben !\n";
+				message = message + "Bitte geben Sie einen Fahrplan-Name ein!\n"+"\r\n";
 				check = false;
 			}
 			
@@ -444,16 +446,16 @@ public class TimetableEditDialog extends Dialog{
             for(int j = 0; j < (midlestationTable.getItemCount()-1); j++){
 				
 				if(midlestationTable.getItem(j).getText().equalsIgnoreCase(midlestationTable.getItem(j + 1).getText())){
-				    message = message + "Es existieren zwei gleiche Zwischenstationen nacheinander ! \n" +
-				    		"Löschen sie eine dieser beiden Stationen!\n";
+				    message = message + "Es sind zwei identische Zwischenstationen vorhanden. \n" +
+	    								"Bitte löschen Sie einen dieser beiden Stationen!\n"+"\r\n";
 				    check = false;
 				}
 				
 			}
 		try{	
 			if(comboEndstation.getText().equalsIgnoreCase(midlestationTable.getItem(midlestationTable.getItemCount()-1).getText())){
-				message = message + "Die letzte Zwischenstation darf nicht die \n" +
-						            "selbe sein wie die Endstation !\n";
+				message = message + "Die Zwischenstation darf nicht identisch mit der \n" +
+								    "Endstation sein!\n"+"\r\n";
 				
 				check = false;
 			}
@@ -464,7 +466,7 @@ public class TimetableEditDialog extends Dialog{
 		    int id = Integer.parseInt(idText.getText());
 		   
 		    if(id < 0){
-		    	message = message + "Die Fahrplan ID muss eine positive Zahl sein!\n";
+		    	message = message + "Die Fahrplan-ID muss eine positive Zahl sein!\n"+"\r\n";
 		    	check = false;
 		    }
 		    

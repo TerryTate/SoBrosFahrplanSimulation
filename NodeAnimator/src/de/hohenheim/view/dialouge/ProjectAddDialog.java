@@ -60,7 +60,7 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    
 	    dialog.setText("Projekt hinzufügen");
-	    dialog.setImage(new Image(null, "img/add.png"));
+	    dialog.setImage(ImageHelper.add);;
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -133,6 +133,7 @@ public class ProjectAddDialog extends Dialog {
 		
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
+		removeButton.setImage(ImageHelper.remove);
 		removeButton.setImage(new Image(null,"img/Clear.png"));
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
@@ -145,6 +146,7 @@ public class ProjectAddDialog extends Dialog {
 		    
 	    
 	    //Linked List
+		
         Label room6 = new Label(dialog, SWT.NONE);
         room6.setText("");
 	    
@@ -176,8 +178,7 @@ public class ProjectAddDialog extends Dialog {
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null, "img/Ok.png"));
-		okButton.setImage(new Image(null, "img/add.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -201,6 +202,7 @@ public class ProjectAddDialog extends Dialog {
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
+		cancelButton.setImage(ImageHelper.cancel);
 		cancelButton.setImage(new Image(null, "img/Cancel.png"));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
@@ -225,34 +227,33 @@ public class ProjectAddDialog extends Dialog {
 		
 		try{
 			if (linkTable.getItemCount() < 1){
-				message = message + "Es muss mindestens ein Zug/Fahrplan paar \n" +
-						"eingetragen sein !\n";
+				message = message + "Es muss mindestens ein Zug und mindestens ein Fahrplan"+ "\n" +
+									"eingetragen sein!\n"+"\r\n";
 				check = false;
 			}
 			
 			if (nameText.getText().equalsIgnoreCase("")){
-				message = message + "Sie haben keinen Projekt Namen Eingegeben !\n";
+				message = message + "Bitte geben Sie einen Projekt-Namen ein!\n"+"\r\n";
 				check = false;
 			}
 			
 		    int id = Integer.parseInt(idText.getText());
 		    if (id < 0){
-		    	message = message + "Die Projekt ID muss eine Positive Zahl sein!";
+		    	message = message + "Die Projekt-ID muss eine positive Zahl enthalten!\n"+"\r\n";
 		    	check = false;
 		    }
 		    for(int j = 0; j < Main.projectListAll.size(); j++){
 			    if(id == Main.projectListAll.get(j).getId()){
 			    
-			        message = message + "Die eingegebene Projekt ID ist bereits vorhanden bitte  \n " +
-			        		" geben sie eine andere 6 stellige Ziffer ein \n " +
-			        		"und versuchen sie es erneut. "; 
+			        message = message + "Die ID-Eingabe ist bereits vorhanden. Bitte  \n " +
+			        		" geben sie eine andere 6-stellige Ziffer ein und versuchen Sie es erneut. \n"; 
 			    	check = false;
 			    }
 		    }
 		
 		}catch(NumberFormatException e){
-			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!";
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen und muss mindestens \n"+
+	        		"eine Ziffer enthalten!"+"\r\n";
 			
 			check = false;
 		}

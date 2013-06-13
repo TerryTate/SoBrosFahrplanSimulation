@@ -24,6 +24,7 @@ import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeTrain;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TrainEditDialog extends Dialog{
 	
@@ -66,7 +67,7 @@ public class TrainEditDialog extends Dialog{
 	    
 	    
 	    dialog.setText("Zug bearbeiten");
-	    dialog.setImage(new Image(null,"img/Edit2.png"));
+	    dialog.setImage(ImageHelper.edit);
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -183,7 +184,7 @@ public class TrainEditDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null,"img/Ok.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -207,7 +208,7 @@ public class TrainEditDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null,"img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);
@@ -235,14 +236,14 @@ public class TrainEditDialog extends Dialog{
 		try{
 		    int id = Integer.parseInt(idText.getText());
 		    if (id < 0){
-		    	message = message + "Die Zug ID muss eine Positive Zahl sein!";
+		    	message = message + "Die Zug-ID muss eine positive Zahl sein!\n"+"\r\n";
 		    	idCheck = false;
 		    }
 		   
 		
 		}catch(NumberFormatException e){
-			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!";
+			message = message + "Die Zug-ID darf nur aus Zahlen bestehen und muss mindestens \n"+
+	        					"eine Ziffer enthalten!"+"\r\n";
 			
 			idCheck = false;
 		}

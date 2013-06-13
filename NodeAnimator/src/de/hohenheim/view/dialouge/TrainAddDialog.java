@@ -22,6 +22,7 @@ import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class TrainAddDialog extends Dialog{
 	
@@ -58,7 +59,7 @@ public class TrainAddDialog extends Dialog{
 	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
 	    
 	    dialog.setText("Zug erstellen");
-	    dialog.setImage(new Image(null,"img/add.png"));
+	    dialog.setImage(ImageHelper.add);;
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 
 	    dialog.setLayout(gridLayout);
@@ -136,7 +137,7 @@ public class TrainAddDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null,"img/Ok.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -161,7 +162,7 @@ public class TrainAddDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null,"img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData);
@@ -186,22 +187,22 @@ public class TrainAddDialog extends Dialog{
 		try{
 		    int id = Integer.parseInt(idText.getText());
 		    if (id < 0){
-		    	message = message + "Die Zug ID muss eine Positive Zahl sein!";
+		    	message = message + "Die Zug-ID muss eine positive Zahl sein!\n"+"\r\n";
 		    	idCheck = false;
 		    }
 		    for(int j = 0; j < Main.trainListAll.size(); j++){
 			    if(id == Main.trainListAll.get(j).getID()){
 			    
-			        message = message + "Die eingegebene Zug ID ist bereits vorhanden bitte  \n " +
-			        		" geben sie eine andere 6 stellige Ziffer ein \n " +
-			        		"und versuchen sie es erneut. "; 
+			        message = message + "Diese Zug-ID ist bereits vorhanden. " +
+				    			"Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n" +
+				        		"und versuchen Sie es erneut.\n"+"\r\n";
 			    	idCheck = false;
 			    }
 		    }
 		
 		}catch(NumberFormatException e){
-			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!";
+			message = message + "Die Zug-ID darf nur aus Zahlen bestehen\n" +
+	        					"und muss mindestens eine Ziffer haben!\n"+"\r\n";
 			
 			idCheck = false;
 		}

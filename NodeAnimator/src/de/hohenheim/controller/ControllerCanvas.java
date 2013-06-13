@@ -15,6 +15,7 @@ import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
+import de.hohenheim.view.mobile.ImageHelper;
 import de.hohenheim.view.mobile.TrainFigure;
 
 public class ControllerCanvas extends Canvas {
@@ -51,6 +52,7 @@ public class ControllerCanvas extends Canvas {
 		train_combo.setItems(fitems);
 		
 		Button walkto = new Button(group, SWT.NONE);
+		walkto.setImage(ImageHelper.goTo);
 		walkto.setBounds(5, 120, 150,25);
 		walkto.setText("Go To");
 		walkto.addListener(SWT.Selection, new Listener() {

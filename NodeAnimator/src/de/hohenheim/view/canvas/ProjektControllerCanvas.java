@@ -15,6 +15,7 @@ import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeProject;
+import de.hohenheim.view.mobile.ImageHelper;
 
 
 public class ProjektControllerCanvas extends Canvas {
@@ -40,7 +41,7 @@ public class ProjektControllerCanvas extends Canvas {
 	    
 		Button newProject = new Button(groupControlSmall, SWT.NONE);
 		newProject.setText("Projekt hinzufügen");
-		newProject.setImage(new Image(null,"img/add.png"));
+		newProject.setImage(ImageHelper.add);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		newProject.setLayoutData(gridData);
@@ -57,7 +58,7 @@ public class ProjektControllerCanvas extends Canvas {
 		 
 		Button editProject = new Button(groupControlSmall, SWT.NONE);
 		editProject.setText("Project ändern");
-		editProject.setImage(new Image(null,"img/Edit.png"));
+		editProject.setImage(ImageHelper.editF);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		editProject.setLayoutData(gridData);
@@ -78,13 +79,14 @@ public class ProjektControllerCanvas extends Canvas {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");   
 				         messageBox.open();
 			         }
 				   }else{
 					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Es gibt keine Projekte die Bearbeitet werden können !");    
-				         messageBox.open();
+				         messageBox.setMessage("Es sind keine Projekte vorhanden, die barbeitet werden können!");    
+					          messageBox.open();
 				   }
 				 
 			
@@ -94,7 +96,7 @@ public class ProjektControllerCanvas extends Canvas {
 		
 		Button deleteProject = new Button(groupControlSmall, SWT.NONE);
 		deleteProject.setText("Project löschen");
-		deleteProject.setImage(new Image(null,"img/Delete.png"));
+		deleteProject.setImage(ImageHelper.delete);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteProject.setLayoutData(gridData);
@@ -116,12 +118,13 @@ public class ProjektControllerCanvas extends Canvas {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
-				         messageBox.open();
+				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");    
+					         messageBox.open();
 			         }
 				   }else{
 					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Es gibt keine Projekte die Bearbeitet werden können !");    
+				         messageBox.setMessage("Es sind keine Projekte vorhanden, die gelöscht werden können!");    
 				         messageBox.open();
 				   }
 				 
@@ -130,8 +133,8 @@ public class ProjektControllerCanvas extends Canvas {
 		});
 		
 		Button importProject = new Button(groupControlSmall, SWT.NONE);
-		importProject.setText("Zug Importieren");
-		importProject.setImage(new Image(null,"img/Import.png"));
+		importProject.setText("Projekt importieren");
+		importProject.setImage(ImageHelper.importPic);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		importProject.setLayoutData(gridData);
@@ -146,8 +149,8 @@ public class ProjektControllerCanvas extends Canvas {
 		});
 		
 		Button exportProject = new Button(groupControlSmall, SWT.NONE);
-		exportProject.setText("Zug Exportieren");
-		exportProject.setImage(new Image(null,"img/export.png"));
+		exportProject.setText("Projekt exportieren");
+		exportProject.setImage(ImageHelper.export);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		exportProject.setLayoutData(gridData);
@@ -169,12 +172,13 @@ public class ProjektControllerCanvas extends Canvas {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keinen Projekt Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");    
 				         messageBox.open();
 			         }
 				   }else{
 					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Es gibt keine Projekte die Exportiert werden können !");    
+				         messageBox.setMessage("Es sind keine Projekte vorhanden, die exportiert werden können!");    
 				         messageBox.open();
 				   }
 						

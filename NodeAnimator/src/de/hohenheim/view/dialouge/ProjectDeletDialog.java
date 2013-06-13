@@ -1,9 +1,14 @@
 package de.hohenheim.view.dialouge;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
+
+import de.hohenheim.view.mobile.ImageHelper;
 
 public class ProjectDeletDialog extends Dialog {
 	
@@ -19,8 +24,17 @@ public class ProjectDeletDialog extends Dialog {
 			
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(220, 310);
+	    
+	  //Fenster  mittig setzen 
+	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
+	    Dimension myDimension = myToolkit.getScreenSize();
+	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
+	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+	    
+	    
+	    
 	    dialog.setText("Projekt Löschen");
-	    dialog.setImage(new Image(null, "img/Delete.png"));
+	    dialog.setImage(ImageHelper.delete);
 			
 		 
 	    

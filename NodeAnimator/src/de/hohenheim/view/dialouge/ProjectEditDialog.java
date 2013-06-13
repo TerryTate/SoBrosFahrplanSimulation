@@ -31,6 +31,7 @@ import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
 import de.hohenheim.view.composite.CompositeProject;
+import de.hohenheim.view.mobile.ImageHelper;
 
 
 public class ProjectEditDialog extends Dialog{
@@ -63,7 +64,7 @@ public class ProjectEditDialog extends Dialog{
 		    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
 		    
 		    dialog.setText("Zug bearbeiten");
-		    dialog.setImage(new Image(null, "img/Edit2.png"));
+		    dialog.setImage(ImageHelper.edit);
 		    GridLayout gridLayout = new GridLayout();
 		    gridLayout.numColumns = 3; 
 		    dialog.setLayout(gridLayout);
@@ -109,7 +110,7 @@ public class ProjectEditDialog extends Dialog{
 	    
 	    Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
-		addButton.setImage(new Image(null,"img/add24.png"));
+		addButton.setImage(ImageHelper.addPlus);
 		addButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -136,7 +137,7 @@ public class ProjectEditDialog extends Dialog{
 		
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
-		removeButton.setImage(new Image(null,"img/Clear.png"));
+		removeButton.setImage(ImageHelper.remove);
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
@@ -167,7 +168,7 @@ public class ProjectEditDialog extends Dialog{
 		trains.setWidth(100);  
 		timetable.setWidth(100);
 		
-        // Buttonn Composite
+        // Button Composite
 	    
 	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
 	    GridLayout gridLayout2 = new GridLayout();
@@ -178,8 +179,7 @@ public class ProjectEditDialog extends Dialog{
 	    
 	    Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
-		okButton.setImage(new Image(null, "img/Ok.png"));
-		okButton.setImage(new Image(null, "img/add.png"));
+		okButton.setImage(ImageHelper.ok);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    okButton.setLayoutData(gridData);
@@ -201,7 +201,7 @@ public class ProjectEditDialog extends Dialog{
 		
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
-		cancelButton.setImage(new Image(null, "img/Cancel.png"));
+		cancelButton.setImage(ImageHelper.cancel);
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.CENTER;
 	    cancelButton.setLayoutData(gridData); 
@@ -277,25 +277,25 @@ public class ProjectEditDialog extends Dialog{
 		
 		try{
 			if (linkTable.getItemCount() < 1){
-				message = message + "Es muss mindestens ein Zug/Fahrplan paar \n" +
-						"eingetragen sein !\n";
+				message = message + "Es muss mindestens ein Zug und mindestens ein Fahrplan"+ "\n" +
+						"eingetragen sein!\n"+"\r\n";
 				check = false;
 			}
 			
 			if (nameText.getText().equalsIgnoreCase("")){
-				message = message + "Sie haben keinen Projekt Namen Eingegeben !\n";
+				message = message + "Bitte geben Sie einen Projekt-Namen ein!\n"+"\r\n";
 				check = false;
 			}
 			
 		    int id = Integer.parseInt(idText.getText());
 		    if (id < 0){
-		    	message = message + "Die Projekt ID muss eine Positive Zahl sein!";
+		    	message = message + "Die Projekt-ID muss eine positive Zahl enthalten!\n"+"\r\n";
 		    	check = false;
 		    }
 		
 		}catch(NumberFormatException e){
-			message = message + "Die Zug ID darf nur aus Zahlen bestehen ! \n" +
-	        		"und muss mindestens eine Ziffer haben!";
+			message = message + "Die Zug ID darf nur aus Zahlen bestehen und muss mindestens \n"+
+	        		"eine Ziffer enthalten!"+"\r\n";
 			
 			check = false;
 		}

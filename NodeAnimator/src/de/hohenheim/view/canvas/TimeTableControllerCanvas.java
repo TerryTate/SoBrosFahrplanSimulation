@@ -18,6 +18,7 @@ import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 
 import de.hohenheim.view.composite.CompositeTimeTable;
+import de.hohenheim.view.mobile.ImageHelper;
 
 
 public class TimeTableControllerCanvas extends Canvas {
@@ -35,14 +36,14 @@ public class TimeTableControllerCanvas extends Canvas {
 		// Group when the shellHeight < then 300 pixel
 				
 		groupControlSmall = (new Group(this, SWT.SHADOW_ETCHED_IN));
-		groupControlSmall.setText("Zug Verwaltung");
+		groupControlSmall.setText("Fahrplan Verwaltung");
 		GridLayout gridLayout = new GridLayout(); 
         gridLayout.numColumns = 1; 
         groupControlSmall.setLayout(gridLayout);
 		        
 		Button newTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		newTimeTable2.setText("Fahrplan hinzufügen");	
-		newTimeTable2.setImage(new Image(null,"img/add.png"));
+		newTimeTable2.setImage(ImageHelper.add);
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		newTimeTable2.setLayoutData(gridData);
@@ -58,7 +59,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				 
 		Button editTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		editTimeTable2.setText("Fahrplan bearbeiten");
-		editTimeTable2.setImage(new Image(null,"img/Edit.png"));
+		editTimeTable2.setImage(ImageHelper.editF);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		editTimeTable2.setLayoutData(gridData);
@@ -79,12 +80,13 @@ public class TimeTableControllerCanvas extends Canvas {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keinen Fahrplan Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok.");
 				         messageBox.open();
 			         }
 				   }else{
 					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Es gibt keine Fahrpläne die Bearbeitet werden können !");    
+				         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die bearbeitet werden können!");    
 				         messageBox.open();
 				   }
 						
@@ -93,7 +95,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button deleteTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		deleteTimeTable2.setText("Fahrplan löschen");
-		deleteTimeTable2.setImage(new Image(null,"img/Delete.png"));
+		deleteTimeTable2.setImage(ImageHelper.delete);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		deleteTimeTable2.setLayoutData(gridData);
@@ -114,12 +116,13 @@ public class TimeTableControllerCanvas extends Canvas {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keinen Fahrplan Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
+				         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
+				        		                "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok."); 
 				         messageBox.open();
 			         }
 				   }else{
 					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Es gibt keine Fahrpläne die Bearbeitet werden können !");    
+				         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die gelöscht werden können !");    
 				         messageBox.open();
 				   }
 						
@@ -128,7 +131,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button importTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		importTimeTable2.setText("Fahrplan Importieren");
-		importTimeTable2.setImage(new Image(null,"img/Import.png"));
+		importTimeTable2.setImage(ImageHelper.importPic);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		importTimeTable2.setLayoutData(gridData);
@@ -143,7 +146,7 @@ public class TimeTableControllerCanvas extends Canvas {
 				
 		Button exportTimeTable2 = new Button(groupControlSmall, SWT.NONE);
 		exportTimeTable2.setText("Fahrplan Exportieren");
-		exportTimeTable2.setImage(new Image(null,"img/export.png"));
+		exportTimeTable2.setImage(ImageHelper.export);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		exportTimeTable2.setLayoutData(gridData);
@@ -164,12 +167,12 @@ public class TimeTableControllerCanvas extends Canvas {
 		         
 		         if(showText == false){
 		        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			         messageBox.setMessage("Sie haben keinen Fahrplan Ausgewählt ! \n Drücken Sie auf Ok und wählen Sie einen Fahrplan aus.");    
-			         messageBox.open();
+			         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
+      		 			   "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok.");messageBox.open();
 		         }
 			   }else{
 				     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
-			         messageBox.setMessage("es gibt keine Fahrpläne die Exportiert werden können !");    
+			         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die exportiert werden können!");    
 			         messageBox.open();
 			   }
 								
