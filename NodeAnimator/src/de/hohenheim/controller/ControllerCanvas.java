@@ -52,7 +52,6 @@ public class ControllerCanvas extends Canvas {
 		train_combo.setItems(fitems);
 		
 		Button walkto = new Button(group, SWT.NONE);
-		walkto.setImage(ImageHelper.goTo);
 		walkto.setBounds(5, 120, 150,25);
 		walkto.setText("Go To");
 		walkto.addListener(SWT.Selection, new Listener() {

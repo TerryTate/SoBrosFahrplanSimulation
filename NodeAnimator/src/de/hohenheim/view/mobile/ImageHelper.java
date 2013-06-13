@@ -41,8 +41,6 @@ public class ImageHelper {
     public static final Image aboutUs = new Image(null, "img/AboutUs.png");
     public static final Image help = new Image(null, "img/Help.png");
     public static final Image aus = new Image(null, "img/Aus.png");
-    
-    public static final Image goTo = new Image(null, "img/goTo.png");
-    
-
+    public static final Image min = new Image(null, "img/minIcon.png");
+    public static final Image hour = new Image(null, "img/hour.png");
 }

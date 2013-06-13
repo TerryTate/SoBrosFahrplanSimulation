@@ -59,7 +59,7 @@ public class TimetableAddDialog extends Dialog{
 		// Set a new dialog with a GridLayout wit 3 columns 
 		 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(400, 410);
+	    dialog.setSize(400, 425);
 	    
 	    //Fenster  mittig setzen 
 	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
@@ -113,13 +113,13 @@ public class TimetableAddDialog extends Dialog{
 	   
 	    
 	    Label h = new Label(timeComposite, SWT.NONE);
-	    h.setText("  h");
+	    h.setImage(ImageHelper.hour);
 	    
 	    minutes = new Spinner(timeComposite, SWT.NONE);
 	    minutes.setMaximum(59);
 	    
 	    Label m = new Label(timeComposite, SWT.NONE);
-	    m.setText("  m");
+	    m.setImage(ImageHelper.min);
 	    
 	    
 	    // Timetable drivingDays --> Label drivingdays and Checkboxes
