@@ -39,7 +39,7 @@ public class TrainEvents {
 		
 		int speed = Integer.parseInt(speedText);
 		
-		TrainData train = new TrainData(id, speed, TrainAddDialog.comboTypOfTrain.getText(), TrainAddDialog.comboLadungen.getText(), TrainAddDialog.comboPriority.getText() );
+		TrainData train = new TrainData(id, speed, TrainAddDialog.comboTypOfTrain.getText(), TrainAddDialog.comboLadungen.getText(), TrainAddDialog.comboPriority.getText(), false);
 		
 		Main.trainListAll.add(train);
 		

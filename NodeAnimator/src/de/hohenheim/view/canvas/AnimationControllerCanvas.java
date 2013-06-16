@@ -1,7 +1,6 @@
 package de.hohenheim.view.canvas;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -21,21 +20,25 @@ import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Spinner;
 
 import de.hohenheim.controller.events.AnimationEvents;
+import de.hohenheim.controller.events.AnimationPlay;
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.State;
-import de.hohenheim.modell.Train;
+
+import de.hohenheim.modell.project.Project;
 import de.hohenheim.view.map.NodeMap;
-import de.hohenheim.view.mobile.AnimationFigure;
-import de.hohenheim.view.mobile.TrainFigure;
 
 public class AnimationControllerCanvas extends Canvas{
 
-	private static NodeMap map;
+	public static NodeMap map;
 	public static Combo comboProjects;
-	private Spinner houre;
-	private Spinner minutes;
-	private Combo comboDrivingday;
-
+	public static Spinner houre;
+	public static Spinner minutes;
+	public static Combo comboDrivingday;
+	String [] drivingdayItems= {"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+	public static Label timer;
+	public static boolean run = false; 
+	public static int hour;
+	public static int min;
+	 
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
 		this.map = map;
@@ -103,7 +106,7 @@ public class AnimationControllerCanvas extends Canvas{
 		
 		comboDrivingday = new Combo(group, SWT.READ_ONLY);
 		
-		//comboProjects.setItems(loadProjectIDs(projectIDs));
+		comboDrivingday.setItems(drivingdayItems);
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
 		comboDrivingday.setLayoutData(gridData);
@@ -114,13 +117,64 @@ public class AnimationControllerCanvas extends Canvas{
 		animationSpeed.setText("Animationsgeschwindigkeit:");
 		
 		Scale scaleAnimationSpeed = new Scale(group, SWT.HORIZONTAL);
+		gridData = new GridData ();
+		gridData.horizontalSpan = 2;
+		scaleAnimationSpeed.setLayoutData(gridData);
 		scaleAnimationSpeed.setMinimum(0);
 		scaleAnimationSpeed.setMaximum(100);
+		
+		timer = new Label(group, SWT.NONE);
+		setTimerLabel();
+		
+		animationSpeed.setText("");
 	
+		Button play = new Button(group, SWT.NONE);
+		play.setBounds(5, 75, 32, 32);
+		play.setToolTipText("Play");
+		play.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+			   
+				if (run == false){
+					setTimerLabel();
+					run = true;
+					AnimationPlay animationPlay;
+					Project p = null;
+					for (Project project : Main.projectListAll) {
+							
+						if (Integer.parseInt(comboProjects.getText()) == project.getId()){
+							
+							p = project;
+						}
+							
+					}
+					
+					animationPlay = new AnimationPlay(Integer.parseInt(comboProjects.getText()), comboDrivingday.getText(), map, Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), p);
+					hour = Integer.parseInt(houre.getText());
+					min = Integer.parseInt(minutes.getText());  
+					animationPlay.start();
+			    }
+				
+			}
+		});
 		
 		group.pack();
 		
 	}
+	private void setTimerLabel() {
+		
+		if ((Integer.parseInt(houre.getText()) < 10) && Integer.parseInt(minutes.getText()) < 10){
+			timer.setText("Timer : " + "0" + houre.getText() + " : " + "0" + minutes.getText());
+		}else if ((Integer.parseInt(houre.getText()) >= 10) && Integer.parseInt(minutes.getText()) < 10){
+			timer.setText("Timer : " + houre.getText() + " : " + "0" + minutes.getText());
+		}else if ((Integer.parseInt(houre.getText()) >= 10) && Integer.parseInt(minutes.getText()) >= 10){
+			timer.setText("Timer : " + houre.getText() + " : " + minutes.getText());
+		}else if ((Integer.parseInt(houre.getText()) < 10) && Integer.parseInt(minutes.getText()) >= 10){
+			timer.setText("Timer : " + "0" + houre.getText() + " : " + minutes.getText());
+		}
+		
+	}
+
 	public static String[] loadProjectIDs(String[] projectIDs) {
 	    
 		for(int i=0; i < Main.projectListAll.size(); i++) {

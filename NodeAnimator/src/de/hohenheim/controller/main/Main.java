@@ -4,12 +4,11 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
+
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
@@ -27,11 +26,12 @@ public class Main {
 	public static ArrayList<Timetable> timetableListAll = new ArrayList();
 	public static ArrayList<Project>  projectListAll = new ArrayList();
 	private static Shell shell;
+	private static Display display;
 	
 	
 	public static void main(String[] args) {
 		
-		Display display = Display.getDefault();
+		setDisplay(Display.getDefault());
         
 		setShell(new Shell());
 		getShell().setText("Fahrplan Animation");
@@ -67,7 +67,7 @@ public class Main {
 		gridData.heightHint = 20;
     	bottomComposite.setLayoutData(gridData);
     	
-	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, display); 
+	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, getDisplay()); 
 	    
 	    
 	    //Animation SoBros mit ProgressBar
@@ -94,9 +94,9 @@ public class Main {
     
 	
 		while (!getShell().isDisposed()) {			
-			if (!display.readAndDispatch()) {
+			if (!getDisplay().readAndDispatch()) {
 	    
-			    display.sleep();
+			    getDisplay().sleep();
 		   }
 	
 		}
@@ -117,6 +117,14 @@ public class Main {
 
 	public static void setShell(Shell shell) {
 		Main.shell = shell;
+	}
+
+	public static Display getDisplay() {
+		return display;
+	}
+
+	public static void setDisplay(Display display) {
+		Main.display = display;
 	}
 
 }

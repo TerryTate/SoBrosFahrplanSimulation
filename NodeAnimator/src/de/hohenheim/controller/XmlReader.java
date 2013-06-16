@@ -44,7 +44,7 @@ public class XmlReader {
 		}
 		
 		
-		TrainData returnTrain = new TrainData(0, 0, null, null, null);
+		TrainData returnTrain = new TrainData(0, 0, null, null, null, false);
 		try{
 		Element id = root.getChild("ID");
 		int iDValue = Integer.parseInt(id.getValue());
@@ -91,7 +91,7 @@ public class XmlReader {
 		}
 		
 		
-		Timetable returnTimeTable = new Timetable(0, null, null, 0, 0, null, 0, 0); 
+		Timetable returnTimeTable = new Timetable(0, null, null, 0, 0, null, 0, 0, 0); 
 		
 		Element iD = root.getChild("ID");
 		int iDValue = Integer.parseInt(iD.getValue());

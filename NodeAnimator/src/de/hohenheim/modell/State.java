@@ -16,7 +16,7 @@ public class State {
 	/**
 	 * Static HashMap which contains all state objects. They are assigned automatically to this HashMap after creation.
 	 */
-	public static HashMap<String, State> statemap = new HashMap<String, State>();
+    public static HashMap<String, State> statemap = new HashMap<String, State>();
 	
 	/**
 	 * The state value of the current object. (0=UNBLOCKED, 1=BLOCKED)

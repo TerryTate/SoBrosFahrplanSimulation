@@ -14,7 +14,7 @@ import de.hohenheim.view.map.NodeMap;
 public class CompositeAnimation extends Composite{
     
 	private NodeMap map;
-
+   
 	/*
 	 * 
 	 * 
