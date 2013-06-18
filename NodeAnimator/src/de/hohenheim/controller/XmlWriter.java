@@ -13,6 +13,7 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
@@ -88,13 +89,9 @@ public class XmlWriter {
 			System.err.println(e);
 			e.fillInStackTrace();
 
-	    } catch (NullPointerException e){
-	    	
-	    }
-		
+		} catch (NullPointerException e) {
 
-		
-
+		}
 
 	}
 
@@ -111,8 +108,8 @@ public class XmlWriter {
 		name.setText(String.valueOf(tD.getName()));
 
 		for (int i = 0; i < tD.getDrivingdays().size(); i++) {
-	        drivingdays = new Element("DrivingDay" + (i + 1));
-		    rootTimeTable.addContent(drivingdays);
+			drivingdays = new Element("DrivingDay" + (i + 1));
+			rootTimeTable.addContent(drivingdays);
 			drivingdays.setText(String.valueOf(tD.getDrivingdays().get(i)));
 		}
 
@@ -124,8 +121,8 @@ public class XmlWriter {
 		startstation.setText(String.valueOf(tD.getStartstation()));
 
 		for (int i = 0; i < tD.getMiddlestations().size(); i++) {
-		Element middlestations = new Element("MiddleStation" + (i + 1));
-		rootStations.addContent(middlestations);
+			Element middlestations = new Element("MiddleStation" + (i + 1));
+			rootStations.addContent(middlestations);
 			middlestations.setText(String
 					.valueOf(tD.getMiddlestations().get(i)));
 		}
@@ -158,11 +155,113 @@ public class XmlWriter {
 		} catch (IOException e) {
 			System.err.println(e);
 			e.fillInStackTrace();
-		}catch (NullPointerException e){
+		} catch (NullPointerException e) {
+
+		}
+
+	}
+
+	/**
+	 * Method to save single Project into a XML-File using JDOM2
+	 * 
+	 * @param fileName
+	 *            Will be the name of the XML-File that is made
+	 */
+
+	public static void saveSingleProject(String fileName, Project pR) {
+		
+		
+		Element root = new Element("Project");
+		
+		
+		Element iD = new Element("ID");
+		root.addContent(iD);
+		iD.setText(String.valueOf(pR.getId()));
+		
+		Element name = new Element("Name");
+		root.addContent(name);
+		name.setText(pR.getName());
+		
+		
+		Element rootSingleTrain = new Element("Trains");
+		root.addContent(rootSingleTrain);
+		
+		for (int i = 0; i <= pR.getTraindataProjectList().size(); i++){
+			
+			Element id = new Element("ID");
+			rootSingleTrain.addContent(id);
+			id.setText(String.valueOf(pR.getTraindataProjectList().get(i).getID()));
+
+			Element typeOfTrain = new Element("TypeOfTrain");
+			rootSingleTrain.addContent(typeOfTrain);
+			typeOfTrain.setText(String.valueOf(pR.getTraindataProjectList().get(i).getTypOfTrain()));
+
+			Element priority = new Element("Priority");
+			rootSingleTrain.addContent(priority);
+			priority.setText(String.valueOf(pR.getTraindataProjectList().get(i).getPriority()));
+
+			Element speed = new Element("Speed");
+			rootSingleTrain.addContent(speed);
+			speed.setText(String.valueOf(pR.getTraindataProjectList().get(i).getSpeed()));
+
+			Element ladung = new Element("Ladung");
+			rootSingleTrain.addContent(ladung);
+			ladung.setText(String.valueOf(pR.getTraindataProjectList().get(i).getLadung()));
+			
 			
 		}
 		
+		Element rootTimeTable = new Element("TimeTables");
+		root.addContent(rootTimeTable);
+		
+		for (int i = 0; i <= pR.getTimeTableProjectList().size(); i++){
+			
+			Element iDTimeTable = new Element("ID");
+			rootTimeTable.addContent(iDTimeTable);
+			iDTimeTable.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getId()));
 
+			Element nameTimeTable = new Element("Name");
+			rootTimeTable.addContent(nameTimeTable);
+			nameTimeTable.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getName()));
+
+			for (int y = 0; y < pR.getTimeTableProjectList().get(i).getDrivingdays().size(); y++) {
+				drivingdays = new Element("DrivingDay" + (y + 1));
+				rootTimeTable.addContent(drivingdays);
+				drivingdays.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getDrivingdays().get(y)));
+			}
+
+			Element rootStations = new Element("Stations");
+			rootTimeTable.addContent(rootStations);
+
+			Element startstation = new Element("StartStation");
+			rootStations.addContent(startstation);
+			startstation.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getStartstation()));
+
+			for (int z = 0; i < pR.getTimeTableProjectList().get(i).getMiddlestations().size(); z++) {
+				Element middlestations = new Element("MiddleStation" + (z + 1));
+				rootStations.addContent(middlestations);
+				middlestations.setText(String
+						.valueOf(String.valueOf(pR.getTimeTableProjectList().get(i).getMiddlestations().get(z))));
+			}
+
+			Element endstation = new Element("EndStation");
+			rootStations.addContent(endstation);
+			endstation.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getEndstation()));
+
+			Element rootTime = new Element("Time");
+			rootTimeTable.addContent(rootTime);
+
+			Element startHouer = new Element("StartHouer");
+			rootTime.addContent(startHouer);
+			startHouer.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getStartHouer()));
+
+			Element startMinutes = new Element("StarMinutes");
+			rootTime.addContent(startMinutes);
+			startMinutes.setText(String.valueOf(pR.getTimeTableProjectList().get(i).getStartMinutes()));
+		}
+		
+		
+		
 	}
 
 }
