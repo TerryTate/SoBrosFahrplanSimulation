@@ -6,16 +6,30 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.controller.main.Main;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class AboutUsDialog extends Dialog{
 
 	Shell parent;
 	
 
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public AboutUsDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
 	}
     
+	/**
+	 * 
+	 * 
+	 */
 	 public void open() {
 	    
 		//Message Box of About Us

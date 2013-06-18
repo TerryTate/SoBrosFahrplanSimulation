@@ -7,6 +7,7 @@ import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
@@ -39,7 +40,44 @@ public class AnimationEvents {
 					}
 				}
 			}	
-		}	
+		}
+		
+		
+	}
+	
+	public static void setAnimations(NodeMap map, Project p){
+		for(AnimationFigure af : map.getMobileObjects().values()){
+	    	TrainFigure tf = (TrainFigure)af;
+	    	NodeFigure n = tf.getNodeFigure();
+	    	
+					for(int j = 0; j < p.getTraindataProjectList().size(); j++){
+						
+						TrainData td = p.getTraindataProjectList().get(j);
+						Timetable tt = p.getTimeTableProjectList().get(j);
+						
+						if (tf.getFigureId() == td.getID()){
+						
+							if (tt.getVisits() == tt.getMiddlestations().size()){
+								
+								tf.walkTo(map, map.getNodes().get(String.valueOf(tt.getEndstation())));
+								tt.setVisits(tt.getVisits() + 1);
+							
+							}else if(tt.getVisits()  < tt.getMiddlestations().size()){
+								System.out.println(tt.getVisits());
+								System.out.println(tt.getMiddlestations().size());
+								tf.walkTo(map,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))));
+								tt.setVisits(tt.getVisits() + 1);
+							}
+								
+						}
+							
+					}
+		    		
+					
+				
+	    	
+	   
+	    }
 	}
     
     public static void updateNodeState(NodeMap map) {

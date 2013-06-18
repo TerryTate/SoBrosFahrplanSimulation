@@ -11,8 +11,18 @@ import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class TimeTableEvents {
-
+	
+	/**
+	 * 
+	 * 
+	 * @param add
+	 */
 	public static void addMiddleStation(boolean add) {
 		
 		if( add == true){
@@ -29,7 +39,11 @@ public class TimeTableEvents {
 		}
 		
 	}
-
+	
+    /**
+     * 
+     * @param add
+     */
 	public static void removeMiddleStation(boolean add) {
 		
 		if (add == true){
@@ -39,7 +53,12 @@ public class TimeTableEvents {
 		}
 	
 	}
-
+    
+	/**
+	 * 
+	 * 
+	 * 
+	 */
 	public static void addTimeTable() {
 		
 		int id = Integer.parseInt(TimetableAddDialog.idText.getText());
@@ -119,7 +138,12 @@ public class TimeTableEvents {
 		TimetableAddDialog.dialog.close();
 		
 	}
-
+    
+	/**
+	 * 
+	 * 
+	 * @param menu
+	 */
 	public static void editTimeTable(boolean menu) {
 		
 		if (menu == false){
@@ -326,7 +350,12 @@ public class TimeTableEvents {
 		}
 		
 	}
-
+	
+    /**
+     * 
+     * 
+     * @param menu
+     */
 	public static void deleteTimeTable(boolean menu) {
 	
         if (menu == false){
@@ -372,7 +401,12 @@ public class TimeTableEvents {
 		
 		
 	}
-
+	
+    /**
+     * Load a Timetable to the Tableview and to the TimetableMainList
+     * 
+     * @param tt - Timetable that is imported from an XMl File
+     */
 	public static void importTimetable(Timetable tt) {
 		
         Main.timetableListAll.add(tt);
@@ -386,7 +420,7 @@ public class TimeTableEvents {
         
 		String middleStationItems = "";
 		
-		//if (tt.getMiddlestations() != null){
+		
 			
 		    
 		
@@ -396,7 +430,7 @@ public class TimeTableEvents {
 	
 		    }
             
-		//}
+		
 		
 		TableItem item = new TableItem(CompositeTimeTable.getTimeTableTable(), SWT.NONE);
 		item.setText(new String[]{String.valueOf((tt.getId())), tt.getName(),

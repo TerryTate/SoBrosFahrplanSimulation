@@ -17,16 +17,29 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.mobile.ImageHelper;
 
-
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ProjektControllerCanvas extends Canvas {
 
 	private Group groupControlSmall;
 
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public ProjektControllerCanvas(Composite parent, int style) {
 		super(parent, style);
 		createContent();
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void createContent() {
 	    
 		// Group 
@@ -165,7 +178,7 @@ public class ProjektControllerCanvas extends Canvas {
 			         for(int i = 0; i < Main.projectListAll.size(); i++){
 			        	
 			        	 if(CompositeProject.getProjectTable().isSelected(i)){
-			        		 
+			        		 CentralEventController.save(false, 2); 
 			        		 showText = true;
 			        	 } 
 			         }

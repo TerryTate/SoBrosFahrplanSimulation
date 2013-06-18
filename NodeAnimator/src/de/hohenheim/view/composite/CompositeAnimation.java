@@ -11,13 +11,19 @@ import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.Map;
 import de.hohenheim.view.map.NodeMap;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class CompositeAnimation extends Composite{
     
 	private NodeMap map;
    
-	/*
+	/**
 	 * 
-	 * 
+	 * @param parent
+	 * @param style
 	 */
 
 	public CompositeAnimation(Composite parent, int style) {

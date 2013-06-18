@@ -17,6 +17,11 @@ import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.mobile.ImageHelper;
 import de.hohenheim.view.tab.TabFolder;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class Main {
 	
 	private static Composite tabComposite;
@@ -28,12 +33,15 @@ public class Main {
 	private static Shell shell;
 	private static Display display;
 	
-	
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		setDisplay(Display.getDefault());
         
-		setShell(new Shell());
+		shell = new Shell();
 		getShell().setText("Fahrplan Animation");
 		getShell().setImage(ImageHelper.trainTab);
 		int screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -102,27 +110,43 @@ public class Main {
 		}
 	
 	}
-
+	
+    /**
+     * 
+     * @return
+     */
 	public static TabFolder getcTabFolder() {
 		return tabFolder;
 	}
-
+	
+    /**
+     * 
+     * @param tabFolder
+     */
 	public static void setTabFolder(TabFolder tabFolder) {
 		Main.tabFolder = tabFolder;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static Shell getShell() {
 		return shell;
 	}
 
-	public static void setShell(Shell shell) {
-		Main.shell = shell;
-	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public static Display getDisplay() {
 		return display;
 	}
 
+	/**
+	 * 
+	 * @param display
+	 */
 	public static void setDisplay(Display display) {
 		Main.display = display;
 	}

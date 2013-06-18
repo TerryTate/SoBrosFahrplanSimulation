@@ -33,7 +33,11 @@ import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.mobile.ImageHelper;
 
-
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ProjectEditDialog extends Dialog{
 	
 
@@ -46,7 +50,7 @@ public class ProjectEditDialog extends Dialog{
 	private Shell dialog;
 	
 	public static Table linkTable; 
-
+    
 	public ProjectEditDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;

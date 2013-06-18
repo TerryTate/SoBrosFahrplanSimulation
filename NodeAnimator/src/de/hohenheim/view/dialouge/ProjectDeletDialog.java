@@ -10,16 +10,30 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.view.mobile.ImageHelper;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ProjectDeletDialog extends Dialog {
 	
 
 	Shell parent; 
-
+    
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public ProjectDeletDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
 	}
-    
+     
+	/**
+	 * 
+	 * 
+	 */
 	 public void open() {
 			
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);

@@ -20,17 +20,30 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.mobile.ImageHelper;
 
-
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class TimeTableControllerCanvas extends Canvas {
 	
     
 	private static Group groupControlSmall;
 	
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public TimeTableControllerCanvas(Composite parent, int style) {
 		super(parent, style);
 		createContent();
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void createContent() {
 			
 		// Group when the shellHeight < then 300 pixel

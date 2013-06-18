@@ -11,13 +11,22 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import de.hohenheim.view.canvas.TimeTableControllerCanvas;
 
-
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class CompositeTimeTable extends Composite {
     
 	private ScrolledComposite scrollComposite;
 	private GridLayout gridLayout;
 	private static Table timeTableTable;
 	
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public CompositeTimeTable(Composite parent, int style) {
 		super(parent, style);
 		
@@ -78,10 +87,20 @@ public class CompositeTimeTable extends Composite {
 		canvasControl.setLayoutData(gridData);
 	}
 
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
 	public static Table getTimeTableTable() {
 		return timeTableTable;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param timeTableTable
+	 */
 	public static void setTimeTableTable(Table timeTableTable) {
 		CompositeTimeTable.timeTableTable = timeTableTable;
 	}

@@ -1,12 +1,9 @@
 package de.hohenheim.view.tab;
 
-
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -17,7 +14,11 @@ import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.mobile.ImageHelper;
 
-
+/**
+ *  
+ * @author Arthur Kaul
+ *
+ */
 
 public class TabFolder extends CTabFolder{
 	
@@ -26,8 +27,26 @@ public class TabFolder extends CTabFolder{
 	private CompositeTimeTable compositeTimeTable;
 	private CompositeProject compositeProject;
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param parent
+	 * @param style
+	 * @param display
+	 */
 	public TabFolder(Composite parent, int style, Display display) {
 		super(parent, style);
+		createTabFolder();
+		
+	}
+
+	/**
+	 * 
+	 * 
+	 * 
+	 */
+	private void createTabFolder() {
 		
 		// Animation Tab 
 	    CTabItem cTabAnimationItem = new CTabItem(this, SWT.NULL );
@@ -57,12 +76,11 @@ public class TabFolder extends CTabFolder{
 	    compositeTimeTable = new CompositeTimeTable(this, SWT.NULL);
 	    cTabTimeTableItem.setControl(compositeTimeTable);
 	     
-	    //cTabFolder.setSimple(false);  Andere Form ist aber dann unterstrichen
 	    
 	    //Color Tab
  
-	    this.setBackground(new Color[]{display.getSystemColor(SWT.COLOR_WHITE), display.getSystemColor(SWT.COLOR_GRAY)}, new int[]{100}, true);
-	    this.setSelectionBackground(new Color[]{display.getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT), display.getSystemColor(SWT.COLOR_TITLE_BACKGROUND)}, new int[]{100}, true);
+	    this.setBackground(new Color[]{getDisplay().getSystemColor(SWT.COLOR_WHITE), getDisplay().getSystemColor(SWT.COLOR_GRAY)}, new int[]{100}, true);
+	    this.setSelectionBackground(new Color[]{getDisplay().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT), getDisplay().getSystemColor(SWT.COLOR_TITLE_BACKGROUND)}, new int[]{100}, true);
 	  
 	    GridData gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;

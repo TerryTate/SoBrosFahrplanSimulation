@@ -17,17 +17,31 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.mobile.ImageHelper;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class TrainControllerCanvas extends Canvas{
 	
 	String[] typOfTrain = {"S-Bahn", "ICE", "IC", "RegioBahn", "Güterzug", "Dampflock"};
 	
 	private static Group groupControlSmall;
 	
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public TrainControllerCanvas(Composite parent, int style) {
 		super(parent, style);
 		createContent();
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void createContent() {
 	
 		// Group 

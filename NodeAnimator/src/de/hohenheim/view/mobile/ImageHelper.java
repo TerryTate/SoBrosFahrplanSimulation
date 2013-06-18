@@ -2,6 +2,11 @@ package de.hohenheim.view.mobile;
 
 import org.eclipse.swt.graphics.Image;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ImageHelper {
 	
     //trains

@@ -26,6 +26,11 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.view.map.NodeMap;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class AnimationControllerCanvas extends Canvas{
 
 	public static NodeMap map;
@@ -38,13 +43,23 @@ public class AnimationControllerCanvas extends Canvas{
 	public static boolean run = false; 
 	public static int hour;
 	public static int min;
-	 
+	
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 * @param map
+	 */
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
 		this.map = map;
 		createContents();
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void createContents() {
 		Group group = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    group.setText("Animations Einstellungen");
@@ -148,7 +163,7 @@ public class AnimationControllerCanvas extends Canvas{
 						}
 							
 					}
-					
+					//AnimationEvents.setAnimations(map, p);
 					animationPlay = new AnimationPlay(Integer.parseInt(comboProjects.getText()), comboDrivingday.getText(), map, Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), p);
 					hour = Integer.parseInt(houre.getText());
 					min = Integer.parseInt(minutes.getText());  
@@ -161,6 +176,11 @@ public class AnimationControllerCanvas extends Canvas{
 		group.pack();
 		
 	}
+	
+	/**
+	 * 
+	 * 
+	 */
 	private void setTimerLabel() {
 		
 		if ((Integer.parseInt(houre.getText()) < 10) && Integer.parseInt(minutes.getText()) < 10){
@@ -175,6 +195,11 @@ public class AnimationControllerCanvas extends Canvas{
 		
 	}
 
+	/**
+	 * 
+	 * @param projectIDs
+	 * @return
+	 */
 	public static String[] loadProjectIDs(String[] projectIDs) {
 	    
 		for(int i=0; i < Main.projectListAll.size(); i++) {
@@ -186,6 +211,10 @@ public class AnimationControllerCanvas extends Canvas{
 		return projectIDs;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static String[] getNodeNames() {
 		Object[] names = map.getNodes().keySet().toArray();
 		String[] n = new String[names.length];
@@ -197,22 +226,27 @@ public class AnimationControllerCanvas extends Canvas{
 		return n;
 	}
 	
+	/**
+	 * 
+	 * @param n
+	 */
 	private static void bubblesort(String[] n) {
-	boolean unsortiert=true;
-	String temp;
 	
-	while (unsortiert){
-		unsortiert = false;
-		for (int i=0; i < n.length-1; i++){
-		    if(Integer.parseInt(n[i]) >= Integer.parseInt(n[i+1])){
-			    temp = n[i];
-			    n[i] = n[i+1];
-			    n[i+1] = temp;
-			    unsortiert = true;
+		boolean unsortiert=true;
+    	String temp;
+	
+	    while (unsortiert){
+		    unsortiert = false;
+		    for (int i=0; i < n.length-1; i++){
+		        if(Integer.parseInt(n[i]) >= Integer.parseInt(n[i+1])){
+			        temp = n[i];
+			        n[i] = n[i+1];
+			        n[i+1] = temp;
+			        unsortiert = true;
 			
-		    }
-		}    
-	}
+		        }
+		    }    
+	    }
 	}
 	
 	private String[] getMobileObjects() {

@@ -12,6 +12,12 @@ import de.hohenheim.view.mobile.AnimationFigure;
 import de.hohenheim.view.mobile.TrainFigure;
 import de.hohenheim.view.node.NodeFigure;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
+
 public class AnimationPlay extends Thread{
 
 	int idProject;
@@ -21,6 +27,15 @@ public class AnimationPlay extends Thread{
 	NodeMap map; 
 	Project p;
 	
+	/**
+	 * 
+	 * @param idProject
+	 * @param drivingday
+	 * @param map
+	 * @param hour
+	 * @param min
+	 * @param p
+	 */
 	public AnimationPlay(int idProject, String drivingday, NodeMap map, int hour, int min, Project p){
 		
 		this.idProject = idProject;
@@ -31,7 +46,12 @@ public class AnimationPlay extends Thread{
 		this.p = p;
 		
 	}
-	 
+	
+	/**
+	 * 
+	 *  
+	 *  
+	 */
     public void run(){
         	
         	while (AnimationControllerCanvas.run == true){ 
@@ -51,18 +71,20 @@ public class AnimationPlay extends Thread{
         	
              }
          }
-	    
+	
+    /**
+	 *     
+	 */
 	protected void draw() {
 		drawTrains();
 		
 	}
-
+    /**
+     * 
+     */
 	private void drawTrains() {
 				
-			
-					
 				
-					
 					for(int j = 0; j < p.getTraindataProjectList().size(); j++){
 						
 						Timetable tt = p.getTimeTableProjectList().get(j);
@@ -76,9 +98,11 @@ public class AnimationPlay extends Thread{
 //						    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(project.getTimeTableProjectList().get(j).getStartstation())))){
 //						    	    	System.out.println("Blocked");
 //						    	    }else{
-						    		    new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
+						    		 new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
 									           p.getTraindataProjectList().get(j).getID());
-						    		           AnimationEvents.updateNodeState(map);}
+						    		       //    AnimationEvents.updateNodeState(map);
+						    	
+						        }
 						    	    
 //						    	}				    	
 						    }
@@ -89,7 +113,10 @@ public class AnimationPlay extends Thread{
 			
 		
 	}
-
+    
+	/**
+	 * 
+	 */
 	private void update() {
 		updateAnimations();
 		updateTime();
@@ -97,29 +124,40 @@ public class AnimationPlay extends Thread{
 		
 	}
 
-    
-
+    /**
+     * 
+     */
 	private void updateStartAnimations() {
 		
-		for(AnimationFigure af : map.getMobileObjects().values()){
+		boolean animcheck = true; 
+		
+		if( animcheck == true) {
+		
+		    for(AnimationFigure af : map.getMobileObjects().values()){
 			
-			TrainFigure tf = (TrainFigure) af;
+			    TrainFigure tf = (TrainFigure) af;
 			
-			for(TrainData td : p.getTraindataProjectList()){
+		    	for(TrainData td : p.getTraindataProjectList()){
 			   
-				if(tf.getFigureId() == td.getID()){
+			    	if(tf.getFigureId() == td.getID()){
 					
-					if(!td.getAnim()){
-						 tf.startAnimation();	
-					}
+				    	if(!td.getAnim()){
+				 	     	 tf.startAnimation();	
+				 	     	 td.setAnim(true);
+				     	}
 					
-				}
+			     	}
 				   
-			}     
+			     }     
+		     }
+		    
 		}
 		
-	}
-
+     	}
+	
+    /***
+     * 
+     */
 	private void updateAnimations() {
 		
 		for(AnimationFigure af : map.getMobileObjects().values()){
@@ -138,7 +176,7 @@ public class AnimationPlay extends Thread{
 								tf.walkTo(map, map.getNodes().get(String.valueOf(tt.getEndstation())));
 								tt.setVisits(tt.getVisits() + 1);
 							
-							}else{
+							}else if(tt.getVisits()  < tt.getMiddlestations().size()){
 								
 								tf.walkTo(map,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))));
 								tt.setVisits(tt.getVisits() + 1);
@@ -158,6 +196,10 @@ public class AnimationPlay extends Thread{
 		
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void updateTime() {
 	
 	   if((AnimationControllerCanvas.min == 59) && (AnimationControllerCanvas.hour == 23)){

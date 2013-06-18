@@ -7,15 +7,29 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.main.Main;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class HelpDialog extends Dialog{
 
 	Shell parent; 
-
+    
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public HelpDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
 	}
     
+	/**
+	 * 
+	 * 
+	 */
 	 public void open() {
 			
 		 

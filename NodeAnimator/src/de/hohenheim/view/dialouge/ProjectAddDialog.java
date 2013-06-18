@@ -28,6 +28,11 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ProjectAddDialog extends Dialog {
 	
 
@@ -42,11 +47,20 @@ public class ProjectAddDialog extends Dialog {
 
 	public static Table linkTable; 
 
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public ProjectAddDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
 	}
     
+	/**
+	 * 
+	 * 
+	 */
 	 public void open() {
 			
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -229,7 +243,11 @@ public class ProjectAddDialog extends Dialog {
 	    
 		dialog.open(); 
 	}
-
+    
+	 /**
+	  * 
+	  * @return
+	  */
 	protected boolean linkTableCheckOk() {
 		message = "";
 		boolean check = true;
@@ -252,7 +270,11 @@ public class ProjectAddDialog extends Dialog {
 		
 		return check;
 	}
-
+    
+	/**
+	 * 
+	 * @return
+	 */
 	protected boolean projectCheckOk() {
 		
 		message = "";	
@@ -294,6 +316,11 @@ public class ProjectAddDialog extends Dialog {
 		return check;
 	}
 
+	/**
+	 * 
+	 * @param trainsID
+	 * @return
+	 */
 	private String[] loadTrainList(String[] trainsID) {
 		
 		for(int i=0; i < Main.trainListAll.size(); i++) {
@@ -305,6 +332,11 @@ public class ProjectAddDialog extends Dialog {
 		return trainsID;
 	}
 
+	/**
+	 * 
+	 * @param timetableID
+	 * @return
+	 */
 	private String[] loadTimetableList(String[] timetableID) {
 		
 		for(int i=0; i < Main.timetableListAll.size(); i++) {

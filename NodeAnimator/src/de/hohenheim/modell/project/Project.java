@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class Project {
 	
 	private int id; 
@@ -12,6 +17,13 @@ public class Project {
 	private ArrayList<TrainData> TraindataProjectList;
 	private ArrayList<Timetable> TimeTableProjectList;
 	
+	/**
+	 * 
+	 * @param id
+	 * @param name
+	 * @param trainList
+	 * @param timetableList
+	 */
 	public Project(int id, String name,  ArrayList<TrainData> trainList, ArrayList<Timetable> timetableList) {
 		
 		this.setId(id);
@@ -20,34 +32,66 @@ public class Project {
 		this.setTimeTableProjectList(timetableList);
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<TrainData> getTraindataProjectList() {
 		return TraindataProjectList;
 	}
 
+	/**
+	 * 
+	 * @param traindataProjectList
+	 */
 	public void setTraindataProjectList(ArrayList<TrainData> traindataProjectList) {
 		TraindataProjectList = traindataProjectList;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Timetable> getTimeTableProjectList() {
 		return TimeTableProjectList;
 	}
 
+	/**
+	 * 
+	 * @param timeTableProjectList
+	 */
 	public void setTimeTableProjectList(ArrayList<Timetable> timeTableProjectList) {
 		TimeTableProjectList = timeTableProjectList;
 	}

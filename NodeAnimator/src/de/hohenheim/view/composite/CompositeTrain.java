@@ -10,20 +10,23 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import de.hohenheim.view.canvas.TrainControllerCanvas;
 
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class CompositeTrain extends Composite{
 	
-	/*
-	 * 
-	 * 
-	 */
-	
+
 	private ScrolledComposite scrollComposite;
 	private GridLayout gridLayout;
 	private static Table trainTable;
 
-	/*
+	
+	/**
 	 * 
-	 * 
+	 * @param parent
+	 * @param style
 	 */
 	
 	public CompositeTrain(Composite parent, int style) {
@@ -81,12 +84,12 @@ public class CompositeTrain extends Composite{
 		
 		
 	}
-	
-	/*
+		
+	/**
 	 * 
 	 * 
+	 * @return
 	 */
-	
 	public static Table getTrainTable(){
 		return trainTable;
 	}

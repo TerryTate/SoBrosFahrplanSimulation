@@ -186,7 +186,7 @@ public class XmlWriter {
 		Element rootSingleTrain = new Element("Trains");
 		root.addContent(rootSingleTrain);
 		
-		for (int i = 0; i <= pR.getTraindataProjectList().size(); i++){
+		for (int i = 0; i < pR.getTraindataProjectList().size(); i++){
 			
 			Element id = new Element("ID");
 			rootSingleTrain.addContent(id);
@@ -214,7 +214,7 @@ public class XmlWriter {
 		Element rootTimeTable = new Element("TimeTables");
 		root.addContent(rootTimeTable);
 		
-		for (int i = 0; i <= pR.getTimeTableProjectList().size(); i++){
+		for (int i = 0; i < pR.getTimeTableProjectList().size(); i++){
 			
 			Element iDTimeTable = new Element("ID");
 			rootTimeTable.addContent(iDTimeTable);

@@ -53,12 +53,13 @@ public class TrainEvents {
 	}
 	
 	
-	/**
-	 * This method provides the ability to chance single trains in in the ArrayList
+    /**
+     * This method provides the ability to chance single trains in in the ArrayList
 	 * trainListAll of the Main class.
 	 * By the id this methods checks whether it is the same train you want to reedit or not.
 	 * 
-	 */
+     * @param menu
+     */
 	public static void editTrain(boolean menu) {
 		
 		if (menu == false){
@@ -177,7 +178,11 @@ public class TrainEvents {
 	    }
 	}
 
-
+    /**
+     * 
+     * 
+     * @param td
+     */
 	public static void importTrain(TrainData td) {
 	
 		Main.trainListAll.add(td);

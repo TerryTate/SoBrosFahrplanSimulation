@@ -11,8 +11,22 @@ import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.ProjectEditDialog;
 
+/**
+ * The class ProjectEvents contain Methods to add, edit, delete, import and export 
+ * a Project.
+ * 
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class ProjectEvents {
-
+	
+    /**
+     * The Methode addLink add a new Item (TrainID and TimetaleID)
+     *  to a Table in the ProjetAddDialog/ProjectEditDialog
+     * 
+     * @param add - Give the information that a Link was add in the add Dialog or in the edit Dialog
+     */
 	public static void addLink(boolean add) {
 		
 		if(add == true){
@@ -28,7 +42,14 @@ public class ProjectEvents {
 			    item.setText(1, ProjectEditDialog.comboChooseTimeTable.getText());
 		}
 	}
-
+    
+	/**
+	 *  The Methode addLink remove a selected Item (TrainID and TimetaleID)
+     *  from a Table in the ProjetAddDialog/ProjectEditDialog
+	 * 
+	 * @param add - Give the information that a Link was remove in the add Dialog or in the edit Dialog
+	 */
+	
 	public static void removeLink(boolean add){
 		
         if(add == true){
@@ -42,7 +63,15 @@ public class ProjectEvents {
 		
 	}
 	
+	/**
+	 * The Methode addProject add a new project to the MainProjectlist (Data) and to the Table in 
+	 * the CompositeProject(View) 
+	 *  
+	 */
 	public static void addProject() {
+		
+		 
+		// Iniziales all needed Datas for a Project
 		
 		int id = Integer.parseInt(ProjectAddDialog.idText.getText());
         String name = ProjectAddDialog.nameText.getText();
@@ -70,6 +99,8 @@ public class ProjectEvents {
 		
 	    Project project = new Project(id, name, trainList, timetableList);
 		
+	    // Add Project to the Mainlist 
+	    
 		Main.projectListAll.add(project);
 		
 		String trainsItem = "";
@@ -87,6 +118,8 @@ public class ProjectEvents {
 	
 		}
 		
+        // Add Project to the Table
+        
 		TableItem item = new TableItem(CompositeProject.getProjectTable(), SWT.NONE);
 		
 		item.setText(new String[]{String.valueOf(id), name, trainsItem, timetableItem});
@@ -100,6 +133,11 @@ public class ProjectEvents {
 		
 	}
 	
+	/**
+	 *  Methode deletProject delete an exist Project from the Mainlist and from the 
+	 *  Table in the CompositeProject
+	 * 
+	 */
 	public static void deletProject() {
 		
 		int i = 0;

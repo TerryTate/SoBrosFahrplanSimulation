@@ -11,7 +11,11 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import de.hohenheim.view.canvas.ProjektControllerCanvas;
 
-
+/**
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class CompositeProject extends Composite {
 	
 	  
@@ -19,11 +23,21 @@ public class CompositeProject extends Composite {
 	private GridLayout gridLayout;
 	private static Table projectTable;
 
+	/**
+	 * 
+	 * @param parent
+	 * @param style
+	 */
 	public CompositeProject(Composite parent, int style) {
 		super(parent, style);
 		createContent();
 	}
 
+	/**
+	 * 
+	 * 
+	 * 
+	 */
 	private void createContent() {
 		
 		gridLayout = new GridLayout();
@@ -72,10 +86,19 @@ public class CompositeProject extends Composite {
 		
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public static Table getProjectTable() {
 		return projectTable;
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param projectTable
+	 */
 	public static void setProjectTable(Table projectTable) {
 		CompositeProject.projectTable = projectTable;
 	}

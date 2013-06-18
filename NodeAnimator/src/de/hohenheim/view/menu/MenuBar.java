@@ -13,13 +13,11 @@ import de.hohenheim.view.mobile.ImageHelper;
 
 public class MenuBar {
     
-	/*
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
-	
+    /**
+     * 
+     * @param shell
+     * @return
+     */
 	public static Menu createMenu(Shell shell ){
 		
 		Menu menubar = new Menu(shell, SWT.BAR);
@@ -193,7 +191,7 @@ public class MenuBar {
 	           
 	    	public void widgetSelected(SelectionEvent e) {
 	    		
-	    	
+	    	     CentralEventController.openExportDialog(2);
                 
             }
         });
