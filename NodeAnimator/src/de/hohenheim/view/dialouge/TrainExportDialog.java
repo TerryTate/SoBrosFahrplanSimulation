@@ -25,13 +25,23 @@ public class TrainExportDialog {
 	Shell parent;
 	public static Combo comboTrains;
 	public static Shell dialog;
-
+    /**
+     * Constructor for a new TrainExportDialog
+     * 
+     * 
+     * @param parent
+     * @param style
+     */
 	public TrainExportDialog(Shell parent, int style) {
 		super();
 		parent = this.parent;
 		
 	}
 
+	/**
+	 * 
+	 * @param menu
+	 */
     public void open(final boolean menu) {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);

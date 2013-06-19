@@ -57,7 +57,7 @@ public class AnimationPlay extends Thread{
         	while (AnimationControllerCanvas.run == true){ 
                           
                try {
-                  sleep(100);
+                  sleep(1000);
                } catch (InterruptedException e) {
                     e.printStackTrace();
                }
@@ -101,6 +101,8 @@ public class AnimationPlay extends Thread{
 						    		 new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
 									           p.getTraindataProjectList().get(j).getID());
 						    		       //    AnimationEvents.updateNodeState(map);
+						    		 updateAnimations();
+						    		 updateStartAnimations();
 						    	
 						        }
 						    	    
@@ -118,9 +120,9 @@ public class AnimationPlay extends Thread{
 	 * 
 	 */
 	private void update() {
-		updateAnimations();
+		//updateAnimations();
 		updateTime();
-		updateStartAnimations();
+		//updateStartAnimations();
 		
 	}
 

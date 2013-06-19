@@ -28,7 +28,7 @@ public class TabFolder extends CTabFolder{
 	private CompositeProject compositeProject;
 	
 	/**
-	 * 
+	 * Constructor for a new TabFolder
 	 * 
 	 * 
 	 * @param parent
@@ -42,9 +42,9 @@ public class TabFolder extends CTabFolder{
 	}
 
 	/**
-	 * 
-	 * 
-	 * 
+	 *  Methode create the different Folders and set all GUI settings 
+	 *  for the Folder
+	 *  
 	 */
 	private void createTabFolder() {
 		
@@ -77,7 +77,7 @@ public class TabFolder extends CTabFolder{
 	    cTabTimeTableItem.setControl(compositeTimeTable);
 	     
 	    
-	    //Color Tab
+	    //Color
  
 	    this.setBackground(new Color[]{getDisplay().getSystemColor(SWT.COLOR_WHITE), getDisplay().getSystemColor(SWT.COLOR_GRAY)}, new int[]{100}, true);
 	    this.setSelectionBackground(new Color[]{getDisplay().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT), getDisplay().getSystemColor(SWT.COLOR_TITLE_BACKGROUND)}, new int[]{100}, true);

@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -23,7 +22,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.events.ProjectEvents;
-import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 
 import de.hohenheim.modell.project.Project;
@@ -42,12 +40,12 @@ public class ProjectEditDialog extends Dialog{
 	
 
 	Shell parent;
-	private Text idText;
-	private Text nameText;
+	public static Text idText;
+	public static Text nameText;
 	public static Combo comboChooseTrain;
 	public static Combo comboChooseTimeTable;
 	String message = "";
-	private Shell dialog;
+	public static Shell dialog;
 	
 	public static Table linkTable; 
     
@@ -155,8 +153,29 @@ public class ProjectEditDialog extends Dialog{
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-				 ProjectEvents.removeLink(false);  
+				 
+				 if(linkTable.getItemCount() > 0){	
+	                 boolean showText = false;
+			    	 
+			         for(int i = 0; i < linkTable.getItemCount(); i++){
+			        	
+			        	 if(linkTable.isSelected(i)){
+			        		 ProjectEvents.removeLink(false); 
+			        		 showText = true;
+			        	 } 
+			         }
+			         
+			         if(showText == false){
+			        	 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Sie haben keine Zwischenstation gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Zwischenstation !");
+				         messageBox.open();
+			         }
+				   }else{
+					     MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Es sind keine Zwischenstationen vorhanden, die gelöscht werden können!");    
+				         messageBox.open();
+				   }
 				
 			}
 		});

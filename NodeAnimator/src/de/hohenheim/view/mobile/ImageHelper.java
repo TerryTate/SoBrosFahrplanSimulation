@@ -48,4 +48,16 @@ public class ImageHelper {
     public static final Image aus = new Image(null, "img/Aus.png");
     public static final Image min = new Image(null, "img/minIcon.png");
     public static final Image hour = new Image(null, "img/hour.png");
+    
+    public static final Image play32 = new Image(null, "img/Play32.png");
+    public static final Image stop32 = new Image(null, "img/Stop32.png");
+    public static final Image pause32 = new Image(null, "img/Pause32.png");
+    
+    public static final Image play48 = new Image(null, "img/Play48.png");
+    public static final Image stop48 = new Image(null, "img/Stop48.png");
+    public static final Image pause48 = new Image(null, "img/Pause48.png");
+    
+    
+    
 }
+

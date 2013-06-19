@@ -21,9 +21,12 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
+
+import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
+import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.mobile.ImageHelper;
 
 public class TimetableAddDialog extends Dialog{
@@ -216,9 +219,29 @@ public class TimetableAddDialog extends Dialog{
 		removeButton.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				
-			    TimeTableEvents.removeMiddleStation(true);  
-				
+				  
+			        if(midlestationTable.getItemCount() > 0){	
+		                 boolean showText = false;
+				    	 
+				         for(int i = 0; i < midlestationTable.getItemCount(); i++){
+				        	
+				        	 if(midlestationTable.isSelected(i)){
+				        		 TimeTableEvents.removeMiddleStation(true); 
+				        		 showText = true;
+				        	 } 
+				         }
+				         
+				         if(showText == false){
+				        	 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+					         messageBox.setMessage("Sie haben keine Zwischenstation gewählt!" + "\r\n" + "\r\n" + 
+					        		 			   "Wählen Sie einen Zwischenstation !");
+					         messageBox.open();
+				         }
+					   }else{
+						     MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+					         messageBox.setMessage("Es sind keine Zwischenstationen vorhanden, die gelöscht werden können!");    
+					         messageBox.open();
+					   }
 			}
 		});
 		

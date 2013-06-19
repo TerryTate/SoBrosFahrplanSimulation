@@ -35,6 +35,7 @@ public class AnimationEvents {
 					    		new Train(map, map.getNodes().get(String.valueOf(project.getTimeTableProjectList().get(j).getStartstation())),
 								           project.getTraindataProjectList().get(j).getID());
 					    		
+					    		
 					    	}				    	
 					    }
 					}

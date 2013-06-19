@@ -163,7 +163,28 @@ public class ProjectAddDialog extends Dialog {
 			
 			public void handleEvent(Event arg0) {
 				
-			    ProjectEvents.removeLink(true);  
+			    if(linkTable.getItemCount() > 0){	
+	                 boolean showText = false;
+			    	 
+			         for(int i = 0; i < linkTable.getItemCount(); i++){
+			        	
+			        	 if(linkTable.isSelected(i)){
+			        		 ProjectEvents.removeLink(true); 
+			        		 showText = true;
+			        	 } 
+			         }
+			         
+			         if(showText == false){
+			        	 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Sie haben keine Zwischenstation gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie einen Zwischenstation !");
+				         messageBox.open();
+			         }
+				   }else{
+					     MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
+				         messageBox.setMessage("Es sind keine Zwischenstationen vorhanden, die gelöscht werden können!");    
+				         messageBox.open();
+				   }
 				
 			}
 		});

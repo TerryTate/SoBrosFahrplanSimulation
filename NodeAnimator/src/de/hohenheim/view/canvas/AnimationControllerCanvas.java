@@ -25,6 +25,7 @@ import de.hohenheim.controller.main.Main;
 
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.view.map.NodeMap;
+import de.hohenheim.view.mobile.ImageHelper;
 
 /**
  * 
@@ -61,6 +62,10 @@ public class AnimationControllerCanvas extends Canvas{
 	 * 
 	 */
 	private void createContents() {
+		GridLayout gridLayout1 = new GridLayout ();
+		gridLayout1.numColumns = 1; 
+		
+		this.setLayout(gridLayout1);
 		Group group = new Group(this, SWT.SHADOW_ETCHED_IN);
 	    group.setText("Animations Einstellungen");
         GridLayout gridLayout = new GridLayout();
@@ -75,8 +80,10 @@ public class AnimationControllerCanvas extends Canvas{
 		comboProjects = new Combo(group, SWT.READ_ONLY);
 		String[] projectIDs = new String [Main.projectListAll.size()];
 		comboProjects.setItems(loadProjectIDs(projectIDs));
+		comboProjects.select(0);
 		GridData gridData = new GridData();
 		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
 		comboProjects.setLayoutData(gridData);
 		comboProjects.addSelectionListener(new SelectionListener() {
 		       
@@ -114,7 +121,7 @@ public class AnimationControllerCanvas extends Canvas{
 		Label m = new Label(timeComposite, SWT.NONE);
 		m.setText("  m");
 		
-		//
+		// Drivingday
 		
 		Label drivingday = new Label(group, SWT.NONE);
 		drivingday.setText("Fahrtag wählen:");
@@ -122,30 +129,44 @@ public class AnimationControllerCanvas extends Canvas{
 		comboDrivingday = new Combo(group, SWT.READ_ONLY);
 		
 		comboDrivingday.setItems(drivingdayItems);
+		comboDrivingday.select(0);
 		gridData = new GridData();
 		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
 		comboDrivingday.setLayoutData(gridData);
 		
-		//
+		// Animation Speed 
 		
 		Label animationSpeed= new Label(group, SWT.NONE);
-		animationSpeed.setText("Animationsgeschwindigkeit:");
+		animationSpeed.setText("Geschwindigkeit : ");
 		
 		Scale scaleAnimationSpeed = new Scale(group, SWT.HORIZONTAL);
 		gridData = new GridData ();
 		gridData.horizontalSpan = 2;
 		scaleAnimationSpeed.setLayoutData(gridData);
 		scaleAnimationSpeed.setMinimum(0);
-		scaleAnimationSpeed.setMaximum(100);
+		scaleAnimationSpeed.setMaximum(50);
 		
-		timer = new Label(group, SWT.NONE);
+		group.pack();
+		
+		
+		Group group2 = new Group(this, SWT.SHADOW_ETCHED_IN | SWT.FILL);
+	    group2.setText("Animations Einstellungen");
+        GridLayout gridLayout2 = new GridLayout();
+        gridLayout2.numColumns = 3;
+        
+	    group2.setLayout(gridLayout2);
+		
+		timer = new Label(group2, SWT.NONE);
 		setTimerLabel();
-		
-		animationSpeed.setText("");
+		gridData = new GridData();
+		gridData.horizontalSpan = 3;
+		gridData.horizontalAlignment = SWT.CENTER;
 	
-		Button play = new Button(group, SWT.NONE);
-		play.setBounds(5, 75, 32, 32);
-		play.setToolTipText("Play");
+		timer.setLayoutData(gridData);
+	
+		Button play = new Button(group2, SWT.NONE);
+		play.setImage(ImageHelper.play48);
 		play.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
@@ -173,7 +194,28 @@ public class AnimationControllerCanvas extends Canvas{
 			}
 		});
 		
-		group.pack();
+		
+		Button pause = new Button(group2, SWT.NONE);
+		pause.setImage(ImageHelper.pause48);
+		pause.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+			   
+				
+			}
+		});
+		
+		Button stop = new Button(group2, SWT.NONE);
+		stop.setImage(ImageHelper.stop48);
+		stop.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event arg0) {
+			   
+				
+			}
+		});
+		
+	   
 		
 	}
 	

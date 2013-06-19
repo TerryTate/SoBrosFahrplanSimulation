@@ -14,6 +14,7 @@ import de.hohenheim.view.mobile.ImageHelper;
 public class MenuBar {
     
     /**
+     * Methode create all MenuItems and set all SelectionListener for them
      * 
      * @param shell
      * @return

@@ -8,8 +8,10 @@ import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
+import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.ProjectEditDialog;
+import de.hohenheim.view.dialouge.TimetableEditDialog;
 
 /**
  * The class ProjectEvents contain Methods to add, edit, delete, import and export 
@@ -130,6 +132,68 @@ public class ProjectEvents {
 	}
 
 	public static void editProject(){
+		
+		ArrayList<TrainData> trainsID = new ArrayList<TrainData>();
+		ArrayList<Timetable> timetableID = new ArrayList<Timetable>();
+		
+		TableItem [] rowData = CompositeProject.getProjectTable().getSelection();
+		
+    	String idText = ProjectEditDialog.idText.getText();
+	    int id = Integer.parseInt(idText);
+	
+    	int idCheck = Integer.parseInt(rowData[0].getText(0));
+	
+	    for (Project p : Main.projectListAll){
+		
+		    if (idCheck == p.getId()){
+			    p.setId(id);
+			    p.setName(ProjectEditDialog.nameText.getText());
+			   
+			    for(int i = 0; i < ProjectEditDialog.linkTable.getItemCount(); i++){
+			    	
+			    	for(int j = 0; j < Main.trainListAll.size(); j++){
+			    		TrainData td = Main.trainListAll.get(j);
+			    		if(Integer.parseInt(ProjectEditDialog.linkTable.getItem(i).getText(0)) == td.getID()){
+			    			trainsID.add(td);
+			    		}
+			    	}
+			    	
+			    	for(int j = 0; j < Main.timetableListAll.size(); j++){
+			    		Timetable tt = Main.timetableListAll.get(j);
+			    		if(Integer.parseInt(ProjectEditDialog.linkTable.getItem(i).getText(1)) == tt.getId()){
+			    			timetableID.add(tt);
+			    		}
+			    	}
+					
+			    }
+			    p.setTimeTableProjectList(timetableID);
+			    p.setTraindataProjectList(trainsID);
+	    	}
+	    }
+    
+        String trainsItem = "";
+		
+		for( int i = 0; i < trainsID.size(); i++){
+			
+			trainsItem = trainsItem + trainsID.get(i).getID() + "; " ;
+		}
+		
+		String timetableItem = "";
+		
+        for( int i = 0; i < timetableID.size(); i++){
+			
+			timetableItem = timetableItem + timetableID.get(i).getId() + "; " ;
+	
+		}
+	    
+	    rowData[0].setText(0, idText);
+	    rowData[0].setText(1, ProjectEditDialog.nameText.getText());
+ 	    rowData[0].setText(2, trainsItem);
+ 	    rowData[0].setText(3, timetableItem);
+ 	  
+ 	    	    
+ 	   ProjectEditDialog.dialog.close();
+		
 		
 	}
 	
