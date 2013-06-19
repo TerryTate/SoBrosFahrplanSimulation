@@ -94,11 +94,20 @@ public class AnimationEvents {
 
 	public static boolean isBlocked(NodeFigure nodeFigure) {
 	
-		if(State.statemap.get(nodeFigure).geState() == State.BLOCKED ){
+//		System.out.println(nodeFigure);
+		System.out.println(State.statemap.get(nodeFigure.getName()).geState());
+		
+		if(State.statemap.get(nodeFigure.getName()).geState() == State.BLOCKED ){
 			return true;
 		}else{
 			return false;
 		}
+		
+	}
+
+	public static void setNodeBlocked(int node) {
+		
+		State.statemap.get(String.valueOf(node)).setState(State.BLOCKED);
 		
 	}
 

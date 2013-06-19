@@ -1,5 +1,6 @@
 package de.hohenheim.controller.events;
 
+
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
@@ -18,7 +19,7 @@ import de.hohenheim.view.node.NodeFigure;
  *
  */
 
-public class AnimationPlay extends Thread{
+public class AnimationPlay implements Runnable{
 
 	int idProject;
 	String drivingday;
@@ -55,20 +56,10 @@ public class AnimationPlay extends Thread{
     public void run(){
         	
         	while (AnimationControllerCanvas.run == true){ 
-                          
-               try {
-                  sleep(1000);
-               } catch (InterruptedException e) {
-                    e.printStackTrace();
-               }
-               Main.getDisplay().asyncExec(new Runnable(){
-                  public void run() {
-                	  
+                            	  
                       draw();
                       update();
-                  }
-               });
-        	
+                      map.getDisplay().timerExec(1000, this);        	
              }
          }
 	
@@ -84,6 +75,7 @@ public class AnimationPlay extends Thread{
      */
 	private void drawTrains() {
 				
+		            
 				
 					for(int j = 0; j < p.getTraindataProjectList().size(); j++){
 						
@@ -95,18 +87,17 @@ public class AnimationPlay extends Thread{
 						    	
 						    	if((tt.getStartHouer() == AnimationControllerCanvas.hour) && (tt.getStartMinutes() == AnimationControllerCanvas.min)){
 						    	  
-//						    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(project.getTimeTableProjectList().get(j).getStartstation())))){
-//						    	    	System.out.println("Blocked");
-//						    	    }else{
+						    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())))){
+						    	    	
+						    	    }else{
 						    		 new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
 									           p.getTraindataProjectList().get(j).getID());
-						    		       //    AnimationEvents.updateNodeState(map);
-						    		 updateAnimations();
-						    		 updateStartAnimations();
+						    		 AnimationEvents.setNodeBlocked(p.getTimeTableProjectList().get(j).getStartstation());
+						    		      
 						    	
 						        }
 						    	    
-//						    	}				    	
+						    	}				    	
 						    }
 						}
 					}
@@ -120,9 +111,9 @@ public class AnimationPlay extends Thread{
 	 * 
 	 */
 	private void update() {
-		//updateAnimations();
+		updateAnimations();
 		updateTime();
-		//updateStartAnimations();
+		updateStartAnimations();
 		
 	}
 
@@ -139,18 +130,18 @@ public class AnimationPlay extends Thread{
 			
 			    TrainFigure tf = (TrainFigure) af;
 			
-		    	for(TrainData td : p.getTraindataProjectList()){
+		    //	for(TrainData td : p.getTraindataProjectList()){
 			   
-			    	if(tf.getFigureId() == td.getID()){
+			    	//if(tf.getFigureId() == td.getID()){
 					
-				    	if(!td.getAnim()){
+				    //	if(!td.getAnim()){
 				 	     	 tf.startAnimation();	
-				 	     	 td.setAnim(true);
-				     	}
+				 	   //  	 td.setAnim(true);
+				     //	}
 					
-			     	}
+			    // 	}
 				   
-			     }     
+			//     }     
 		     }
 		    
 		}
@@ -228,6 +219,11 @@ public class AnimationPlay extends Thread{
 	
 		   AnimationControllerCanvas.timer.setText("Timer : " + "0" + AnimationControllerCanvas.hour + " : " + AnimationControllerCanvas.min);
 	   }
+		
+	}
+
+	public void start() {
+		run();
 		
 	}
 

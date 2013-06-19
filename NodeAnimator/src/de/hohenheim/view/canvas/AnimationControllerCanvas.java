@@ -89,7 +89,7 @@ public class AnimationControllerCanvas extends Canvas{
 		       
 	    	public void widgetSelected(SelectionEvent e) {
 	          
-	    	    AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
+	    	   // AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
 	    		
 	        }
 
@@ -174,7 +174,7 @@ public class AnimationControllerCanvas extends Canvas{
 				if (run == false){
 					setTimerLabel();
 					run = true;
-					AnimationPlay animationPlay;
+				
 					Project p = null;
 					for (Project project : Main.projectListAll) {
 							
@@ -184,11 +184,11 @@ public class AnimationControllerCanvas extends Canvas{
 						}
 							
 					}
-					//AnimationEvents.setAnimations(map, p);
-					animationPlay = new AnimationPlay(Integer.parseInt(comboProjects.getText()), comboDrivingday.getText(), map, Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), p);
+					AnimationPlay animationPlay = new AnimationPlay(Integer.parseInt(comboProjects.getText()), comboDrivingday.getText(), map, Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), p);
 					hour = Integer.parseInt(houre.getText());
 					min = Integer.parseInt(minutes.getText());  
 					animationPlay.start();
+			
 			    }
 				
 			}
@@ -201,6 +201,7 @@ public class AnimationControllerCanvas extends Canvas{
 			@Override
 			public void handleEvent(Event arg0) {
 			   
+				
 				
 			}
 		});
