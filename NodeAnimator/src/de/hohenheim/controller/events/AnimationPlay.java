@@ -57,9 +57,10 @@ public class AnimationPlay implements Runnable{
         	
         	while (AnimationControllerCanvas.run == true){ 
                             	  
+                     
+                  //    map.getDisplay().timerExec(1000, this);   
                       draw();
                       update();
-                      map.getDisplay().timerExec(1000, this);        	
              }
          }
 	
