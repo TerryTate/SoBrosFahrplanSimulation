@@ -315,7 +315,27 @@ public class TimetableAddDialog extends Dialog{
 	    
 	    dialog.open();
 	}
-
+	 
+	protected boolean farplannameCheck(){
+			
+		boolean nameCheck = true;
+		
+		try{
+			if(fahrplannameText.getText().equalsIgnoreCase("")){
+				message = message + "Bitte geben Sie einen Fahrplan-Name ein!\n"+"\r\n";
+				nameCheck = false;
+			}
+		}catch (NumberFormatException e){
+				
+				message = message + "Achtung zahlen";
+				
+				nameCheck = false;
+			}
+		
+	
+		return nameCheck;
+	}
+	 
 	protected boolean middleStationCheck() {
 		message = "";
 		if(midlestationTable.getItemCount() > 0){
@@ -350,11 +370,14 @@ public class TimetableAddDialog extends Dialog{
 			if(fahrplannameText.getText().equalsIgnoreCase("")){
 				message = message + "Bitte geben Sie einen Fahrplan-Name ein!\n"+"\r\n";
 				check = false;
+			}else if (fahrplannameText.getText().isEmpty()){
+				
+				message = message + "bla bla bla";
 			}
 			
 			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
 				message = message + "Die Startstation und Endstation dürfen nur die \n" +
-						     		"selben sein wenn die Zwischenstationen nicht leer sind!\n";
+						     		"selben sein wenn die Zwischenstationen nicht leer sind!\n"+"\r\n";
 				check = false;
 			}
 			try{	
@@ -368,7 +391,7 @@ public class TimetableAddDialog extends Dialog{
 				    if(id == Main.timetableListAll.get(j).getId()){
 				    	message = message + "Diese Fahrplan-ID ist bereits vorhanden. " +
 				    			"Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n" +
-				        		"und versuchen Sie es erneut.\n"+"\r\n";
+				        		"und versuchen Sie es erneut.\n"+"\r\n"+"\r\n";
 				    	check = false;
 				    	
 				    }
@@ -377,7 +400,7 @@ public class TimetableAddDialog extends Dialog{
 	    	}catch(NumberFormatException e){
 				
 				message = message + "Die Fahrplan ID darf nur aus Zahlen bestehen und muss mindestens \n"+
-		        		"eine Ziffer enthalten!"+"\r\n";
+		        		"eine Ziffer enthalten!"+"\r\n"+"\r\n";
 				check = false;
 				
 			}	

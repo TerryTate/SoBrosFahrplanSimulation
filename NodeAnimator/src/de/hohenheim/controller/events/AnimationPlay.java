@@ -19,7 +19,7 @@ import de.hohenheim.view.node.NodeFigure;
  *
  */
 
-public class AnimationPlay implements Runnable{
+public class AnimationPlay extends Thread{
 
 	int idProject;
 	String drivingday;
@@ -27,6 +27,11 @@ public class AnimationPlay implements Runnable{
 	int min;
 	NodeMap map; 
 	Project p;
+	boolean start = false;
+	boolean stop = true;
+	boolean pause = false;
+	
+	int drawTrainCounter = 0;
 	
 	/**
 	 * 
@@ -54,15 +59,30 @@ public class AnimationPlay implements Runnable{
 	 *  
 	 */
     public void run(){
-        	
-        	while (AnimationControllerCanvas.run == true){ 
-                            	  
-                     
-                  //    map.getDisplay().timerExec(1000, this);   
+    	    AnimationEvents.setNodeBlocked(5);
+    	    Runnable r = new Runnable(){
+               public void run(){
+            	  try{
                       draw();
                       update();
-             }
-         }
+                      sleep(AnimationControllerCanvas.scaleAnimationSpeed.getSelection());
+            	  }catch(InterruptedException e){
+            		  
+            	  }
+                }
+            };
+        	while (AnimationControllerCanvas.run == true){ 
+        		Main.getDisplay().asyncExec(r);
+        		try {
+        
+                    sleep(100);
+                } catch (InterruptedException e) {
+                	
+                }
+            }
+        	
+             
+    }
 	
     /**
 	 *     
@@ -76,36 +96,35 @@ public class AnimationPlay implements Runnable{
      */
 	private void drawTrains() {
 				
-		            
+        if (drawTrainCounter < p.getTraindataProjectList().size()){
 				
-					for(int j = 0; j < p.getTraindataProjectList().size(); j++){
+			for(int j = 0; j < p.getTraindataProjectList().size(); j++){
 						
-						Timetable tt = p.getTimeTableProjectList().get(j);
+			    Timetable tt = p.getTimeTableProjectList().get(j);
 						
-						for(int i = 0; i < tt.getDrivingdays().size(); i++){
+				for(int i = 0; i < tt.getDrivingdays().size(); i++){
 							
-						    if(tt.getDrivingdays().get(i).equalsIgnoreCase(drivingday)){
+					if(tt.getDrivingdays().get(i).equalsIgnoreCase(drivingday)){
 						    	
-						    	if((tt.getStartHouer() == AnimationControllerCanvas.hour) && (tt.getStartMinutes() == AnimationControllerCanvas.min)){
+				    	if((tt.getStartHouer() == AnimationControllerCanvas.hour) && (tt.getStartMinutes() == AnimationControllerCanvas.min)){
 						    	  
-						    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())))){
+				    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())))){
 						    	    	
-						    	    }else{
-						    		 new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
-									           p.getTraindataProjectList().get(j).getID());
-						    		 AnimationEvents.setNodeBlocked(p.getTimeTableProjectList().get(j).getStartstation());
-						    		      
+				    	    }else{
+	    			    	    new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
+    					        p.getTraindataProjectList().get(j).getID());
+						    	AnimationEvents.setNodeBlocked(p.getTimeTableProjectList().get(j).getStartstation());
+						    	drawTrainCounter++;	    
 						    	
-						        }
-						    	    
-						    	}				    	
-						    }
-						}
-					}
-					
 				
-			
-		
+						    }
+						    	    
+						}				    	
+				    }
+				}
+			}
+        }			
+					
 	}
     
 	/**
@@ -156,38 +175,31 @@ public class AnimationPlay implements Runnable{
 		
 		for(AnimationFigure af : map.getMobileObjects().values()){
 	    	TrainFigure tf = (TrainFigure)af;
-	    	NodeFigure n = tf.getNodeFigure();
 	    	
-					for(int j = 0; j < p.getTraindataProjectList().size(); j++){
+			for(int j = 0; j < p.getTraindataProjectList().size(); j++){
 						
-						TrainData td = p.getTraindataProjectList().get(j);
-						Timetable tt = p.getTimeTableProjectList().get(j);
+				TrainData td = p.getTraindataProjectList().get(j);
+				Timetable tt = p.getTimeTableProjectList().get(j);
 						
-						if (tf.getFigureId() == td.getID()){
+				if (tf.getFigureId() == td.getID()){
 						
-							if (tt.getVisits() == tt.getMiddlestations().size()){
+					if (tt.getVisits() == tt.getMiddlestations().size()){
 								
-								tf.walkTo(map, map.getNodes().get(String.valueOf(tt.getEndstation())));
-								tt.setVisits(tt.getVisits() + 1);
+						tf.walkTo(map, map.getNodes().get(String.valueOf(tt.getEndstation())));
+						tt.setVisits(tt.getVisits() + 1);
 							
-							}else if(tt.getVisits()  < tt.getMiddlestations().size()){
+					}else if(tt.getVisits()  < tt.getMiddlestations().size()){
 								
-								tf.walkTo(map,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))));
-								tt.setVisits(tt.getVisits() + 1);
-							}
-								
-						}
-							
+						tf.walkTo(map,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))));
+						tt.setVisits(tt.getVisits() + 1);
 					}
+								
+				}
+							
+			}
 		    		
-					
-				
-	    	
-	   
 	    }
-			
-		
-		
+				
 	}
 
 	/**
@@ -198,6 +210,7 @@ public class AnimationPlay implements Runnable{
 	
 	   if((AnimationControllerCanvas.min == 59) && (AnimationControllerCanvas.hour == 23)){
 		   AnimationControllerCanvas.run = false;
+		   start = false;
 		   AnimationControllerCanvas.min = 0;
 		   AnimationControllerCanvas.hour = 0;
 	   }else if (AnimationControllerCanvas.min < 59){
@@ -220,11 +233,6 @@ public class AnimationPlay implements Runnable{
 	
 		   AnimationControllerCanvas.timer.setText("Timer : " + "0" + AnimationControllerCanvas.hour + " : " + AnimationControllerCanvas.min);
 	   }
-		
-	}
-
-	public void start() {
-		run();
 		
 	}
 

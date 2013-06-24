@@ -460,7 +460,7 @@ public class TimetableEditDialog extends Dialog{
 			
 			if(comboStartstation.getText().equalsIgnoreCase(comboEndstation.getText()) && (midlestationTable.getItemCount() == 0)){
 				message = message + "Die Startstation und Endstation dürfen nur die \n" +
-						            "selben sein wenn die Zwischenstationen nicht leer sind!\n";
+						            "selben sein wenn die Zwischenstationen nicht leer sind!\n"+"\r\n";
 				check = false;
 			}
 			
@@ -494,7 +494,7 @@ public class TimetableEditDialog extends Dialog{
     	}catch(NumberFormatException e){
 			
 			message = message + "Die Zug ID darf nur aus Zahlen bestehen \n" +
-	        		"und muss mindestens eine Ziffer haben! \n";
+	        		"und muss mindestens eine Ziffer haben! \n"+"\r\n";
 			check = false;
 			
 		}

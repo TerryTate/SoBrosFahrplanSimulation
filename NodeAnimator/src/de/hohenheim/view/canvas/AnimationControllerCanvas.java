@@ -40,6 +40,7 @@ public class AnimationControllerCanvas extends Canvas{
 	public static Spinner minutes;
 	public static Combo comboDrivingday;
 	String [] drivingdayItems= {"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
+	public static Scale scaleAnimationSpeed;
 	public static Label timer;
 	public static boolean run = false; 
 	public static int hour;
@@ -89,7 +90,7 @@ public class AnimationControllerCanvas extends Canvas{
 		       
 	    	public void widgetSelected(SelectionEvent e) {
 	          
-	    	   // AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
+	    	   //AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
 	    		
 	        }
 
@@ -140,12 +141,12 @@ public class AnimationControllerCanvas extends Canvas{
 		Label animationSpeed= new Label(group, SWT.NONE);
 		animationSpeed.setText("Geschwindigkeit : ");
 		
-		Scale scaleAnimationSpeed = new Scale(group, SWT.HORIZONTAL);
+		scaleAnimationSpeed = new Scale(group, SWT.HORIZONTAL);
 		gridData = new GridData ();
 		gridData.horizontalSpan = 2;
 		scaleAnimationSpeed.setLayoutData(gridData);
-		scaleAnimationSpeed.setMinimum(0);
-		scaleAnimationSpeed.setMaximum(50);
+		scaleAnimationSpeed.setMinimum(100);
+		scaleAnimationSpeed.setMaximum(1000);
 		
 		group.pack();
 		

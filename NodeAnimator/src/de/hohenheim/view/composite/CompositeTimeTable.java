@@ -92,7 +92,7 @@ public class CompositeTimeTable extends Composite {
 	                if (value1 <= value2) {
 	                  String[] values = { items[i].getText(0),
 	                      items[i].getText(1), items[i].getText(2),
-	                      items[i].getText(3),items[i].getText(4)};
+	                      items[i].getText(3),items[i].getText(4) ,items[i].getText(5)};
 	                  items[i].dispose();
 	                  TableItem item = new TableItem(timeTableTable, SWT.NONE, j);
 	                  item.setText(values);
@@ -116,7 +116,7 @@ public class CompositeTimeTable extends Composite {
 	                if (collator.compare(value1, value2) < 0) {
 	                  String[] values = { items[i].getText(0),
 	                      items[i].getText(1), items[i].getText(2),
-	                      items[i].getText(3),items[i].getText(4)};
+	                      items[i].getText(3),items[i].getText(4),items[i].getText(5)};
 	                  items[i].dispose();
 	                  TableItem item = new TableItem(timeTableTable, SWT.NONE, j);
 	                  item.setText(values);
@@ -137,10 +137,10 @@ public class CompositeTimeTable extends Composite {
 	              int value1 = Integer.parseInt(items[i].getText(4));
 	              for (int j = 0; j < i; j++) {
 	                int value2 = Integer.parseInt(items[j].getText(4));
-	                if (value1 <= value2) {
+	                if (value1 < value2) {
 	                  String[] values = { items[i].getText(0),
 	                      items[i].getText(1), items[i].getText(2),
-	                      items[i].getText(3),items[i].getText(4)};
+	                      items[i].getText(3),items[i].getText(4),items[i].getText(5)};
 	                  items[i].dispose();
 	                  TableItem item = new TableItem(timeTableTable, SWT.NONE, j);
 	                  item.setText(values);
@@ -161,10 +161,10 @@ public class CompositeTimeTable extends Composite {
 	              int value1 = Integer.parseInt(items[i].getText(5));
 	              for (int j = 0; j < i; j++) {
 	                int value2 = Integer.parseInt(items[j].getText(5));
-	                if (value1 <= value2) {
+	                if (value1 < value2) {
 	                  String[] values = { items[i].getText(0),
 	                      items[i].getText(1), items[i].getText(2),
-	                      items[i].getText(3),items[i].getText(4)};
+	                      items[i].getText(3),items[i].getText(4), items[i].getText(5)};
 	                  items[i].dispose();
 	                  TableItem item = new TableItem(timeTableTable, SWT.NONE, j);
 	                  item.setText(values);
