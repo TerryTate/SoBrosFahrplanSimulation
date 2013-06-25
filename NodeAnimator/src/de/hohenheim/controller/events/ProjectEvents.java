@@ -8,10 +8,8 @@ import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.composite.CompositeProject;
-import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.ProjectEditDialog;
-import de.hohenheim.view.dialouge.TimetableEditDialog;
 
 /**
  * The class ProjectEvents contain Methods to add, edit, delete, import and export 

@@ -1,12 +1,9 @@
 package de.hohenheim.view.dialouge;
 
-
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -29,7 +26,7 @@ public class TrainAddDialog extends Dialog{
 	
 	Shell parent;
 	String[] typs = {"S-Bahn", "ICE", "IC", "RegioBahn", "Güterzug", "Dampflock"};
-	String[] speeds = {"80", "120", "150", "200", "300"};
+	String[] speeds = {"100", "150", "200", "250", "300"};
 	String[] priorities = {"Sehr wichtig", "Wichtig", "Normal", "Irrelevant"};
 	String[] ladung = {"keine", "Rohstoffe", "Müll", "Fertige Produkte", "Brennstoffe"};
 	

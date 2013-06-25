@@ -2,7 +2,7 @@ package de.hohenheim.modell.dijkstra;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import de.hohenheim.modell.State;
 import de.hohenheim.view.mobile.Utility;
 import de.hohenheim.view.path.PathFigure;
 import de.hohenheim.view.node.NodeFigure;
@@ -40,16 +40,53 @@ public class Graph {
 			NodeFigure erf = Utility.getNextNode(pas.get(j), room);
 			Node end = getNode(erf);
 			Edge e = new Edge(pas.get(j), start, end);
+			
 			if(node_edges.get(start) == null) {
 				  node_edges.put(start, new ArrayList<Edge>());
 			}
+			
 			node_edges.get(start).add(e);
 			edges.add(e);
 		  }
 	  }	  
   }
   
-  public ArrayList<Node> getNodes() {
+  public Graph(ArrayList<NodeFigure> nodeList,
+		HashMap<NodeFigure, ArrayList<PathFigure>> paths, NodeFigure start1) {
+	  
+		
+			for (int i = 0; i < nodeList.size(); i++) {
+				Node node = new Node(nodeList.get(i));
+				nodes.add(node);
+				nodehashMap.put(nodeList.get(i), node);
+			}
+			for (int i = 0; i < nodes.size(); i++) {
+				Node start = nodes.get(i);
+				NodeFigure room = start.getNode();
+
+				ArrayList<PathFigure> pas = paths.get(room);
+
+				for (int j = 0; j < pas.size(); j++) {
+					NodeFigure erf = Utility.getNextNode(pas.get(j), room);
+
+					if (node_edges.get(start) == null) {
+						node_edges.put(start, new ArrayList<Edge>());
+					}
+
+					if (State.statemap.get(start.getNode().getName()).geState() == State.UNBLOCKED
+							|| room == start1) {
+						Node end = getNode(erf);
+						Edge e = new Edge(pas.get(j), start, end);
+
+						node_edges.get(start).add(e);
+						node_edges.get(start).size();
+						edges.add(e);
+					}
+				}
+			}
+}
+
+public ArrayList<Node> getNodes() {
 	  return this.nodes;
   }
   
@@ -74,7 +111,8 @@ public class Graph {
   }
   private void dijkstra(Node start, ArrayList<Node> Q) {
 	  initialize(start, Q);
-	 
+	  
+	  
 	  while (Q.size()>0) {		  
 		  int tmp_index=-1;
 		  Node n=null;
@@ -137,7 +175,7 @@ public class Graph {
 	  }
 	  
 	  for(int i=0; i<retVal.size(); i++) {
-	      System.out.println(retVal.get(i).getNode().getName());
+	     System.out.println(retVal.get(i).getNode().getName());
 	  }
 	  return retVal;
   }

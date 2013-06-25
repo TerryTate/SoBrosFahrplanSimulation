@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -24,14 +23,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeTimeTable;
-import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.mobile.ImageHelper;
 
 public class TimetableEditDialog extends Dialog{
@@ -172,6 +168,7 @@ public class TimetableEditDialog extends Dialog{
 	    dienstag.setText("Dienstag");
 	    
 	    Label room = new Label(dialog, SWT.NONE);
+	    room.setText("");
 	    
 	    mittwoch = new Button(dialog, SWT.CHECK);
 	    mittwoch.setText("Mittwoch");
@@ -179,6 +176,7 @@ public class TimetableEditDialog extends Dialog{
         donerstag.setText("Donerstag");
         
         Label room1 = new Label(dialog, SWT.NONE);
+        room1.setText("");
         
 	    freitag = new Button(dialog, SWT.CHECK);
 	    freitag.setText("Freitag");
@@ -186,6 +184,7 @@ public class TimetableEditDialog extends Dialog{
 	    samstag.setText("Samstag");
 	    
 	    Label room3 = new Label(dialog, SWT.NONE);
+	    room3.setText("");
 	    
 	    sontag = new Button(dialog, SWT.CHECK);
 	    sontag.setText("Sontag");
@@ -286,7 +285,8 @@ public class TimetableEditDialog extends Dialog{
 		});
 		
 		Label room6 = new Label(dialog, SWT.NONE);
-	    
+	    room6.setText("");
+		
 		Composite tableComposite = new Composite(dialog, SWT.NONE);
 		gridData = new GridData();
 		gridData.horizontalSpan = 2; 

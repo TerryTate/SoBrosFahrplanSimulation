@@ -2,12 +2,9 @@ package de.hohenheim.view.dialouge;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
-
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**

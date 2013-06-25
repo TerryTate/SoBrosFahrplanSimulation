@@ -1,7 +1,6 @@
 package de.hohenheim.view.canvas;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -23,8 +22,6 @@ import de.hohenheim.view.mobile.ImageHelper;
  *
  */
 public class TrainControllerCanvas extends Canvas{
-	
-	String[] typOfTrain = {"S-Bahn", "ICE", "IC", "RegioBahn", "Güterzug", "Dampflock"};
 	
 	private static Group groupControlSmall;
 	

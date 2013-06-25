@@ -6,7 +6,6 @@ import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.view.composite.CompositeTimeTable;
-import de.hohenheim.view.composite.CompositeTrain;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;

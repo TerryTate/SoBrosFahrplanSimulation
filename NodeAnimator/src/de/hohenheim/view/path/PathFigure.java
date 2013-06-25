@@ -34,6 +34,8 @@ public class PathFigure extends PolylineConnection {
 	   */
 	  private Object modellObject;
 
+	private int pathSpeed;
+
 	  
 	  /**
 	   * The constructor sets a {@link BendpointConnectionRouter} to draw the path
@@ -73,6 +75,7 @@ public class PathFigure extends PolylineConnection {
 	    LineAttributes attr = new LineAttributes(LINE_WIDTH);
 	    this.setLineAttributes(attr);
 	    this.modellObject=modellObject;
+	    this.pathSpeed = pathSpeed;
 	    
 	  }
 	  
@@ -100,5 +103,9 @@ public class PathFigure extends PolylineConnection {
 	   */
 	  public double getDistance() {
 		  return Utility.getDistance(this);
+	  }
+	  
+	  public int getPathSpeed(){
+		  return this.pathSpeed;
 	  }
 	}

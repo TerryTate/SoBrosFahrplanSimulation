@@ -1,7 +1,5 @@
 package de.hohenheim.view.canvas;
 
-import java.util.Arrays;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -18,11 +16,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Spinner;
-
 import de.hohenheim.controller.events.AnimationEvents;
-import de.hohenheim.controller.events.AnimationPlay;
 import de.hohenheim.controller.main.Main;
-
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.ImageHelper;
@@ -54,7 +49,7 @@ public class AnimationControllerCanvas extends Canvas{
 	 */
 	public AnimationControllerCanvas(Composite parent, int style, NodeMap map) {
 		super(parent, style);
-		this.map = map;
+		AnimationControllerCanvas.map = map;
 		createContents();
 	}
 
@@ -91,7 +86,7 @@ public class AnimationControllerCanvas extends Canvas{
 	    	public void widgetSelected(SelectionEvent e) {
 	          
 	    	   //AnimationEvents.drawTrains(map, Integer.parseInt(comboProjects.getText()));
-	    		
+	    	   
 	        }
 
 	        public void widgetDefaultSelected(SelectionEvent e) {
@@ -171,27 +166,20 @@ public class AnimationControllerCanvas extends Canvas{
 		play.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-			   
-				if (run == false){
-					setTimerLabel();
-					run = true;
 				
-					Project p = null;
-					for (Project project : Main.projectListAll) {
-							
-						if (Integer.parseInt(comboProjects.getText()) == project.getId()){
-							
-							p = project;
-						}
-							
+				
+				Project p = null;
+				for (Project project : Main.projectListAll) {
+						
+					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
+						
+						p = project;
 					}
-					AnimationPlay animationPlay = new AnimationPlay(Integer.parseInt(comboProjects.getText()), comboDrivingday.getText(), map, Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), p);
-					hour = Integer.parseInt(houre.getText());
-					min = Integer.parseInt(minutes.getText());  
-					animationPlay.start();
-			
-			    }
+						
+				}
 				
+				AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()));
+					
 			}
 		});
 		
@@ -201,8 +189,18 @@ public class AnimationControllerCanvas extends Canvas{
 		pause.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-			   
+			    
+				Project p = null;
+				for (Project project : Main.projectListAll) {
+						
+					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
+						
+						p = project;
+					}
+						
+				}
 				
+				AnimationEvents.pause(map, p);
 				
 			}
 		});
@@ -212,8 +210,17 @@ public class AnimationControllerCanvas extends Canvas{
 		stop.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-			   
-				
+
+				Project p = null;
+				for (Project project : Main.projectListAll) {
+						
+					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
+						
+						p = project;
+					}
+						
+				}
+				AnimationEvents.stop(map, p);
 			}
 		});
 		
@@ -293,11 +300,9 @@ public class AnimationControllerCanvas extends Canvas{
 	    }
 	}
 	
-	private String[] getMobileObjects() {
-		String[] s = new String[map.getMobileObjects().size()];
-		map.getMobileObjects().keySet().toArray(s);
-		Arrays.sort(s);
-		return s;
+	public static int getSimulationSpeed() {
+		
+		return scaleAnimationSpeed.getMaximum()+1-scaleAnimationSpeed.getSelection();
 	}
 	
 

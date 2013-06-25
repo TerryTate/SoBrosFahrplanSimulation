@@ -2,12 +2,19 @@ package de.hohenheim.view.mobile.animation;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Observable;
+import java.util.Vector;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 import org.eclipse.draw2d.geometry.PointList;
+import de.hohenheim.controller.events.AnimationEvents;
+import de.hohenheim.modell.State;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
+import de.hohenheim.view.mobile.TrainFigure;
 import de.hohenheim.view.mobile.Utility;
 import de.hohenheim.view.mobile.animation.exceptions.PathNotFoundException;
 import de.hohenheim.view.mobile.animation.listeners.AnimationFinishedEvent;
@@ -86,6 +93,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 	 * indicates if the animation is finished.
 	 */
 	boolean finished     = false;
+	int trainSpeed = 0;
 	
 	/**
 	 * Constructor. creates the Animation.
@@ -95,9 +103,11 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 	 */
 	public WalkToAnimator(NodeMap map, AnimationFigure figure, NodeFigure end_node) {
 		this.animationFigure=figure;
+		TrainFigure tf = (TrainFigure)animationFigure;
 		this.init=true;
 		this.total_end=end_node;
-		this.map=map;			
+		this.map=map;	
+		this.trainSpeed = tf.getSpeed(tf.getFigureId());
 	}
 	
 	/**
@@ -165,7 +175,38 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 			 	start_node = animationFigure.getDirection_to_node();
 			 	path=getPathTo(start_node);
 			  }
-			  walking_path = Utility.getOptimizedRoute(map, start_node, total_end);
+			 
+			  //Set all Nodes on the way to be blocked
+			 
+			  Iterator<NodeFigure> nodesToBlock = Utility.getOptimizedRoute(map, start_node, total_end);
+			  List<NodeFigure> nodesAlreadyBlocked = new Vector<NodeFigure>();
+			  List<NodeFigure> walkToNodes = new Vector<NodeFigure>();
+			  while (nodesToBlock.hasNext()) {
+				NodeFigure n = nodesToBlock.next();
+				walkToNodes.add(n);
+				State stateToBlock = State.statemap.get(n.getName());
+				if(stateToBlock.geState() == State.UNBLOCKED){
+					stateToBlock.setState(State.BLOCKED);
+					nodesAlreadyBlocked.add(n);
+				}else{
+					TrainFigure tf = (TrainFigure)animationFigure;
+					
+					
+					//unblock nodes again and clear animations of trainfigure then call walktomethod again					
+					tf.stopAnimation();
+					tf.clearAnimations();
+					
+					for(NodeFigure nodeToUnblock : nodesAlreadyBlocked){
+						State.statemap.get(nodeToUnblock.getName()).setState(State.UNBLOCKED);
+					}
+					
+					AnimationEvents.walkTo(tf, total_end, map);
+					
+					return;
+				}
+			  }
+			  
+			  walking_path = walkToNodes.iterator();
 			}
 			
 			if(!walking_path.hasNext()) {
@@ -180,12 +221,14 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				//Notify Observers
 				setChanged();				
 				notifyObservers(animationFigure);
+			
 				return;
 			}
 			
 			if(path!=null) {
 			  end_node=start_node;	
 			} else {
+			  State.statemap.get(start_node.getName()).setState(State.UNBLOCKED);
 			  end_node = walking_path.next();			
 			  path = getPathTo(end_node);
 			}
@@ -213,8 +256,13 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		}
 		
 		animationFigure.setLocation(segments.getPoint(run_count));
-		parent.repaint();
-		run_count++;
+		if(parent!= null){
+			parent.repaint();
+		}
+		
+		int pathSpeed = getValueSpeed(animationFigure.getPath().getPathSpeed());
+		System.out.println(getMaxDrivingSpeed(pathSpeed, trainSpeed));
+		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed());
 		if(run_count>=segments.size()) {
 			init=true;
 			run_count=0;
@@ -235,6 +283,36 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		}
 		map.getDisplay().timerExec(0, this);			
 	}
+	private int getValueSpeed(int pathSpeed) {
+		if(pathSpeed == 100){
+			return 1;
+		}else if(pathSpeed == 150){
+			return 2;
+		}else if(pathSpeed == 200){
+			return 3;
+		}else if(pathSpeed == 250){
+			return 4;
+		}else{
+			return 5;
+		}
+		
+	}
+
+	private int getControllerSpeed(int i) {
+		
+		return (i/100);
+	}
+
+	private int getMaxDrivingSpeed(int pathSpeed, int trainSpeed2) {
+		if (pathSpeed < trainSpeed2){
+			return pathSpeed;
+		}
+		return trainSpeed;
+	}
+
+	
+
+
 	/**
 	 * Starts the animation. Can also be used to restart the animation if it was stopped.
 	 * To start(run) the animation only use this method!

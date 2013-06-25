@@ -1,9 +1,7 @@
 package de.hohenheim.view.dialouge;
 
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -21,9 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-
 import de.hohenheim.controller.events.ProjectEvents;
-import de.hohenheim.controller.events.TimeTableEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;

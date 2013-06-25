@@ -22,8 +22,8 @@ import de.hohenheim.view.mobile.animation.Animator;
 import de.hohenheim.view.mobile.animation.BusyAnimator;
 import de.hohenheim.view.mobile.animation.BusyWaitAnimator;
 import de.hohenheim.view.mobile.animation.WalkToAnimator;
-import de.hohenheim.view.path.PathFigure;
 import de.hohenheim.view.node.NodeFigure;
+import de.hohenheim.view.path.PathFigure;
 
 /**
  * @author Marc Fernandes
@@ -84,6 +84,29 @@ public class TrainFigure extends AnimationFigure {
 	    	g.setBackgroundColor(ColorConstants.red);
 	    	g.fillRectangle(r.x+r.width-5, r.y+10, 5, 5);
 	    }	   
+	}
+	
+	public int getSpeed(int id){
+		
+		for(int j = 0; j < Main.trainListAll.size(); j++){
+			TrainData td = Main.trainListAll.get(j);
+			if (td.getID() == id){
+				if (td.getSpeed() == 100){
+                    return 1;			
+				}else if (td.getSpeed() == 150){ 
+				    return 2;
+				}else if (td.getSpeed() == 200){ 
+					return 3;
+				}else if (td.getSpeed() == 250){ 
+					return 4;
+				}else if (td.getSpeed() == 300){ 
+					return 5;
+				}
+						
+			}
+		}
+		return 0;
+		
 	}
 	
 	private Image getTrainImage(int id) {

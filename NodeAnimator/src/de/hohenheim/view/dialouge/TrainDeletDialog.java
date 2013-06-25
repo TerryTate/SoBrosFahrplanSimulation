@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -20,7 +16,6 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.mobile.ImageHelper;
 
 public class TrainDeletDialog extends Dialog {

@@ -3,10 +3,8 @@ package de.hohenheim.view.mobile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
-
 import de.hohenheim.modell.dijkstra.Graph;
 import de.hohenheim.modell.dijkstra.Node;
 import de.hohenheim.view.map.NodeMap;
@@ -163,12 +161,32 @@ public class Utility {
 		  NodeFigure start, 
 		  NodeFigure end) {
 	  
+	//Build a graph where all blocked nodes and their paths are left out
+			ArrayList<NodeFigure> list_opt = new ArrayList<NodeFigure>();
+			list_opt.addAll(map.getNodes().values());
+			Graph g = new Graph(list_opt, map.getPaths(), start);
+			HashMap<NodeFigure, Node> nodeMap_opt = g.getNodeHashMap();
+			ArrayList<Node> nodes_opt = g.getShortestPath(nodeMap_opt.get(start),
+					nodeMap_opt.get(end), new ArrayList<Node>());
+			
+			//if the solution is not possible, the size of the path is 1
+			//so we only return the optimized route if it is bigger than 1
+			if (nodes_opt.size() > 1) {
+				ArrayList<NodeFigure> nodeFigures = new ArrayList<NodeFigure>();
+				for (int i = 1; i < nodes_opt.size(); i++) {
+					nodeFigures.add(nodes_opt.get(i).getNode());
+				}
+				System.out.println("Return optimized path...");
+				return nodeFigures.iterator();
+			}
+	  
 	  ArrayList<NodeFigure> list = new ArrayList<NodeFigure>();
 	  list.addAll(map.getNodes().values());
-	  Graph g = new Graph(list, map.getPaths());
+	
+	  Graph g2 = new Graph(list, map.getPaths());
 	  
 	  HashMap<NodeFigure, Node> nodeMap = g.getNodeHashMap();
-	  ArrayList<Node> nodes=g.getShortestPath(nodeMap.get(start), nodeMap.get(end), new ArrayList<Node>());
+	  ArrayList<Node> nodes=g2.getShortestPath(nodeMap.get(start), nodeMap.get(end), new ArrayList<Node>());
 	  ArrayList<NodeFigure> nodeFigures=new ArrayList<NodeFigure>();
 	  for(int i=1; i<nodes.size();i++) {
 		  nodeFigures.add(nodes.get(i).getNode());

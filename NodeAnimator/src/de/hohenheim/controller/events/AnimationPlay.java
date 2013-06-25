@@ -1,17 +1,8 @@
 package de.hohenheim.controller.events;
 
-
-import de.hohenheim.controller.main.Main;
-import de.hohenheim.modell.State;
-import de.hohenheim.modell.Train;
 import de.hohenheim.modell.project.Project;
-import de.hohenheim.modell.timetable.Timetable;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
-import de.hohenheim.view.mobile.AnimationFigure;
-import de.hohenheim.view.mobile.TrainFigure;
-import de.hohenheim.view.node.NodeFigure;
 
 /**
  * 
@@ -19,221 +10,161 @@ import de.hohenheim.view.node.NodeFigure;
  *
  */
 
-public class AnimationPlay extends Thread{
+public class AnimationPlay implements Runnable{
 
-	int idProject;
-	String drivingday;
-	int hour;
+	private boolean stop;
+	private boolean start;
+	private boolean pause = false;
+		
+	int houre;
 	int min;
-	NodeMap map; 
+	NodeMap map;
 	Project p;
-	boolean start = false;
-	boolean stop = true;
-	boolean pause = false;
 	
-	int drawTrainCounter = 0;
 	
-	/**
-	 * 
-	 * @param idProject
-	 * @param drivingday
-	 * @param map
-	 * @param hour
-	 * @param min
-	 * @param p
-	 */
-	public AnimationPlay(int idProject, String drivingday, NodeMap map, int hour, int min, Project p){
+	public AnimationPlay(){
 		
-		this.idProject = idProject;
-		this.drivingday = drivingday;
-		this.map = map;
-		this.hour = hour;
-		this.min = min;
-		this.p = p;
-		
+	    setHoure(0);
+	    setMin(0);
+	    setStop(true);
+	   
 	}
 	
+	private void setMin(int min) {
+		this.min = min;
+		
+	}
+
+	private void setHoure(int houre) {
+		this.houre = houre;	
+	}
+
 	/**
 	 * 
 	 *  
 	 *  
 	 */
     public void run(){
-    	    AnimationEvents.setNodeBlocked(5);
-    	    Runnable r = new Runnable(){
-               public void run(){
-            	  try{
-                      draw();
-                      update();
-                      sleep(AnimationControllerCanvas.scaleAnimationSpeed.getSelection());
-            	  }catch(InterruptedException e){
-            		  
-            	  }
-                }
-            };
-        	while (AnimationControllerCanvas.run == true){ 
-        		Main.getDisplay().asyncExec(r);
-        		try {
-        
-                    sleep(100);
-                } catch (InterruptedException e) {
-                	
-                }
-            }
-        	
-             
+    	
+    	if(!isStart()){
+			if(getMin() < 59){
+				setMin(getMin()+1);
+			}else{
+				setHoure(getHoure()+1);
+			}
+		}
+		updateTime(houre, min);
+		if(!isStop() && !isPause()){
+			setStart(false);
+			AnimationProcess.calculateSimulation(p, map);
+			map.getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);
+		}
     }
+    
+	private void updateTime(int houre, int min) {
+		
+		   if((min == 59) && (houre == 23)){
+			   min = 0; 
+			   houre = 0;
+		   }else if (min < 59){
+			   min++;
+		   }else{
+			   min = 0;
+			   houre++;
+		   }
+		  
+		   if ((houre < 10) && (min < 10)){
+			
+			  AnimationControllerCanvas.timer.setText("Timer : " + "0" + houre + " : " + "0" + min);
+		   }else if ((houre >= 10) && (min < 10)){
+			
+			   AnimationControllerCanvas.timer.setText("Timer : " + houre + " : " + "0" + min);
+		   }else if ((houre >= 10) && (min >= 10)){
+			 
+			   AnimationControllerCanvas.timer.setText("Timer : "  + houre + " : "  + min);
+		   }else if ((houre < 10) && (min >= 10)){
+		
+			   AnimationControllerCanvas.timer.setText("Timer : " + "0" + houre + " : " + min);
+		   }
+			
+		}
+
+    private int getHoure(){
+		return houre;
+	}
+
+	private int getMin(){ 
+		return min;
+	}
+
+	private boolean isStart() {
+		
+		return start;
+	}
+
+	public boolean isStop() {
+		return stop;
+	}
+
+	public void start(int houre, int min, NodeMap map, Project p) {
+		setHoure(houre);
+		setMin(min);
+		setMap(map);
+		setProject(p);
+		setStop(false);
+		setPause(false);
+		setStart(true);
 	
-    /**
-	 *     
-	 */
-	protected void draw() {
-		drawTrains();
+		run();
+	
+	}
+
+	private void setProject(Project p2) {
+		this.p = p2;
 		
 	}
-    /**
-     * 
-     */
-	private void drawTrains() {
-				
-        if (drawTrainCounter < p.getTraindataProjectList().size()){
-				
-			for(int j = 0; j < p.getTraindataProjectList().size(); j++){
-						
-			    Timetable tt = p.getTimeTableProjectList().get(j);
-						
-				for(int i = 0; i < tt.getDrivingdays().size(); i++){
-							
-					if(tt.getDrivingdays().get(i).equalsIgnoreCase(drivingday)){
-						    	
-				    	if((tt.getStartHouer() == AnimationControllerCanvas.hour) && (tt.getStartMinutes() == AnimationControllerCanvas.min)){
-						    	  
-				    		if(AnimationEvents.isBlocked(map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())))){
-						    	    	
-				    	    }else{
-	    			    	    new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
-    					        p.getTraindataProjectList().get(j).getID());
-						    	AnimationEvents.setNodeBlocked(p.getTimeTableProjectList().get(j).getStartstation());
-						    	drawTrainCounter++;	    
-						    	
-				
-						    }
-						    	    
-						}				    	
-				    }
-				}
-			}
-        }			
-					
+
+	private void setMap(NodeMap map2) {
+		this.map = map2;
+		
+	}
+
+	private void setStart(boolean start) {
+		this.start = start;
+		
+	}
+
+	private void setPause(boolean pause) {
+	    this.pause = pause;
+		
+	}
+
+	private void setStop(boolean stop) {
+		this.stop = stop;	
+	}
+
+	public boolean isPause() {
+		return pause;
+	}
+
+	public void unpause() {
+		setPause(false);
+		setStart(true);
+		run();	
+	}
+
+	public void pause() {
+	
+		setPause(true);
+		
 	}
     
-	/**
-	 * 
-	 */
-	private void update() {
-		updateAnimations();
-		updateTime();
-		updateStartAnimations();
-		
-	}
+	public void stop(){
+	
+		setStop(true);
+		setPause(false);
+		map.getDisplay().timerExec(-1, this);
 
-    /**
-     * 
-     */
-	private void updateStartAnimations() {
-		
-		boolean animcheck = true; 
-		
-		if( animcheck == true) {
-		
-		    for(AnimationFigure af : map.getMobileObjects().values()){
-			
-			    TrainFigure tf = (TrainFigure) af;
-			
-		    //	for(TrainData td : p.getTraindataProjectList()){
-			   
-			    	//if(tf.getFigureId() == td.getID()){
-					
-				    //	if(!td.getAnim()){
-				 	     	 tf.startAnimation();	
-				 	   //  	 td.setAnim(true);
-				     //	}
-					
-			    // 	}
-				   
-			//     }     
-		     }
-		    
-		}
-		
-     	}
-	
-    /***
-     * 
-     */
-	private void updateAnimations() {
-		
-		for(AnimationFigure af : map.getMobileObjects().values()){
-	    	TrainFigure tf = (TrainFigure)af;
-	    	
-			for(int j = 0; j < p.getTraindataProjectList().size(); j++){
-						
-				TrainData td = p.getTraindataProjectList().get(j);
-				Timetable tt = p.getTimeTableProjectList().get(j);
-						
-				if (tf.getFigureId() == td.getID()){
-						
-					if (tt.getVisits() == tt.getMiddlestations().size()){
-								
-						tf.walkTo(map, map.getNodes().get(String.valueOf(tt.getEndstation())));
-						tt.setVisits(tt.getVisits() + 1);
-							
-					}else if(tt.getVisits()  < tt.getMiddlestations().size()){
-								
-						tf.walkTo(map,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))));
-						tt.setVisits(tt.getVisits() + 1);
-					}
-								
-				}
-							
-			}
-		    		
-	    }
-				
-	}
-
-	/**
-	 * 
-	 * 
-	 */
-	private void updateTime() {
-	
-	   if((AnimationControllerCanvas.min == 59) && (AnimationControllerCanvas.hour == 23)){
-		   AnimationControllerCanvas.run = false;
-		   start = false;
-		   AnimationControllerCanvas.min = 0;
-		   AnimationControllerCanvas.hour = 0;
-	   }else if (AnimationControllerCanvas.min < 59){
-		   AnimationControllerCanvas.min++;
-	   }else{
-		   AnimationControllerCanvas.min = 0;
-		   AnimationControllerCanvas.hour++;
-	   }
-	  
-	   if ((AnimationControllerCanvas.hour < 10) && (AnimationControllerCanvas.min < 10)){
-		
-		  AnimationControllerCanvas.timer.setText("Timer : " + "0" + AnimationControllerCanvas.hour + " : " + "0" + AnimationControllerCanvas.min);
-	   }else if ((AnimationControllerCanvas.hour >= 10) && (AnimationControllerCanvas.min < 10)){
-		
-		   AnimationControllerCanvas.timer.setText("Timer : " + AnimationControllerCanvas.hour + " : " + "0" + AnimationControllerCanvas.min);
-	   }else if ((AnimationControllerCanvas.hour >= 10) && (AnimationControllerCanvas.min >= 10)){
-		 
-		   AnimationControllerCanvas.timer.setText("Timer : "  + AnimationControllerCanvas.hour + " : "  + AnimationControllerCanvas.min);
-	   }else if ((AnimationControllerCanvas.hour < 10) && (AnimationControllerCanvas.min >= 10)){
-	
-		   AnimationControllerCanvas.timer.setText("Timer : " + "0" + AnimationControllerCanvas.hour + " : " + AnimationControllerCanvas.min);
-	   }
-		
 	}
 
 }
