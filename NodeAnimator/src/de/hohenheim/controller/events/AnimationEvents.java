@@ -27,7 +27,7 @@ public class AnimationEvents {
 		map.getMobileObjects().clear();
 		
 	    for(int j = 0; j < p.getTraindataProjectList().size(); j++){
-	    	System.out.println("Tes2");	
+	    
     		new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
 			p.getTraindataProjectList().get(j).getID());
 					    							    	 	
@@ -95,6 +95,7 @@ public class AnimationEvents {
 		if (!AnimationProcess.player.isStop()) {
 			AnimationProcess.player.stop();
 			drawTrains(map, p);
+			AnimationProcess.stopAnimations(map, p);
 			for (Timetable tt : p.getTimeTableProjectList()) {
 				tt.setVisits(0);
 			}

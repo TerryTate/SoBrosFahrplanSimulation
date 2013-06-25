@@ -95,6 +95,19 @@ public class Project {
 	public void setTimeTableProjectList(ArrayList<Timetable> timeTableProjectList) {
 		TimeTableProjectList = timeTableProjectList;
 	}
+
+	public Timetable getTimetable(int figureId) {
+		int k = 0;
+		Timetable tt = null;
+		for(TrainData td : TraindataProjectList){
+		    
+			if(figureId == td.getID()){
+				tt = TimeTableProjectList.get(k);
+			}
+			k++;
+		}
+		return tt;
+	}
 	
 	
 

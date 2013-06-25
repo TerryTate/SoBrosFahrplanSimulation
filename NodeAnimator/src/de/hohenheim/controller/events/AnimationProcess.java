@@ -2,6 +2,8 @@ package de.hohenheim.controller.events;
 
 import java.util.ArrayList;
 
+
+import de.hohenheim.controller.DeadlockDetection;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
@@ -11,7 +13,8 @@ import de.hohenheim.view.mobile.TrainFigure;
 public class AnimationProcess {
 
 	public static AnimationPlay player = new AnimationPlay();
-
+	public static DeadlockDetection deadlockDetector = new DeadlockDetection();
+	
 	public static void startAnimations(Project p, NodeMap map) {
 		
 		for(TrainData train : p.getTraindataProjectList()){
@@ -21,6 +24,9 @@ public class AnimationProcess {
 	}
 
 	public static void calculateSimulation(Project p, NodeMap map) {
+		
+		deadlockDetector.run();
+		
 		sortedTrains(p.getTraindataProjectList(), p.getTimeTableProjectList());
 		int k = 0;
 		for (TrainData train : p.getTraindataProjectList()) {
@@ -28,19 +34,20 @@ public class AnimationProcess {
 			Timetable tt = p.getTimeTableProjectList().get(k);
 			TrainFigure tf = (TrainFigure) map.getMobileObjects().get(String.valueOf(train.getID()));
 				if (tf != null && tt != null) {
-					if (tt.getVisits() == tt.getMiddlestations().size()){
+					if (!tt.isHandled() && !tt.isDeadlockHandling()) {
+					    if (tt.getVisits() == tt.getMiddlestations().size()){
 						
-						tt.setVisits(tt.getVisits() + 1);
-						AnimationEvents.walkTo(tf, map.getNodes().get(String.valueOf(tt.getEndstation())), map);
+						    tt.setVisits(tt.getVisits() + 1);
+						    tt.setHandled(true);
+						    AnimationEvents.walkTo(tf, map.getNodes().get(String.valueOf(tt.getEndstation())), map);
+												
+					    }else if(tt.getVisits()  < tt.getMiddlestations().size()){
+					    	tt.setHandled(true);
+						    AnimationEvents.walkTo(tf,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))), map);
+						    tt.setVisits(tt.getVisits() + 1);
 						
-							
-					}else if(tt.getVisits()  < tt.getMiddlestations().size()){
-						
-						
-						AnimationEvents.walkTo(tf,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))), map);
-						tt.setVisits(tt.getVisits() + 1);
-						
-					}else{
+					    }else{
+					    }
 					}
 				}
 				

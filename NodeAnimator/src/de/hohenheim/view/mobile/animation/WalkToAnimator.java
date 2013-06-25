@@ -10,7 +10,10 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ManhattanConnectionRouter;
 import org.eclipse.draw2d.geometry.PointList;
 import de.hohenheim.controller.events.AnimationEvents;
+import de.hohenheim.controller.events.AnimationPlay;
+import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.State;
+import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
@@ -93,6 +96,10 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 	 * indicates if the animation is finished.
 	 */
 	boolean finished     = false;
+	
+	/**
+	 * the Speed of the Train as Value 
+	 */
 	int trainSpeed = 0;
 	
 	/**
@@ -221,6 +228,15 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				//Notify Observers
 				setChanged();				
 				notifyObservers(animationFigure);
+				Timetable tt = AnimationPlay.getP().getTimetable(animationFigure.getFigureId());
+				if(tt.isDeadlockHandling()){
+					//Set timetable info of train
+					tt.setVisits(tt.getVisits() + 1);
+					tt.setHandled(false);
+				}else{
+					tt.setDeadlockHandling(false);
+					tt.setHandled(false);
+				}
 			
 				return;
 			}
@@ -246,6 +262,16 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				//Notify Observers
 				setChanged();				
 				notifyObservers(animationFigure);
+				Timetable tt = AnimationPlay.getP().getTimetable(animationFigure.getFigureId());
+				if(tt.isDeadlockHandling()){
+					//Set timetable info of train
+					tt.setVisits(tt.getVisits() + 1);
+					tt.setHandled(false);
+				}else{
+					tt.setDeadlockHandling(false);
+					tt.setHandled(false);
+				}
+				
 				return;
 			}
 			animationFigure.setDirection_to_node(end_node);
@@ -261,7 +287,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		}
 		
 		int pathSpeed = getValueSpeed(animationFigure.getPath().getPathSpeed());
-		//System.out.println(getMaxDrivingSpeed(pathSpeed, trainSpeed));
+		
 		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed());
 		if(run_count>=segments.size()) {
 			init=true;
@@ -283,6 +309,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		}
 		map.getDisplay().timerExec(0, this);			
 	}
+	
 	private int getValueSpeed(int pathSpeed) {
 		if(pathSpeed == 100){
 			return 1;

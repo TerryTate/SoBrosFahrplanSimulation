@@ -17,6 +17,8 @@ public class Timetable {
 	private int startHouer;
 	private	int startMinutes;
 	private int visits;
+	private boolean handle = false;
+	private boolean deadlock = false;
 	
 	/**
 	 * 
@@ -187,5 +189,25 @@ public class Timetable {
 	public void setVisits(int visits) {
 		this.visits = visits;
 	}
+
+	public boolean isHandled() {
+		return handle ;
+	}
+
+	public void setHandled(boolean handle) {
+		this.handle = handle;
+		
+	}
+
+	public boolean isDeadlockHandling() {
+		return deadlock ;
+	}
+
+	public void setDeadlockHandling(boolean deadlock) {
+		this.deadlock = deadlock;
+		
+	}
+	
+	
 
 }

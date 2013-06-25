@@ -94,5 +94,10 @@ public class BusyWaitAnimator extends Observable implements Runnable, Animator {
 	public boolean isStopped() {
 		return this.stopped;
 	}
+
+	public State getState() {
+		// TODO Auto-generated method stub
+		return state;
+	}
 }
 

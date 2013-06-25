@@ -18,8 +18,8 @@ public class AnimationPlay implements Runnable{
 		
 	int houre;
 	int min;
-	NodeMap map;
-	Project p;
+	private static NodeMap map;
+	private static Project p;
 	
 	
 	public AnimationPlay(){
@@ -56,8 +56,8 @@ public class AnimationPlay implements Runnable{
 		updateTime(houre, min);
 		if(!isStop() && !isPause()){
 			setStart(false);
-			AnimationProcess.calculateSimulation(p, map);
-			map.getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);
+			AnimationProcess.calculateSimulation(getP(), getMap());
+			getMap().getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);
 		}
     }
     
@@ -120,7 +120,7 @@ public class AnimationPlay implements Runnable{
 	}
 
 	private void setProject(Project p2) {
-		this.p = p2;
+		this.setP(p2);
 		
 	}
 
@@ -163,8 +163,20 @@ public class AnimationPlay implements Runnable{
 	
 		setStop(true);
 		setPause(false);
-		map.getDisplay().timerExec(-1, this);
+		getMap().getDisplay().timerExec(-1, this);
 
+	}
+
+	public static Project getP() {
+		return p;
+	}
+
+	public void setP(Project p) {
+		this.p = p;
+	}
+
+	public static NodeMap getMap() {
+		return map;
 	}
 
 }
