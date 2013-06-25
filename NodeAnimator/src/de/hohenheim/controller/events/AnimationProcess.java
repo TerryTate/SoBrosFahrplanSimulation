@@ -36,8 +36,9 @@ public class AnimationProcess {
 							
 					}else if(tt.getVisits()  < tt.getMiddlestations().size()){
 						
-						tt.setVisits(tt.getVisits() + 1);
+						
 						AnimationEvents.walkTo(tf,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))), map);
+						tt.setVisits(tt.getVisits() + 1);
 						
 					}else{
 					}
