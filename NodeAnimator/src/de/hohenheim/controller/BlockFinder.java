@@ -3,10 +3,8 @@ package de.hohenheim.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
 import de.hohenheim.controller.events.AnimationEvents;
 import de.hohenheim.controller.events.AnimationPlay;
-import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.Node;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.timetable.Timetable;
@@ -18,7 +16,7 @@ import de.hohenheim.view.mobile.animation.BusyAnimator;
 import de.hohenheim.view.mobile.animation.BusyWaitAnimator;
 import de.hohenheim.view.node.NodeFigure;
 
-public class DeadlockDetection implements Runnable{
+public class BlockFinder implements Runnable{
 	/**
 	 * Führt die Erkennung von Deadlocks aus.
 	 */

@@ -9,11 +9,15 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.menu.MenuBar;
 import de.hohenheim.view.mobile.ImageHelper;
 import de.hohenheim.view.tab.TabFolder;
@@ -47,7 +51,7 @@ public class Main {
 		getShell().setImage(ImageHelper.trainTab);
 		int screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-		getShell().setSize(820, 720);
+		getShell().setSize(960, 700);
 		getShell().setLocation( screenWidth/2 - 410, screenHeight/2 - 360);
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
@@ -77,7 +81,20 @@ public class Main {
     	bottomComposite.setLayoutData(gridData);
     	
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, getDisplay()); 
-	    
+	    tabFolder.addListener(SWT.Selection, new Listener() {
+	        public void handleEvent(Event e) {
+	        	
+	        	if(AnimationControllerCanvas.isRun()){
+	        		
+	        	     tabFolder.setSelection(0);	
+	        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			         messageBox.setMessage("Die Ansicht kann nicht gewechselt werden \n" +
+			         		               "solange eine Animation läuft!");    
+			         messageBox.open();
+	        	}
+	         
+	          }
+	    });
 	    
 	    //Animation SoBros mit ProgressBar
         

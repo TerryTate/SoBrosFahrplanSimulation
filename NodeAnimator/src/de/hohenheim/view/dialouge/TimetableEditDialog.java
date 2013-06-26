@@ -120,6 +120,7 @@ public class TimetableEditDialog extends Dialog{
 	     
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
+	    gridData.horizontalAlignment =SWT.FILL;
 	
 	    idText.setLayoutData(gridData);
 	    
@@ -132,6 +133,7 @@ public class TimetableEditDialog extends Dialog{
 	    fahrplannameText = new Text(dialog, SWT.NONE); 
 	    gridData = new GridData();
 	    gridData.horizontalSpan = 2;
+	    gridData.horizontalAlignment = SWT.FILL;
 	    fahrplannameText.setLayoutData(gridData);
 	    
 	    //Set the Label and a spinner for the Starttime
@@ -225,6 +227,7 @@ public class TimetableEditDialog extends Dialog{
         comboMiddlestation.setItems(items);
 	    comboMiddlestation.select(0);
 	    
+	    
 	    Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
 	    middlestationButtonC.setLayout(new FillLayout());
 	    
@@ -291,6 +294,7 @@ public class TimetableEditDialog extends Dialog{
 		gridData = new GridData();
 		gridData.horizontalSpan = 2; 
 		gridData.horizontalAlignment = SWT.FILL;
+		
 		tableComposite.setLayoutData(gridData);
 		tableComposite.setLayout(new FillLayout());
 		

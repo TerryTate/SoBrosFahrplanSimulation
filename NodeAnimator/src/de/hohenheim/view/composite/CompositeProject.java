@@ -49,7 +49,7 @@ public class CompositeProject extends Composite {
 		gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
 		this.setLayout(gridLayout);
-		this.setBackground(ColorConstants.black);
+		
 		
         scrollComposite = new ScrolledComposite(this, SWT.H_SCROLL  | SWT.V_SCROLL);
 		
@@ -133,8 +133,7 @@ public class CompositeProject extends Composite {
 	    
 	    scrollComposite.setContent(getProjectTable());
 		
-		ProjektControllerCanvas canvasControl = new ProjektControllerCanvas(this, SWT.BORDER );	
-		canvasControl.setBackground(ColorConstants.white);
+		ProjektControllerCanvas canvasControl = new ProjektControllerCanvas(this, SWT.NONE );	
 		
 		gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;

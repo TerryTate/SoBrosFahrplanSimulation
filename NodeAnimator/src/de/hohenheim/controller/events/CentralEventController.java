@@ -11,6 +11,7 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.composite.CompositeTrain;
@@ -64,7 +65,14 @@ public class CentralEventController {
      */
 	public static void changeLook(int tab) {
 		
-		Main.getcTabFolder().setSelection(tab);
+		if(!AnimationControllerCanvas.isRun()){
+		    Main.getcTabFolder().setSelection(tab);
+		}else{
+			 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	         messageBox.setMessage("Die Ansicht kann nicht gewechselt werden \n" +
+	         		               "solange eine Animation läuft!");    
+	         messageBox.open();
+		}
 		
 	}
     

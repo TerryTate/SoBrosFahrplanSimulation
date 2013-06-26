@@ -1,6 +1,5 @@
 package de.hohenheim.view.composite;
 
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -33,10 +32,10 @@ public class CompositeAnimation extends Composite{
 		    this.setLayout(gridLayout);
 		    
 		    
-		    this.setBackground(ColorConstants.black);	
+		    //this.setBackground(ColorConstants.black);	
 			
-			Canvas canvasMap = new Canvas(this, SWT.BORDER);
-			canvasMap.setBackground(ColorConstants.white);
+			Canvas canvasMap = new Canvas(this, SWT.NONE);
+			
 			
 			GridData gridData = new GridData();
 			gridData.horizontalAlignment = SWT.FILL;
@@ -47,8 +46,7 @@ public class CompositeAnimation extends Composite{
 			map = Map.createMap(canvasMap, 1);
 			
 			
-	        AnimationControllerCanvas canvasControl = new AnimationControllerCanvas(this, SWT.BORDER, map);
-			canvasControl.setBackground(ColorConstants.white);
+	        AnimationControllerCanvas canvasControl = new AnimationControllerCanvas(this, SWT.NONE, map);
 			canvasControl.setBounds(0, 0, 800, 0);
 			gridData = new GridData();
 			gridData.verticalAlignment = GridData.FILL;

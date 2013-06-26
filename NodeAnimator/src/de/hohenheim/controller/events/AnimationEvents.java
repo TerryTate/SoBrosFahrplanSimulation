@@ -1,5 +1,6 @@
 package de.hohenheim.controller.events;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
@@ -95,10 +96,20 @@ public class AnimationEvents {
 		if (!AnimationProcess.player.isStop()) {
 			AnimationProcess.player.stop();
 			drawTrains(map, p);
-			AnimationProcess.stopAnimations(map, p);
 			for (Timetable tt : p.getTimeTableProjectList()) {
 				tt.setVisits(0);
+				tt.setDeadlockHandling(false);
+				tt.setHandled(false);
 			}
+			setNodesUnblocked(map);
+		}
+		
+	}
+
+	private static void setNodesUnblocked(NodeMap map) {
+		HashMap<String, NodeFigure> nodesToUnblocked = map.getNodes();
+		for(int j = 1; j <= nodesToUnblocked.size(); j++){
+			State.statemap.get(String.valueOf(j)).setState(State.UNBLOCKED);
 		}
 		
 	}

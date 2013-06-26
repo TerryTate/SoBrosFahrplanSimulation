@@ -7,7 +7,6 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-
 import de.hohenheim.view.composite.CompositeAnimation;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.composite.CompositeTimeTable;

@@ -3,7 +3,7 @@ package de.hohenheim.controller.events;
 import java.util.ArrayList;
 
 
-import de.hohenheim.controller.DeadlockDetection;
+import de.hohenheim.controller.BlockFinder;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
@@ -13,7 +13,7 @@ import de.hohenheim.view.mobile.TrainFigure;
 public class AnimationProcess {
 
 	public static AnimationPlay player = new AnimationPlay();
-	public static DeadlockDetection deadlockDetector = new DeadlockDetection();
+	public static BlockFinder deadlockDetector = new BlockFinder();
 	
 	public static void startAnimations(Project p, NodeMap map) {
 		
@@ -34,7 +34,7 @@ public class AnimationProcess {
 			Timetable tt = p.getTimeTableProjectList().get(k);
 			TrainFigure tf = (TrainFigure) map.getMobileObjects().get(String.valueOf(train.getID()));
 				if (tf != null && tt != null) {
-					if (!tt.isHandled() && !tt.isDeadlockHandling()) {
+					if (!tt.isHandled() && !tt.isDeadlockHandling()){
 					    if (tt.getVisits() == tt.getMiddlestations().size()){
 						
 						    tt.setVisits(tt.getVisits() + 1);

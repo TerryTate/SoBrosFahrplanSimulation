@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.widgets.Spinner;
 import de.hohenheim.controller.events.AnimationEvents;
@@ -37,9 +38,10 @@ public class AnimationControllerCanvas extends Canvas{
 	String [] drivingdayItems= {"Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"};
 	public static Scale scaleAnimationSpeed;
 	public static Label timer;
-	public static boolean run = false; 
+	private static boolean run = false; 
 	public static int hour;
 	public static int min;
+	String message = "";
 	
 	/**
 	 * 
@@ -140,8 +142,10 @@ public class AnimationControllerCanvas extends Canvas{
 		gridData = new GridData ();
 		gridData.horizontalSpan = 2;
 		scaleAnimationSpeed.setLayoutData(gridData);
-		scaleAnimationSpeed.setMinimum(100);
+		scaleAnimationSpeed.setMinimum(1);
 		scaleAnimationSpeed.setMaximum(1000);
+		scaleAnimationSpeed.setIncrement(250);
+		scaleAnimationSpeed.setPageIncrement(250);
 		
 		group.pack();
 		
@@ -167,20 +171,26 @@ public class AnimationControllerCanvas extends Canvas{
 			@Override
 			public void handleEvent(Event arg0) {
 				
-				
-				Project p = null;
-				for (Project project : Main.projectListAll) {
+				if(projectCheck()){
+							 
+				    Project p = null;
+				    for (Project project : Main.projectListAll) {
 						
-					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
+					    if (Integer.parseInt(comboProjects.getText()) == project.getId()){
 						
-						p = project;
-					}
+						    p = project;
+					    }
 						
+				    }
+				    run = true;
+				    AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()));
+				}else{
+					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			         messageBox.setMessage(message);    
+				          messageBox.open();
 				}
-				
-				AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()));
-					
 			}
+
 		});
 		
 		
@@ -199,7 +209,7 @@ public class AnimationControllerCanvas extends Canvas{
 					}
 						
 				}
-				
+				run = false;
 				AnimationEvents.pause(map, p);
 				
 			}
@@ -220,6 +230,7 @@ public class AnimationControllerCanvas extends Canvas{
 					}
 						
 				}
+				run = false;
 				AnimationEvents.stop(map, p);
 			}
 		});
@@ -305,5 +316,26 @@ public class AnimationControllerCanvas extends Canvas{
 		return scaleAnimationSpeed.getMaximum()+1-scaleAnimationSpeed.getSelection();
 	}
 	
+	private boolean projectCheck() {
+		
+		boolean check = true;
+		message = "";
+		
+		if(run == true){
+			message = "Die animmation läuft bereits ! \n";
+			check = false;
+		}
+		if(comboProjects.getText().equalsIgnoreCase("")){
+			
+			message = "Sie haben kein Projekt ausgewählt ! \n";
+			check = false;
+		}
+		
+		return check;
+	}
+
+	public static boolean isRun() {
+		return run;
+	}
 
 }

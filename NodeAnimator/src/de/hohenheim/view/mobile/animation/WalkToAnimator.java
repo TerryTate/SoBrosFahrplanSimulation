@@ -11,7 +11,6 @@ import org.eclipse.draw2d.ManhattanConnectionRouter;
 import org.eclipse.draw2d.geometry.PointList;
 import de.hohenheim.controller.events.AnimationEvents;
 import de.hohenheim.controller.events.AnimationPlay;
-import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;

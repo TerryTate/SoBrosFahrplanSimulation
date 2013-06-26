@@ -39,7 +39,7 @@ public class CompositeTimeTable extends Composite {
 		gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
 		this.setLayout(gridLayout);
-		this.setBackground(ColorConstants.black);
+		//this.setBackground(ColorConstants.black);
 		
         scrollComposite = new ScrolledComposite(this, SWT.H_SCROLL  | SWT.V_SCROLL);
 		
@@ -176,12 +176,12 @@ public class CompositeTimeTable extends Composite {
 	          }
 	    });
 	    
+	    getTimeTableTable().setLinesVisible(true);
 	    getTimeTableTable().setHeaderVisible(true);
 	    
 	    scrollComposite.setContent(getTimeTableTable());
 		
-		TimeTableControllerCanvas canvasControl = new TimeTableControllerCanvas(this, SWT.BORDER );	
-		canvasControl.setBackground(ColorConstants.white);
+		TimeTableControllerCanvas canvasControl = new TimeTableControllerCanvas(this, SWT.NONE );	
 		
 		gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;

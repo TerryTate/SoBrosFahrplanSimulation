@@ -18,31 +18,44 @@ import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.view.canvas.TrainControllerCanvas;
 
 /**
+ * This class create a new CompositeTrain with a Table 
+ * and call the Constructor for a new TrainControllerCanvas 
  * 
  * @author Arthur Kaul
  *
  */
 public class CompositeTrain extends Composite{
 	
-
 	private ScrolledComposite scrollComposite;
 	private GridLayout gridLayout;
 	private static Table trainTable;
 
 	
 	/**
+	 * Construktor for a new TrainComposite
 	 * 
-	 * @param parent
-	 * @param style
+	 * @param parent - where the Composite is in 
+	 * @param style - witch style the Composite should have
 	 */
-	
 	public CompositeTrain(Composite parent, int style) {
-	
 		super(parent, style);
+		createConten();	
+	}
+	
+	/**
+	 * Create the Content of the new Train Composite (the TrainTable, 
+	 * the TrainControllersCanvas
+	 * 
+	 */
+	private void createConten() {
+		
+		// Set the Gridlayout
+		
 		gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
 		this.setLayout(gridLayout);
-		this.setBackground(ColorConstants.black);
+
+		// Set a new ScrollComposite
 		
 		scrollComposite = new ScrolledComposite(this, SWT.H_SCROLL  | SWT.V_SCROLL);
 		
@@ -57,6 +70,7 @@ public class CompositeTrain extends Composite{
 		gridData.grabExcessVerticalSpace = true;
 		scrollComposite.setLayoutData(gridData);
 		
+		// Set the Traintable 
 		
 		trainTable = new Table(scrollComposite, SWT.FULL_SELECTION);
 	    TableColumn idTrain = new TableColumn(getTrainTable(),SWT.CENTER);
@@ -76,7 +90,9 @@ public class CompositeTrain extends Composite{
 	    maxSpeed.setWidth(80);
 	    priority.setWidth(70);
 	    ladung.setWidth(80);
-
+        
+	    // Set the listener for Sort a Traintable when clicking on the Header of a Column
+	    
 	    idTrain.addListener(SWT.Selection, new Listener() {
 	        public void handleEvent(Event e) {
 	           
@@ -218,27 +234,28 @@ public class CompositeTrain extends Composite{
 	          }
 	    });
        
+        //Set the visiblie of Lines and Header 
        
-	    
+        getTrainTable().setLinesVisible(true);
 	    getTrainTable().setHeaderVisible(true);
 	    
 	    scrollComposite.setContent(getTrainTable());
-		
-		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.BORDER );	
-		canvasControl.setBackground(ColorConstants.white);
+	    
+		//Set a new TrainControllerCanvas
+	    
+		TrainControllerCanvas canvasControl = new TrainControllerCanvas(this, SWT.NONE );	
 		
 		gridData = new GridData();
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.grabExcessVerticalSpace = true;
 		canvasControl.setLayoutData(gridData);
 		
-		
 	}
-		
+
 	/**
+	 * Getter for TrainTable
 	 * 
-	 * 
-	 * @return
+	 * @return Table - return the Table from the Train Composite with the train Datas
 	 */
 	public static Table getTrainTable(){
 		return trainTable;
