@@ -99,7 +99,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 	/**
 	 * the Speed of the Train as Value 
 	 */
-	int trainSpeed = 0;
+	int trainSpeed = 1;
 	
 	/**
 	 * Constructor. creates the Animation.
@@ -287,7 +287,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		
 		int pathSpeed = getValueSpeed(animationFigure.getPath().getPathSpeed());
 		
-		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed());
+		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + 9/*+ getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed())*/;
 		if(run_count>=segments.size()) {
 			init=true;
 			run_count=0;

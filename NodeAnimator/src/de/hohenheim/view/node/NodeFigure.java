@@ -9,6 +9,8 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 
+import de.hohenheim.modell.State;
+
 /**
  * This class is for drawing of a room.
  * @author Marc Fernandes
@@ -81,7 +83,13 @@ public class NodeFigure extends Figure {
       if(backgroundImage!=null) {
         g.drawImage(backgroundImage, r_tmp.x,r_tmp.y);
       }
-      g.setForegroundColor(ColorConstants.darkGray);
+      
+      if(State.statemap.get(getName()).geState() == State.BLOCKED){
+    	  g.setForegroundColor(ColorConstants.red);
+      }else{
+    	  g.setForegroundColor(ColorConstants.darkGray);
+      }
+      
       g.drawRectangle(r.x, r.y, r.width-1, r.height-1);
       
       g.setForegroundColor(ColorConstants.white);

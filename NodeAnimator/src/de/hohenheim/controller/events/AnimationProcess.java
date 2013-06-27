@@ -13,7 +13,7 @@ import de.hohenheim.view.mobile.TrainFigure;
 public class AnimationProcess {
 
 	public static AnimationPlay player = new AnimationPlay();
-	public static BlockFinder deadlockDetector = new BlockFinder();
+	public static BlockFinder blockFinder = new BlockFinder();
 	
 	public static void startAnimations(Project p, NodeMap map) {
 		
@@ -25,7 +25,7 @@ public class AnimationProcess {
 
 	public static void calculateSimulation(Project p, NodeMap map) {
 		
-		deadlockDetector.run();
+		blockFinder.run();
 		
 		sortedTrains(p.getTraindataProjectList(), p.getTimeTableProjectList());
 		int k = 0;

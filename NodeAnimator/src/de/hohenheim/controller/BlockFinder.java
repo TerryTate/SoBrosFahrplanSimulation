@@ -219,16 +219,6 @@ public class BlockFinder implements Runnable{
 			AnimationEvents.walkTo(((TrainFigure) AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train1.getID()))), unblockedNodes.get(index), AnimationPlay.getMap());
 		}
 		
-		
-		AnimationFigure animFig_train = AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train1.getID()));
-		AnimationFigure animFig_finishedTrain = AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train2.getID()));
-		
-		/*
-		ProgramActions.showErrors("Deadlock", "Deadlock could not be resolved between following trains:\n"+
-				" - Train: "+train1.getName()+"(ID:"+train1.getID()+") at node: "+animFig_train.getNodeFigure().getName()+"\n"+
-				" - Train: "+train2.getName()+"(ID:"+train2.getID()+") at node: "+animFig_finishedTrain.getNodeFigure().getName());
-		*/
-		
 	}
 
 	private int getValue(String priority) {

@@ -2,6 +2,7 @@ package de.hohenheim.view.mobile.animation;
 
 import java.util.Observable;
 
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
 import de.hohenheim.view.mobile.animation.listeners.AnimationFinishedEvent;
@@ -61,9 +62,9 @@ public class BusyAnimator extends Observable implements Runnable, Animator {
 			notifyObservers(this.animationFigure);
 			return;
 		}
-		this.time_left-=500;
+		this.time_left-=1;
 		this.animationFigure.showBusy(!this.animationFigure.isShowBusy());
-		map.getDisplay().timerExec(500, this);			
+		map.getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);			
 	}
 	
 	/**
