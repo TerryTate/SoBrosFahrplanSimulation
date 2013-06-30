@@ -309,7 +309,7 @@ public class ProjectEditDialog extends Dialog{
 		
 		for(int j = 0; j < linkTable.getItemCount(); j++){
 			
-			if(Integer.parseInt(comboChooseTimeTable.getText()) == Integer.parseInt(linkTable.getItem(j).getText(0))){
+			if(Integer.parseInt(comboChooseTrain.getText()) == Integer.parseInt(linkTable.getItem(j).getText(0))){
 				
 				message = message + "Der ausgewählte Zug ist schon vorhanden !\n";
 				check = false;

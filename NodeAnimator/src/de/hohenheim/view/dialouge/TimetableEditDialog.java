@@ -468,12 +468,23 @@ public class TimetableEditDialog extends Dialog{
 				check = false;
 			}
 			
-            for(int j = 0; j < (midlestationTable.getItemCount()-1); j++){
-				
-				if(midlestationTable.getItem(j).getText().equalsIgnoreCase(midlestationTable.getItem(j + 1).getText())){
+			for(int j = 0; j < (midlestationTable.getItemCount()); j++){
+				if(j == 0){
+					if(comboStartstation.getText().equalsIgnoreCase(midlestationTable.getItem(j).getText())){
+					    
+						message = message + "Die erste Zwischenstation ist identisch mit der Startstation. \n" +
+            		            "Bitte geben Sie eine andere, nicht identische Zwischenstation ein!\n"+"\r\n";
+					    check = false;
+				    	}
+					
+				}
+			    else{
+			    	if(midlestationTable.getItem(j-1).getText().equalsIgnoreCase(midlestationTable.getItem(j).getText())){
+			    
 				    message = message + "Es sind zwei identische Zwischenstationen vorhanden. \n" +
-	    								"Bitte löschen Sie einen dieser beiden Stationen!\n"+"\r\n";
+				    					"Bitte löschen Sie einen dieser beiden Stationen!\n"+"\r\n";
 				    check = false;
+			    	}
 				}
 				
 			}
@@ -560,12 +571,13 @@ public class TimetableEditDialog extends Dialog{
 				comboEndstation.setText(endstation.toString());
 			
 				Integer middlestation; 
+				midlestationTable.removeAll();
 			
 				for(int j = 0; j < tt.getMiddlestations().size(); j++){
 					
 					middlestation =  Integer.valueOf(tt.getMiddlestations().get(j));
 					 
-					TableItem item = new TableItem(TimetableEditDialog.midlestationTable, SWT.NONE);
+					TableItem item = new TableItem(midlestationTable, SWT.NONE);
 					item.setText(middlestation.toString());
 				}
 	        		

@@ -390,7 +390,7 @@ public class TimeTableEvents {
 			int i = 0;
 
 			while (Integer.parseInt(TimetableEditDialog.comboTimetable
-					.getText()) != Integer.parseInt(item.getText(i))) {
+					.getText()) != Integer.parseInt(item.getText(0))) {
 				i++;
 				item = items[i];
 
