@@ -235,14 +235,14 @@ public class ProjectEvents {
 			String trainsItem = "";
 			
 			for( int i = 0; i < p.getTraindataProjectList().size(); i++){
-				
+				TrainEvents.importTrain(p.getTraindataProjectList().get(i));
 				trainsItem = trainsItem + p.getTraindataProjectList().get(i).getID() + "; " ;
 			}
 			
 			String timetableItem = "";
 			
 	        for( int i = 0; i < p.getTimeTableProjectList().size(); i++){
-				
+				TimeTableEvents.importTimetable(p.getTimeTableProjectList().get(i));
 				timetableItem = timetableItem + p.getTimeTableProjectList().get(i).getId() + "; " ;
 		
 			}

@@ -400,6 +400,11 @@ public class AnimationControllerCanvas extends Canvas{
 		return scaleAnimationSpeed.getMaximum()+1-scaleAnimationSpeed.getSelection();
 	}
 	
+	public static int getAnimationSpeed() {
+		
+		return scaleAnimationSpeed.getSelection()/100;
+	}
+	
 	private boolean projectCheck() {
 		
 		boolean check = true;

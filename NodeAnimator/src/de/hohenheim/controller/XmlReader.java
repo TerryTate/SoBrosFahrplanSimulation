@@ -203,7 +203,7 @@ public class XmlReader {
 			TrainData addingTrain = new TrainData(0, 0, null, null, null, false);
 			
 			
-			Element train = trains.getChild("Train");
+			Element train = trains.getChildren().get(i);
 			
 			try {
 				Element id = train.getChild("ID");
@@ -251,7 +251,7 @@ public class XmlReader {
 			Timetable addingTimeTable = new Timetable(0, null, null, 0, 0, null, 0,
 					0, 0);
 			
-			Element timeTable = timeTables.getChild("TimeTable");
+			Element timeTable = timeTables.getChildren().get(t);
 
 			Element iD = timeTable.getChild("ID");
 			int iDValue = Integer.parseInt(iD.getValue());
