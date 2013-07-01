@@ -62,7 +62,7 @@ public class TrainExportDialog {
     	chooseTrain.setText("Wähle Zug ID : ");
     	
     	comboTrains = new Combo(dialog, SWT.READ_ONLY);
-    	String[] trainsID = new String [Main.trainListAll.size()];
+    	String[] trainsID = new String [Main.getTrainListAll().size()];
 	    comboTrains.setItems(loadTrainList(trainsID));
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
@@ -113,8 +113,8 @@ public class TrainExportDialog {
 
 	private String[] loadTrainList(String[] trainsID) {
 	
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
+		for(int i=0; i < Main.getTrainListAll().size(); i++) {
+			Integer id = Main.getTrainListAll().get(i).getID();
 			trainsID[i] = id.toString();
 		}
 		

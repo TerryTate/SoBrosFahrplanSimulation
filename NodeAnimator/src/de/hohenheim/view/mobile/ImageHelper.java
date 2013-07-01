@@ -57,6 +57,12 @@ public class ImageHelper {
     public static final Image stop48 = new Image(null, "img/Stop48.png");
     public static final Image pause48 = new Image(null, "img/Pause48.png");
     
+    public static final Image redPath = new Image(null, "img/pathRed.png");
+    public static final Image bluePath = new Image(null, "img/pathBlue.png");
+    public static final Image greenPath = new Image(null, "img/pathGreen.png");
+    public static final Image orangePath = new Image(null, "img/pathOrange.png");
+    public static final Image limePath = new Image(null, "img/pathLime.png");
+    
     
     
 }

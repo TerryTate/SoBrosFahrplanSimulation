@@ -1,5 +1,9 @@
 package de.hohenheim.controller.events;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
+
+import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
@@ -51,6 +55,8 @@ public class AnimationPlay implements Runnable{
 				setMin(getMin()+1);
 			}else{
 				setHoure(getHoure()+1);
+				setMin(0);
+				
 			}
 		}
 		updateTime(houre, min);
@@ -66,11 +72,11 @@ public class AnimationPlay implements Runnable{
 		   if((min == 59) && (houre == 23)){
 			   min = 0; 
 			   houre = 0;
-		   }else if (min < 59){
-			   min++;
-		   }else{
-			   min = 0;
-			   houre++;
+			   AnimationEvents.stop(map, p);
+			   AnimationControllerCanvas.setRun(false);
+			   MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
+		        messageBox.setMessage("Fahrtag komplett Abgespielt !");    
+		        messageBox.open();
 		   }
 		  
 		   if ((houre < 10) && (min < 10)){

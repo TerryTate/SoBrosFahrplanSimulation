@@ -187,8 +187,8 @@ public class TrainAddDialog extends Dialog{
 		    	message = message + "Die Zug-ID muss eine positive Zahl sein!\n"+"\r\n";
 		    	idCheck = false;
 		    }
-		    for(int j = 0; j < Main.trainListAll.size(); j++){
-			    if(id == Main.trainListAll.get(j).getID()){
+		    for(int j = 0; j < Main.getTrainListAll().size(); j++){
+			    if(id == Main.getTrainListAll().get(j).getID()){
 			    
 			        message = message + "Diese Zug-ID ist bereits vorhanden. " +
 				    			"Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n" +

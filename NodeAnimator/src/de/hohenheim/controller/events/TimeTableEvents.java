@@ -2,16 +2,18 @@ package de.hohenheim.controller.events;
 
 import java.util.ArrayList;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
-import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.dialouge.TimetableAddDialog;
 import de.hohenheim.view.dialouge.TimetableDeletDialog;
 import de.hohenheim.view.dialouge.TimetableEditDialog;
 
 /**
+ * The class TimetableEvents contain Methods to add, edit, delete, import and export 
+ * a Timetable.
  * 
  * @author Arthur Kaul
  * 
@@ -19,9 +21,10 @@ import de.hohenheim.view.dialouge.TimetableEditDialog;
 public class TimeTableEvents {
 
 	/**
+	 * The method addMiddleStation add a new Middlestation 
+     *  to a Table in the TimetableAddDialog if the boolean add is true else to the TimetableEditDialog
 	 * 
-	 * 
-	 * @param add
+	 * @param add - boolean true if TimetableAddDialog false if TimetableEditDialog
 	 */
 	public static void addMiddleStation(boolean add) {
 
@@ -43,8 +46,10 @@ public class TimeTableEvents {
 	}
 
 	/**
+	 * The method removeMiddleStation remove a selected Middlestation
+     *  from the MiddlestationTable in the TimetableAddDialog if add is true else in the TimetableEditDialog
 	 * 
-	 * @param add
+	 * @param add - boolean true if TimetableAddDialog false if TimetableEditDialog
 	 */
 	public static void removeMiddleStation(boolean add) {
 
@@ -61,8 +66,8 @@ public class TimeTableEvents {
 	}
 
 	/**
-	 * 
-	 * 
+	 * The method addTimetable add a new timetable to the MainTimetablelist (Data) and to the Table in 
+	 * the CompositeTimetable(View) 
 	 * 
 	 */
 	public static void addTimeTable() {
@@ -123,7 +128,7 @@ public class TimeTableEvents {
 
 		Timetable timetable = new Timetable(id, drivingdays, name,
 				startstation, endstation, middlestation, h, m, 0);
-		Main.timetableListAll.add(timetable);
+		Main.getTimetableListAll().add(timetable);
 
 		String drivingdaysItem = "";
 
@@ -173,9 +178,9 @@ public class TimeTableEvents {
 	}
 
 	/**
+	 * The Method editTimetable edit a existing Timetable in the Mainlist and in the Table. 
 	 * 
-	 * 
-	 * @param menu
+	 * @param menu - boolean if true it is a chosen one from a comboBox if false it is an selected one
 	 */
 	public static void editTimeTable(boolean menu) {
 
@@ -192,7 +197,7 @@ public class TimeTableEvents {
 
 			int idCheck = Integer.parseInt(rowData[0].getText(0));
 
-			for (Timetable tt : Main.timetableListAll) {
+			for (Timetable tt : Main.getTimetableListAll()) {
 
 				if (idCheck == tt.getId()) {
 					tt.setId(id);
@@ -311,7 +316,7 @@ public class TimeTableEvents {
 			ArrayList<String> drivingdays = new ArrayList<String>();
 			ArrayList<Integer> middlestation = new ArrayList<Integer>();
 
-			for (Timetable tt : Main.timetableListAll) {
+			for (Timetable tt : Main.getTimetableListAll()) {
 
 				if (Integer.parseInt(TimetableEditDialog.comboTimetable
 						.getText()) == tt.getId()) {
@@ -448,8 +453,10 @@ public class TimeTableEvents {
 
 	/**
 	 * 
+	 *  Method deletTimetable delete an existing Timetable from the Mainlist and from the 
+	 *  Table in the CompositeTimetable
 	 * 
-	 * @param menu
+	 * @param menu - boolean if true it is a chosen one from a comboBox if false it is an selected one
 	 */
 	public static void deleteTimeTable(boolean menu) {
 
@@ -460,12 +467,12 @@ public class TimeTableEvents {
 			TableItem[] rowData = CompositeTimeTable.getTimeTableTable()
 					.getSelection();
 
-			while (Integer.parseInt((rowData[0].getText(0))) != ((Main.timetableListAll
+			while (Integer.parseInt((rowData[0].getText(0))) != ((Main.getTimetableListAll()
 					.get(i).getId()))) {
 				i++;
 			}
 
-			Main.timetableListAll.remove(i);
+			Main.getTimetableListAll().remove(i);
 
 			CompositeTimeTable.getTimeTableTable().remove(
 					CompositeTimeTable.getTimeTableTable()
@@ -480,11 +487,11 @@ public class TimeTableEvents {
 			TableItem item = items[0];
 
 			while (Integer.parseInt(TimetableDeletDialog.comboTimetables
-					.getText()) != ((Main.timetableListAll.get(i).getId()))) {
+					.getText()) != ((Main.getTimetableListAll().get(i).getId()))) {
 				i++;
 			}
 
-			Main.timetableListAll.remove(i);
+			Main.getTimetableListAll().remove(i);
 
 			int j = 0;
 
@@ -511,7 +518,9 @@ public class TimeTableEvents {
 	 */
 	public static void importTimetable(Timetable tt) {
 
-		Main.timetableListAll.add(tt);
+		if (idCheck(tt.getId())){
+		
+		Main.getTimetableListAll().add(tt);
 
 		String drivingdaysItem = "";
 
@@ -539,7 +548,34 @@ public class TimeTableEvents {
 						+ String.valueOf(tt.getStartMinutes()),
 				drivingdaysItem, String.valueOf(tt.getStartstation()),
 				String.valueOf(tt.getEndstation()), middleStationItems });
+		}else{
+			MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
+	        messageBox.setMessage("Der zu ladene Fahrplan konnte nicht geladen werden !\n" +
+	        		              "Da der zu ladene Fahrplan die selbe ID wie ein bereits \n" +
+	        		              "existierender Fahrplan hat!");    
+		          messageBox.open();
+		}
+	}
 
+	/**
+	 *  The Methode idCheck control that the id which is given as parameter not exist in the MainTimetable list
+	 * 
+	 * @param id - Timetable id from the loading xml File
+	 * @return boolean - return true if the id not exist else false
+	 */
+	private static boolean idCheck(int id) {
+
+		boolean check = true;
+		
+		for(int j = 0; j < Main.getTimetableListAll().size(); j++){
+			
+			if (Main.getTimetableListAll().get(j).getId() == id){
+				check = false;
+			}
+			
+		}
+		
+		return check;
 	}
 
 }

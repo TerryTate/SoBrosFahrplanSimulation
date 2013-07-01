@@ -85,7 +85,7 @@ public class TimetableEditDialog extends Dialog{
 	    	chooseTimetable.setText("Wähle Fahrplan ID : ");
 	    	
 	    	comboTimetable = new Combo(dialog, SWT.READ_ONLY);
-	    	String[] timetableID = new String [Main.timetableListAll.size()];
+	    	String[] timetableID = new String [Main.getTimetableListAll().size()];
 		    comboTimetable.setItems(loadTimetableList(timetableID));
 		    comboTimetable.select(0);
 		    
@@ -308,9 +308,9 @@ public class TimetableEditDialog extends Dialog{
 		
 		 if(menu == false){
 		    	
-			 for(int i = 0; i < Main.timetableListAll.size(); i++ ){
+			 for(int i = 0; i < Main.getTimetableListAll().size(); i++ ){
 					
-					Timetable tt = Main.timetableListAll.get(i);
+					Timetable tt = Main.getTimetableListAll().get(i);
 					
 					if (Integer.parseInt(rowData[0].getText()) == tt.getId()){
 						
@@ -395,7 +395,7 @@ public class TimetableEditDialog extends Dialog{
 				if (checkOk()){
 			        TimeTableEvents.editTimeTable(menu);
 				}else{
-					MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			        messageBox.setMessage(message);    
 			        messageBox.open();
 				}
@@ -521,9 +521,9 @@ public class TimetableEditDialog extends Dialog{
 
 	protected void setText() {
         
-		for(int i = 0; i < Main.timetableListAll.size(); i++ ){
+		for(int i = 0; i < Main.getTimetableListAll().size(); i++ ){
 			
-			Timetable tt = Main.timetableListAll.get(i);
+			Timetable tt = Main.getTimetableListAll().get(i);
 			
 			if (Integer.valueOf(comboTimetable.getText()) == tt.getId()){
 				
@@ -590,8 +590,8 @@ public class TimetableEditDialog extends Dialog{
 	private String[] loadTimetableList(String[] timetableID) {
 	
 
-		for(int i=0; i < Main.timetableListAll.size(); i++) {
-			Integer id = Main.timetableListAll.get(i).getId();
+		for(int i=0; i < Main.getTimetableListAll().size(); i++) {
+			Integer id = Main.getTimetableListAll().get(i).getId();
 			timetableID[i] = id.toString();
 		}
 		

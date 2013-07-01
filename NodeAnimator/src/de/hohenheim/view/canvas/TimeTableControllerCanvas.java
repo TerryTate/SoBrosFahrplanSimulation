@@ -79,10 +79,10 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				   if(Main.timetableListAll.size() > 0){	
+				   if(Main.getTimetableListAll().size() > 0){	
 	                 boolean showText = false;
 			    	 
-			         for(int i = 0; i < Main.timetableListAll.size(); i++){
+			         for(int i = 0; i < Main.getTimetableListAll().size(); i++){
 			        	
 			        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
 			        		 CentralEventController.openEditDialog(false, 1);
@@ -91,13 +91,13 @@ public class TimeTableControllerCanvas extends Canvas {
 			         }
 			         
 			         if(showText == false){
-			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
 				        		 			   "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok.");
 				         messageBox.open();
 			         }
 				   }else{
-					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die bearbeitet werden können!");    
 				         messageBox.open();
 				   }
@@ -115,10 +115,10 @@ public class TimeTableControllerCanvas extends Canvas {
 					
 			public void handleEvent(Event arg0) {
 						
-				 if(Main.timetableListAll.size() > 0){	
+				 if(Main.getTimetableListAll().size() > 0){	
 	                 boolean showText = false;
 			    	 
-			         for(int i = 0; i < Main.timetableListAll.size(); i++){
+			         for(int i = 0; i < Main.getTimetableListAll().size(); i++){
 			        	
 			        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
 			        		 TimeTableEvents.deleteTimeTable(false);
@@ -127,13 +127,13 @@ public class TimeTableControllerCanvas extends Canvas {
 			         }
 			         
 			         if(showText == false){
-			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
 				        		                "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok."); 
 				         messageBox.open();
 			         }
 				   }else{
-					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die gelöscht werden können !");    
 				         messageBox.open();
 				   }
@@ -166,10 +166,10 @@ public class TimeTableControllerCanvas extends Canvas {
 							
 			public void handleEvent(Event arg0) {
 								
-			   if(Main.timetableListAll.size() > 0){	
+			   if(Main.getTimetableListAll().size() > 0){	
                  boolean showText = false;
 		    	 
-		         for(int i = 0; i < Main.timetableListAll.size(); i++){
+		         for(int i = 0; i < Main.getTimetableListAll().size(); i++){
 		        	
 		        	 if(CompositeTimeTable.getTimeTableTable().isSelected(i)){
 		        		 CentralEventController.save(false, 1);
@@ -178,12 +178,12 @@ public class TimeTableControllerCanvas extends Canvas {
 		         }
 		         
 		         if(showText == false){
-		        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			         messageBox.setMessage("Sie haben keinen Fahrplan gewählt!" + "\r\n" + "\r\n" + 
       		 			   "Wählen Sie einen Fahrplan aus und drücken Sie auf Ok.");messageBox.open();
 		         }
 			   }else{
-				     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			         messageBox.setMessage("Es sind keine Fahrpläne vorhanden, die exportiert werden können!");    
 			         messageBox.open();
 			   }

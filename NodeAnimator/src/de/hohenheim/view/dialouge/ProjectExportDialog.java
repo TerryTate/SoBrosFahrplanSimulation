@@ -53,7 +53,7 @@ public class ProjectExportDialog {
     	chooseProject.setText("Wähle Projekt ID : ");
     	
     	comboProjects = new Combo(dialog, SWT.READ_ONLY);
-    	String[] projectID = new String [Main.projectListAll.size()];
+    	String[] projectID = new String [Main.getProjectListAll().size()];
 	    comboProjects.setItems(loadProjectList(projectID));
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
@@ -104,8 +104,8 @@ public class ProjectExportDialog {
 
 	private String[] loadProjectList(String[] projectID) {
 	
-		for(int i=0; i < Main.projectListAll.size(); i++) {
-			Integer id = Main.projectListAll.get(i).getId();
+		for(int i=0; i < Main.getProjectListAll().size(); i++) {
+			Integer id = Main.getProjectListAll().get(i).getId();
 			projectID[i] = id.toString();
 		}
 		

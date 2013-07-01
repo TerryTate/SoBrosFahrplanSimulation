@@ -287,7 +287,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		
 		int pathSpeed = getValueSpeed(animationFigure.getPath().getPathSpeed());
 		
-		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + 9/*+ getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed())*/;
+		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed)/*+ getControllerSpeed(AnimationControllerCanvas.getSimulationSpeed())*/;
 		if(run_count>=segments.size()) {
 			init=true;
 			run_count=0;

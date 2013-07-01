@@ -104,7 +104,7 @@ public class ProjectAddDialog extends Dialog {
 	    chooseTrain.setText("Zug wählen : ");
 	    
 	    comboChooseTrain = new Combo(dialog, SWT.READ_ONLY);
-	    String[] trainsID = new String [Main.trainListAll.size()];
+	    String[] trainsID = new String [Main.getTrainListAll().size()];
 	    comboChooseTrain.setItems(loadTrainList(trainsID));
 	    gridData = new GridData();
 	    
@@ -142,7 +142,7 @@ public class ProjectAddDialog extends Dialog {
 	    chooseTimeTable.setText("Fahrplan wählen : ");
 	    
 	    comboChooseTimeTable = new Combo(dialog, SWT.READ_ONLY);
-	    String[] timetableID = new String [Main.timetableListAll.size()];
+	    String[] timetableID = new String [Main.getTimetableListAll().size()];
 	    comboChooseTimeTable.setItems(loadTimetableList(timetableID));
 	    gridData = new GridData();
 	    gridData.horizontalAlignment = SWT.FILL;
@@ -229,7 +229,7 @@ public class ProjectAddDialog extends Dialog {
 			public void handleEvent(Event arg0) {
 				if (projectCheckOk()){
 			        ProjectEvents.addProject();
-			        String[] projectIDs = new String [Main.projectListAll.size()];
+			        String[] projectIDs = new String [Main.getProjectListAll().size()];
 			        AnimationControllerCanvas.comboProjects.setItems(AnimationControllerCanvas.loadProjectIDs(projectIDs));
 				}else{
 					 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
@@ -314,8 +314,8 @@ public class ProjectAddDialog extends Dialog {
 		    	message = message + "Die Projekt-ID muss eine positive Zahl enthalten!\n"+"\r\n";
 		    	check = false;
 		    }
-		    for(int j = 0; j < Main.projectListAll.size(); j++){
-			    if(id == Main.projectListAll.get(j).getId()){
+		    for(int j = 0; j < Main.getProjectListAll().size(); j++){
+			    if(id == Main.getProjectListAll().get(j).getId()){
 			    
 			        message = message + "Die ID-Eingabe ist bereits vorhanden. Bitte  \n " +
 			        		" geben sie eine andere 6-stellige Ziffer ein und versuchen Sie es erneut. \n"; 
@@ -340,8 +340,8 @@ public class ProjectAddDialog extends Dialog {
 	 */
 	private String[] loadTrainList(String[] trainsID) {
 		
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
+		for(int i=0; i < Main.getTrainListAll().size(); i++) {
+			Integer id = Main.getTrainListAll().get(i).getID();
 			trainsID[i] = id.toString();
 		}
 		
@@ -356,8 +356,8 @@ public class ProjectAddDialog extends Dialog {
 	 */
 	private String[] loadTimetableList(String[] timetableID) {
 		
-		for(int i=0; i < Main.timetableListAll.size(); i++) {
-			Integer id = Main.timetableListAll.get(i).getId();
+		for(int i=0; i < Main.getTimetableListAll().size(); i++) {
+			Integer id = Main.getTimetableListAll().get(i).getId();
 			timetableID[i] = id.toString();
 		}
 		

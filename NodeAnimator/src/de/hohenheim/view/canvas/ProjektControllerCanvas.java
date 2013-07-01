@@ -78,10 +78,10 @@ public class ProjektControllerCanvas extends Canvas {
 		editProject.addListener(SWT.Selection, new Listener() {
 			
 			public void handleEvent(Event arg0) {
-				if(Main.projectListAll.size() > 0){	
+				if(Main.getProjectListAll().size() > 0){	
 	                 boolean showText = false;
 			    	 
-			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			         for(int i = 0; i < Main.getProjectListAll().size(); i++){
 			        	
 			        	 if(CompositeProject.getProjectTable().isSelected(i)){
 			        		 CentralEventController.openEditDialog(false, 2);
@@ -90,13 +90,13 @@ public class ProjektControllerCanvas extends Canvas {
 			         }
 			         
 			         if(showText == false){
-			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
 				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");   
 				         messageBox.open();
 			         }
 				   }else{
-					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Es sind keine Projekte vorhanden, die barbeitet werden können!");    
 					          messageBox.open();
 				   }
@@ -117,10 +117,10 @@ public class ProjektControllerCanvas extends Canvas {
 			
 			public void handleEvent(Event arg0) {
 				 
-				if(Main.projectListAll.size() > 0){	
+				if(Main.getProjectListAll().size() > 0){	
 	                 boolean showText = false;
 			    	 
-			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			         for(int i = 0; i < Main.getProjectListAll().size(); i++){
 			        	
 			        	 if(CompositeProject.getProjectTable().isSelected(i)){
 			        		 ProjectEvents.deletProject();
@@ -129,13 +129,13 @@ public class ProjektControllerCanvas extends Canvas {
 			         }
 			         
 			         if(showText == false){
-			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
 				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");    
 					         messageBox.open();
 			         }
 				   }else{
-					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Es sind keine Projekte vorhanden, die gelöscht werden können!");    
 				         messageBox.open();
 				   }
@@ -171,10 +171,10 @@ public class ProjektControllerCanvas extends Canvas {
 					
 		     public void handleEvent(Event arg0) {
 						
-		    	 if(Main.projectListAll.size() > 0){	
+		    	 if(Main.getProjectListAll().size() > 0){	
 	                 boolean showText = false;
 			    	 
-			         for(int i = 0; i < Main.projectListAll.size(); i++){
+			         for(int i = 0; i < Main.getProjectListAll().size(); i++){
 			        	
 			        	 if(CompositeProject.getProjectTable().isSelected(i)){
 			        		 CentralEventController.save(false, 2); 
@@ -183,13 +183,13 @@ public class ProjektControllerCanvas extends Canvas {
 			         }
 			         
 			         if(showText == false){
-			        	 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			        	 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Sie haben kein Projekt gewählt!" + "\r\n" + "\r\n" + 
 				        		 			   "Wählen Sie einen Projekt aus und drücken Sie auf Ok.");    
 				         messageBox.open();
 			         }
 				   }else{
-					     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 				         messageBox.setMessage("Es sind keine Projekte vorhanden, die exportiert werden können!");    
 				         messageBox.open();
 				   }

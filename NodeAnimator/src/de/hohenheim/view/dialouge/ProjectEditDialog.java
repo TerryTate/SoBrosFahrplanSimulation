@@ -101,7 +101,7 @@ public class ProjectEditDialog extends Dialog{
 	    chooseTrain.setText("Zug wählen : ");
 	    
 	    comboChooseTrain = new Combo(dialog, SWT.READ_ONLY);
-	    String[] trainsID = new String [Main.trainListAll.size()];
+	    String[] trainsID = new String [Main.getTrainListAll().size()];
 	    comboChooseTrain.setItems(loadTrainList(trainsID));
 	    gridData = new GridData();
 	    
@@ -138,7 +138,7 @@ public class ProjectEditDialog extends Dialog{
 	    chooseTimeTable.setText("Fahrplan wählen : ");
 	    
 	    comboChooseTimeTable = new Combo(dialog, SWT.READ_ONLY);
-	    String[] timetableID2 = new String [Main.timetableListAll.size()];
+	    String[] timetableID2 = new String [Main.getTimetableListAll().size()];
 	    comboChooseTimeTable.setItems(loadTimetableList(timetableID2));
 	    gridData = new GridData();
 	
@@ -249,9 +249,9 @@ public class ProjectEditDialog extends Dialog{
 		});
 		
 		//if (menu == false){
-		for(int i = 0; i < Main.projectListAll.size(); i++ ){
+		for(int i = 0; i < Main.getProjectListAll().size(); i++ ){
 			
-			Project p = Main.projectListAll.get(i);
+			Project p = Main.getProjectListAll().get(i);
 			
 			if (Integer.parseInt(rowData[0].getText()) == p.getId()){
 				
@@ -284,8 +284,8 @@ public class ProjectEditDialog extends Dialog{
 	}
 
 	private String[] loadTrainList(String[] trainsID) {
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
+		for(int i=0; i < Main.getTrainListAll().size(); i++) {
+			Integer id = Main.getTrainListAll().get(i).getID();
 			trainsID[i] = id.toString();
 		}
 		
@@ -295,8 +295,8 @@ public class ProjectEditDialog extends Dialog{
 
 	private String[] loadTimetableList(String[] timetableID2) {
 		
-		for(int i=0; i < Main.timetableListAll.size(); i++) {
-			Integer id = Main.timetableListAll.get(i).getId();
+		for(int i=0; i < Main.getTimetableListAll().size(); i++) {
+			Integer id = Main.getTimetableListAll().get(i).getId();
 			timetableID2[i] = id.toString();
 		}
 		

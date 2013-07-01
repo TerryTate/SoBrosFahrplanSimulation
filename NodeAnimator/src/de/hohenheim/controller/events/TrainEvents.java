@@ -41,7 +41,7 @@ public class TrainEvents {
 		
 		TrainData train = new TrainData(id, speed, TrainAddDialog.comboTypOfTrain.getText(), TrainAddDialog.comboLadungen.getText(), TrainAddDialog.comboPriority.getText(), false);
 		
-		Main.trainListAll.add(train);
+		Main.getTrainListAll().add(train);
 		
 		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
 		item.setText(new String[]{String.valueOf(train.getID()),
@@ -74,7 +74,7 @@ public class TrainEvents {
 		
 	    	int idCheck = Integer.parseInt(rowData[0].getText(0));
 		
-		    for (TrainData td : Main.trainListAll){
+		    for (TrainData td : Main.getTrainListAll()){
 			
 			    if (idCheck == td.getID()){
 				    td.setID(id);
@@ -95,7 +95,7 @@ public class TrainEvents {
 		
 		}else if (menu == true){
 				
-			 for (TrainData td : Main.trainListAll){
+			 for (TrainData td : Main.getTrainListAll()){
 			
 			    if (Integer.parseInt(TrainEditDialog.comboTrains.getText()) == td.getID()){
 				  
@@ -142,11 +142,11 @@ public class TrainEvents {
 	
     		TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
 			
-	    	while(Integer.parseInt((rowData[0].getText(0))) != ((Main.trainListAll.get(i).getID()))){
+	    	while(Integer.parseInt((rowData[0].getText(0))) != ((Main.getTrainListAll().get(i).getID()))){
 		    	i++;
 	    	}
 		
-		    Main.trainListAll.remove(i);
+		    Main.getTrainListAll().remove(i);
 		
 	    	CompositeTrain.getTrainTable().remove(CompositeTrain.getTrainTable().getSelectionIndices());  
 			
@@ -157,11 +157,11 @@ public class TrainEvents {
 	    	TableItem [] items = CompositeTrain.getTrainTable().getItems();
 	    	TableItem item = items[0]; 
 	    	
-	    	while(Integer.parseInt(TrainDeletDialog.comboTrains.getText()) != ((Main.trainListAll.get(i).getID()))){
+	    	while(Integer.parseInt(TrainDeletDialog.comboTrains.getText()) != ((Main.getTrainListAll().get(i).getID()))){
 		    	i++;
 	    	}
 	    	
-	    	Main.trainListAll.remove(i);
+	    	Main.getTrainListAll().remove(i);
 	    	
 	    	int j = 0; 
 	    	
@@ -184,14 +184,34 @@ public class TrainEvents {
      * @param td
      */
 	public static void importTrain(TrainData td) {
-	
-		Main.trainListAll.add(td);
+        if(idCheck(td.getID())){
+        	
+        
+		Main.getTrainListAll().add(td);
 		
 		TableItem item = new TableItem(CompositeTrain.getTrainTable(), SWT.NONE);
 		item.setText(new String[]{String.valueOf(td.getID()),
 				td.getTypOfTrain(),
 				String.valueOf(td.getSpeed()), td.getPriority(), td.getLadung()});
+        }else{
+        	
+        }
+	}
+
+
+	private static boolean idCheck(int id) {
+
+		boolean check = true;
 		
+		for(int j = 0; j < Main.getTrainListAll().size(); j++){
+			
+			if (Main.getTrainListAll().get(j).getID() == id){
+				check = false;
+			}
+			
+		}
+		
+		return check;
 	}
 	
 }

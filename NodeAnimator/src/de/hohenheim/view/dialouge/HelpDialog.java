@@ -35,7 +35,7 @@ public class HelpDialog extends Dialog{
 		 
 			//Message Box of HelpDialog
 			 
-		    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_QUESTION);
+		    MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ICON_QUESTION);
 		    messageBox.setMessage("Bitte wenden Sie sich an Ihren Hersteller" + "\r\n" +
 		            "\r\n" + "(c) Copyright SoBros");
 		    messageBox.setText("Help");

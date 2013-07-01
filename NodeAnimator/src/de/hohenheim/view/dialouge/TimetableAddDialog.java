@@ -386,8 +386,8 @@ public class TimetableAddDialog extends Dialog{
 			    	message = message + "Die Fahrplan-ID muss eine positive Zahl sein!\n"+"\r\n";
 			    	check = false;
 			    }
-			    for(int j = 0; j < Main.timetableListAll.size(); j++){
-				    if(id == Main.timetableListAll.get(j).getId()){
+			    for(int j = 0; j < Main.getTimetableListAll().size(); j++){
+				    if(id == Main.getTimetableListAll().get(j).getId()){
 				    	message = message + "Diese Fahrplan-ID ist bereits vorhanden. " +
 				    			"Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n" +
 				        		"und versuchen Sie es erneut.\n"+"\r\n"+"\r\n";

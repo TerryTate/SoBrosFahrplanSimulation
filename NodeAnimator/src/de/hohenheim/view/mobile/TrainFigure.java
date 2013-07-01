@@ -88,8 +88,8 @@ public class TrainFigure extends AnimationFigure {
 	
 	public int getSpeed(int id){
 		
-		for(int j = 0; j < Main.trainListAll.size(); j++){
-			TrainData td = Main.trainListAll.get(j);
+		for(int j = 0; j < Main.getTrainListAll().size(); j++){
+			TrainData td = Main.getTrainListAll().get(j);
 			if (td.getID() == id){
 				if (td.getSpeed() == 100){
                     return 1;			
@@ -112,8 +112,8 @@ public class TrainFigure extends AnimationFigure {
 	private Image getTrainImage(int id) {
 		
 		Image trainImg = null;
-		for(int j = 0; j < Main.trainListAll.size(); j++){
-			TrainData td = Main.trainListAll.get(j);
+		for(int j = 0; j < Main.getTrainListAll().size(); j++){
+			TrainData td = Main.getTrainListAll().get(j);
 			if (td.getID() == id){
 				if (td.getTypOfTrain().equalsIgnoreCase("S-Bahn")){
 					trainImg = ImageHelper.sBahn;

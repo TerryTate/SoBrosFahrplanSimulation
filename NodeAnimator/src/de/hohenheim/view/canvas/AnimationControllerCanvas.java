@@ -76,7 +76,7 @@ public class AnimationControllerCanvas extends Canvas{
 		choseProject.setText("Project ID wählen:");
 		
 		comboProjects = new Combo(group, SWT.READ_ONLY);
-		String[] projectIDs = new String [Main.projectListAll.size()];
+		String[] projectIDs = new String [Main.getProjectListAll().size()];
 		comboProjects.setItems(loadProjectIDs(projectIDs));
 		comboProjects.select(0);
 		GridData gridData = new GridData();
@@ -151,7 +151,7 @@ public class AnimationControllerCanvas extends Canvas{
 		
 		
 		Group group2 = new Group(this, SWT.SHADOW_ETCHED_IN | SWT.FILL);
-	    group2.setText("Animations Einstellungen");
+	    group2.setText("Animation");
         GridLayout gridLayout2 = new GridLayout();
         gridLayout2.numColumns = 3;
         
@@ -174,7 +174,7 @@ public class AnimationControllerCanvas extends Canvas{
 				if(projectCheck()){
 							 
 				    Project p = null;
-				    for (Project project : Main.projectListAll) {
+				    for (Project project : Main.getProjectListAll()) {
 						
 					    if (Integer.parseInt(comboProjects.getText()) == project.getId()){
 						
@@ -182,10 +182,10 @@ public class AnimationControllerCanvas extends Canvas{
 					    }
 						
 				    }
-				    run = true;
+				    setRun(true);
 				    AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()));
 				}else{
-					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			         messageBox.setMessage(message);    
 				          messageBox.open();
 				}
@@ -201,7 +201,7 @@ public class AnimationControllerCanvas extends Canvas{
 			public void handleEvent(Event arg0) {
 			    
 				Project p = null;
-				for (Project project : Main.projectListAll) {
+				for (Project project : Main.getProjectListAll()) {
 						
 					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
 						
@@ -209,7 +209,7 @@ public class AnimationControllerCanvas extends Canvas{
 					}
 						
 				}
-				run = false;
+				setRun(false);
 				AnimationEvents.pause(map, p);
 				
 			}
@@ -222,7 +222,7 @@ public class AnimationControllerCanvas extends Canvas{
 			public void handleEvent(Event arg0) {
 
 				Project p = null;
-				for (Project project : Main.projectListAll) {
+				for (Project project : Main.getProjectListAll()) {
 						
 					if (Integer.parseInt(comboProjects.getText()) == project.getId()){
 						
@@ -230,13 +230,97 @@ public class AnimationControllerCanvas extends Canvas{
 					}
 						
 				}
-				run = false;
+				setRun(false);
 				AnimationEvents.stop(map, p);
 			}
 		});
 		
-	   
-		
+		Group legend = new Group(this, SWT.SHADOW_ETCHED_IN);
+	    legend.setText("Legende : ");
+        GridLayout gridLayout3 = new GridLayout();
+        gridLayout3.numColumns = 4;
+	    legend.setLayout(gridLayout3);
+	    
+	    Label train = new Label(legend, SWT.NONE);
+	    train.setText("Züge :");
+	    gridData = new GridData();
+	    gridData.horizontalSpan = 4;
+	    gridData.horizontalAlignment = SWT.BEGINNING;
+	    train.setLayoutData(gridData);
+	    
+	    Label iceText  = new Label(legend, SWT.NONE);
+	    iceText.setText("ICE");
+	    
+	    Label ice  = new Label(legend, SWT.NONE);
+	    ice.setImage(ImageHelper.ice);
+	    
+	    Label icText  = new Label(legend, SWT.NONE);
+	    icText.setText("    IC");
+	    
+	    Label ic  = new Label(legend, SWT.NONE);
+	    ic.setImage(ImageHelper.ic);
+	    
+	    Label sBahnText  = new Label(legend, SWT.NONE);
+	    sBahnText.setText("S-Bahn");
+	    
+	    Label sBahn  = new Label(legend, SWT.NONE);
+	    sBahn.setImage(ImageHelper.sBahn);
+	    
+	    Label dampflockText  = new Label(legend, SWT.NONE);
+	    dampflockText.setText("    Dampflock");
+	    
+	    Label dampflock  = new Label(legend, SWT.NONE);
+	    dampflock.setImage(ImageHelper.dampflock);
+
+	    Label gueterText  = new Label(legend, SWT.NONE);
+	    gueterText.setText("Güterzug");
+	    
+	    Label gueterzug  = new Label(legend, SWT.NONE);
+	    gueterzug.setImage(ImageHelper.gueterZug);
+	    
+	    Label regioText  = new Label(legend, SWT.NONE);
+	    regioText.setText("    RegioBahn");
+	    
+	    Label regio  = new Label(legend, SWT.NONE);
+	    regio.setImage(ImageHelper.regioBahn);
+	    
+	    Label pathSpeed = new Label(legend, SWT.NONE);
+	    pathSpeed.setText("Streckengeschwindigkeiten :");
+	    gridData = new GridData();
+	    gridData.horizontalSpan = 4;
+	    gridData.horizontalAlignment = SWT.BEGINNING;
+	    pathSpeed.setLayoutData(gridData);
+	    
+	    Label redText  = new Label(legend, SWT.NONE);
+	    redText.setText("100 km/h");
+	    
+	    Label red  = new Label(legend, SWT.NONE);
+	    red.setImage(ImageHelper.redPath);
+	    
+	    Label blueText  = new Label(legend, SWT.NONE);
+	    blueText.setText("    150 km/h");
+	    
+	    Label blue  = new Label(legend, SWT.NONE);
+	    blue.setImage(ImageHelper.bluePath);
+	    
+	    Label greenText  = new Label(legend, SWT.NONE);
+	    greenText.setText("200 km/h");
+	    
+	    Label green  = new Label(legend, SWT.NONE);
+	    green.setImage(ImageHelper.greenPath);
+	    
+	    Label orangeText  = new Label(legend, SWT.NONE);
+	    orangeText.setText("   250 km/h");
+	    
+	    Label orange  = new Label(legend, SWT.NONE);
+	    orange.setImage(ImageHelper.orangePath);
+
+	    Label limeText  = new Label(legend, SWT.NONE);
+	    limeText.setText("300 km/h");
+	    
+	    Label lime  = new Label(legend, SWT.NONE);
+	    lime.setImage(ImageHelper.limePath);
+	    
 	}
 	
 	/**
@@ -264,8 +348,8 @@ public class AnimationControllerCanvas extends Canvas{
 	 */
 	public static String[] loadProjectIDs(String[] projectIDs) {
 	    
-		for(int i=0; i < Main.projectListAll.size(); i++) {
-			Integer id = Main.projectListAll.get(i).getId();
+		for(int i=0; i < Main.getProjectListAll().size(); i++) {
+			Integer id = Main.getProjectListAll().get(i).getId();
 			projectIDs[i] = id.toString();
 		}
 		
@@ -321,7 +405,7 @@ public class AnimationControllerCanvas extends Canvas{
 		boolean check = true;
 		message = "";
 		
-		if(run == true){
+		if(isRun() == true){
 			message = "Die animmation läuft bereits ! \n";
 			check = false;
 		}
@@ -336,6 +420,10 @@ public class AnimationControllerCanvas extends Canvas{
 
 	public static boolean isRun() {
 		return run;
+	}
+
+	public static void setRun(boolean run) {
+		AnimationControllerCanvas.run = run;
 	}
 
 }

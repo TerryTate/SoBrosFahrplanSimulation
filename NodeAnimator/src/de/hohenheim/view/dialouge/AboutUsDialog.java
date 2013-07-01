@@ -34,7 +34,7 @@ public class AboutUsDialog extends Dialog{
 	    
 		//Message Box of About Us
 		 
-	    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_INFORMATION
+	    MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ICON_INFORMATION
 	            | SWT.YES);
 	    messageBox.setMessage
 	    ("Fahrplan Animation" + "\r\n" + "\r\n" +

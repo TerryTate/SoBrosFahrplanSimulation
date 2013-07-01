@@ -80,7 +80,7 @@ public class TrainEditDialog extends Dialog{
 	    	chooseTrain.setText("Wähle Zug ID : ");
 	    	
 	    	comboTrains = new Combo(dialog, SWT.READ_ONLY);
-	    	String[] trainsID = new String [Main.trainListAll.size()];
+	    	String[] trainsID = new String [Main.getTrainListAll().size()];
 		    comboTrains.setItems(loadTrainList(trainsID));
 		    comboTrains.select(0);
 		    comboTrains.addSelectionListener(new SelectionListener() {
@@ -252,9 +252,9 @@ public class TrainEditDialog extends Dialog{
 
 	protected void setText() {
 		
-		for(int i = 0; i < Main.trainListAll.size(); i++ ){
+		for(int i = 0; i < Main.getTrainListAll().size(); i++ ){
 			
-			TrainData td = Main.trainListAll.get(i);
+			TrainData td = Main.getTrainListAll().get(i);
 			
 			if (Integer.valueOf(comboTrains.getText()) == td.getID()){
 				
@@ -275,8 +275,8 @@ public class TrainEditDialog extends Dialog{
 	private String[] loadTrainList(String[] trainsID2) {
 		
 		
-		for(int i=0; i < Main.trainListAll.size(); i++) {
-			Integer id = Main.trainListAll.get(i).getID();
+		for(int i=0; i < Main.getTrainListAll().size(); i++) {
+			Integer id = Main.getTrainListAll().get(i).getID();
 			trainsID2[i] = id.toString();
 		}
 		

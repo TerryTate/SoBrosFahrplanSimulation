@@ -51,7 +51,7 @@ public class TimetableExportDialog {
     	chooseTimetable.setText("Wähle Fahrplan ID : ");
     	
     	comboTimetables = new Combo(dialog, SWT.READ_ONLY);
-    	String[] timetablesID = new String [Main.timetableListAll.size()];
+    	String[] timetablesID = new String [Main.getTimetableListAll().size()];
 	    comboTimetables.setItems(loadTimetableList(timetablesID));
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
@@ -102,8 +102,8 @@ public class TimetableExportDialog {
 
 	private String[] loadTimetableList(String[] timetablesID) {
 	
-		for(int i=0; i < Main.timetableListAll.size(); i++) {
-			Integer id = Main.timetableListAll.get(i).getId();
+		for(int i=0; i < Main.getTimetableListAll().size(); i++) {
+			Integer id = Main.getTimetableListAll().get(i).getId();
 			timetablesID[i] = id.toString();
 		}
 		

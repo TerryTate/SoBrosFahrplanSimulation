@@ -32,10 +32,10 @@ public class Main {
 	private static Composite tabComposite;
 	private static Composite bottomComposite;
 	private static TabFolder tabFolder;
-	public static ArrayList<TrainData> trainListAll = new ArrayList();
-	public static ArrayList<Timetable> timetableListAll = new ArrayList();
-	public static ArrayList<Project>  projectListAll = new ArrayList();
-	private static Shell shell;
+	private static ArrayList<TrainData> trainListAll = new ArrayList();
+	private static ArrayList<Timetable> timetableListAll = new ArrayList();
+	private static ArrayList<Project>  projectListAll = new ArrayList();
+	private static Shell mainShell;
 	private static Display display;
 	
 	/**
@@ -46,20 +46,20 @@ public class Main {
 		
 		setDisplay(Display.getDefault());
         
-		shell = new Shell();
-		getShell().setText("Fahrplan Animation");
-		getShell().setImage(ImageHelper.trainTab);
+		mainShell = new Shell();
+		getMainShell().setText("Fahrplan Animation");
+		getMainShell().setImage(ImageHelper.trainTab);
 		int screenWidth  = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-		getShell().setSize(960, 700);
-		getShell().setLocation( screenWidth/2 - 410, screenHeight/2 - 360);
+		getMainShell().setSize(960, 700);
+		getMainShell().setLocation( screenWidth/2 - 410, screenHeight/2 - 360);
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
-	    getShell().setLayout(gridLayout);
+	    getMainShell().setLayout(gridLayout);
 		
-		getShell().setMenuBar(MenuBar.createMenu(getShell()));
+		getMainShell().setMenuBar(MenuBar.createMenu(getMainShell()));
 		
-		tabComposite = new Composite(getShell(), SWT.BORDER );
+		tabComposite = new Composite(getMainShell(), SWT.BORDER );
 		
 		/////////// innerer Rand
 		tabComposite.setBackground(ColorConstants.lightGray);
@@ -72,7 +72,7 @@ public class Main {
 		tabComposite.setLayout(gridLayout);
 		
 		
-		bottomComposite = new Composite(getShell(), SWT.BORDER );
+		bottomComposite = new Composite(getMainShell(), SWT.BORDER );
 		bottomComposite.setBackground(ColorConstants.lightGray);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
@@ -87,7 +87,7 @@ public class Main {
 	        	if(AnimationControllerCanvas.isRun()){
 	        		
 	        	     tabFolder.setSelection(0);	
-	        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+	        	     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			         messageBox.setMessage("Die Ansicht kann nicht gewechselt werden \n" +
 			         		               "solange eine Animation läuft!");    
 			         messageBox.open();
@@ -116,10 +116,10 @@ public class Main {
         animation.close();
         animation.dispose();
         
-	    getShell().open();
+	    getMainShell().open();
     
 	
-		while (!getShell().isDisposed()) {			
+		while (!getMainShell().isDisposed()) {			
 			if (!getDisplay().readAndDispatch()) {
 	    
 			    getDisplay().sleep();
@@ -149,8 +149,8 @@ public class Main {
 	 * 
 	 * @return
 	 */
-	public static Shell getShell() {
-		return shell;
+	public static Shell getMainShell() {
+		return mainShell;
 	}
 
 	/**
@@ -167,6 +167,18 @@ public class Main {
 	 */
 	public static void setDisplay(Display display) {
 		Main.display = display;
+	}
+
+	public static ArrayList<Timetable> getTimetableListAll() {
+		return timetableListAll;
+	}
+
+	public static ArrayList<TrainData> getTrainListAll() {
+		return trainListAll;
+	}
+
+	public static ArrayList<Project> getProjectListAll() {
+		return projectListAll;
 	}
 
 }

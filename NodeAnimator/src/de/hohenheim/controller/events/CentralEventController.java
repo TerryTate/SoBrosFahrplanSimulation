@@ -48,7 +48,7 @@ public class CentralEventController {
 	 */
 	public static void closeProgramm() {
 		
-		 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ICON_QUESTION
+		 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ICON_QUESTION
 		            | SWT.YES | SWT.NO);
 		 messageBox.setMessage("Wollen Sie das Programm wirklich beenden ?");
 		 messageBox.setText("Programm Beenden");
@@ -68,7 +68,7 @@ public class CentralEventController {
 		if(!AnimationControllerCanvas.isRun()){
 		    Main.getcTabFolder().setSelection(tab);
 		}else{
-			 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 	         messageBox.setMessage("Die Ansicht kann nicht gewechselt werden \n" +
 	         		               "solange eine Animation läuft!");    
 	         messageBox.open();
@@ -85,31 +85,31 @@ public class CentralEventController {
 		
 		if (addDialog == 0){
 		
-			new TrainAddDialog(Main.getShell(), SWT.NONE).open();
+			new TrainAddDialog(Main.getMainShell(), SWT.NONE).open();
 		
 		}else if (addDialog == 1){
 		
-			new TimetableAddDialog(Main.getShell(), SWT.NONE).open();
+			new TimetableAddDialog(Main.getMainShell(), SWT.NONE).open();
 		
 		}else if (addDialog == 2){
 			
-			if((Main.timetableListAll.size() > 0) && (Main.trainListAll.size() > 0)){
+			if((Main.getTimetableListAll().size() > 0) && (Main.getTrainListAll().size() > 0)){
 				
-			    new ProjectAddDialog(Main.getShell(), SWT.NONE).open();
+			    new ProjectAddDialog(Main.getMainShell(), SWT.NONE).open();
 			
 			}else{
 				String message = "";
-			    if(Main.timetableListAll.size() < 1){
+			    if(Main.getTimetableListAll().size() < 1){
 			    	
 			    	message = message + "Es gibt keine Fahrpläne daher kann kein Project erstellt werden. \n";
 			        
 			    }
-			    if (Main.trainListAll.size() < 1){
+			    if (Main.getTrainListAll().size() < 1){
 			    	
 			    	message = message + "Es gibt keine Züge daher kann kein Project ertstellt werden.";
 			    	
 			    }
-			    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			    MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		        messageBox.setMessage(message);    
 		        messageBox.open();
 			}
@@ -127,13 +127,13 @@ public class CentralEventController {
 		
 		if (editDialog == 0){
 		    
-			if (Main.trainListAll.size() > 0){
+			if (Main.getTrainListAll().size() > 0){
 			
-			    new TrainEditDialog(Main.getShell(), SWT.NONE).open(menu);
+			    new TrainEditDialog(Main.getMainShell(), SWT.NONE).open(menu);
 			
 		    }else{
 			
-			    MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+			    MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 	            messageBox.setMessage("Es gibt keine Züge die Bearbeitet werden können.");    
 	            messageBox.open();
 			
@@ -141,13 +141,13 @@ public class CentralEventController {
 	
 		}else if (editDialog == 1){
 			
-			if (Main.timetableListAll.size() > 0){
+			if (Main.getTimetableListAll().size() > 0){
 			    
-	        	new TimetableEditDialog(Main.getShell(), SWT.NONE).open(menu);
+	        	new TimetableEditDialog(Main.getMainShell(), SWT.NONE).open(menu);
 			
 	        }else{
 				
-				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		        messageBox.setMessage("Es gibt keine Fahrpläne die Bearbeitet werden können.");    
 		        messageBox.open();
 				
@@ -155,7 +155,7 @@ public class CentralEventController {
 			
 		}else if (editDialog == 2){
 			
-			new ProjectEditDialog(Main.getShell(), SWT.NONE).open();
+			new ProjectEditDialog(Main.getMainShell(), SWT.NONE).open();
 		}
 	}
 	
@@ -168,26 +168,26 @@ public class CentralEventController {
     	
     	if (deleteDialog == 0){
     		
-    	    if (Main.trainListAll.size() > 0){
+    	    if (Main.getTrainListAll().size() > 0){
 		    
-    		    new TrainDeletDialog(Main.getShell(), SWT.NONE).open(menu);
+    		    new TrainDeletDialog(Main.getMainShell(), SWT.NONE).open(menu);
 		
             }else{
 			
-		    	MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		    	MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 	            messageBox.setMessage("Es gibt keine Züge die Gelöscht werden können.");    
 	            messageBox.open();
 			
 		    }
     	}else if(deleteDialog == 1){
     		
-    		if (Main.timetableListAll.size() > 0){
+    		if (Main.getTimetableListAll().size() > 0){
 			    
-    			new TimetableDeletDialog(Main.getShell(), SWT.NONE).open(menu);
+    			new TimetableDeletDialog(Main.getMainShell(), SWT.NONE).open(menu);
     			
     	    }else{
     				
-    			MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+    			MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
     			messageBox.setMessage("Es gibt keine Fahrpläne die Gelöscht werden können.");    
     		    messageBox.open();
     				
@@ -202,7 +202,7 @@ public class CentralEventController {
      */
 	public static void showHelp() {
 		
-		new HelpDialog(Main.getShell(), SWT.NONE).open();
+		new HelpDialog(Main.getMainShell(), SWT.NONE).open();
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class CentralEventController {
         	
         }
         
-		FileDialog fd = new FileDialog(Main.getShell(), SWT.SAVE);
+		FileDialog fd = new FileDialog(Main.getMainShell(), SWT.SAVE);
         fd.setText(title);
         fd.setFilterPath("C:/");
         String[] filterExt = { "*.xml" };
@@ -239,12 +239,12 @@ public class CentralEventController {
             if (menu == false){
         	
         	   TableItem [] rowData = CompositeTrain.getTrainTable().getSelection();
-        	   TrainData td = Main.trainListAll.get(0);
+        	   TrainData td = Main.getTrainListAll().get(0);
         	   int i = 0; 
         	
         	    while(Integer.parseInt(rowData[0].getText(0)) != td.getID()){
         		    i++;
-        		    td = Main.trainListAll.get(i);
+        		    td = Main.getTrainListAll().get(i);
         	    }
         		
         	    XmlWriter.saveSingleTrain(selected,  td);
@@ -252,12 +252,12 @@ public class CentralEventController {
             }else if (menu == true){
         	
         	    String idCheck = TrainExportDialog.comboTrains.getText();
-        	    TrainData td = Main.trainListAll.get(0);
+        	    TrainData td = Main.getTrainListAll().get(0);
         	    int i = 0; 
         	
         	    while(Integer.parseInt(idCheck) != td.getID()){
         		   i++;
-        		   td = Main.trainListAll.get(i);
+        		   td = Main.getTrainListAll().get(i);
         	    }
         	
         	    XmlWriter.saveSingleTrain(selected,  td);
@@ -268,12 +268,12 @@ public class CentralEventController {
         	if (menu == false){
             	
             	TableItem [] rowData = CompositeTimeTable.getTimeTableTable().getSelection();
-            	Timetable tt = Main.timetableListAll.get(0);
+            	Timetable tt = Main.getTimetableListAll().get(0);
             	int i = 0; 
             	
             	while(Integer.parseInt(rowData[0].getText(0)) != tt.getId()){
             		i++;
-            		tt = Main.timetableListAll.get(i);
+            		tt = Main.getTimetableListAll().get(i);
             	}
             		
             	XmlWriter.saveSingleTimeTable(selected, tt);
@@ -281,12 +281,12 @@ public class CentralEventController {
             }else if (menu == true){
             	
             	String idCheck = TimetableExportDialog.comboTimetables.getText();
-            	Timetable tt = Main.timetableListAll.get(0);
+            	Timetable tt = Main.getTimetableListAll().get(0);
             	int i = 0; 
             	
             	while(Integer.parseInt(idCheck) != tt.getId()){
             		i++;
-            		tt = Main.timetableListAll.get(i);
+            		tt = Main.getTimetableListAll().get(i);
             	}
             	
             	XmlWriter.saveSingleTimeTable(selected,  tt);
@@ -298,12 +298,12 @@ public class CentralEventController {
         	if(menu == false){
         		
         		TableItem [] rowData = CompositeProject.getProjectTable().getSelection();
-            	Project p = Main.projectListAll.get(0);
+            	Project p = Main.getProjectListAll().get(0);
             	int i = 0; 
             	
             	while(Integer.parseInt(rowData[0].getText(0)) != p.getId()){
             		i++;
-            		p = Main.projectListAll.get(i);
+            		p = Main.getProjectListAll().get(i);
             	}
             		
             	XmlWriter.saveSingleProject(selected, p);
@@ -311,12 +311,12 @@ public class CentralEventController {
         	}else if(menu == true){
         		
         		String idCheck = ProjectExportDialog.comboProjects.getText();
-            	Project p = Main.projectListAll.get(0);
+            	Project p = Main.getProjectListAll().get(0);
             	int i = 0; 
             	
             	while(Integer.parseInt(idCheck) != p.getId()){
             		i++;
-            		p = Main.projectListAll.get(i);
+            		p = Main.getProjectListAll().get(i);
             	}
             	
             	XmlWriter.saveSingleProject(selected, p);
@@ -348,7 +348,7 @@ public class CentralEventController {
 	        	
 	     }
 	     
-		 FileDialog fd = new FileDialog(Main.getShell(), SWT.OPEN);
+		 FileDialog fd = new FileDialog(Main.getMainShell(), SWT.OPEN);
 	     fd.setText(title);
 	     fd.setFilterPath("C:/");
 	     String[] filterExt = { "*.xml"};
@@ -400,13 +400,13 @@ public class CentralEventController {
 		
 		if(exportDialog == 0){
 			
-			if (Main.trainListAll.size() > 0){
+			if (Main.getTrainListAll().size() > 0){
 	        	
-	        	new TrainExportDialog(Main.getShell(),SWT.NONE).open(true);
+	        	new TrainExportDialog(Main.getMainShell(),SWT.NONE).open(true);
 	    				
 	        }else{
 				
-				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		        messageBox.setMessage("Es gibt keine Züge die Exportiert werden können.");    
 		        messageBox.open();
 				
@@ -414,13 +414,13 @@ public class CentralEventController {
 			
 		}else if(exportDialog == 1){
 			
-			if (Main.timetableListAll.size() > 0){
+			if (Main.getTimetableListAll().size() > 0){
 		        	
-		       	new TimetableExportDialog(Main.getShell(),SWT.NONE).open(true);
+		       	new TimetableExportDialog(Main.getMainShell(),SWT.NONE).open(true);
 		    				
 	        }else{
 					
-				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			    messageBox.setMessage("Es gibt keine Fahrpläne die Exportiert werden können.");    
 		        messageBox.open();
 				
@@ -428,13 +428,13 @@ public class CentralEventController {
 			
 		}else if(exportDialog == 2){
 			
-			if (Main.projectListAll.size() > 0){
+			if (Main.getProjectListAll().size() > 0){
 	        	
-		       	new TimetableExportDialog(Main.getShell(),SWT.NONE).open(true);
+		       	new TimetableExportDialog(Main.getMainShell(),SWT.NONE).open(true);
 		    				
 	        }else{
 					
-				MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+				MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			    messageBox.setMessage("Es gibt keine Projecte die Exportiert werden können.");    
 		        messageBox.open();
 				
@@ -450,7 +450,7 @@ public class CentralEventController {
 	 */
 	public static void showInfo() {
 		
-		new AboutUsDialog(Main.getShell(), SWT.NONE).open();
+		new AboutUsDialog(Main.getMainShell(), SWT.NONE).open();
 		
 	}
 

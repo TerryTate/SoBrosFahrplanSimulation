@@ -50,7 +50,7 @@ public class TimetableDeletDialog extends Dialog {
     	chooseTrain.setText("Wähle Zug ID : ");
     	
     	comboTimetables = new Combo(dialog, SWT.READ_ONLY);
-    	String[] timetablesID = new String [Main.timetableListAll.size()];
+    	String[] timetablesID = new String [Main.getTimetableListAll().size()];
 	    comboTimetables.setItems(loadTrainList(timetablesID));
 	    GridData gridData = new GridData();
 	    gridData.horizontalSpan = 2;
@@ -100,8 +100,8 @@ public class TimetableDeletDialog extends Dialog {
 
 	private String[] loadTrainList(String[] timetablesID) {
 		
-		for(int i=0; i < Main.timetableListAll.size(); i++) {
-			Integer id = Main.timetableListAll.get(i).getId();
+		for(int i=0; i < Main.getTimetableListAll().size(); i++) {
+			Integer id = Main.getTimetableListAll().get(i).getId();
 			timetablesID[i] = id.toString();
 		}
 		

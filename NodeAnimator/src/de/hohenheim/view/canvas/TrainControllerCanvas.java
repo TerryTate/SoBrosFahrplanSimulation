@@ -78,11 +78,11 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-                 if(Main.trainListAll.size() > 0){
+                 if(Main.getTrainListAll().size() > 0){
 					 
 		    	     boolean showText = false;
 		    	 
-		             for(int i = 0; i < Main.trainListAll.size(); i++){
+		             for(int i = 0; i < Main.getTrainListAll().size(); i++){
 		        	
 		        	     if(CompositeTrain.getTrainTable().isSelected(i)){
 		        		     CentralEventController.openEditDialog(false, 0);
@@ -91,12 +91,12 @@ public class TrainControllerCanvas extends Canvas{
 		             }
 		         
 		             if(showText == false){
-		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        	     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
 	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok.");messageBox.open();
 		             }
 				 }else{
-					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		             messageBox.setMessage("Es sind keine Züge vorhanden, die bearbeitet werden können!");    
 		             messageBox.open();
 				 }
@@ -116,11 +116,11 @@ public class TrainControllerCanvas extends Canvas{
 			
 			public void handleEvent(Event arg0) {
 				
-				if(Main.trainListAll.size() > 0){
+				if(Main.getTrainListAll().size() > 0){
 					 
 		    	     boolean showText = false;
 		    	 
-		             for(int i = 0; i < Main.trainListAll.size(); i++){
+		             for(int i = 0; i < Main.getTrainListAll().size(); i++){
 		        	
 		        	     if(CompositeTrain.getTrainTable().isSelected(i)){
 		        		     TrainEvents.deleteTrain(false);
@@ -129,13 +129,13 @@ public class TrainControllerCanvas extends Canvas{
 		             }
 		         
 		             if(showText == false){
-		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        	     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
 	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok."); 
 			             messageBox.open();
 		             }
 				 }else{
-					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		             messageBox.setMessage("Es sind keine Züge vorhanden, die gelöscht werden können!");    
 		             messageBox.open();
 				 }  
@@ -172,11 +172,11 @@ public class TrainControllerCanvas extends Canvas{
 		exportTrain.addListener(SWT.Selection, new Listener() {
 					
 		     public void handleEvent(Event arg0) {
-				 if(Main.trainListAll.size() > 0){
+				 if(Main.getTrainListAll().size() > 0){
 					 
 		    	     boolean showText = false;
 		    	 
-		             for(int i = 0; i < Main.trainListAll.size(); i++){
+		             for(int i = 0; i < Main.getTrainListAll().size(); i++){
 		        	
 		        	     if(CompositeTrain.getTrainTable().isSelected(i)){
 		        		     CentralEventController.save(false, 0);
@@ -185,13 +185,13 @@ public class TrainControllerCanvas extends Canvas{
 		             }
 		         
 		             if(showText == false){
-		        	     MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+		        	     MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			             messageBox.setMessage("Sie haben keinen Zug gewählt!" + "\r\n" + "\r\n" + 
 	        		 			   			   "Wählen Sie einen Zug aus und drücken Sie auf Ok."); 
 			             messageBox.open();
 		             }
 				 }else{
-					 MessageBox messageBox = new MessageBox(Main.getShell(), SWT.ERROR | SWT.OK);
+					 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		             messageBox.setMessage("Es sind keine Züge vorhanden, die exportiert werden können!");    
 		             messageBox.open();
 				 }
