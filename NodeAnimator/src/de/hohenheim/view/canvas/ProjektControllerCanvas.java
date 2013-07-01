@@ -155,7 +155,7 @@ public class ProjektControllerCanvas extends Canvas {
 			
 			public void handleEvent(Event arg0) {
 				
-			
+			    CentralEventController.open(2);
 				
 			}
 		});

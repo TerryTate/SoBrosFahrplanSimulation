@@ -375,7 +375,16 @@ public class CentralEventController {
 	         }
 	    	 
 	     }else if(openDialog == 2){
-	        	
+	        
+	    	  
+	    	 Project p = XmlReader.loadSingelProject(selected);
+	    	 
+	         
+	        	 
+	        	 ProjectEvents.importProject(p);
+	        	 
+	         
+	    	 
 	     }
 		
 	}

@@ -124,11 +124,15 @@ public class XmlWriter {
 		Element startstation = new Element("StartStation");
 		rootStations.addContent(startstation);
 		startstation.setText(String.valueOf(tD.getStartstation()));
+		
+		
+		Element middlestations = new Element("Middlestations");
+		rootStations.addContent(middlestations);
 
-		for (int i = 0; i < tD.getMiddlestations().size()-1; i++) {
-			Element middlestations = new Element("MiddleStation" + (i + 1));
-			rootStations.addContent(middlestations);
-			middlestations.setText(String
+		for (int i = 0; i < tD.getMiddlestations().size(); i++) {
+			Element middlestation = new Element("MiddleStation");
+			middlestations.addContent(middlestation);
+			middlestation.setText(String
 					.valueOf(tD.getMiddlestations().get(i)));
 		}
 
@@ -175,6 +179,9 @@ public class XmlWriter {
 
 	public static void saveSingleProject(String fileName, Project pR) {
 
+		//Erste Zeilen nur String und Interger vom Fahrplan
+		
+		
 		Element root = new Element("Project");
 
 		Element iD = new Element("ID");
@@ -188,70 +195,87 @@ public class XmlWriter {
 		Element rootSingleTrain = new Element("Trains");
 		root.addContent(rootSingleTrain);
 
+		
+		//Alle Züge die in dem ZugArray sind
+		
 		for (int i = 0; i < pR.getTraindataProjectList().size(); i++) {
+			
+			Element train = new Element("Train" );
+			rootSingleTrain.addContent(train);
 
 			Element id = new Element("ID");
-			rootSingleTrain.addContent(id);
+			train.addContent(id);
 			id.setText(String.valueOf(pR.getTraindataProjectList().get(i)
 					.getID()));
 
 			Element typeOfTrain = new Element("TypeOfTrain");
-			rootSingleTrain.addContent(typeOfTrain);
+			train.addContent(typeOfTrain);
 			typeOfTrain.setText(String.valueOf(pR.getTraindataProjectList()
 					.get(i).getTypOfTrain()));
 
 			Element priority = new Element("Priority");
-			rootSingleTrain.addContent(priority);
+			train.addContent(priority);
 			priority.setText(String.valueOf(pR.getTraindataProjectList().get(i)
 					.getPriority()));
 
 			Element speed = new Element("Speed");
-			rootSingleTrain.addContent(speed);
+			train.addContent(speed);
 			speed.setText(String.valueOf(pR.getTraindataProjectList().get(i)
 					.getSpeed()));
 
 			Element ladung = new Element("Ladung");
-			rootSingleTrain.addContent(ladung);
+			train.addContent(ladung);
 			ladung.setText(String.valueOf(pR.getTraindataProjectList().get(i)
 					.getLadung()));
 
 		}
 
+		
+		//Alle Fahrpläne die in dem TimeTableArray sind
+		
+		
 		Element rootTimeTable = new Element("TimeTables");
 		root.addContent(rootTimeTable);
-
+		
 		for (int i = 0; i < pR.getTimeTableProjectList().size(); i++) {
+			
+			
+			Element timeTable = new Element("TimeTable");
+			rootTimeTable.addContent(timeTable);
 
 			Element iDTimeTable = new Element("ID");
-			rootTimeTable.addContent(iDTimeTable);
+			timeTable.addContent(iDTimeTable);
 			iDTimeTable.setText(String.valueOf(pR.getTimeTableProjectList()
 					.get(i).getId()));
 
 			Element nameTimeTable = new Element("Name");
-			rootTimeTable.addContent(nameTimeTable);
+			timeTable.addContent(nameTimeTable);
 			nameTimeTable.setText(String.valueOf(pR.getTimeTableProjectList()
 					.get(i).getName()));
 
 			for (int y = 0; y < pR.getTimeTableProjectList().get(i)
 					.getDrivingdays().size(); y++) {
 				drivingdays = new Element("DrivingDay" + (y + 1));
-				rootTimeTable.addContent(drivingdays);
+				timeTable.addContent(drivingdays);
 				drivingdays.setText(String.valueOf(pR.getTimeTableProjectList()
 						.get(i).getDrivingdays().get(y)));
 			}
 
 			Element rootStations = new Element("Stations");
-			rootTimeTable.addContent(rootStations);
+			timeTable.addContent(rootStations);
 
 			Element startstation = new Element("StartStation");
 			rootStations.addContent(startstation);
 			startstation.setText(String.valueOf(pR.getTimeTableProjectList()
 					.get(i).getStartstation()));
 
-			for (int z = 0; i < pR.getTimeTableProjectList().get(i)
+			Element allMiddleStations = new Element("AllMiddleStations");
+			rootStations.addContent(allMiddleStations);
+			
+			for (int z = 0; z < pR.getTimeTableProjectList().get(i)
 					.getMiddlestations().size(); z++) {
-				Element middlestations = new Element("MiddleStation" + (z + 1));
-				rootStations.addContent(middlestations);
+				Element middlestations = new Element("MiddleStation");
+				allMiddleStations.addContent(middlestations);
 				middlestations.setText(String.valueOf(String.valueOf(pR
 						.getTimeTableProjectList().get(i).getMiddlestations()
 						.get(z))));
@@ -263,7 +287,7 @@ public class XmlWriter {
 					.get(i).getEndstation()));
 
 			Element rootTime = new Element("Time");
-			rootTimeTable.addContent(rootTime);
+			timeTable.addContent(rootTime);
 
 			Element startHouer = new Element("StartHouer");
 			rootTime.addContent(startHouer);

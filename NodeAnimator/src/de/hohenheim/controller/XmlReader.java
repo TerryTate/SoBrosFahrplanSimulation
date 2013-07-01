@@ -116,29 +116,43 @@ public class XmlReader {
 		}
 
 		returnTimeTable.setDrivingdays(drivingdays);
+		
+		
+		
+		
+		Element stations = root.getChild("Stations");
 
-		Element startstation = root.getChild("StartStation");
+		Element startstation = stations.getChild("StartStation");
 		Integer startStationValue = Integer.parseInt(startstation.getValue());
 		returnTimeTable.setStartstation(startStationValue);
 
-		Element endstation = root.getChild("EndStation");
+		Element endstation = stations.getChild("EndStation");
 		Integer endstationValue = Integer.parseInt(endstation.getValue());
 		returnTimeTable.setEndstation(endstationValue);
+		
+		Element middlestations = stations.getChild("Middlestations");
 
-		ArrayList<Integer> middlestations = new ArrayList<Integer>();
-		for (int j = 0; j <= 7; j++) {
-			Element singleMStation = root.getChild("MiddleStation" + (j + 1));
+		ArrayList<Integer> middlestation = new ArrayList<Integer>();
+		
+		for (int j = 0; j < middlestations.getChildren().size(); j++) {
+			Element singleMStation = middlestations.getChildren().get(j);
 			int singleMStationValue = Integer.parseInt(singleMStation
 					.getValue());
-			middlestations.add(singleMStationValue);
+			middlestation.add(singleMStationValue);
 		}
-		returnTimeTable.setMiddlestations(middlestations);
+		returnTimeTable.setMiddlestations(middlestation);
 
-		Element startHouer = root.getChild("StartHour");
+		
+		
+		
+		Element time =  root.getChild("Time");
+		
+		
+		Element startHouer = time.getChild("StartHouer");
 		Integer startHourValue = Integer.parseInt(startHouer.getValue());
 		returnTimeTable.setStartHouer(startHourValue);
 
-		Element startMinutes = root.getChild("StarMinutes");
+		Element startMinutes = time.getChild("StarMinutes");
 		Integer startMinutesValue = Integer.parseInt(startMinutes.getValue());
 		returnTimeTable.setStartMinutes(startMinutesValue);
 
@@ -146,14 +160,19 @@ public class XmlReader {
 
 	}
 
+	
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @return
+	 */
 	public static Project loadSingelProject (String fileName){
 		
 		Project returnProject = new Project(0, null, null, null);
 		
 		SAXBuilder saxBuilder = new SAXBuilder();
-		
 		Element root = null;
-		
 		Document doc;
 		
 		try {
@@ -162,6 +181,147 @@ public class XmlReader {
 		}catch (Exception e){
 			e.fillInStackTrace();
 		}
+		
+		
+		
+		Element idProject = root.getChild("ID");
+		int valueOfidProject = Integer.parseInt(idProject.getValue());
+		returnProject.setId(valueOfidProject);
+		
+		Element nameProject = root.getChild("Name");
+		returnProject.setName(nameProject.getValue());
+		
+		
+		//-----------------------------------------------------------------------------------------
+		
+		Element trains = root.getChild("Trains");
+		
+		ArrayList<TrainData> returnArrayListTD = new ArrayList<TrainData>();
+		
+		for (int i = 0; i < trains.getChildren().size(); i++){
+			
+			TrainData addingTrain = new TrainData(0, 0, null, null, null, false);
+			
+			
+			Element train = trains.getChild("Train");
+			
+			try {
+				Element id = train.getChild("ID");
+				int iDValue = Integer.parseInt(id.getValue());
+				addingTrain.setID(iDValue);
+
+				Element typeOfTrain = train.getChild("TypeOfTrain");
+				String typOfTrainValue = typeOfTrain.getValue();
+				addingTrain.setTypOfTrain(typOfTrainValue);
+
+				Element priority = train.getChild("Priority");
+				String priorityValue = priority.getValue();
+				addingTrain.setPriority(priorityValue);
+
+				Element speed = train.getChild("Speed");
+				int speedValue = Integer.parseInt(speed.getValue());
+				addingTrain.setSpeed(speedValue);
+
+				Element ladung = train.getChild("Ladung");
+				String ladungValue = ladung.getValue();
+				addingTrain.setLadung(ladungValue);
+
+			} catch (NullPointerException e) {
+				e.fillInStackTrace();
+			}
+			
+			
+			
+			
+			returnArrayListTD.add(addingTrain);
+		}
+		
+		returnProject.setTraindataProjectList(returnArrayListTD);
+		
+		
+		//----------------------------------------------------------------------------------
+		
+		Element timeTables = root.getChild("TimeTables");
+		
+		ArrayList <Timetable> returnArrayListTT = new ArrayList<Timetable>();
+		
+		
+		for (int t = 0; t < timeTables.getChildren().size(); t++) {
+			
+			Timetable addingTimeTable = new Timetable(0, null, null, 0, 0, null, 0,
+					0, 0);
+			
+			Element timeTable = timeTables.getChild("TimeTable");
+
+			Element iD = timeTable.getChild("ID");
+			int iDValue = Integer.parseInt(iD.getValue());
+			addingTimeTable.setId(iDValue);
+
+			Element name = timeTable.getChild("Name");
+			String nameValue = name.getValue();
+			addingTimeTable.setName(nameValue);
+
+			ArrayList<String> drivingdays = new ArrayList<String>();
+			for (int i = 0; i <= 7; i++) {
+				Element singleDay = timeTable.getChild("DrivingDay" + (i + 1));
+				try {
+					String singleDayValue = singleDay.getValue();
+					drivingdays.add(singleDayValue);
+				} catch (NullPointerException e) {
+
+				}
+
+			}
+
+			addingTimeTable.setDrivingdays(drivingdays);
+			
+			
+			
+			
+			Element stations = timeTable.getChild("Stations");
+
+			Element startstation = stations.getChild("StartStation");
+			Integer startStationValue = Integer.parseInt(startstation.getValue());
+			addingTimeTable.setStartstation(startStationValue);
+
+			Element endstation = stations.getChild("EndStation");
+			Integer endstationValue = Integer.parseInt(endstation.getValue());
+			addingTimeTable.setEndstation(endstationValue);
+			
+			
+			Element allMiddleStations = stations.getChild("AllMiddleStations");
+
+			ArrayList<Integer> middlestation = new ArrayList<Integer>();
+			
+			for (int j = 0; j < allMiddleStations.getChildren().size(); j++) {
+				Element singleMStation = allMiddleStations.getChildren().get(j);
+				int singleMStationValue = Integer.parseInt(singleMStation
+						.getValue());
+				middlestation.add(singleMStationValue);
+			}
+			addingTimeTable.setMiddlestations(middlestation);
+
+			
+			
+			
+			Element time =  timeTable.getChild("Time");
+			
+			
+			Element startHouer = time.getChild("StartHouer");
+			Integer startHourValue = Integer.parseInt(startHouer.getValue());
+			addingTimeTable.setStartHouer(startHourValue);
+
+			Element startMinutes = time.getChild("StarMinutes");
+			Integer startMinutesValue = Integer.parseInt(startMinutes.getValue());
+			addingTimeTable.setStartMinutes(startMinutesValue);
+			
+			
+			returnArrayListTT.add(addingTimeTable);
+		}
+		
+		returnProject.setTimeTableProjectList(returnArrayListTT);
+	
+		
 		
 		return returnProject;
 	
