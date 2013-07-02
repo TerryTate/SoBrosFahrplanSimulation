@@ -179,9 +179,9 @@ public class TrainEvents {
 	}
 
     /**
+     * Method to import a Train from a XML File into the Table and the trainListAll
      * 
-     * 
-     * @param td
+     * @param td - the TrainDatas witch are into the XML file
      */
 	public static void importTrain(TrainData td) {
         if(idCheck(td.getID())){
@@ -198,7 +198,12 @@ public class TrainEvents {
         }
 	}
 
-
+    /**
+     * The Methode idCheck control that the id which is given as parameter not exist in the trainListAll
+     * 
+     * @param id
+     * @return boolean - true if the id not in the trainListAll else false
+     */
 	private static boolean idCheck(int id) {
 
 		boolean check = true;

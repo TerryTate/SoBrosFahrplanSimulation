@@ -1,10 +1,8 @@
-package de.hohenheim.controller;
+package de.hohenheim.controller.events;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import de.hohenheim.controller.events.AnimationEvents;
-import de.hohenheim.controller.events.AnimationPlay;
 import de.hohenheim.modell.Node;
 import de.hohenheim.modell.State;
 import de.hohenheim.modell.timetable.Timetable;

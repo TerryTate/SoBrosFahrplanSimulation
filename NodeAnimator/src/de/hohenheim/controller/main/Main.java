@@ -23,6 +23,8 @@ import de.hohenheim.view.mobile.ImageHelper;
 import de.hohenheim.view.tab.TabFolder;
 
 /**
+ * Main Method witch starts the application with an Splash screen and set then a mainShell with his Components 
+ * 
  * 
  * @author Arthur Kaul
  *
@@ -44,7 +46,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		setDisplay(Display.getDefault());
+		display = (Display.getDefault());
         
 		mainShell = new Shell();
 		getMainShell().setText("Fahrplan Animation");
@@ -130,53 +132,55 @@ public class Main {
 	}
 	
     /**
+     * Getter for the tabFolder
      * 
-     * @return
+     * @return TabFolder - tabFolder
      */
 	public static TabFolder getcTabFolder() {
 		return tabFolder;
 	}
 	
-    /**
-     * 
-     * @param tabFolder
-     */
-	public static void setTabFolder(TabFolder tabFolder) {
-		Main.tabFolder = tabFolder;
-	}
-
 	/**
+	 * Getter for the mainShell
 	 * 
-	 * @return
+	 * @return Shell - mainShell
 	 */
 	public static Shell getMainShell() {
 		return mainShell;
 	}
 
 	/**
+	 * Getter for the Display
 	 * 
-	 * @return
+	 * @return Display
 	 */
 	public static Display getDisplay() {
 		return display;
 	}
 
 	/**
+	 * Getter for timetableListAll
 	 * 
-	 * @param display
+	 * @return ArrayList - with all existing Timetables 
 	 */
-	public static void setDisplay(Display display) {
-		Main.display = display;
-	}
-
 	public static ArrayList<Timetable> getTimetableListAll() {
 		return timetableListAll;
 	}
 
+	/**
+	 * Getter for trainListAll
+	 * 
+	 * @return ArrayList - with all existing TrainDatas 
+	 */
 	public static ArrayList<TrainData> getTrainListAll() {
 		return trainListAll;
 	}
-
+    
+	/**
+	 * Getter for projectListAll
+	 * 
+	 * @return ArrayList - with all existing projects 
+	 */
 	public static ArrayList<Project> getProjectListAll() {
 		return projectListAll;
 	}

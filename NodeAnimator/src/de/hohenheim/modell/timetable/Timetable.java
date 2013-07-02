@@ -2,6 +2,8 @@ package de.hohenheim.modell.timetable;
 
 import java.util.ArrayList;
 /**
+ * This Java- Class contains the Constructor for a Timetable and all Getter and Setter for 
+ * his attributes
  * 
  * @author Arthur Kaul
  *
@@ -19,6 +21,32 @@ public class Timetable {
 	private int visits;
 	private boolean handle = false;
 	private boolean deadlock = false;
+	
+	/**
+	 * 
+	 * @param id
+	 * @param drivingdays
+	 * @param name
+	 * @param startstation
+	 * @param endstation
+	 * @param middlestations
+	 * @param startHouer
+	 * @param startMinutes
+	 * @param visits
+	 */
+	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes, int visits){
+		
+		this.setId(id);
+		this.setDrivingdays(drivingdays);
+		this.setName(name); 
+		this.setStartstation(startstation);
+		this.setEndstation(endstation);
+		this.middlestations = middlestations;
+		this.startHouer = startHouer;
+		this.startMinutes = startMinutes;
+		this.setVisits(visits);
+			
+	}
 	
 	/**
 	 * 
@@ -66,32 +94,6 @@ public class Timetable {
 	 */
 	public void setStartMinutes(int startMinutes) {
 		this.startMinutes = startMinutes;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 * @param drivingdays
-	 * @param name
-	 * @param startstation
-	 * @param endstation
-	 * @param middlestations
-	 * @param startHouer
-	 * @param startMinutes
-	 * @param visits
-	 */
-	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes, int visits){
-		
-		this.setId(id);
-		this.setDrivingdays(drivingdays);
-		this.setName(name); 
-		this.setStartstation(startstation);
-		this.setEndstation(endstation);
-		this.middlestations = middlestations;
-		this.startHouer = startHouer;
-		this.startMinutes = startMinutes;
-		this.setVisits(visits);
-			
 	}
 
 	/**

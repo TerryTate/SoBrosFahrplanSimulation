@@ -3,7 +3,6 @@ package de.hohenheim.controller.events;
 import java.util.ArrayList;
 
 
-import de.hohenheim.controller.BlockFinder;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;

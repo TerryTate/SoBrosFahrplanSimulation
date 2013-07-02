@@ -6,6 +6,8 @@ import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
 /**
+ * This Java- Class contains the Constructor for a Project and all Getter and Setter for 
+ * his attributes
  * 
  * @author Arthur Kaul
  *

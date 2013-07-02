@@ -77,9 +77,12 @@ public class CentralEventController {
 	}
     
 	/**
+	 * Open a AddDialog to add a Train or a Timetable or a Project 
+	 *   open a ProjectAddDialog if addDialog = 2
+	 *   open a TimetableAddDialog if addDialog = 1 
+	 *   open a TrainAddDialog id addDialog = 0
 	 * 
-	 * 
-	 * @param addDialog
+	 * @param addDialog - int witch Dialog should be open
 	 */
 	public static void openAddDialog(int addDialog) {
 		
@@ -118,10 +121,13 @@ public class CentralEventController {
 	}
 	
     /**
-     * 
+     * Open a EditDialog to edit a Train or a Timetable or a Project 
+	 *   open a ProjectEditDialog if addDialog = 2
+	 *   open a TimetableEditDialog if addDialog = 1 
+	 *   open a TrainEditDialog id addDialog = 0
      * 
      * @param menu
-     * @param editDialog
+     * @param editDialog - int witch Dialog should be open
      */
 	public static void openEditDialog(boolean menu, int editDialog) {
 		
@@ -161,8 +167,13 @@ public class CentralEventController {
 	
 	/**
 	 * 
+     * Open a DeleteDialog to delete a Train or a Timetable 
+	 *
+	 *   open a TimetableDeleteDialog if addDialog = 1 
+	 *   open a TrainDeleteDialog id addDialog = 0
+	 *   
 	 * @param menu
-	 * @param deleteDialog
+	 * @param deleteDialog - int witch Dialog should be open
 	 */
     public static void openDeleteDialog(boolean menu, int deleteDialog) {
     	
@@ -197,7 +208,7 @@ public class CentralEventController {
 	}
 
     /**
-     * 
+     * Open a show new HelpDialog
      * 
      */
 	public static void showHelp() {
@@ -206,7 +217,12 @@ public class CentralEventController {
 	}
 
 	/**
-	 * 
+	 * Open a SaveDialog to delete a Train or a Timetable 
+	 *   
+	 *   open a ProjectSaveDialog if addDialog = 2
+	 *   open a TimetableSaveDialog if addDialog = 1 
+	 *   open a TrainSaveDialog id addDialog = 0
+	 *   
 	 * @param menu
 	 * @param saveDialog
 	 */
@@ -328,7 +344,12 @@ public class CentralEventController {
 	}
 
 	/**
-	 * 
+	 * Open a LoadDialog to delete a Train or a Timetable 
+	 *   
+	 *   open a ProjectLoadDialog if addDialog = 2
+	 *   open a TimetableLoadDialog if addDialog = 1 
+	 *   open a TrainLoadDialog id addDialog = 0
+	 *
 	 * @param openDialog
 	 */
 	public static void open(int openDialog) {
