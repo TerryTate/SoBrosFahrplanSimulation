@@ -25,7 +25,7 @@ public class BackgroundLayerdPane extends LayeredPane {
 	public void paint(Graphics graphics) {
 		Rectangle r = this.getBounds();
 		graphics.setForegroundColor(ColorConstants.titleGradient);
-		graphics.setBackgroundColor(ColorConstants.white);
+		graphics.setBackgroundColor(ColorConstants.lightGray);
 	
 		
 		graphics.fillRectangle(r);
@@ -50,7 +50,7 @@ public class BackgroundLayerdPane extends LayeredPane {
 		
 		
 		
-		graphics.drawImage(new Image(null, "img/Backi3.png"), 20,20);
+	
 //		#2269B5
 		Color c = new Color(null, new RGB(22, 69, 120));
 		graphics.setForegroundColor(c);

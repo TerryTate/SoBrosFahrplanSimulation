@@ -8,6 +8,7 @@ import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
+import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.dialouge.ProjectAddDialog;
 import de.hohenheim.view.dialouge.ProjectEditDialog;
@@ -252,7 +253,8 @@ public class ProjectEvents {
 			TableItem item = new TableItem(CompositeProject.getProjectTable(), SWT.NONE);
 			
 			item.setText(new String[]{String.valueOf(p.getId()), p.getName(), trainsItem, timetableItem});
-			
+			 String[] projectIDs = new String [Main.getProjectListAll().size()];
+			 AnimationControllerCanvas.comboProjects.setItems(AnimationControllerCanvas.loadProjectIDs(projectIDs));
 		}else{
 			MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 	        messageBox.setMessage("Das zu ladene Projekt konnte nicht geladen werden !\n" +

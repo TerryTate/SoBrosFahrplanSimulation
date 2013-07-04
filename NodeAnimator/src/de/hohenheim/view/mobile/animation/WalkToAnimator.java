@@ -136,16 +136,21 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 	  	
 	  NodeFigure start_node = this.animationFigure.getNodeFigure();
 	  ArrayList<PathFigure> edges_start = map.getPaths().get(start_node);
-	  
+	  System.out.println(this.animationFigure.getFigureId());
+	  try{
 	  if(start_node.equals(end_node)) {		  
 		  return null;
 	  }
+	  
 	  for(int i=0; i<edges_start.size(); i++) {
 		  for(int j=0; j<edges_end.size();j++) {
 			  if(edges_start.get(i).equals(edges_end.get(j))) {
 				  return edges_start.get(i);
 			  }
 		  }
+	  }
+	  }catch(NullPointerException e){
+		  
 	  }
 	  return null;
 	}
@@ -284,7 +289,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 		if(parent!= null){
 			parent.repaint();
 		}
-		
+		try{
 		int pathSpeed = getValueSpeed(animationFigure.getPath().getPathSpeed());
 		
 		run_count+= getMaxDrivingSpeed(pathSpeed, trainSpeed) + AnimationControllerCanvas.getAnimationSpeed();
@@ -293,7 +298,9 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 			run_count=0;
 			animationFigure.setNode(end_node);
 		}	
-		
+		}catch(NullPointerException e){
+			
+		}
 		if(stop) { 
 			//Stop can cause problems when we restart it later again and the figur is not in a room and not 
 			//on a direct path: means it is between a path and a room...
