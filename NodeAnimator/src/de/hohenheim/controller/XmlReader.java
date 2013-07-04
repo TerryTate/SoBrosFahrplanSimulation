@@ -25,6 +25,7 @@ public class XmlReader {
 	 * 
 	 * @param fileName
 	 *            Selected file to load the right and by the user chosen
+	 * @return TrainData
 	 */
 	public static TrainData loadSingleTrain(String fileName) {
 
@@ -77,9 +78,9 @@ public class XmlReader {
 	 * 
 	 * @param fileName
 	 *            Path and Name of XML-File with the save timeTable
-	 * @return singleTimeTable
+	 * @return TimeTable
 	 */
-	public static Timetable loadSingleTimeTable(String fileName){
+	public static Timetable loadSingleTimeTable(String fileName) {
 
 		SAXBuilder saxBuilder = new SAXBuilder();
 		Element root = null;
@@ -116,10 +117,7 @@ public class XmlReader {
 		}
 
 		returnTimeTable.setDrivingdays(drivingdays);
-		
-		
-		
-		
+
 		Element stations = root.getChild("Stations");
 
 		Element startstation = stations.getChild("StartStation");
@@ -129,11 +127,11 @@ public class XmlReader {
 		Element endstation = stations.getChild("EndStation");
 		Integer endstationValue = Integer.parseInt(endstation.getValue());
 		returnTimeTable.setEndstation(endstationValue);
-		
+
 		Element middlestations = stations.getChild("Middlestations");
 
 		ArrayList<Integer> middlestation = new ArrayList<Integer>();
-		
+
 		for (int j = 0; j < middlestations.getChildren().size(); j++) {
 			Element singleMStation = middlestations.getChildren().get(j);
 			int singleMStationValue = Integer.parseInt(singleMStation
@@ -142,12 +140,8 @@ public class XmlReader {
 		}
 		returnTimeTable.setMiddlestations(middlestation);
 
-		
-		
-		
-		Element time =  root.getChild("Time");
-		
-		
+		Element time = root.getChild("Time");
+
 		Element startHouer = time.getChild("StartHouer");
 		Integer startHourValue = Integer.parseInt(startHouer.getValue());
 		returnTimeTable.setStartHouer(startHourValue);
@@ -160,51 +154,49 @@ public class XmlReader {
 
 	}
 
-	
-	
 	/**
+	 * Method to load a single project (including all trains and timetables)
+	 * from one XML-File
 	 * 
 	 * @param fileName
-	 * @return
+	 *            path and name from the xml-file that will be loaded into the
+	 *            SoBros programm
+	 * @return Project
 	 */
-	public static Project loadSingelProject (String fileName){
-		
+	public static Project loadSingelProject(String fileName) {
+
 		Project returnProject = new Project(0, null, null, null);
-		
+
 		SAXBuilder saxBuilder = new SAXBuilder();
 		Element root = null;
 		Document doc;
-		
+
 		try {
 			doc = saxBuilder.build(fileName);
 			root = doc.getRootElement();
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.fillInStackTrace();
 		}
-		
-		
-		
+
 		Element idProject = root.getChild("ID");
 		int valueOfidProject = Integer.parseInt(idProject.getValue());
 		returnProject.setId(valueOfidProject);
-		
+
 		Element nameProject = root.getChild("Name");
 		returnProject.setName(nameProject.getValue());
-		
-		
-		//-----------------------------------------------------------------------------------------
-		
+
+		// -----------------------------------------------------------------------------------------
+
 		Element trains = root.getChild("Trains");
-		
+
 		ArrayList<TrainData> returnArrayListTD = new ArrayList<TrainData>();
-		
-		for (int i = 0; i < trains.getChildren().size(); i++){
-			
+
+		for (int i = 0; i < trains.getChildren().size(); i++) {
+
 			TrainData addingTrain = new TrainData(0, 0, null, null, null, false);
-			
-			
+
 			Element train = trains.getChildren().get(i);
-			
+
 			try {
 				Element id = train.getChild("ID");
 				int iDValue = Integer.parseInt(id.getValue());
@@ -229,28 +221,24 @@ public class XmlReader {
 			} catch (NullPointerException e) {
 				e.fillInStackTrace();
 			}
-			
-			
-			
-			
+
 			returnArrayListTD.add(addingTrain);
 		}
-		
+
 		returnProject.setTraindataProjectList(returnArrayListTD);
-		
-		
-		//----------------------------------------------------------------------------------
-		
+
+		// ----------------------------------------------------------------------------------
+		// New Node (Element) in the JDOM Tree including all timeTable values
+
 		Element timeTables = root.getChild("TimeTables");
-		
-		ArrayList <Timetable> returnArrayListTT = new ArrayList<Timetable>();
-		
-		
+
+		ArrayList<Timetable> returnArrayListTT = new ArrayList<Timetable>();
+
 		for (int t = 0; t < timeTables.getChildren().size(); t++) {
-			
-			Timetable addingTimeTable = new Timetable(0, null, null, 0, 0, null, 0,
-					0, 0);
-			
+
+			Timetable addingTimeTable = new Timetable(0, null, null, 0, 0,
+					null, 0, 0, 0);
+
 			Element timeTable = timeTables.getChildren().get(t);
 
 			Element iD = timeTable.getChild("ID");
@@ -274,25 +262,22 @@ public class XmlReader {
 			}
 
 			addingTimeTable.setDrivingdays(drivingdays);
-			
-			
-			
-			
+
 			Element stations = timeTable.getChild("Stations");
 
 			Element startstation = stations.getChild("StartStation");
-			Integer startStationValue = Integer.parseInt(startstation.getValue());
+			Integer startStationValue = Integer.parseInt(startstation
+					.getValue());
 			addingTimeTable.setStartstation(startStationValue);
 
 			Element endstation = stations.getChild("EndStation");
 			Integer endstationValue = Integer.parseInt(endstation.getValue());
 			addingTimeTable.setEndstation(endstationValue);
-			
-			
+
 			Element allMiddleStations = stations.getChild("AllMiddleStations");
 
 			ArrayList<Integer> middlestation = new ArrayList<Integer>();
-			
+
 			for (int j = 0; j < allMiddleStations.getChildren().size(); j++) {
 				Element singleMStation = allMiddleStations.getChildren().get(j);
 				int singleMStationValue = Integer.parseInt(singleMStation
@@ -301,29 +286,23 @@ public class XmlReader {
 			}
 			addingTimeTable.setMiddlestations(middlestation);
 
-			
-			
-			
-			Element time =  timeTable.getChild("Time");
-			
-			
+			Element time = timeTable.getChild("Time");
+
 			Element startHouer = time.getChild("StartHouer");
 			Integer startHourValue = Integer.parseInt(startHouer.getValue());
 			addingTimeTable.setStartHouer(startHourValue);
 
 			Element startMinutes = time.getChild("StarMinutes");
-			Integer startMinutesValue = Integer.parseInt(startMinutes.getValue());
+			Integer startMinutesValue = Integer.parseInt(startMinutes
+					.getValue());
 			addingTimeTable.setStartMinutes(startMinutesValue);
-			
-			
+
 			returnArrayListTT.add(addingTimeTable);
 		}
-		
+
 		returnProject.setTimeTableProjectList(returnArrayListTT);
-	
-		
-		
+
 		return returnProject;
-	
+
 	}
 }
