@@ -63,7 +63,7 @@ public class ImageHelper {
     public static final Image orangePath = new Image(null, "img/pathOrange.png");
     public static final Image limePath = new Image(null, "img/pathLime.png");
     
-    
+    public static final Image leiste = new Image(null, "img/leiste.png");
     
 }
 

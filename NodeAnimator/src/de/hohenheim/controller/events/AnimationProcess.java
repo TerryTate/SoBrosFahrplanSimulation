@@ -1,6 +1,8 @@
 package de.hohenheim.controller.events;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 import de.hohenheim.modell.project.Project;
@@ -51,7 +53,8 @@ public class AnimationProcess {
 			Timetable tt = p.getTimeTableProjectList().get(k);
 			TrainFigure tf = (TrainFigure) map.getMobileObjects().get(String.valueOf(train.getID()));
 				if (tf != null && tt != null) {
-					if (!tt.isDrived() && !tt.isBlocked() && tt.getStartHouer() < h && tt.getStartMinutes() < min ){
+					
+					if (!tt.isDrived() && !tt.isBlocked() && tt.getStartHouer() <= h && tt.getStartMinutes() <= min){
 					    if (tt.getVisits() == tt.getMiddlestations().size()){
 						
 						    tt.setVisits(tt.getVisits() + 1);

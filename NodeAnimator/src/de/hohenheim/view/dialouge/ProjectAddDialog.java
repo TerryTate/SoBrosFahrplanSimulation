@@ -172,8 +172,8 @@ public class ProjectAddDialog extends Dialog {
 			         
 			         if(showText == false){
 			        	 MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
-				         messageBox.setMessage("Sie haben keine Zwischenstation gewählt!" + "\r\n" + "\r\n" + 
-				        		 			   "Wählen Sie einen Zwischenstation !");
+				         messageBox.setMessage("Sie haben keine Zug/Fahrplan Kombination gewählt!" + "\r\n" + "\r\n" + 
+				        		 			   "Wählen Sie eine Zug/Fahrplan Kombination aus !");
 				         messageBox.open();
 			         }
 				   }else{

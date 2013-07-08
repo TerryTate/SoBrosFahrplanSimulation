@@ -77,7 +77,7 @@ public class BlockFinder implements Runnable{
 
 		// Check whether two waiting trains are blocking each other
 		for (TrainData train : waitingTrains) {
-			System.out.println("Test");
+			
 			for (TrainData waitingTrain : waitingTrains) {
 				if (train.getID() != waitingTrain.getID()) {
 					
@@ -89,7 +89,7 @@ public class BlockFinder implements Runnable{
 							break;
 						}
 					}
-					System.out.println("Tes2t");
+					
 					//check for deadlock between these two trains
 					if (!deadlockAlreadyDetected && getWaitingForNodes(AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID())).getAnimationList()).contains(
 							AnimationPlay.getMap().getMobileObjects().get(String.valueOf(waitingTrain.getID())).getNodeFigure())
@@ -166,6 +166,7 @@ public class BlockFinder implements Runnable{
 	 * @param train2
 	 */
 	private void resolveBlock(TrainData train1, TrainData train2) {
+		
 		//Train with lower priority has to move away from its path
 		int value1 = getValue(train1.getPriority());
 		int value2 = getValue(train2.getPriority());
@@ -185,7 +186,6 @@ public class BlockFinder implements Runnable{
 			//get a random node of the unblocked nodes
 			double zufallszahl = Math.random();
 			zufallszahl = zufallszahl * (unblockedNodes.size()-1);
-			System.out.println("KnotenArray-Länge: "+unblockedNodes.size()+" - Zufallszahl: "+zufallszahl);
 			int index = (int)zufallszahl;
 			
 			AnimationPlay.getP().getTimetable(train2.getID()).setBlocked(true);

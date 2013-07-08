@@ -539,13 +539,32 @@ public class TimeTableEvents {
 
 		}
 
+		int h = tt.getStartHouer();
+		int m = tt.getStartMinutes();
+		
+		String time = "";
+		
+		if ((h < 10) && (m < 10)) {
+
+			time = ("0" + h + " : " + "0" + m);
+			
+		} else if ((h >= 10) && (m < 10)) {
+
+			time = (h + " : " + "0" + m);
+		} else if ((h >= 10) && (m >= 10)) {
+
+			time = (h + " : " + m);
+		} else if ((h < 10) && (m >= 10)) {
+
+			time = ("0" + h + " : " + m);
+		}
+		
 		TableItem item = new TableItem(CompositeTimeTable.getTimeTableTable(),
 				SWT.NONE);
 		item.setText(new String[] {
 				String.valueOf((tt.getId())),
 				tt.getName(),
-				String.valueOf(tt.getStartHouer()) + ":"
-						+ String.valueOf(tt.getStartMinutes()),
+				time,
 				drivingdaysItem, String.valueOf(tt.getStartstation()),
 				String.valueOf(tt.getEndstation()), middleStationItems });
 		}else{

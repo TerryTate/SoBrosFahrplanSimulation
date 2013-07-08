@@ -79,7 +79,7 @@ public class AnimationPlay implements Runnable{
 		updateTime(houre, min, drivingday);
 		if(!isStop() && !isPause()){
 			setStart(false);
-			AnimationProcess.calculateSimulation(getP(), getMap(), min, houre);
+			AnimationProcess.calculateSimulation(getP(), getMap(), houre, min);
 			getMap().getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);
 		}
     }

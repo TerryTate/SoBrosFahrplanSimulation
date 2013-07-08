@@ -75,11 +75,11 @@ public class Main {
 		
 		
 		bottomComposite = new Composite(getMainShell(), SWT.BORDER );
-		bottomComposite.setBackground(ColorConstants.lightGray);
+		bottomComposite.setBackgroundImage(ImageHelper.leiste);
 		gridData = new GridData();
 		gridData.horizontalAlignment = SWT.FILL;
 		gridData.grabExcessHorizontalSpace = true;
-		gridData.heightHint = 20;
+		gridData.heightHint = 39;
     	bottomComposite.setLayoutData(gridData);
     	
 	    tabFolder = new TabFolder(tabComposite, SWT.BORDER, getDisplay()); 
