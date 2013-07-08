@@ -9,19 +9,37 @@ import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.TrainFigure;
 
+/**
+ * The Java-Class AniamtionProcess starts the starts the calculation of the animation and 
+ * when a train can Move and start the waltTo Methode 
+ * 
+ * @author Arthur Kaul
+ *
+ */
 public class AnimationProcess {
 
 	public static AnimationPlay player = new AnimationPlay();
 	public static BlockFinder blockFinder = new BlockFinder();
 	
+	/**
+	 * Method startAnimation starts all Animation of the Trains witch are drawn on the Map
+	 * 
+	 * @param p - project witch should be Play
+	 * @param map - NodeMap with all Nodes and Paths
+	 */
 	public static void startAnimations(Project p, NodeMap map) {
 		
-		for(TrainData train : p.getTraindataProjectList()){
-			//visible einbauen 
+		for(TrainData train : p.getTraindataProjectList()){ 
 			map.getMobileObjects().get(String.valueOf(train.getID())).startAnimation();		
 		}
 	}
 
+	/**
+	 * Method calculateSimulation check when a train can be start his Animation
+	 * 
+	 * @param p - project witch is be played
+	 * @param map - NodeMap with all Nodes and Paths
+	 */
 	public static void calculateSimulation(Project p, NodeMap map) {
 		
 		blockFinder.run();
@@ -54,6 +72,12 @@ public class AnimationProcess {
 		    }
 		}
 
+	/**
+	 * Method sorted Train sorts all Trains by Priority
+	 * 
+	 * @param traindataProjectList
+	 * @param timeTableProjectList
+	 */
 	private static void sortedTrains(
 			ArrayList<TrainData> traindataProjectList,
 			ArrayList<Timetable> timeTableProjectList) {
@@ -82,7 +106,13 @@ public class AnimationProcess {
 	    }
 		
 	}
-
+    
+	/**
+     * Method getValue return the Value of the Priority
+     * 
+     * @param priority
+     * @return
+     */
 	private static int getValue(String priority) {
 		
 		if(priority.equalsIgnoreCase("Sehr Wichtig")){
@@ -98,6 +128,12 @@ public class AnimationProcess {
 		
 	}
 
+	/**
+	 * Method stop Aniamtions stops all Animations of the Trains 
+	 * 
+	 * @param map
+	 * @param p
+	 */
 	public static void stopAnimations(NodeMap map, Project p) {
 		
 		for(TrainData train : p.getTraindataProjectList()){

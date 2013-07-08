@@ -50,7 +50,7 @@ public class AnimationPlay implements Runnable{
 	}
 
 	/**
-	 * Setter for the houre of the Time
+	 * Setter for the hour of the Time
 	 * 
 	 * @param houre
 	 */
@@ -83,6 +83,13 @@ public class AnimationPlay implements Runnable{
 		}
     }
     
+    /**
+     * 
+     * Method updateTime refresh the Timer of the GUI in the AnimationeControllerCanvas
+     * 
+     * @param houre
+     * @param min
+     */
 	private void updateTime(int houre, int min) {
 		
 		   if((min == 59) && (houre == 23)){
@@ -111,23 +118,52 @@ public class AnimationPlay implements Runnable{
 			
 		}
 
+	/**
+	 * Getter for hour
+	 * 
+	 * @return
+	 */
     private int getHoure(){
 		return houre;
 	}
 
+    /**
+     * Getter for the minutes
+     * 
+     * @return
+     */
 	private int getMin(){ 
 		return min;
 	}
 
+	/**
+	 * Getter for start
+	 * 
+	 * @return boolean - start
+	 */
 	private boolean isStart() {
 		
 		return start;
 	}
 
+	/**
+	 * Getter for Stop
+	 * 
+	 * @return boolean - stop
+	 */
 	public boolean isStop() {
 		return stop;
 	}
 
+	/**
+	 * Method start sets the StartTime the Project the map and stop and pause to false
+	 * and call then the run Method
+	 * 
+	 * @param houre - start time hour
+	 * @param min - start time minutes
+	 * @param map - NodeMap with all Nodes and Paths
+	 * @param p - project witch should be play
+	 */
 	public void start(int houre, int min, NodeMap map, Project p) {
 		setHoure(houre);
 		setMin(min);
@@ -141,46 +177,89 @@ public class AnimationPlay implements Runnable{
 	
 	}
 
+	/**
+	 * Setter for Project
+	 * 
+	 * @param p2
+	 */
 	private void setProject(Project p2) {
 		this.setP(p2);
 		
 	}
 
+	/**
+	 * Setter for map
+	 * 
+	 * @param map2
+	 */
 	private void setMap(NodeMap map2) {
 		this.map = map2;
 		
 	}
 
+	/**
+	 * Setter for start
+	 * 
+	 * @param start
+	 */
 	private void setStart(boolean start) {
 		this.start = start;
 		
 	}
-
+    
+	/**
+	 * Setter for pause
+	 * 
+	 * @param pause
+	 */
 	private void setPause(boolean pause) {
 	    this.pause = pause;
 		
 	}
 
+	/**
+	 * Setter for stop
+	 * 
+	 * @param stop
+	 */
 	private void setStop(boolean stop) {
 		this.stop = stop;	
 	}
 
+	/**
+	 * Getter for pause
+	 * 
+	 * @return
+	 */
 	public boolean isPause() {
 		return pause;
 	}
 
+	/**
+	 * Method unpause starts the Animation after a pause
+	 * 
+	 */
 	public void unpause() {
 		setPause(false);
 		setStart(true);
 		run();	
 	}
 
+	/**
+	 * Method pause stops the Animation but the animation can be play on when the start
+	 * button is pushed
+	 * 
+	 */
 	public void pause() {
 	
 		setPause(true);
 		
 	}
     
+	/**
+	 * Method stop stops the Animation the animation can´t be play on 
+	 * 
+	 */
 	public void stop(){
 	
 		setStop(true);
@@ -189,14 +268,29 @@ public class AnimationPlay implements Runnable{
 
 	}
 
+	/**
+	 * Getter for Project
+	 * 
+	 * @return
+	 */
 	public static Project getP() {
 		return p;
 	}
 
+	/**
+	 * Setter for Project
+	 * 
+	 * @param p
+	 */
 	public void setP(Project p) {
 		this.p = p;
 	}
 
+	/**
+	 * Setter for map
+	 * 
+	 * @return
+	 */
 	public static NodeMap getMap() {
 		return map;
 	}
