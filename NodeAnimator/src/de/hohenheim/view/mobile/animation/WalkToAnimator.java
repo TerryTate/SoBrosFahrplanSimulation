@@ -233,13 +233,13 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				setChanged();				
 				notifyObservers(animationFigure);
 				Timetable tt = AnimationPlay.getP().getTimetable(animationFigure.getFigureId());
-				if(tt.isDeadlockHandling()){
+				if(tt.isBlocked()){
 					//Set timetable info of train
 					tt.setVisits(tt.getVisits() + 1);
-					tt.setHandled(false);
+					tt.setDrived(false);
 				}else{
-					tt.setDeadlockHandling(false);
-					tt.setHandled(false);
+					tt.setBlocked(false);
+					tt.setDrived(false);
 				}
 			
 				return;
@@ -267,13 +267,13 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				setChanged();				
 				notifyObservers(animationFigure);
 				Timetable tt = AnimationPlay.getP().getTimetable(animationFigure.getFigureId());
-				if(tt.isDeadlockHandling()){
+				if(tt.isBlocked()){
 					//Set timetable info of train
 					tt.setVisits(tt.getVisits() + 1);
-					tt.setHandled(false);
+					tt.setDrived(false);
 				}else{
-					tt.setDeadlockHandling(false);
-					tt.setHandled(false);
+					tt.setBlocked(false);
+					tt.setDrived(false);
 				}
 				
 				return;

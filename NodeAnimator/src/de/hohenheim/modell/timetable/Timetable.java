@@ -19,10 +19,11 @@ public class Timetable {
 	private int startHouer;
 	private	int startMinutes;
 	private int visits;
-	private boolean handle = false;
-	private boolean deadlock = false;
+	private boolean drive = false;
+	private boolean blocked = false;
 	
 	/**
+	 * 
 	 * 
 	 * @param id
 	 * @param drivingdays
@@ -192,21 +193,21 @@ public class Timetable {
 		this.visits = visits;
 	}
 
-	public boolean isHandled() {
-		return handle ;
+	public boolean isDrived() {
+		return drive ;
 	}
 
-	public void setHandled(boolean handle) {
-		this.handle = handle;
+	public void setDrived(boolean drive) {
+		this.drive = drive;
 		
 	}
 
-	public boolean isDeadlockHandling() {
-		return deadlock ;
+	public boolean isBlocked() {
+		return blocked ;
 	}
 
-	public void setDeadlockHandling(boolean deadlock) {
-		this.deadlock = deadlock;
+	public void setBlocked(boolean blocked) {
+		this.blocked = blocked;
 		
 	}
 	

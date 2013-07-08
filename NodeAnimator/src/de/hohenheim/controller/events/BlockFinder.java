@@ -150,7 +150,7 @@ public class BlockFinder implements Runnable{
 		System.out.println("KnotenArray-Länge: "+unblockedNodes.size()+" - Zufallszahl: "+zufallszahl);
 		int index = (int)zufallszahl;
 		
-		AnimationPlay.getP().getTimetable(finishedTrain.getID()).setDeadlockHandling(true);
+		AnimationPlay.getP().getTimetable(finishedTrain.getID()).setBlocked(true);
 		AnimationPlay.getP().getTimetable(finishedTrain.getID()).setVisits(AnimationPlay.getP().getTimetable(finishedTrain.getID()).getMiddlestations().size());
 		
 		//start walkTo random node
@@ -188,7 +188,7 @@ public class BlockFinder implements Runnable{
 			System.out.println("KnotenArray-Länge: "+unblockedNodes.size()+" - Zufallszahl: "+zufallszahl);
 			int index = (int)zufallszahl;
 			
-			AnimationPlay.getP().getTimetable(train2.getID()).setDeadlockHandling(true);
+			AnimationPlay.getP().getTimetable(train2.getID()).setBlocked(true);
 			
 			//start walkTo random node
 			AnimationEvents.walkTo(((TrainFigure) AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train2.getID()))), unblockedNodes.get(index), AnimationPlay.getMap());
@@ -211,7 +211,7 @@ public class BlockFinder implements Runnable{
 			System.out.println("KnotenArray-Länge: "+unblockedNodes.size()+" - Zufallszahl: "+zufallszahl);
 			int index = (int)zufallszahl;
 
-			AnimationPlay.getP().getTimetable(train2.getID()).setDeadlockHandling(true);
+			AnimationPlay.getP().getTimetable(train2.getID()).setBlocked(true);
 			
 			//start walkTo random node
 			AnimationEvents.walkTo(((TrainFigure) AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train1.getID()))), unblockedNodes.get(index), AnimationPlay.getMap());

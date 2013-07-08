@@ -148,8 +148,8 @@ public class AnimationEvents {
 			drawTrains(map, p);
 			for (Timetable tt : p.getTimeTableProjectList()) {
 				tt.setVisits(0);
-				tt.setDeadlockHandling(false);
-				tt.setHandled(false);
+				tt.setBlocked(false);
+				tt.setDrived(false);
 			}
 			setNodesUnblocked(map);
 		}

@@ -51,15 +51,15 @@ public class AnimationProcess {
 			Timetable tt = p.getTimeTableProjectList().get(k);
 			TrainFigure tf = (TrainFigure) map.getMobileObjects().get(String.valueOf(train.getID()));
 				if (tf != null && tt != null) {
-					if (!tt.isHandled() && !tt.isDeadlockHandling()){
+					if (!tt.isDrived() && !tt.isBlocked()){
 					    if (tt.getVisits() == tt.getMiddlestations().size()){
 						
 						    tt.setVisits(tt.getVisits() + 1);
-						    tt.setHandled(true);
+						    tt.setDrived(true);
 						    AnimationEvents.walkTo(tf, map.getNodes().get(String.valueOf(tt.getEndstation())), map);
 												
 					    }else if(tt.getVisits()  < tt.getMiddlestations().size()){
-					    	tt.setHandled(true);
+					    	tt.setDrived(true);
 						    AnimationEvents.walkTo(tf,  map.getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits()))), map);
 						    tt.setVisits(tt.getVisits() + 1);
 						
