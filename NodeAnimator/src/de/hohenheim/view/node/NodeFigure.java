@@ -77,7 +77,7 @@ public class NodeFigure extends Figure {
       Rectangle r = bounds;
       
       Rectangle r_tmp = r.getCopy();
-      g.setBackgroundColor(ColorConstants.lightGray);
+      //g.setBackgroundColor(ColorConstants.lightGray);
       g.fillRectangle(r_tmp);
       
       if(backgroundImage!=null) {
@@ -86,13 +86,15 @@ public class NodeFigure extends Figure {
       
       if(State.statemap.get(getName()).geState() == State.BLOCKED){
     	  g.setForegroundColor(ColorConstants.red);
+    	  g.setBackgroundColor(ColorConstants.red);
       }else{
     	  g.setForegroundColor(ColorConstants.darkGray);
+    	  g.setBackgroundColor(ColorConstants.lightGray);
       }
       
       g.drawRectangle(r.x, r.y, r.width-1, r.height-1);
       
-      g.setForegroundColor(ColorConstants.white);
+    
       
       Font f = g.getFont();
       Dimension dim = FigureUtilities.getStringExtents(name, f);

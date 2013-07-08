@@ -20,11 +20,12 @@ public class Project {
 	private ArrayList<Timetable> TimeTableProjectList;
 	
 	/**
+	 * Constructor for Projects
 	 * 
-	 * @param id
-	 * @param name
-	 * @param trainList
-	 * @param timetableList
+	 * @param id - int 
+	 * @param name - String 
+	 * @param trainList - ArrayList
+	 * @param timetableList - ArrayList
 	 */
 	public Project(int id, String name,  ArrayList<TrainData> trainList, ArrayList<Timetable> timetableList) {
 		
@@ -35,6 +36,7 @@ public class Project {
 	}
 
 	/**
+	 * Getter for ID
 	 * 
 	 * @return
 	 */
@@ -43,6 +45,7 @@ public class Project {
 	}
 
 	/**
+	 * Setter for ID
 	 * 
 	 * @param id
 	 */
@@ -51,6 +54,7 @@ public class Project {
 	}
 
 	/**
+	 * Getter for Name
 	 * 
 	 * @return
 	 */
@@ -59,6 +63,7 @@ public class Project {
 	}
 
 	/**
+	 * Setter for Name
 	 * 
 	 * @param name
 	 */
@@ -67,6 +72,7 @@ public class Project {
 	}
 
 	/**
+	 * Getter for Train list
 	 * 
 	 * @return
 	 */
@@ -75,6 +81,7 @@ public class Project {
 	}
 
 	/**
+	 * Setter for Train list
 	 * 
 	 * @param traindataProjectList
 	 */
@@ -83,6 +90,7 @@ public class Project {
 	}
 
 	/**
+	 * Getter for Timetable list 
 	 * 
 	 * @return
 	 */
@@ -91,6 +99,7 @@ public class Project {
 	}
 
 	/**
+	 * Setter for Timetable list
 	 * 
 	 * @param timeTableProjectList
 	 */
@@ -98,6 +107,12 @@ public class Project {
 		TimeTableProjectList = timeTableProjectList;
 	}
 
+	/**
+	 * Method get the timetable witch is part of the TrainID
+	 * 
+	 * @param figureId
+	 * @return
+	 */
 	public Timetable getTimetable(int figureId) {
 		int k = 0;
 		Timetable tt = null;

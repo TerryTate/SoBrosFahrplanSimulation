@@ -1,6 +1,8 @@
 package de.hohenheim.modell.train;
 
 /**
+ *  This Java- Class contains the Constructor for a Train and all Getter and Setter for 
+ * his attributes
  * 
  * @author Arthur Kaul
  *
@@ -15,6 +17,7 @@ public class TrainData {
 	boolean anim;
 	
 	/**
+	 * Constructor for Train
 	 * 
 	 * @param id
 	 * @param speed
@@ -23,7 +26,7 @@ public class TrainData {
 	 * @param priority
 	 * @param anim
 	 */
-	public TrainData (int id, int speed, String typOfTrain, String ladung, String priority, boolean anim){
+	public TrainData (int id, int speed, String typOfTrain, String ladung, String priority){
 		this.id = id;
 		this.speed = speed;
 		this.typOfTrain = typOfTrain; 
@@ -34,6 +37,7 @@ public class TrainData {
 	}
     
 	/**
+	 * Getter for ID
 	 * 
 	 * @return
 	 */
@@ -42,6 +46,7 @@ public class TrainData {
 	}
 	
 	/**
+	 * Getter for Speed 
 	 * 
 	 * @return
 	 */
@@ -50,7 +55,7 @@ public class TrainData {
 	}
 	
 	/**
-	 * 
+	 * Getter for Typ of Train
 	 * 
 	 * @return
 	 */
@@ -59,6 +64,7 @@ public class TrainData {
 	}
 
 	/**
+	 * Setter for ID
 	 * 
 	 * @param id
 	 */
@@ -67,6 +73,7 @@ public class TrainData {
 	}
 	
 	/**
+	 * Setter for Speed
 	 * 
 	 * @param speed
 	 */
@@ -75,6 +82,7 @@ public class TrainData {
 	}
 	
 	/**
+	 * Setter for Typ of Train
 	 * 
 	 * @param typOfTrain
 	 */
@@ -83,6 +91,7 @@ public class TrainData {
 	}
 
 	/**
+	 * Getter for ladung
 	 * 
 	 * @return
 	 */
@@ -91,6 +100,7 @@ public class TrainData {
 	}
 
 	/**
+	 * Setter for Ladung
 	 * 
 	 * @param ladung
 	 */
@@ -99,6 +109,7 @@ public class TrainData {
 	}
 
 	/**
+	 * Getter for Priority
 	 * 
 	 * @return
 	 */
@@ -107,29 +118,12 @@ public class TrainData {
 	}
 
 	/**
+	 * Setter for Priority
 	 * 
 	 * @param priority
 	 */
 	public void setPriority(String priority) {
 		this.priority = priority;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public boolean getAnim() {
-		
-		return anim;
-	}
-
-	/**
-	 * 
-	 * @param anim
-	 */
-	public void setAnim(boolean anim) {
-		this.anim = anim;
-		
 	}
 	
 }

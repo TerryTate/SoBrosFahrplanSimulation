@@ -23,17 +23,17 @@ public class Timetable {
 	private boolean blocked = false;
 	
 	/**
+	 * Constructor for Timetable
 	 * 
-	 * 
-	 * @param id
-	 * @param drivingdays
-	 * @param name
-	 * @param startstation
-	 * @param endstation
-	 * @param middlestations
-	 * @param startHouer
-	 * @param startMinutes
-	 * @param visits
+	 * @param id - int 
+	 * @param drivingdays- Arraylist
+	 * @param name - String
+	 * @param startstation - int 
+	 * @param endstation - int 
+	 * @param middlestations - Arraylist
+	 * @param startHouer - int 
+	 * @param startMinutes - int 
+	 * @param visits - int 
 	 */
 	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes, int visits){
 		
@@ -50,6 +50,7 @@ public class Timetable {
 	}
 	
 	/**
+	 * Getter for middlestations
 	 * 
 	 * @return
 	 */
@@ -58,6 +59,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for middlestations
 	 * 
 	 * @param middlestations
 	 */
@@ -66,6 +68,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for start hour
 	 * 
 	 * @return
 	 */
@@ -74,6 +77,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for start Hour
 	 * 
 	 * @param startHouer
 	 */
@@ -82,6 +86,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for startMinutes
 	 * 
 	 * @return
 	 */
@@ -90,6 +95,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for startMinutes
 	 * 
 	 * @param startMinutes
 	 */
@@ -98,6 +104,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for ID
 	 * 
 	 * @return
 	 */
@@ -106,6 +113,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for ID
 	 * 
 	 * @param id
 	 */
@@ -114,6 +122,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for Name
 	 * 
 	 * @return
 	 */
@@ -122,6 +131,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for name
 	 * 
 	 * @param name
 	 */
@@ -130,6 +140,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for startstation
 	 * 
 	 * @return
 	 */
@@ -138,6 +149,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for startstation
 	 * 
 	 * @param startstation
 	 */
@@ -146,6 +158,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Getter for endstation
 	 * 
 	 * @return
 	 */
@@ -154,6 +167,7 @@ public class Timetable {
 	}
 	
 	/**
+	 * Setter for Endstation
 	 * 
 	 * @param endstation
 	 */
@@ -162,6 +176,7 @@ public class Timetable {
 	}
 
     /**
+     * Getter for drivingdays
      * 
      * @return
      */
@@ -170,6 +185,7 @@ public class Timetable {
 	}
 
 	/**
+	 * Setter for drivingdays
 	 * 
 	 * @param drivingdays
 	 */
@@ -178,6 +194,7 @@ public class Timetable {
 	}
 
     /**
+     * Getter for visits
      * 
      * @return
      */
@@ -186,6 +203,7 @@ public class Timetable {
 	}
 
     /**
+     * Setter for visits
      * 
      * @param visits
      */
@@ -193,19 +211,39 @@ public class Timetable {
 		this.visits = visits;
 	}
 
+	/**
+	 * Getter for drive
+	 * 
+	 * @return
+	 */
 	public boolean isDrived() {
 		return drive ;
 	}
 
+	/**
+	 * Setter for drive
+	 * 
+	 * @param drive
+	 */
 	public void setDrived(boolean drive) {
 		this.drive = drive;
 		
 	}
 
+	/**
+	 * Getter for blocked
+	 * 
+	 * @return
+	 */
 	public boolean isBlocked() {
 		return blocked ;
 	}
 
+	/**
+	 * Setter for blocked
+	 * 
+	 * @param blocked
+	 */
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
 		

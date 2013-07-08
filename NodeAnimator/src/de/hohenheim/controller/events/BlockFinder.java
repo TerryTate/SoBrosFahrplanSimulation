@@ -25,6 +25,7 @@ public class BlockFinder implements Runnable{
 		List<List<TrainData>> deadlocks = new Vector<List<TrainData>>();
 		List<List<TrainData>> finishedTrainDeadlocks = new Vector<List<TrainData>>();
 		int k = 0;
+		
 		// Get waiting and finished Trains
 		for (TrainData train : AnimationPlay.getP().getTraindataProjectList()) {
 			    
@@ -33,22 +34,25 @@ public class BlockFinder implements Runnable{
 				if (af != null) {
 					NodeFigure nextStation = null;
 					if(tt.getVisits() == tt.getMiddlestations().size()){
+						
 					    nextStation = AnimationPlay.getMap().getNodes().get(String.valueOf(tt.getEndstation()));
 					}else if(tt.getVisits() < tt.getMiddlestations().size()){
 					    nextStation = AnimationPlay.getMap().getNodes().get(String.valueOf(tt.getMiddlestations().get(tt.getVisits())));
 					}
-					// Train is waiting the 2 minutes after reaching a station
-					// but is finished because it has no further stations
+
 					if (af.getCurrentAnimation() instanceof BusyAnimator
 							&& nextStation == null) {
+						
 						finishedTrains.add(train);
 						
 						// train is not waiting and has no further stations
 					} else if (nextStation == null) {
+						
 						finishedTrains.add(train);
 						
-						// train is waiting
+					
 					} else if (af.getCurrentAnimation() instanceof BusyWaitAnimator) {
+						
 						waitingTrains.add(train);
 					}
 				}
@@ -62,9 +66,7 @@ public class BlockFinder implements Runnable{
 			for (TrainData finishedTrain : finishedTrains) {
 				if (getWaitingForNodes(AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID())).getAnimationList()).contains(
 						AnimationPlay.getMap().getMobileObjects().get(String.valueOf(finishedTrain.getID())).getNodeFigure())) {
-					System.err.println("Deadlock detected between train "
-							+ train.getID() + " and " + finishedTrain.getID());
-					//add the detected deadlock to the deadlocks list
+					
 					List<TrainData> deadlock = new Vector<TrainData>();
 					deadlock.add(train);
 					deadlock.add(finishedTrain);
@@ -75,8 +77,9 @@ public class BlockFinder implements Runnable{
 
 		// Check whether two waiting trains are blocking each other
 		for (TrainData train : waitingTrains) {
+			System.out.println("Test");
 			for (TrainData waitingTrain : waitingTrains) {
-				if (!train.equals(waitingTrain)) {
+				if (train.getID() != waitingTrain.getID()) {
 					
 					//Check whether a deadlock between these trains has already been detected.
 					boolean deadlockAlreadyDetected = false;
@@ -86,15 +89,12 @@ public class BlockFinder implements Runnable{
 							break;
 						}
 					}
-					
+					System.out.println("Tes2t");
 					//check for deadlock between these two trains
 					if (!deadlockAlreadyDetected && getWaitingForNodes(AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID())).getAnimationList()).contains(
-							AnimationPlay.getMap().getMobileObjects().get(String.valueOf(waitingTrain.getID())))
+							AnimationPlay.getMap().getMobileObjects().get(String.valueOf(waitingTrain.getID())).getNodeFigure())
 							&& getWaitingForNodes(AnimationPlay.getMap().getMobileObjects().get(String.valueOf(waitingTrain.getID())).getAnimationList()).contains(
-									AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID())))) {
-						System.err.println("Deadlock detected between train "
-								+ train.getID() + " and "
-								+ waitingTrain.getID());
+									AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID())).getNodeFigure())) {
 						
 						//add the detected deadlock to the deadlocks list
 						List<TrainData> deadlock = new Vector<TrainData>();
@@ -112,10 +112,10 @@ public class BlockFinder implements Runnable{
 		//the resolving actions won't make any sense. But since there are no resolving actions
 		//this doesn't matter.
 		for(List<TrainData> deadlock : finishedTrainDeadlocks){
-			resolveDeadlockWithFinishedTrain(deadlock.get(0), deadlock.get(1));
+			resolveBlockFinishedTrain(deadlock.get(0), deadlock.get(1));
 		}
 		for(List<TrainData> deadlock : deadlocks){
-			resolveDeadlock(deadlock.get(0), deadlock.get(1));
+			resolveBlock(deadlock.get(0), deadlock.get(1));
 		}
 	}
 
@@ -126,7 +126,7 @@ public class BlockFinder implements Runnable{
 	 * @param train
 	 * @param finishedTrain
 	 */
-	private void resolveDeadlockWithFinishedTrain(TrainData train,
+	private void resolveBlockFinishedTrain(TrainData train,
 			TrainData finishedTrain) {
 		//get actual route of "train" and search for the next UNBLOCKED node that is not contained in this actual path near the "finishedTrain".
 		//let the finishedTrain go to the UNBLOCKED node, so the "train" can move on. Afterwards reset the timetable of the finishedTrain to the last
@@ -165,7 +165,7 @@ public class BlockFinder implements Runnable{
 	 * @param train1
 	 * @param train2
 	 */
-	private void resolveDeadlock(TrainData train1, TrainData train2) {
+	private void resolveBlock(TrainData train1, TrainData train2) {
 		//Train with lower priority has to move away from its path
 		int value1 = getValue(train1.getPriority());
 		int value2 = getValue(train2.getPriority());
