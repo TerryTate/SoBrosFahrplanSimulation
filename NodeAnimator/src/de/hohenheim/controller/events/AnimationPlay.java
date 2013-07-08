@@ -9,6 +9,8 @@ import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.map.NodeMap;
 
 /**
+ * AnimationPlay class implements Runnable so that the calculation of the Timer and trains can
+ * refresh 
  * 
  * @author Arthur Kaul
  *
@@ -25,7 +27,10 @@ public class AnimationPlay implements Runnable{
 	private static NodeMap map;
 	private static Project p;
 	
-	
+	/**
+	 * Constructor for a new AnimationPlay 
+	 * 
+	 */
 	public AnimationPlay(){
 		
 	    setHoure(0);
@@ -34,19 +39,30 @@ public class AnimationPlay implements Runnable{
 	   
 	}
 	
+	/**
+	 * 
+	 * Setter for the Minutes of the Time
+	 * 
+	 */
 	private void setMin(int min) {
 		this.min = min;
 		
 	}
 
+	/**
+	 * Setter for the houre of the Time
+	 * 
+	 * @param houre
+	 */
 	private void setHoure(int houre) {
 		this.houre = houre;	
 	}
 
 	/**
-	 * 
-	 *  
-	 *  
+	 * Method run check if the animation is played, paused or stopped
+	 * and call if play is true the Method to update the timer and 
+	 * update the Animation of the trains
+	 *   
 	 */
     public void run(){
     	
