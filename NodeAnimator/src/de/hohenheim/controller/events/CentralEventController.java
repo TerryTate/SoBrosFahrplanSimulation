@@ -451,7 +451,7 @@ public class CentralEventController {
 			
 			if (Main.getProjectListAll().size() > 0){
 	        	
-		       	new TimetableExportDialog(Main.getMainShell(),SWT.NONE).open(true);
+		       	new ProjectExportDialog(Main.getMainShell(),SWT.NONE).open(true);
 		    				
 	        }else{
 					

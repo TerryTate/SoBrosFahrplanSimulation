@@ -24,6 +24,7 @@ public class AnimationPlay implements Runnable{
 		
 	int houre;
 	int min;
+	String drivingday;
 	private static NodeMap map;
 	private static Project p;
 	
@@ -75,10 +76,10 @@ public class AnimationPlay implements Runnable{
 				
 			}
 		}
-		updateTime(houre, min);
+		updateTime(houre, min, drivingday);
 		if(!isStop() && !isPause()){
 			setStart(false);
-			AnimationProcess.calculateSimulation(getP(), getMap());
+			AnimationProcess.calculateSimulation(getP(), getMap(), min, houre);
 			getMap().getDisplay().timerExec(AnimationControllerCanvas.getSimulationSpeed(), this);
 		}
     }
@@ -90,12 +91,12 @@ public class AnimationPlay implements Runnable{
      * @param houre
      * @param min
      */
-	private void updateTime(int houre, int min) {
+	private void updateTime(int houre, int min, String drivingday) {
 		
 		   if((min == 59) && (houre == 23)){
 			   min = 0; 
 			   houre = 0;
-			   AnimationEvents.stop(map, p);
+			   AnimationEvents.stop(map, p, drivingday);
 			   AnimationControllerCanvas.setRun(false);
 			   MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 		        messageBox.setMessage("Fahrtag komplett Abgespielt !");    

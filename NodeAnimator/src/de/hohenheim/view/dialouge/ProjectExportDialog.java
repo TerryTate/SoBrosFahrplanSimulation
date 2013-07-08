@@ -42,7 +42,7 @@ public class ProjectExportDialog {
 	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
 	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
 	    
-	    dialog.setText("Zug exportieren");
+	    dialog.setText("Projekt exportieren");
 	    dialog.setImage(ImageHelper.export);
 	    GridLayout gridLayout = new GridLayout();
 	    gridLayout.numColumns = 3; 

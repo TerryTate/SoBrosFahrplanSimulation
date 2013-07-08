@@ -40,7 +40,7 @@ public class AnimationProcess {
 	 * @param p - project witch is be played
 	 * @param map - NodeMap with all Nodes and Paths
 	 */
-	public static void calculateSimulation(Project p, NodeMap map) {
+	public static void calculateSimulation(Project p, NodeMap map, int h, int min) {
 		
 		blockFinder.run();
 		
@@ -51,7 +51,7 @@ public class AnimationProcess {
 			Timetable tt = p.getTimeTableProjectList().get(k);
 			TrainFigure tf = (TrainFigure) map.getMobileObjects().get(String.valueOf(train.getID()));
 				if (tf != null && tt != null) {
-					if (!tt.isDrived() && !tt.isBlocked()){
+					if (!tt.isDrived() && !tt.isBlocked() && tt.getStartHouer() < h && tt.getStartMinutes() < min ){
 					    if (tt.getVisits() == tt.getMiddlestations().size()){
 						
 						    tt.setVisits(tt.getVisits() + 1);

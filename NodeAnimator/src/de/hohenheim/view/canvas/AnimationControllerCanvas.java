@@ -183,7 +183,7 @@ public class AnimationControllerCanvas extends Canvas{
 						
 				    }
 				    setRun(true);
-				    AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()));
+				    AnimationEvents.start(map, p,  Integer.parseInt(houre.getText()), Integer.parseInt(minutes.getText()), comboDrivingday.getText());
 				}else{
 					 MessageBox messageBox = new MessageBox(Main.getMainShell(), SWT.ERROR | SWT.OK);
 			         messageBox.setMessage(message);    
@@ -231,7 +231,7 @@ public class AnimationControllerCanvas extends Canvas{
 						
 				}
 				setRun(false);
-				AnimationEvents.stop(map, p);
+				AnimationEvents.stop(map, p, comboDrivingday.getText());
 			}
 		});
 		

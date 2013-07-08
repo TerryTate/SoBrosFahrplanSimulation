@@ -194,7 +194,8 @@ public class ProjectEvents {
 	    rowData[0].setText(1, ProjectEditDialog.nameText.getText());
  	    rowData[0].setText(2, trainsItem);
  	    rowData[0].setText(3, timetableItem);
- 	  
+ 	   String[] projectIDs = new String [Main.getProjectListAll().size()];
+       AnimationControllerCanvas.comboProjects.setItems(AnimationControllerCanvas.loadProjectIDs(projectIDs));
  	    	    
  	   ProjectEditDialog.dialog.close();
 		
@@ -219,6 +220,9 @@ public class ProjectEvents {
 	    Main.getProjectListAll().remove(i);
 	
     	CompositeProject.getProjectTable().remove(CompositeProject.getProjectTable().getSelectionIndices()); 
+    	
+    	 String[] projectIDs = new String [Main.getProjectListAll().size()];
+	        AnimationControllerCanvas.comboProjects.setItems(AnimationControllerCanvas.loadProjectIDs(projectIDs));
 		
 	}
     

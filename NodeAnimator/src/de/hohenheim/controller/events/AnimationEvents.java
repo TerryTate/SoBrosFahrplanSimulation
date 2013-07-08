@@ -28,7 +28,7 @@ public class AnimationEvents {
 	 * @param map - NodeMap with Nodes and Paths 
 	 * @param p -Project witch should be play
 	 */
-	public static void drawTrains(NodeMap map, Project p) {
+	public static void drawTrains(NodeMap map, Project p, String drivingday) {
 
 		map.getAnimationLayer().removeAll();
 		
@@ -39,10 +39,15 @@ public class AnimationEvents {
 		map.getMobileObjects().clear();
 		
 	    for(int j = 0; j < p.getTraindataProjectList().size(); j++){
-	    
-    		new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
-			p.getTraindataProjectList().get(j).getID());
-    		updateNodeState(map);
+	        
+	    	for(int i = 0; i < p.getTimeTableProjectList().get(j).getDrivingdays().size(); i++){
+	    		if(p.getTimeTableProjectList().get(j).getDrivingdays().get(i).equalsIgnoreCase(drivingday)){
+	        		new Train(map, map.getNodes().get(String.valueOf(p.getTimeTableProjectList().get(j).getStartstation())),
+	    			p.getTraindataProjectList().get(j).getID());
+	        		updateNodeState(map);
+	    		}
+	    	}
+	    	
 					    							    	 	
 		}
 	    
@@ -58,12 +63,12 @@ public class AnimationEvents {
 	 */
     public static void updateNodeState(NodeMap map) {
 		   	
-   		//Alle Knoten auf unblocked setzen
+   		
    		for(String s : State.statemap.keySet()){
    			State.statemap.get(s).setState(State.UNBLOCKED);
    		}
     		
-   		//Alle Knoten auf denen ein Zug steht auf BLOCKED setzen
+   		
    	    for(AnimationFigure af : map.getMobileObjects().values()){
    	    	TrainFigure tf = (TrainFigure)af;
    	    	NodeFigure n = tf.getNodeFigure();
@@ -80,10 +85,10 @@ public class AnimationEvents {
      * @param houre - int Starttime houre
      * @param min -int Starttime minutes
      */
-	public static void start(NodeMap map, Project p, int houre, int min) {
+	public static void start(NodeMap map, Project p, int houre, int min, String drivingday) {
 	    if(AnimationProcess.player.isStop()){
 	    	
-		    AnimationEvents.drawTrains(map, p);
+		    AnimationEvents.drawTrains(map, p, drivingday);
 			AnimationProcess.player.start(houre, min, map, p);
 	    }else if(!AnimationProcess.player.isStop() && AnimationProcess.player.isPause()){ 
 		    AnimationProcess.startAnimations(p, map);
@@ -105,7 +110,6 @@ public class AnimationEvents {
 		trainFigure.stopAnimation();
 		trainFigure.clearAnimations();
 			
-		//Auf alle Knoten warten.
 		Iterator<NodeFigure> walkingpath = Utility.getOptimizedRoute(
 					map, 
 					trainFigure.getNodeFigure(),
@@ -142,10 +146,10 @@ public class AnimationEvents {
      * @param map - NodeMap with all Nodes and Paths of the Map 
      * @param p - Project witch is played and should be stopped
      */
-	public static void stop(NodeMap map, Project p) {
+	public static void stop(NodeMap map, Project p, String drivingday) {
 		if (!AnimationProcess.player.isStop()) {
 			AnimationProcess.player.stop();
-			drawTrains(map, p);
+			drawTrains(map, p, drivingday);
 			for (Timetable tt : p.getTimeTableProjectList()) {
 				tt.setVisits(0);
 				tt.setBlocked(false);
