@@ -8,104 +8,102 @@ import de.hohenheim.view.mobile.Utility;
 
 /**
  * This class is used to draw paths between rooms in a RoomMap.
- * @author Marc Fernandes
- *
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class PathFigure extends PolylineConnection {
-	 
-	  /**
-	   * The thickness of the polyline which is drawn.
-	   */
-	  public static int LINE_WIDTH = 3; 
-	  
-	  /*
-	   * 
-	   */
-	  
-	  final Color red = new Color(null,200,0,0);
-	  final Color blue = new Color(null,0,200,0);
-	  final Color green = new Color(null,0,0,200);
-	  final Color orange = new Color(null, 255, 127, 0);
-	  final Color lime = new Color(null, 127, 255, 127);
-	  
-	  
-	  /**
-	   * A Object that is connected to this {@link PathFigure} as the modell.
-	   */
-	  private Object modellObject;
+
+	/**
+	 * The thickness of the polyline which is drawn.
+	 */
+	public static int LINE_WIDTH = 3;
+
+	/**
+	 * Set the paths depending on the speed in different colors.
+	 */
+	final Color red = new Color(null, 200, 0, 0);
+	final Color blue = new Color(null, 0, 200, 0);
+	final Color green = new Color(null, 0, 0, 200);
+	final Color orange = new Color(null, 255, 127, 0);
+	final Color lime = new Color(null, 127, 255, 127);
+
+	/**
+	 * A Object that is connected to this {@link PathFigure} as the modell.
+	 */
+	private Object modellObject;
 
 	private int pathSpeed;
 
-	  
-	  /**
-	   * The constructor sets a {@link BendpointConnectionRouter} to draw the path
-	   * as a line.  
-	 * @param pathSpeed 
-	   */
-	  public PathFigure(Object modellObject, int pathSpeed) {
+	/**
+	 * The constructor sets a {@link BendpointConnectionRouter} to draw the path
+	 * as a line.
+	 * 
+	 * @param pathSpeed
+	 */
+	public PathFigure(Object modellObject, int pathSpeed) {
 		BendpointConnectionRouter router = new BendpointConnectionRouter();
-	    
+
 		/*
-		 * 
+		 * Draw the lines of paths in different colors
 		 */
-		
-		if(pathSpeed == 100){
+
+		if (pathSpeed == 100) {
 			this.setBackgroundColor(red);
 			this.setForegroundColor(red);
-		}
-		else if(pathSpeed == 150){
+		} else if (pathSpeed == 150) {
 			this.setBackgroundColor(blue);
 			this.setForegroundColor(blue);
-		}
-		else if(pathSpeed == 200){
+		} else if (pathSpeed == 200) {
 			this.setBackgroundColor(green);
 			this.setForegroundColor(green);
-		}
-		else if(pathSpeed == 250){
+		} else if (pathSpeed == 250) {
 			this.setBackgroundColor(orange);
 			this.setForegroundColor(orange);
-		}
-		else if(pathSpeed == 300){
+		} else if (pathSpeed == 300) {
 			this.setBackgroundColor(lime);
 			this.setForegroundColor(lime);
 		}
-		
-		
-	    setConnectionRouter(router);
-	    LineAttributes attr = new LineAttributes(LINE_WIDTH);
-	    this.setLineAttributes(attr);
-	    this.modellObject=modellObject;
-	    this.pathSpeed = pathSpeed;
-	    
-	  }
-	  
-	  
+
+		setConnectionRouter(router);
+		LineAttributes attr = new LineAttributes(LINE_WIDTH);
+		this.setLineAttributes(attr);
+		this.modellObject = modellObject;
+		this.pathSpeed = pathSpeed;
+
+	}
 
 	/**
-	   * Sets the modellObject for this {@link PathFigure}.
-	   * @param modellObject - The modell object that belongs to this PathFigure.
-	   */
-	  public void setModellObject(Object modellObject) {
-		  this.modellObject = modellObject;
-	  }
-	  
-	  /**
-	   * Returns the modellObject of this PathFigure.
-	   * @return {@link Object}
-	   */
-	  public Object getModellObject() {
-		  return this.modellObject;
-	  }	  
-	  
-	  /**
-	   * Calculates and returns the distance of this path.
-	   * @return double
-	   */
-	  public double getDistance() {
-		  return Utility.getDistance(this);
-	  }
-	  
-	  public int getPathSpeed(){
-		  return this.pathSpeed;
-	  }
+	 * Sets the modellObject for this {@link PathFigure}.
+	 * 
+	 * @param modellObject
+	 *            - The modell object that belongs to this PathFigure.
+	 */
+	public void setModellObject(Object modellObject) {
+		this.modellObject = modellObject;
 	}
+
+	/**
+	 * Returns the modellObject of this PathFigure.
+	 * 
+	 * @return {@link Object}
+	 */
+	public Object getModellObject() {
+		return this.modellObject;
+	}
+
+	/**
+	 * Calculates and returns the distance of this path.
+	 * 
+	 * @return double
+	 */
+	public double getDistance() {
+		return Utility.getDistance(this);
+	}
+
+	public int getPathSpeed() {
+		return this.pathSpeed;
+	}
+}

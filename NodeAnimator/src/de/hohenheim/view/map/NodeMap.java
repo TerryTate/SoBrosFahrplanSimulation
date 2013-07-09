@@ -12,6 +12,15 @@ import de.hohenheim.view.mobile.AnimationFigure;
 import de.hohenheim.view.path.PathFigure;
 import de.hohenheim.view.node.NodeFigure;
 
+/**
+ * The class NodeMap contains all paths of all rooms in the RoomMap and also all
+ * rooms in the NodeMap.
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
+ */
 public class NodeMap {
 	
 	/**

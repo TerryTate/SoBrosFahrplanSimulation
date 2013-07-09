@@ -6,12 +6,15 @@ import org.eclipse.draw2d.MarginBorder;
 
 /**
  * This class is a container to draw the rooms in a RoomMap.
- * @author Marc Fernandes
- *
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 class NodeLayerFigure extends FreeformLayeredPane {
-	  public NodeLayerFigure() {
-	    setLayoutManager(new FreeformLayout());
-	    setBorder(new MarginBorder(5));	    
-	  }
+	public NodeLayerFigure() {
+		setLayoutManager(new FreeformLayout());
+		setBorder(new MarginBorder(5));
 	}
+}

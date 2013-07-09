@@ -1,54 +1,69 @@
 package de.hohenheim.modell.timetable;
 
 import java.util.ArrayList;
+
 /**
- * This Java- Class contains the Constructor for a Timetable and all Getter and Setter for 
- * his attributes
+ * This Java- Class contains the Constructor for a Timetable and all Getter and
+ * Setter for his attributes
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class Timetable {
-	
+
 	private int id;
 	private String name;
 	private ArrayList<String> drivingdays;
 	private int startstation;
 	private int endstation;
-	ArrayList<Integer> middlestations; 
+	ArrayList<Integer> middlestations;
 	private int startHouer;
-	private	int startMinutes;
+	private int startMinutes;
 	private int visits;
 	private boolean drive = false;
 	private boolean blocked = false;
-	
+
 	/**
 	 * Constructor for Timetable
 	 * 
-	 * @param id - int 
-	 * @param drivingdays- Arraylist
-	 * @param name - String
-	 * @param startstation - int 
-	 * @param endstation - int 
-	 * @param middlestations - Arraylist
-	 * @param startHouer - int 
-	 * @param startMinutes - int 
-	 * @param visits - int 
+	 * @param id
+	 *            - int
+	 * @param drivingdays
+	 *            - Arraylist
+	 * @param name
+	 *            - String
+	 * @param startstation
+	 *            - int
+	 * @param endstation
+	 *            - int
+	 * @param middlestations
+	 *            - Arraylist
+	 * @param startHouer
+	 *            - int
+	 * @param startMinutes
+	 *            - int
+	 * @param visits
+	 *            - int
 	 */
-	public Timetable (int id, ArrayList<String> drivingdays, String name, int startstation, int endstation, ArrayList<Integer> middlestations, int startHouer, int startMinutes, int visits){
-		
+	public Timetable(int id, ArrayList<String> drivingdays, String name,
+			int startstation, int endstation,
+			ArrayList<Integer> middlestations, int startHouer,
+			int startMinutes, int visits) {
+
 		this.setId(id);
 		this.setDrivingdays(drivingdays);
-		this.setName(name); 
+		this.setName(name);
 		this.setStartstation(startstation);
 		this.setEndstation(endstation);
 		this.middlestations = middlestations;
 		this.startHouer = startHouer;
 		this.startMinutes = startMinutes;
 		this.setVisits(visits);
-			
+
 	}
-	
+
 	/**
 	 * Getter for middlestations
 	 * 
@@ -165,7 +180,7 @@ public class Timetable {
 	public int getEndstation() {
 		return endstation;
 	}
-	
+
 	/**
 	 * Setter for Endstation
 	 * 
@@ -175,11 +190,11 @@ public class Timetable {
 		this.endstation = endstation;
 	}
 
-    /**
-     * Getter for drivingdays
-     * 
-     * @return
-     */
+	/**
+	 * Getter for drivingdays
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> getDrivingdays() {
 		return drivingdays;
 	}
@@ -193,20 +208,20 @@ public class Timetable {
 		this.drivingdays = drivingdays;
 	}
 
-    /**
-     * Getter for visits
-     * 
-     * @return
-     */
+	/**
+	 * Getter for visits
+	 * 
+	 * @return
+	 */
 	public int getVisits() {
 		return visits;
 	}
 
-    /**
-     * Setter for visits
-     * 
-     * @param visits
-     */
+	/**
+	 * Setter for visits
+	 * 
+	 * @param visits
+	 */
 	public void setVisits(int visits) {
 		this.visits = visits;
 	}
@@ -217,7 +232,7 @@ public class Timetable {
 	 * @return
 	 */
 	public boolean isDrived() {
-		return drive ;
+		return drive;
 	}
 
 	/**
@@ -227,7 +242,7 @@ public class Timetable {
 	 */
 	public void setDrived(boolean drive) {
 		this.drive = drive;
-		
+
 	}
 
 	/**
@@ -236,7 +251,7 @@ public class Timetable {
 	 * @return
 	 */
 	public boolean isBlocked() {
-		return blocked ;
+		return blocked;
 	}
 
 	/**
@@ -246,9 +261,7 @@ public class Timetable {
 	 */
 	public void setBlocked(boolean blocked) {
 		this.blocked = blocked;
-		
+
 	}
-	
-	
 
 }

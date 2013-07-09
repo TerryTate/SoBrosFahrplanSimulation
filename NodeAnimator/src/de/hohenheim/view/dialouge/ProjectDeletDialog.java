@@ -8,9 +8,12 @@ import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**
+ * The class ProjectDeleteDialog contains the GUI of deleting a project.
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class ProjectDeletDialog extends Dialog {
 	
@@ -18,9 +21,12 @@ public class ProjectDeletDialog extends Dialog {
 	Shell parent; 
     
 	/**
+	 * A Constructor for a new ProjectDelete dialog.
 	 * 
 	 * @param parent
+	 *            - component in which it's inside
 	 * @param style
+	 *            - how the style looks like
 	 */
 	public ProjectDeletDialog(Shell parent, int style) {
 		super(parent, style);
@@ -28,15 +34,15 @@ public class ProjectDeletDialog extends Dialog {
 	}
      
 	/**
-	 * 
-	 * 
+	 * The method open contains view elements of deleting a project
 	 */
 	 public void open() {
 			
 		final Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(220, 310);
 	    
-	  //Fenster  mittig setzen 
+	 	// Set the window in the middle
+	    
 	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
 	    Dimension myDimension = myToolkit.getScreenSize();
 	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 

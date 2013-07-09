@@ -17,18 +17,24 @@ import de.hohenheim.view.composite.CompositeProject;
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**
+ * This class is responsible for the GUI of the ProjectControllerCanvas.
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class ProjektControllerCanvas extends Canvas {
 
 	private Group groupControlSmall;
 
 	/**
+	 * A Constructor for a new ProjectControllerCanvas.
 	 * 
 	 * @param parent
+	 *            - component in which it's inside
 	 * @param style
+	 *            - how the style looks like
 	 */
 	public ProjektControllerCanvas(Composite parent, int style) {
 		super(parent, style);
@@ -36,8 +42,7 @@ public class ProjektControllerCanvas extends Canvas {
 	}
 
 	/**
-	 * 
-	 * 
+	 * Create the content of the new ProjectControllerCanvas
 	 */
 	private void createContent() {
 	    

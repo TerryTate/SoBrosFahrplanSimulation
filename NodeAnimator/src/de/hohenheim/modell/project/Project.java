@@ -6,31 +6,38 @@ import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
 
 /**
- * This Java- Class contains the Constructor for a Project and all Getter and Setter for 
- * his attributes
+ * This Java- Class contains the Constructor for a Project and all Getter and
+ * Setter for his attributes
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class Project {
-	
-	private int id; 
+
+	private int id;
 	private String name;
 	private ArrayList<TrainData> TraindataProjectList;
 	private ArrayList<Timetable> TimeTableProjectList;
-	
+
 	/**
 	 * Constructor for Projects
 	 * 
-	 * @param id - int 
-	 * @param name - String 
-	 * @param trainList - ArrayList
-	 * @param timetableList - ArrayList
+	 * @param id
+	 *            - int
+	 * @param name
+	 *            - String
+	 * @param trainList
+	 *            - ArrayList
+	 * @param timetableList
+	 *            - ArrayList
 	 */
-	public Project(int id, String name,  ArrayList<TrainData> trainList, ArrayList<Timetable> timetableList) {
-		
+	public Project(int id, String name, ArrayList<TrainData> trainList,
+			ArrayList<Timetable> timetableList) {
+
 		this.setId(id);
-		this.setName(name); 
+		this.setName(name);
 		this.setTraindataProjectList(trainList);
 		this.setTimeTableProjectList(timetableList);
 	}
@@ -85,12 +92,13 @@ public class Project {
 	 * 
 	 * @param traindataProjectList
 	 */
-	public void setTraindataProjectList(ArrayList<TrainData> traindataProjectList) {
+	public void setTraindataProjectList(
+			ArrayList<TrainData> traindataProjectList) {
 		TraindataProjectList = traindataProjectList;
 	}
 
 	/**
-	 * Getter for Timetable list 
+	 * Getter for Timetable list
 	 * 
 	 * @return
 	 */
@@ -103,7 +111,8 @@ public class Project {
 	 * 
 	 * @param timeTableProjectList
 	 */
-	public void setTimeTableProjectList(ArrayList<Timetable> timeTableProjectList) {
+	public void setTimeTableProjectList(
+			ArrayList<Timetable> timeTableProjectList) {
 		TimeTableProjectList = timeTableProjectList;
 	}
 
@@ -116,16 +125,14 @@ public class Project {
 	public Timetable getTimetable(int figureId) {
 		int k = 0;
 		Timetable tt = null;
-		for(TrainData td : TraindataProjectList){
-		    
-			if(figureId == td.getID()){
+		for (TrainData td : TraindataProjectList) {
+
+			if (figureId == td.getID()) {
 				tt = TimeTableProjectList.get(k);
 			}
 			k++;
 		}
 		return tt;
 	}
-	
-	
 
 }

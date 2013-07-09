@@ -18,9 +18,13 @@ import org.eclipse.swt.widgets.TableItem;
 import de.hohenheim.view.canvas.ProjektControllerCanvas;
 
 /**
+ * This class create a new CompositeProject with a Table 
+ * and call the Constructor for a new ProjectControllerCanvas 
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class CompositeProject extends Composite {
 	
@@ -30,9 +34,12 @@ public class CompositeProject extends Composite {
 	private static Table projectTable;
 
 	/**
+	 * A Constructor for a new CompositeProject
 	 * 
 	 * @param parent
+	 *            - component in which it's inside
 	 * @param style
+	 *            - how the style looks like
 	 */
 	public CompositeProject(Composite parent, int style) {
 		super(parent, style);
@@ -40,9 +47,8 @@ public class CompositeProject extends Composite {
 	}
 
 	/**
-	 * 
-	 * 
-	 * 
+	 * Create the content of the new Train Composite (the ProjectTable, 
+	 * the ProjectControllersCanvas
 	 */
 	private void createContent() {
 		
@@ -143,15 +149,17 @@ public class CompositeProject extends Composite {
 	}
 
 	/**
+	 * Getter for the ProjectTable
 	 * 
-	 * @return
+	 * @return projectTable - return the table from the Project-Composite with the project
+	 *         data
 	 */
 	public static Table getProjectTable() {
 		return projectTable;
 	}
 
 	/**
-	 * 
+	 * Setter for the ProjectTable
 	 * 
 	 * @param projectTable
 	 */

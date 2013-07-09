@@ -13,54 +13,65 @@ import de.hohenheim.modell.State;
 
 /**
  * This class is for drawing of a room.
- * @author Marc Fernandes
- *
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class NodeFigure extends Figure {
 	private String name = new String();
-	
+
 	private Object modellObject;
-	
-	private Image backgroundImage=null;
-	
+
+	private Image backgroundImage = null;
+
 	/**
-	 * Constructor. Creates a room with a name.
-	 * The Name will be displayed in the center of the figure.
-	 * @param String roomName 
+	 * Constructor. Creates a room with a name. The Name will be displayed in
+	 * the center of the figure.
+	 * 
+	 * @param String
+	 *            roomName
 	 */
-	
 	public NodeFigure(Object modellObject) {
 		setModelObject(modellObject);
 	}
-	
+
 	public NodeFigure(Object modellObject, Image backgroundImg) {
 		this(modellObject);
-		this.backgroundImage=backgroundImg;
+		this.backgroundImage = backgroundImg;
 	}
-	
+
 	/**
 	 * Returns the modell object of this RoomFigure.
+	 * 
 	 * @return {@link Object}
 	 */
 	public Object getModellObject() {
 		return this.modellObject;
 	}
+
 	/**
 	 * Sets the Object which is the modell part of this view object .
-	 * @param modellObject - The modell object which belongs to this RoomFigure.
+	 * 
+	 * @param modellObject
+	 *            - The modell object which belongs to this RoomFigure.
 	 */
 	public void setModelObject(Object modellObject) {
-		this.modellObject=modellObject;
+		this.modellObject = modellObject;
 	}
-	
+
 	/**
 	 * Sets the name of the room, which then is beeing displayed.
-	 * @param roomName - the name of the room.
+	 * 
+	 * @param roomName
+	 *            - the name of the room.
 	 */
 	public void setName(String roomName) {
-	    name = roomName;
-	    repaint();
-	}	
+		name = roomName;
+		repaint();
+	}
+
 	/**
 	 * Returns the name of the room.
 	 * 
@@ -69,35 +80,34 @@ public class NodeFigure extends Figure {
 	public String getName() {
 		return this.name;
 	}
+
 	/**
-	 * Draws a rectangle which represents a room in a RoomMap.
-	 * The name of the room will be placed in the middle of the rectangle.
+	 * Draws a rectangle which represents a room in a RoomMap. The name of the
+	 * room will be placed in the middle of the rectangle.
 	 */
 	public void paintFigure(Graphics g) {
-      Rectangle r = bounds;
-      
-      Rectangle r_tmp = r.getCopy();
-      //g.setBackgroundColor(ColorConstants.lightGray);
-      g.fillRectangle(r_tmp);
-      
-      if(backgroundImage!=null) {
-        g.drawImage(backgroundImage, r_tmp.x,r_tmp.y);
-      }
-      
-      if(State.statemap.get(getName()).geState() == State.BLOCKED){
-    	  g.setForegroundColor(ColorConstants.red);
-    	  g.setBackgroundColor(ColorConstants.red);
-      }else{
-    	  g.setForegroundColor(ColorConstants.darkGray);
-    	  g.setBackgroundColor(ColorConstants.lightGray);
-      }
-      
-      g.drawRectangle(r.x, r.y, r.width-1, r.height-1);
-      
-    
-      
-      Font f = g.getFont();
-      Dimension dim = FigureUtilities.getStringExtents(name, f);
-      g.drawText(name, r.x+r.width/2-dim.width/2 , r.y+r.height/2-dim.height/2);
-  }  
+		Rectangle r = bounds;
+
+		Rectangle r_tmp = r.getCopy();
+		g.fillRectangle(r_tmp);
+
+		if (backgroundImage != null) {
+			g.drawImage(backgroundImage, r_tmp.x, r_tmp.y);
+		}
+
+		if (State.statemap.get(getName()).geState() == State.BLOCKED) {
+			g.setForegroundColor(ColorConstants.red);
+			g.setBackgroundColor(ColorConstants.red);
+		} else {
+			g.setForegroundColor(ColorConstants.darkGray);
+			g.setBackgroundColor(ColorConstants.lightGray);
+		}
+
+		g.drawRectangle(r.x, r.y, r.width - 1, r.height - 1);
+
+		Font f = g.getFont();
+		Dimension dim = FigureUtilities.getStringExtents(name, f);
+		g.drawText(name, r.x + r.width / 2 - dim.width / 2, r.y + r.height / 2
+				- dim.height / 2);
+	}
 }

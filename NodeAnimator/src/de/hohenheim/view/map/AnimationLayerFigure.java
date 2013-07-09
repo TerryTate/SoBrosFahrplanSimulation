@@ -5,18 +5,22 @@ import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.MarginBorder;
 
 /**
- * This class is a transparent {@link FreeformLayeredPane}.
- * It is used to draw the animations in a RoomMap.
- * @author Marc Fernandes
- *
+ * This class is a transparent {@link FreeformLayeredPane}. It is used to draw
+ * the animations in a RoomMap.
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 class AnimationLayerFigure extends FreeformLayeredPane {
+
 	/**
-	 * Constructor sets the background of the layer transparent.  
+	 * Constructor sets the background of the layer transparent.
 	 */
 	public AnimationLayerFigure() {
-	    setLayoutManager(new FreeformLayout());
-	    setBorder(new MarginBorder(5));	    
-	    setOpaque(false);
-	  }
+		setLayoutManager(new FreeformLayout());
+		setBorder(new MarginBorder(5));
+		setOpaque(false);
+	}
 }

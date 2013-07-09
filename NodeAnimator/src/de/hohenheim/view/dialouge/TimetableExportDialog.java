@@ -17,24 +17,48 @@ import de.hohenheim.controller.events.CentralEventController;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.mobile.ImageHelper;
 
+/**
+ * The class TimetableExportDialog contains the GUI of exporting a timetable.
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
+ */
 public class TimetableExportDialog {
 
 	Shell parent;
 	public static Combo comboTimetables;
 	public static Shell dialog;
 
+	/**
+	 * A Constructor for a new ProjectAdd dialog.
+	 * 
+	 * @param parent
+	 *            - component in which it's inside
+	 * @param style
+	 *            - how the style looks like
+	 */
 	public TimetableExportDialog(Shell parent, int style) {
 		super();
 		parent = this.parent;
 		
 	}
 
+	/**
+	 * 
+	 * The method open is responsible for the view elements of exporting a
+	 * timetable.
+	 * 
+	 * @param menu
+	 */
     public void open(final boolean menu) {
 		
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 	    dialog.setSize(215, 130);
 	    
-	  //Fenster  mittig setzen 
+	    // Set the window in the middle
+	    
 	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
 	    Dimension myDimension = myToolkit.getScreenSize();
 	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
@@ -99,7 +123,12 @@ public class TimetableExportDialog {
 	    dialog.open();
 	}
 
-
+    /**
+ 	 * Load the timetableID's into a String[]
+	 * 
+	 * @param timetableID
+	 * @return timetableID - the id's of the timetables
+     */
 	private String[] loadTimetableList(String[] timetablesID) {
 	
 		for(int i=0; i < Main.getTimetableListAll().size(); i++) {

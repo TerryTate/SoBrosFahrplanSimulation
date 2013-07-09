@@ -1,21 +1,22 @@
 package de.hohenheim.modell.train;
 
 /**
- *  This Java- Class contains the Constructor for a Train and all Getter and Setter for 
- * his attributes
+ * This Java- Class contains the Constructor for a Train and all Getter and
+ * Setter for his attributes
  * 
- * @author Arthur Kaul
- *
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class TrainData {
-	
-	int id; 
-	int speed; 
-	String typOfTrain; 
+
+	int id;
+	int speed;
+	String typOfTrain;
 	private String ladung;
 	private String priority;
-	boolean anim;
-	
+
 	/**
 	 * Constructor for Train
 	 * 
@@ -26,16 +27,16 @@ public class TrainData {
 	 * @param priority
 	 * @param anim
 	 */
-	public TrainData (int id, int speed, String typOfTrain, String ladung, String priority){
+	public TrainData(int id, int speed, String typOfTrain, String ladung,
+			String priority) {
 		this.id = id;
 		this.speed = speed;
-		this.typOfTrain = typOfTrain; 
+		this.typOfTrain = typOfTrain;
 		this.setLadung(ladung);
 		this.setPriority(priority);
-		this.anim = anim;
-		
+
 	}
-    
+
 	/**
 	 * Getter for ID
 	 * 
@@ -44,16 +45,16 @@ public class TrainData {
 	public int getID() {
 		return id;
 	}
-	
+
 	/**
-	 * Getter for Speed 
+	 * Getter for Speed
 	 * 
 	 * @return
 	 */
 	public int getSpeed() {
 		return speed;
 	}
-	
+
 	/**
 	 * Getter for Typ of Train
 	 * 
@@ -69,25 +70,25 @@ public class TrainData {
 	 * @param id
 	 */
 	public void setID(int id) {
-		this.id = id;	
+		this.id = id;
 	}
-	
+
 	/**
 	 * Setter for Speed
 	 * 
 	 * @param speed
 	 */
 	public void setSpeed(int speed) {
-		this.speed = speed;	
+		this.speed = speed;
 	}
-	
+
 	/**
 	 * Setter for Typ of Train
 	 * 
 	 * @param typOfTrain
 	 */
 	public void setTypOfTrain(String typOfTrain) {
-		this.typOfTrain = typOfTrain;	
+		this.typOfTrain = typOfTrain;
 	}
 
 	/**
@@ -125,5 +126,5 @@ public class TrainData {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
-	
+
 }

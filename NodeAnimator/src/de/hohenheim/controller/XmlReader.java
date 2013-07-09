@@ -15,8 +15,10 @@ import de.hohenheim.modell.train.TrainData;
 /**
  * Class to read XML Documents that stored trains and time tables
  * 
- * @author Matze
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
  * 
+ * @version 1.0
  */
 public class XmlReader {
 

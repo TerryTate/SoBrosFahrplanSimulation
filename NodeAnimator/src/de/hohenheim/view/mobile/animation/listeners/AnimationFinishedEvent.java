@@ -3,8 +3,13 @@ package de.hohenheim.view.mobile.animation.listeners;
 import java.util.EventObject;
 
 /**
+ * The class AnimationEventMulticaster contains the different ActionListener to
+ * finish the ongoing animation event.
  * 
- * @author Marc Fernandes
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofs‰ﬂ
+ * 
+ * @version 1.0
  */
 public class AnimationFinishedEvent extends EventObject {
 
@@ -17,20 +22,36 @@ public class AnimationFinishedEvent extends EventObject {
 	
 	private int animationtype;
 	
+	/**
+	 * The ActionListener to finish an event
+	 * 
+	 * @param source
+	 * @param animationtype
+	 */
     public AnimationFinishedEvent(Object source, int animationtype) {
 		super(source);
 		this.animationtype=animationtype;
 	}
 	
+	/**
+	 * Getter for AnimationType
+	 * 
+	 * @return animationType
+	 */
     public int getAnimationtype() {
     	return this.animationtype;
     }
     
-	
+	/**
+	 * Getter for Source
+	 */
 	public Object getSource() {
 		return super.getSource();
 	}
 
+	/**
+	 * Getter for toString
+	 */
 	public String toString() {
 		return super.toString();
 	}

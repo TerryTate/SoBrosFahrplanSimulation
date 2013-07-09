@@ -21,189 +21,222 @@ import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.view.mobile.ImageHelper;
 
-public class TrainAddDialog extends Dialog{
-	
-	
+/**
+ * The class TrainAddDialog contains the GUI and some different ActionListener
+ * of TrainAddDialog.
+ * 
+ * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
+ *         Hofsäß
+ * 
+ * @version 1.0
+ */
+public class TrainAddDialog extends Dialog {
+
 	Shell parent;
-	String[] typs = {"S-Bahn", "ICE", "IC", "RegioBahn", "Güterzug", "Dampflock"};
-	String[] speeds = {"100", "150", "200", "250", "300"};
-	String[] priorities = {"Sehr wichtig", "Wichtig", "Normal", "Irrelevant"};
-	String[] ladung = {"keine", "Rohstoffe", "Müll", "Fertige Produkte", "Brennstoffe"};
-	
+	String[] typs = { "S-Bahn", "ICE", "IC", "RegioBahn", "Güterzug",
+			"Dampflock" };
+	String[] speeds = { "100", "150", "200", "250", "300" };
+	String[] priorities = { "Sehr wichtig", "Wichtig", "Normal", "Irrelevant" };
+	String[] ladung = { "keine", "Rohstoffe", "Müll", "Fertige Produkte",
+			"Brennstoffe" };
+
 	public static Shell dialog;
 	public static Combo comboTypOfTrain;
 	public static Combo comboLadungen;
 	public static Combo comboPriority;
 	public static Combo comboSpeed;
 	public static Text idText;
-    String message = "";
-	
+	String message = "";
+
+	/**
+	 * A Constructor for a new TrainAdd dialog.
+	 * 
+	 * @param parent
+	 *            - component in which it's inside
+	 * @param style
+	 *            - how the style looks like
+	 */
 	public TrainAddDialog(Shell parent, int style) {
 		super(parent, style);
 		parent = this.parent;
-		
+
 	}
 
+	/**
+	 * The method open is responsible for the view elements of adding an
+	 * project.
+	 */
 	public void open() {
 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-	    dialog.setSize(300, 240);
-	    
-	    //Fenster  mittig setzen 
-	    Toolkit myToolkit = Toolkit.getDefaultToolkit();
-	    Dimension myDimension = myToolkit.getScreenSize();
-	    dialog.setLocation((int) ((myDimension.getWidth() - dialog.getSize().x) / 2), 
-	    		           (int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
-	    
-	    dialog.setText("Zug erstellen");
-	    dialog.setImage(ImageHelper.add);;
-	    GridLayout gridLayout = new GridLayout();
-	    gridLayout.numColumns = 3; 
-	    dialog.setLayout(gridLayout);
-	    
-	    
-	    // Train ID
-	    
-	    Label id = new Label(dialog, SWT.NONE); 
-	    id.setText("ID : ");
-	    
-	    idText = new Text(dialog, SWT.NONE);
-	    GridData gridData = new GridData();
-	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
-	    idText.setLayoutData(gridData);
-	    idText.setTextLimit(6);
-	    
-	    // Train Typ
-	    
-	    Label typOfTrain = new Label(dialog, SWT.NONE); 
-	    typOfTrain.setText("ZugTyp : "); 
-	    
-	    comboTypOfTrain = new Combo(dialog, SWT.READ_ONLY);
-	    comboTypOfTrain.setItems(typs);
-	    gridData = new GridData();
-	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
-	    comboTypOfTrain.setLayoutData(gridData);
-	    comboTypOfTrain.select(0);
+		dialog.setSize(300, 240);
 
-	    //Train Speed
-	    
-	    Label trainSpeed = new Label(dialog, SWT.NONE); 
-	    trainSpeed.setText("Geschwindigkeit : "); 
-	    
-        comboSpeed = new Combo(dialog, SWT.READ_ONLY);
-	    comboSpeed.setItems(speeds);
-	    comboSpeed.select(0);
-	    
-	    Label kmH = new Label(dialog, SWT.NONE); 
-	    kmH.setText("km/h"); 
-	    
-	    //Train Priority
-	    
-	    Label priority = new Label(dialog, SWT.NONE); 
-	    priority.setText("Priorität : "); 
-	    
-	    comboPriority = new Combo(dialog, SWT.READ_ONLY);
-	    comboPriority.setItems(priorities);
-	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
-	    comboPriority.setLayoutData(gridData);
-	    comboPriority.select(0);
-	    
-	    //Train Ladung
-	    
-	    Label ladungen = new Label(dialog, SWT.NONE); 
-	    ladungen.setText("Ladung : "); 
-	    
-	    comboLadungen = new Combo(dialog, SWT.READ_ONLY);
-	    comboLadungen.setItems(ladung);
-	    gridData.horizontalSpan = 2;
-	    gridData.horizontalAlignment = SWT.FILL;
-	    comboLadungen.setLayoutData(gridData);
-	    comboLadungen.select(0);
-	    
-	    // Buttonn Composite
-	    
-	    Composite buttonComposite = new Composite(dialog, SWT.NONE);
-	    GridLayout gridLayout2 = new GridLayout();
-	    gridLayout2.numColumns = 2;
-	    buttonComposite.setLayout(gridLayout2);
-	    
-	    // OK Button 
-	    
-	    Button okButton = new Button(dialog, SWT.NONE);
+		// Set the window in the middle
+
+		Toolkit myToolkit = Toolkit.getDefaultToolkit();
+		Dimension myDimension = myToolkit.getScreenSize();
+		dialog.setLocation(
+				(int) ((myDimension.getWidth() - dialog.getSize().x) / 2),
+				(int) ((myDimension.getHeight() - dialog.getSize().y) / 2));
+
+		dialog.setText("Zug erstellen");
+		dialog.setImage(ImageHelper.add);
+		;
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 3;
+		dialog.setLayout(gridLayout);
+
+		// Train ID
+
+		Label id = new Label(dialog, SWT.NONE);
+		id.setText("ID : ");
+
+		idText = new Text(dialog, SWT.NONE);
+		GridData gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		idText.setLayoutData(gridData);
+		idText.setTextLimit(6);
+
+		// Train Typ
+
+		Label typOfTrain = new Label(dialog, SWT.NONE);
+		typOfTrain.setText("ZugTyp : ");
+
+		comboTypOfTrain = new Combo(dialog, SWT.READ_ONLY);
+		comboTypOfTrain.setItems(typs);
+		gridData = new GridData();
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		comboTypOfTrain.setLayoutData(gridData);
+		comboTypOfTrain.select(0);
+
+		// Train Speed
+
+		Label trainSpeed = new Label(dialog, SWT.NONE);
+		trainSpeed.setText("Geschwindigkeit : ");
+
+		comboSpeed = new Combo(dialog, SWT.READ_ONLY);
+		comboSpeed.setItems(speeds);
+		comboSpeed.select(0);
+
+		Label kmH = new Label(dialog, SWT.NONE);
+		kmH.setText("km/h");
+
+		// Train Priority
+
+		Label priority = new Label(dialog, SWT.NONE);
+		priority.setText("Priorität : ");
+
+		comboPriority = new Combo(dialog, SWT.READ_ONLY);
+		comboPriority.setItems(priorities);
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		comboPriority.setLayoutData(gridData);
+		comboPriority.select(0);
+
+		// Train Ladung
+
+		Label ladungen = new Label(dialog, SWT.NONE);
+		ladungen.setText("Ladung : ");
+
+		comboLadungen = new Combo(dialog, SWT.READ_ONLY);
+		comboLadungen.setItems(ladung);
+		gridData.horizontalSpan = 2;
+		gridData.horizontalAlignment = SWT.FILL;
+		comboLadungen.setLayoutData(gridData);
+		comboLadungen.select(0);
+
+		// Button Composite
+
+		Composite buttonComposite = new Composite(dialog, SWT.NONE);
+		GridLayout gridLayout2 = new GridLayout();
+		gridLayout2.numColumns = 2;
+		buttonComposite.setLayout(gridLayout2);
+
+		// OK Button
+
+		Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
 		okButton.setImage(ImageHelper.ok);
-	    gridData = new GridData();
-	    gridData.horizontalAlignment = SWT.CENTER;
-	    okButton.setLayoutData(gridData);
-		
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.CENTER;
+		okButton.setLayoutData(gridData);
+
 		okButton.addListener(SWT.Selection, new Listener() {
-			
+
 			public void handleEvent(Event arg0) {
-				
-				if (trainIdCheck()){
+
+				if (trainIdCheck()) {
 					TrainEvents.addNewTrain();
-				}else{
-					
-					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR | SWT.OK);
-			        messageBox.setMessage(message);    
-			        messageBox.open();
+				} else {
+
+					MessageBox messageBox = new MessageBox(dialog, SWT.ERROR
+							| SWT.OK);
+					messageBox.setMessage(message);
+					messageBox.open();
 				}
-						
+
 			}
 		});
-	    
-	    // Cancel Button
-		
+
+		// Cancel Button
+
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
 		cancelButton.setImage(ImageHelper.cancel);
-	    gridData = new GridData();
-	    gridData.horizontalAlignment = SWT.CENTER;
-	    cancelButton.setLayoutData(gridData);
-		
+		gridData = new GridData();
+		gridData.horizontalAlignment = SWT.CENTER;
+		cancelButton.setLayoutData(gridData);
+
 		cancelButton.addListener(SWT.Selection, new Listener() {
-			
+
 			public void handleEvent(Event arg0) {
-				
-			   dialog.close();
-				
+
+				dialog.close();
+
 			}
 		});
-	    
-	    dialog.open();
-	    
-	    
+
+		dialog.open();
+
 	}
-	
+
+	/**
+	 * This method prove the trainIds. If there is a wrong input or a blank box,
+	 * exceptions will be called in terms of error messages.
+	 * 
+	 * @return idCheck - if the statements are wrong, an error message will be
+	 *         display
+	 */
 	protected boolean trainIdCheck() {
-		message = "";	
+		message = "";
 		boolean idCheck = true;
-		try{
-		    int id = Integer.parseInt(idText.getText());
-		    if (id < 0){
-		    	message = message + "Die Zug-ID muss eine positive Zahl sein!\n"+"\r\n";
-		    	idCheck = false;
-		    }
-		    for(int j = 0; j < Main.getTrainListAll().size(); j++){
-			    if(id == Main.getTrainListAll().get(j).getID()){
-			    
-			        message = message + "Diese Zug-ID ist bereits vorhanden. " +
-				    			"Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n" +
-				        		"und versuchen Sie es erneut.\n"+"\r\n";
-			    	idCheck = false;
-			    }
-		    }
-		
-		}catch(NumberFormatException e){
-			message = message + "Die Zug-ID darf nur aus Zahlen bestehen\n" +
-	        					"und muss mindestens eine Ziffer haben!\n"+"\r\n";
-			
+		try {
+			int id = Integer.parseInt(idText.getText());
+			if (id < 0) {
+				message = message
+						+ "Die Zug-ID muss eine positive Zahl sein!\n" + "\r\n";
+				idCheck = false;
+			}
+			for (int j = 0; j < Main.getTrainListAll().size(); j++) {
+				if (id == Main.getTrainListAll().get(j).getID()) {
+
+					message = message
+							+ "Diese Zug-ID ist bereits vorhanden. "
+							+ "Bitte geben Sie eine andere, 1 bis 6-stellige Ziffer ein \n"
+							+ "und versuchen Sie es erneut.\n" + "\r\n";
+					idCheck = false;
+				}
+			}
+
+		} catch (NumberFormatException e) {
+			message = message + "Die Zug-ID darf nur aus Zahlen bestehen\n"
+					+ "und muss mindestens eine Ziffer haben!\n" + "\r\n";
+
 			idCheck = false;
 		}
-		 
+
 		return idCheck;
 	}
 
