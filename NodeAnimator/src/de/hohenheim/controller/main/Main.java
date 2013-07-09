@@ -67,6 +67,7 @@ public class Main {
 
 		tabComposite = new Composite(getMainShell(), SWT.NONE);
         tabComposite.setBackgroundImage(ImageHelper.animBack);
+        
 		// ///////// innerer Rand
 		tabComposite.setBackground(ColorConstants.lightGray);
 		GridData gridData = new GridData();
@@ -116,7 +117,9 @@ public class Main {
 		bar.setBounds(0, 370, 600, 15);
 
 		animation.open();
-		for (int i = 0; i <= bar.getMaximum(); i++) {
+		for (int i = 0; i <= bar.getMaximum(); i++){
+
+             
 			try {
 				Thread.sleep(50);
 			} catch (Throwable th) {
@@ -129,6 +132,7 @@ public class Main {
 
 		getMainShell().open();
 
+		
 		while (!getMainShell().isDisposed()) {
 			if (!getDisplay().readAndDispatch()) {
 

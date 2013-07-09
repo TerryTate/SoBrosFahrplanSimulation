@@ -66,14 +66,14 @@ public class AnimationProcess {
 						&& tt.getStartMinutes() <= min) {
 					if (tt.getVisits() == tt.getMiddlestations().size()) {
 
-						tt.setVisits(tt.getVisits() + 1);
+						
 						tt.setDrived(true);
 						AnimationEvents.walkTo(
 								tf,
 								map.getNodes().get(
 										String.valueOf(tt.getEndstation())),
 								map);
-
+						tt.setVisits(tt.getVisits() + 1);
 					} else if (tt.getVisits() < tt.getMiddlestations().size()) {
 						tt.setDrived(true);
 						AnimationEvents.walkTo(
