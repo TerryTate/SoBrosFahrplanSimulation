@@ -25,8 +25,8 @@ import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**
- * The class ProjectAddDialog contains the GUI and some different ActionListener
- * of TimetableAddDialog.
+ * The class TimeTableAddDialog contains the GUI and some different
+ * ActionListener of adding a TimeTable.
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofs‰ﬂ
@@ -69,7 +69,7 @@ public class TimetableAddDialog extends Dialog {
 	}
 
 	/**
-	 * The method open is responsible for the view elements of editing a
+	 * The method open is responsible for the view elements of adding a
 	 * timetable.
 	 */
 	public void open() {

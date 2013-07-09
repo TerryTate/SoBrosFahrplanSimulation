@@ -31,7 +31,7 @@ import de.hohenheim.view.composite.CompositeTimeTable;
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**
- * The class ProjectAddDialog contains the GUI of TimeTableEditDialog.
+ * The class TimeTableEditDialog contains the GUI of editing a timetable
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofs‰ﬂ
@@ -62,7 +62,7 @@ public class TimetableEditDialog extends Dialog {
 	String message = "";
 
 	/**
-	 * A Constructor for a new ProjectAdd dialog.
+	 * A Constructor for a new TimetableEdit dialog.
 	 * 
 	 * @param parent
 	 *            - component in which it's inside

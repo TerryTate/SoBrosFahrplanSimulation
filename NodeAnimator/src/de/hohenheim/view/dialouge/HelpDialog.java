@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import de.hohenheim.controller.main.Main;
 
 /**
- * The class AboutUsDialog displays the help option for user if he has problems.
+ * The class HelpDialog displays the help option for user if he has problems.
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofs‰ﬂ

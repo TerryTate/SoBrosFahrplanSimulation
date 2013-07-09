@@ -65,7 +65,7 @@ public class ProjectEditDialog extends Dialog {
 	}
 
 	/**
-	 * The method open contains view elements of deleting a project
+	 * The method open contains view elements of editing a project
 	 */
 	public void open() {
 

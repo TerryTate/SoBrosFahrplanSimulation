@@ -23,7 +23,7 @@ import de.hohenheim.view.mobile.ImageHelper;
 
 /**
  * The class TrainAddDialog contains the GUI and some different ActionListener
- * of TrainAddDialog.
+ * of adding a train.
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofs‰ﬂ
@@ -64,7 +64,7 @@ public class TrainAddDialog extends Dialog {
 
 	/**
 	 * The method open is responsible for the view elements of adding an
-	 * project.
+	 * train.
 	 */
 	public void open() {
 

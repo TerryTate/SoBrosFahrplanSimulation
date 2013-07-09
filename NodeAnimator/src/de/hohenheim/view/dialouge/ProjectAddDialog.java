@@ -25,7 +25,7 @@ import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;
 
 /**
- * The class ProjectAddDialog contains the GUI of ProjectAddDialog.
+ * The class ProjectAddDialog contains the GUI of adding a project.
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofs‰ﬂ
