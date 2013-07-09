@@ -79,5 +79,6 @@ public class ImageHelper {
 	public static final Image limePath = new Image(null, "img/pathLime.png");
 
 	public static final Image leiste = new Image(null, "img/leiste.png");
+	public static final Image animBack = new Image(null, "img/backi3.png");
 
 }

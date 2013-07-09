@@ -44,10 +44,12 @@ public class BlockFinder implements Runnable {
 					.get(String.valueOf(train.getID()));
 			if (af != null) {
 				NodeFigure nextStation = null;
-				if (tt.getVisits() == tt.getMiddlestations().size()) {
-
+				
+				if (tt.getVisits() == tt.getMiddlestations().size() + 1) {
+                    
 					nextStation = AnimationPlay.getMap().getNodes()
 							.get(String.valueOf(tt.getEndstation()));
+					
 				} else if (tt.getVisits() < tt.getMiddlestations().size()) {
 					nextStation = AnimationPlay
 							.getMap()
@@ -58,15 +60,15 @@ public class BlockFinder implements Runnable {
 
 				if (af.getCurrentAnimation() instanceof BusyAnimator
 						&& nextStation == null) {
-
+					 
 					finishedTrains.add(train);
 
 					// train is not waiting and has no further stations
 				} else if (nextStation == null) {
-
+					 
 					finishedTrains.add(train);
 
-				} else if (af.getCurrentAnimation() instanceof BusyWaitAnimator) {
+				} else /*if (af.getCurrentAnimation() instanceof BusyWaitAnimator)*/ {
 
 					waitingTrains.add(train);
 				}
@@ -96,12 +98,14 @@ public class BlockFinder implements Runnable {
 		}
 
 		// Check whether two waiting trains are blocking each other
-
+		 System.out.println("FTrains" + finishedTrains.size());
+        System.out.println("WaitingTrains" + waitingTrains.size());
 		for (TrainData train : waitingTrains) {
 
 			for (TrainData waitingTrain : waitingTrains) {
+				System.out.println("Test2");
 				if (train.getID() != waitingTrain.getID()) {
-
+                    System.out.println("Test");
 					// Check whether a deadlock between these trains has already
 					// been detected.
 

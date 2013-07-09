@@ -268,10 +268,10 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				if (!tt.isBlocked()) {
 
 					// Set timetable info of train
-					// tt.setVisits(tt.getVisits() + 1);
 
 					tt.setDrived(false);
 				} else {
+					tt.setVisits(tt.getVisits() -1);
 					tt.setBlocked(false);
 					tt.setDrived(false);
 				}
@@ -314,10 +314,11 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 				if (!tt.isBlocked()) {
 					
 					// Set timetable info of train
-					// tt.setVisits(tt.getVisits() + 1);
+					
 					
 					tt.setDrived(false);
 				} else {
+					tt.setVisits(tt.getVisits() -1);
 					tt.setBlocked(false);
 					tt.setDrived(false);
 				}

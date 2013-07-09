@@ -51,6 +51,7 @@ public class Main {
 		display = (Display.getDefault());
 
 		mainShell = new Shell();
+		mainShell.setBackgroundImage(ImageHelper.animBack);
 		getMainShell().setText("Fahrplan Animation");
 		getMainShell().setImage(ImageHelper.trainTab);
 		int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
@@ -64,8 +65,8 @@ public class Main {
 
 		getMainShell().setMenuBar(MenuBar.createMenu(getMainShell()));
 
-		tabComposite = new Composite(getMainShell(), SWT.BORDER);
-
+		tabComposite = new Composite(getMainShell(), SWT.NONE);
+        tabComposite.setBackgroundImage(ImageHelper.animBack);
 		// ///////// innerer Rand
 		tabComposite.setBackground(ColorConstants.lightGray);
 		GridData gridData = new GridData();
