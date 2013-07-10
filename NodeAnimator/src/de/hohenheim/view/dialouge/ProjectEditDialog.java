@@ -118,6 +118,7 @@ public class ProjectEditDialog extends Dialog {
 		comboChooseTrain = new Combo(dialog, SWT.READ_ONLY);
 		String[] trainsID = new String[Main.getTrainListAll().size()];
 		comboChooseTrain.setItems(loadTrainList(trainsID));
+		comboChooseTrain.select(0);
 		gridData = new GridData();
 
 		gridData.horizontalAlignment = SWT.FILL;
@@ -156,6 +157,7 @@ public class ProjectEditDialog extends Dialog {
 		comboChooseTimeTable = new Combo(dialog, SWT.READ_ONLY);
 		String[] timetableID2 = new String[Main.getTimetableListAll().size()];
 		comboChooseTimeTable.setItems(loadTimetableList(timetableID2));
+		comboChooseTimeTable.select(0);
 		gridData = new GridData();
 
 		gridData.horizontalAlignment = SWT.FILL;
@@ -344,6 +346,14 @@ public class ProjectEditDialog extends Dialog {
 		message = "";
 		boolean check = true;
 
+		Timetable tt = null;
+		for(int k = 0; k < Main.getTimetableListAll().size(); k++){
+			if (Integer.parseInt(comboChooseTimeTable.getText()) == Main.getTimetableListAll().get(k).getId()){ 
+				tt = Main.getTimetableListAll().get(k);
+			}
+			
+		}
+		
 		for (int j = 0; j < linkTable.getItemCount(); j++) {
 
 			if (Integer.parseInt(comboChooseTrain.getText()) == Integer
@@ -362,6 +372,20 @@ public class ProjectEditDialog extends Dialog {
 				check = false;
 			}
 
+			Timetable tt2 = null;
+			for(int i = 0; i < Main.getTimetableListAll().size(); i++){
+				
+				if (Integer.parseInt(linkTable.getItem(j).getText(1)) == Main.getTimetableListAll().get(i).getId()){ 
+					tt2 = Main.getTimetableListAll().get(i);
+				}
+			}
+			
+			if(tt.getStartstation() == tt2.getStartstation()){
+				
+				message = message + "Es können keine zwei Fahrpläne mit der selben \n"+
+				                    "Startstation in einem Projekt existieren !\n";
+				check = false;
+			}
 		}
 
 		return check;

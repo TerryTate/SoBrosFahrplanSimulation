@@ -290,7 +290,7 @@ public class ProjectAddDialog extends Dialog {
 		boolean check = true;
 
 		Timetable tt = null;
-		for(int k = 0; k < Main.getTrainListAll().size(); k++){
+		for(int k = 0; k < Main.getTimetableListAll().size(); k++){
 			if (Integer.parseInt(comboChooseTimeTable.getText()) == Main.getTimetableListAll().get(k).getId()){ 
 				tt = Main.getTimetableListAll().get(k);
 			}
