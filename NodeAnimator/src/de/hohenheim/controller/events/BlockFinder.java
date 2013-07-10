@@ -15,6 +15,7 @@ import de.hohenheim.view.mobile.animation.BusyWaitAnimator;
 import de.hohenheim.view.node.NodeFigure;
 
 /**
+ * Java - Class to find Blocks between Trains so that the can move on and finished his Timetable
  * 
  * @author Arthur Kaul, Besim Gashi, Mathias Zwiesele, Daniel Intili, Bernd
  *         Hofsäß
@@ -23,18 +24,15 @@ import de.hohenheim.view.node.NodeFigure;
  */
 public class BlockFinder implements Runnable {
 
-	/**
-	 * Recognized the deadlocks.
-	 */
 	@Override
 	public void run() {
 		List<TrainData> waitingTrains = new Vector<TrainData>();
 		List<TrainData> finishedTrains = new Vector<TrainData>();
-		List<List<TrainData>> deadlocks = new Vector<List<TrainData>>();
-		List<List<TrainData>> finishedTrainDeadlocks = new Vector<List<TrainData>>();
+		List<List<TrainData>> blocks = new Vector<List<TrainData>>();
+		List<List<TrainData>> finishedTrainBlocks = new Vector<List<TrainData>>();
 		int k = 0;
 
-		// Get waiting and finished Trains
+		// Check if a Train is waiting or finished 
 
 		for (TrainData train : AnimationPlay.getP().getTraindataProjectList()) {
 
@@ -63,12 +61,12 @@ public class BlockFinder implements Runnable {
 					 
 					finishedTrains.add(train);
 
-					// train is not waiting and has no further stations
+				
 				} else if (nextStation == null) {
 					 
 					finishedTrains.add(train);
 
-				} else /*if (af.getCurrentAnimation() instanceof BusyWaitAnimator)*/ {
+				} else {
 
 					waitingTrains.add(train);
 				}
@@ -76,9 +74,7 @@ public class BlockFinder implements Runnable {
 			k++;
 		}
 
-		// Check whether a finished train blocks a waiting train from going to
-		// next node.
-		// If so, the finished train has to move to another free node
+		// Check whether a finished Train block a Waiting Train
 		for (TrainData train : waitingTrains) {
 			for (TrainData finishedTrain : finishedTrains) {
 				if (getWaitingForNodes(
@@ -89,10 +85,10 @@ public class BlockFinder implements Runnable {
 								.get(String.valueOf(finishedTrain.getID()))
 								.getNodeFigure())) {
 
-					List<TrainData> deadlock = new Vector<TrainData>();
-					deadlock.add(train);
-					deadlock.add(finishedTrain);
-					finishedTrainDeadlocks.add(deadlock);
+					List<TrainData> block = new Vector<TrainData>();
+					block.add(train);
+					block.add(finishedTrain);
+					finishedTrainBlocks.add(block);
 				}
 			}
 		}
@@ -108,17 +104,17 @@ public class BlockFinder implements Runnable {
 					// Check whether a deadlock between these trains has already
 					// been detected.
 
-					boolean deadlockAlreadyDetected = false;
-					for (List<TrainData> deadlock : deadlocks) {
+					boolean blockWasFind = false;
+					for (List<TrainData> deadlock : blocks) {
 						if (deadlock.contains(train)
 								&& deadlock.contains(waitingTrain)) {
-							deadlockAlreadyDetected = true;
+							blockWasFind = true;
 							break;
 						}
 					}
 
 					// check for deadlock between these two trains
-					if (!deadlockAlreadyDetected
+					if (!blockWasFind
 							&& getWaitingForNodes(
 									AnimationPlay.getMap().getMobileObjects()
 											.get(String.valueOf(train.getID()))
@@ -141,48 +137,36 @@ public class BlockFinder implements Runnable {
 
 						// Add the detected deadlock to the deadlocks list
 
-						List<TrainData> deadlock = new Vector<TrainData>();
-						deadlock.add(train);
-						deadlock.add(waitingTrain);
-						deadlocks.add(deadlock);
+						List<TrainData> block = new Vector<TrainData>();
+						block.add(train);
+						block.add(waitingTrain);
+						blocks.add(block);
 					}
 				}
 			}
 		}
 
-		// Start resolving deadlocks
-		//
-		// Not a smart way to do this... resolving one deadlock could resolve
-		// multiple deadlocks and the resolving actions won't make any sense.
-		// But since there are no resolving actions this doesn't matter.
-
-		for (List<TrainData> deadlock : finishedTrainDeadlocks) {
+		// resolve the Block how are was find
+		
+		for (List<TrainData> deadlock : finishedTrainBlocks) {
 			resolveBlockFinishedTrain(deadlock.get(0), deadlock.get(1));
 		}
-		for (List<TrainData> deadlock : deadlocks) {
+		for (List<TrainData> deadlock : blocks) {
 			resolveBlock(deadlock.get(0), deadlock.get(1));
 		}
 	}
 
 	/**
-	 * Resolve a deadlock between two trains. One of them blocks the node
-	 * because he has not timetable.
+	 * Resolve a block between two trains. One of them blocks the node
+	 * because he has no Stations more and stand on a Node.
 	 * 
 	 * @param train
 	 * @param finishedTrain
 	 */
 	private void resolveBlockFinishedTrain(TrainData train,
 			TrainData finishedTrain) {
-
-		// Get actual route of "train" and search for the next UNBLOCKED node
-		// that is not contained in this actual path near the "finishedTrain".
-		// let the finishedTrain go to the UNBLOCKED node, so the "train" can
-		// move on. Afterwards reset the timetable of the finishedTrain to the
-		// last station, so the finishedTrain is on the right node at the end of
-		// the simulation.
-		//
-		// If no free node walkable is found, show an error message.
-
+        
+		// search a rout for the waiting Train to move him away
 		ArrayList<NodeFigure> unblockedNodes = new ArrayList<NodeFigure>();
 		List<NodeFigure> routeOfTrain = getWaitingForNodes(AnimationPlay
 				.getMap().getMobileObjects().get(String.valueOf(train.getID()))
@@ -222,15 +206,15 @@ public class BlockFinder implements Runnable {
 	}
 
 	/**
-	 * Löst ein Deadlock zwischen zwei Zügen auf. Hierbei wird die Priorität der
-	 * Züge beachtet und der niedriger priorisierte Zug muss ausweichen.
+	 * Resolve a block between to waiting Trains. the Train with lower Priority 
+	 * have to move away 
 	 * 
 	 * @param train1
 	 * @param train2
 	 */
 	private void resolveBlock(TrainData train1, TrainData train2) {
 
-		// Train with lower priority has to move away from its path
+		// Train with lower priority has to move away from its Node
 		int value1 = getValue(train1.getPriority());
 		int value2 = getValue(train2.getPriority());
 
@@ -261,7 +245,7 @@ public class BlockFinder implements Runnable {
 					unblockedNodes.get(index), AnimationPlay.getMap());
 
 		} else {
-			// priority is higher or the same - train1 has to move away to next
+			// priority of train2  is higher Train1 has to move away to next
 			// free node or something
 			ArrayList<NodeFigure> unblockedNodes = new ArrayList<NodeFigure>();
 			List<NodeFigure> routeOfTrain = getWaitingForNodes(AnimationPlay
@@ -291,6 +275,12 @@ public class BlockFinder implements Runnable {
 
 	}
 
+	/**
+	 * Convert the Priority to a Value
+	 * 
+	 * @param priority
+	 * @return
+	 */
 	private int getValue(String priority) {
 
 		if (priority.equalsIgnoreCase("Sehr Wichtig")) {
@@ -305,6 +295,13 @@ public class BlockFinder implements Runnable {
 
 	}
 
+	/**
+	 * Check if a finished or waiting Train stay on a Node witch is need by a 
+	 * other Train.
+	 * 
+	 * @param animationList
+	 * @return
+	 */
 	private List<NodeFigure> getWaitingForNodes(
 			ArrayList<Animator> animationList) {
 		List<NodeFigure> waitingForNodes = new Vector<NodeFigure>();

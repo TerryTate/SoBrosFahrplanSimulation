@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.main.Main;
+import de.hohenheim.modell.timetable.Timetable;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;
 
@@ -287,6 +289,14 @@ public class ProjectAddDialog extends Dialog {
 		message = "";
 		boolean check = true;
 
+		Timetable tt = null;
+		for(int k = 0; k < Main.getTrainListAll().size(); k++){
+			if (Integer.parseInt(comboChooseTimeTable.getText()) == Main.getTimetableListAll().get(k).getId()){ 
+				tt = Main.getTimetableListAll().get(k);
+			}
+			
+		}
+		
 		for (int j = 0; j < linkTable.getItemCount(); j++) {
 
 			if (Integer.parseInt(comboChooseTrain.getText()) == Integer
@@ -302,6 +312,21 @@ public class ProjectAddDialog extends Dialog {
 
 				message = message
 						+ "Der ausgewählte Fahrplan ist schon vorhanden !\n";
+				check = false;
+			}
+			
+			Timetable tt2 = null;
+			for(int i = 0; i < Main.getTimetableListAll().size(); i++){
+				
+				if (Integer.parseInt(linkTable.getItem(j).getText(1)) == Main.getTimetableListAll().get(i).getId()){ 
+					tt2 = Main.getTimetableListAll().get(i);
+				}
+			}
+			
+			if(tt.getStartstation() == tt2.getStartstation()){
+				
+				message = message + "Es können keine zwei Fahrpläne mit der selben \n"+
+				                    "Startstation in einem Projekt existieren !\n";
 				check = false;
 			}
 
