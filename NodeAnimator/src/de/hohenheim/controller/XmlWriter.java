@@ -48,7 +48,7 @@ public class XmlWriter {
 
 		// Wurzel an die alle Projekte (mit Trains und Timetables) sowie alle
 		// Timetables und Trains attached sind
-		Element rootOfAll = new Element("ProgrammDataBackup");
+		Element rootOfAll = new Element("ProgrammDataBackupAll");
 
 		// If abfrage ob Projekte angelegt wurden wenn die Liste NICHT leer ist
 		// dann for-Schleife über alle Projekte
