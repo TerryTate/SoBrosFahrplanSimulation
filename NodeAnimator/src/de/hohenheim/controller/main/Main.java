@@ -12,12 +12,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
+import de.hohenheim.controller.XmlReader;
 import de.hohenheim.controller.XmlWriter;
+import de.hohenheim.controller.events.ProjectEvents;
+import de.hohenheim.controller.events.TimeTableEvents;
+import de.hohenheim.controller.events.TrainEvents;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
@@ -116,15 +122,40 @@ public class Main {
 
 		animation.setBackgroundImage(ImageHelper.logo);
 		animation.setLocation(screenWidth / 2 - 300, screenHeight / 2 - 200);
-
+        Label loadSetting = new Label(animation, SWT.NONE);
+        animation.setBackgroundMode(SWT.INHERIT_DEFAULT);
+		loadSetting.setText("");
+		
+		loadSetting.setBounds(10, 350, 400, 20);
 		ProgressBar bar = new ProgressBar(animation, SWT.SMOOTH);
 		bar.setBounds(0, 370, 600, 15);
 
 		animation.open();
+		
+		
+		XmlReader.loadAllData();
+		
+		ProjectEvents.importAllProjects();
+		
+		TrainEvents.importAllTrain();
+		
+		TimeTableEvents.importAllTimetable();
+		
 		for (int i = 0; i <= bar.getMaximum(); i++){
-
-             
 			try {
+			if(i < (bar.getMaximum()/3)){
+            	
+            	loadSetting.setText("/Settings/loadProjects");
+            	
+            }else if(i < (2*(bar.getMaximum()/3))){
+           	    loadSetting.setText("/Settings/loadTrains");
+            	
+            }else{
+                loadSetting.setText("/Settings/loadTimetables");
+            	
+		    }
+		
+			
 				Thread.sleep(50);
 			} catch (Throwable th) {
 			}

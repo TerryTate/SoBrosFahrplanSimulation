@@ -54,7 +54,8 @@ public class XmlReader {
 		}
 
 		Element allProjects = rootOfAll.getChild("AllProjects");
-
+        
+		try {
 		for (int r = 0; r < allProjects.getChildren().size(); r++) {
 
 			Project returnProject = new Project(0, null, null, null);
@@ -269,14 +270,14 @@ public class XmlReader {
 		
 		
 		Element rootOfAllTrain = rootOfAll.getChild("AllTrainData");
-		
+		try {
 		for (int z = 0; z < rootOfAllTrain.getChildren().size(); z++){
 			
 			TrainData returnTrain = new TrainData(0, 0, null, null, null);
 			
 			Element root = rootOfAllTrain.getChildren().get(z);
 			
-			try {
+			
 				Element id = root.getChild("ID");
 				int iDValue = Integer.parseInt(id.getValue());
 				returnTrain.setID(iDValue);
@@ -297,15 +298,18 @@ public class XmlReader {
 				String ladungValue = ladung.getValue();
 				returnTrain.setLadung(ladungValue);
 
-			} catch (NullPointerException e) {
-
-			}
+		
 			
 			Main.getTrainListAll().add(returnTrain);
 			
 			
 		}
-		
+		} catch (NullPointerException e) {
+
+		}
+		} catch (NullPointerException e) {
+
+		}
 		
 		
 

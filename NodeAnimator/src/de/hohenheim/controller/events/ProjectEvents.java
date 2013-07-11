@@ -321,4 +321,40 @@ public class ProjectEvents {
 
 	}
 
+	public static void importAllProjects(){
+		
+		for(Project p : Main.getProjectListAll()){
+		
+			String trainsItem = "";
+
+			for (int i = 0; i < p.getTraindataProjectList().size(); i++) {
+				
+				trainsItem = trainsItem
+						+ p.getTraindataProjectList().get(i).getID() + "; ";
+			}
+
+			String timetableItem = "";
+
+			for (int i = 0; i < p.getTimeTableProjectList().size(); i++) {
+				
+				
+				timetableItem = timetableItem
+						+ p.getTimeTableProjectList().get(i).getId() + "; ";
+				
+
+			}
+			
+			TableItem item = new TableItem(CompositeProject.getProjectTable(),
+					SWT.NONE);
+			
+			item.setText(new String[] { String.valueOf(p.getId()), p.getName(),
+					trainsItem, timetableItem });
+			
+		}
+		
+		String[] projectIDs = new String[Main.getProjectListAll().size()];
+		AnimationControllerCanvas.comboProjects
+				.setItems(AnimationControllerCanvas
+						.loadProjectIDs(projectIDs));
+	}
 }

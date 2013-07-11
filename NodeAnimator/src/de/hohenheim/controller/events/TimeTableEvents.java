@@ -610,4 +610,53 @@ public class TimeTableEvents {
 		return check;
 	}
 
+	public static void importAllTimetable(){
+		
+		for(Timetable tt: Main.getTimetableListAll()){
+			String drivingdaysItem = "";
+
+			for (int j = 0; j < tt.getDrivingdays().size(); j++) {
+
+				drivingdaysItem = drivingdaysItem + tt.getDrivingdays().get(j)
+						+ "; ";
+			}
+
+			String middleStationItems = "";
+
+			for (int i = 0; i < tt.getMiddlestations().size(); i++) {
+
+				middleStationItems = middleStationItems
+						+ tt.getMiddlestations().get(i) + " --> ";
+
+			}
+
+			int h = tt.getStartHouer();
+			int m = tt.getStartMinutes();
+
+			String time = "";
+
+			if ((h < 10) && (m < 10)) {
+
+				time = ("0" + h + " : " + "0" + m);
+
+			} else if ((h >= 10) && (m < 10)) {
+
+				time = (h + " : " + "0" + m);
+			} else if ((h >= 10) && (m >= 10)) {
+
+				time = (h + " : " + m);
+			} else if ((h < 10) && (m >= 10)) {
+
+				time = ("0" + h + " : " + m);
+			}
+
+			TableItem item = new TableItem(
+					CompositeTimeTable.getTimeTableTable(), SWT.NONE);
+			item.setText(new String[] { String.valueOf((tt.getId())),
+					tt.getName(), time, drivingdaysItem,
+					String.valueOf(tt.getStartstation()),
+					String.valueOf(tt.getEndstation()), middleStationItems });	
+		}
+		
+	}
 }

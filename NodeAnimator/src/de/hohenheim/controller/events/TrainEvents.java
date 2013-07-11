@@ -238,4 +238,16 @@ public class TrainEvents {
 		return check;
 	}
 
+	public static void importAllTrain(){
+		
+		for(TrainData td : Main.getTrainListAll()){
+
+			TableItem item = new TableItem(CompositeTrain.getTrainTable(),
+					SWT.NONE);
+			item.setText(new String[] { String.valueOf(td.getID()),
+					td.getTypOfTrain(), String.valueOf(td.getSpeed()),
+					td.getPriority(), td.getLadung() });
+		}
+		
+	}
 }
