@@ -1,15 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ProgrammDataBackupAll>
+  <AllProjects>
+    <Project>
+      <ID>23</ID>
+      <Name>TestProjekt</Name>
+      <Trains>
+        <Train>
+          <ID>1</ID>
+          <TypeOfTrain>S-Bahn</TypeOfTrain>
+          <Priority>Sehr wichtig</Priority>
+          <Speed>100</Speed>
+          <Ladung>keine</Ladung>
+        </Train>
+      </Trains>
+      <TimeTables>
+        <TimeTable>
+          <ID>312312</ID>
+          <Name>TEST</Name>
+          <DrivingDay1>Mo</DrivingDay1>
+          <DrivingDay2>Mi</DrivingDay2>
+          <DrivingDay3>Do</DrivingDay3>
+          <DrivingDay4>Fr</DrivingDay4>
+          <DrivingDay5>Sa</DrivingDay5>
+          <Stations>
+            <StartStation>1</StartStation>
+            <AllMiddleStations>
+              <MiddleStation>2</MiddleStation>
+              <MiddleStation>4</MiddleStation>
+            </AllMiddleStations>
+            <EndStation>6</EndStation>
+          </Stations>
+          <Time>
+            <StartHouer>0</StartHouer>
+            <StarMinutes>0</StarMinutes>
+          </Time>
+        </TimeTable>
+      </TimeTables>
+    </Project>
+  </AllProjects>
+  <AllTimeTables>
+    <Timetable>
+      <ID>312312</ID>
+      <Name>TEST</Name>
+      <DrivingDay1>Mo</DrivingDay1>
+      <DrivingDay2>Mi</DrivingDay2>
+      <DrivingDay3>Do</DrivingDay3>
+      <DrivingDay4>Fr</DrivingDay4>
+      <Stations>
+        <StartStation>1</StartStation>
+        <Middlestations>
+          <MiddleStation>2</MiddleStation>
+          <MiddleStation>4</MiddleStation>
+        </Middlestations>
+        <EndStation>6</EndStation>
+      </Stations>
+      <Time>
+        <StartHouer>0</StartHouer>
+        <StarMinutes>0</StarMinutes>
+      </Time>
+    </Timetable>
+  </AllTimeTables>
   <AllTrainData>
     <Train>
       <ID>1</ID>
-      <TypeOfTrain>S-Bahn</TypeOfTrain>
-      <Priority>Sehr wichtig</Priority>
-      <Speed>100</Speed>
-      <Ladung>keine</Ladung>
-    </Train>
-    <Train>
-      <ID>2</ID>
       <TypeOfTrain>S-Bahn</TypeOfTrain>
       <Priority>Sehr wichtig</Priority>
       <Speed>100</Speed>
