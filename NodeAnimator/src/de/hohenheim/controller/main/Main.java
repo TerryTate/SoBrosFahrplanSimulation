@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.swt.SWT;
 
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -14,6 +16,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
+
+import de.hohenheim.controller.XmlWriter;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
 import de.hohenheim.modell.train.TrainData;
@@ -129,7 +133,12 @@ public class Main {
 
 		animation.close();
 		animation.dispose();
-
+		mainShell.addShellListener(new ShellAdapter() {
+            public void shellClosed(ShellEvent e) {
+                XmlWriter.writeAllToXML();
+            }
+        });
+ 
 		getMainShell().open();
 
 		

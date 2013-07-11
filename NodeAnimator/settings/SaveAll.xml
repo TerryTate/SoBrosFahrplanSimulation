@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProgrammDataBackupAll>
+  <AllTrainData>
+    <Train>
+      <ID>1</ID>
+      <TypeOfTrain>S-Bahn</TypeOfTrain>
+      <Priority>Sehr wichtig</Priority>
+      <Speed>100</Speed>
+      <Ladung>keine</Ladung>
+    </Train>
+    <Train>
+      <ID>2</ID>
+      <TypeOfTrain>S-Bahn</TypeOfTrain>
+      <Priority>Sehr wichtig</Priority>
+      <Speed>100</Speed>
+      <Ladung>keine</Ladung>
+    </Train>
+  </AllTrainData>
+</ProgrammDataBackupAll>

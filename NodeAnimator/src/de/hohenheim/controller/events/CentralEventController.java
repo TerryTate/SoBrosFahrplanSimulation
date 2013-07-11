@@ -55,6 +55,7 @@ public class CentralEventController {
 		messageBox.setText("Programm Beenden");
 		int response = messageBox.open();
 		if (response == SWT.YES)
+			XmlWriter.writeAllToXML();
 			System.exit(0);
 
 	}
