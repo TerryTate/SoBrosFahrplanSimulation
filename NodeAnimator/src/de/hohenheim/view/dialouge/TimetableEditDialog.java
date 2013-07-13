@@ -94,10 +94,6 @@ public class TimetableEditDialog extends Dialog {
 		dialog.setText("Fahrplan bearbeiten");
 		dialog.setImage(ImageHelper.edit);
 
-//		GridLayout gridLayout = new GridLayout();
-//		gridLayout.numColumns = 3;
-//		dialog.setLayout(gridLayout);
-
 		TableItem[] rowData = CompositeTimeTable.getTimeTableTable()
 				.getSelection();
 
@@ -126,10 +122,6 @@ public class TimetableEditDialog extends Dialog {
 				}
 			});
 
-//			GridData gridData = new GridData();
-//			gridData.horizontalSpan = 2;
-//			gridData.horizontalAlignment = SWT.FILL;
-//			comboTimetable.setLayoutData(gridData);
 
 		}
 
@@ -143,11 +135,6 @@ public class TimetableEditDialog extends Dialog {
 		idText.setBounds(115, 35, 100, 15);
 		idText.setTextLimit(6);
 
-//		GridData gridData = new GridData();
-//		gridData.horizontalSpan = 2;
-//		gridData.horizontalAlignment = SWT.FILL;
-
-//		idText.setLayoutData(gridData);
 
 		// TimetableName
 
@@ -157,22 +144,11 @@ public class TimetableEditDialog extends Dialog {
         
 		fahrplannameText = new Text(dialog, SWT.NONE);
 		fahrplannameText.setBounds(115, 60, 100, 15);
-		
-//		gridData = new GridData();
-//		gridData.horizontalSpan = 2;
-//		gridData.horizontalAlignment = SWT.FILL;
-//		fahrplannameText.setLayoutData(gridData);
 
 		// Set the Label and a spinner for the Starttime
 		Label starttime = new Label(dialog, SWT.NONE);
 		starttime.setText("Start Uhrzeit : ");
 		starttime.setBounds(5, 85, 100, 15);
-
-//		Composite timeComposite = new Composite(dialog, SWT.NONE);
-//		timeComposite.setLayout(new FillLayout());
-//		gridData = new GridData();
-//		gridData.horizontalSpan = 2;
-//		timeComposite.setLayoutData(gridData);
 
 		houre = new Spinner(dialog, SWT.NONE);
 		houre.setMaximum(23);
@@ -187,54 +163,54 @@ public class TimetableEditDialog extends Dialog {
 		minutes.setBounds(170, 85, 35, 15);
 
 		Label m = new Label(dialog, SWT.NONE);
-		m.setText("  m");
-		m.setBounds(200, 85, 10, 15);
+		m.setText("m");
+		m.setBounds(210, 85, 10, 15);
 
 		// Timetable drivingDays
 
 		Label drivingDays = new Label(dialog, SWT.NONE);
 		drivingDays.setText("Fahrtage : ");
-		drivingDays.setBounds(5, 105, 100, 15);
+		drivingDays.setBounds(5, 110, 100, 15);
 
 		montag = new Button(dialog, SWT.CHECK);
 		montag.setText("Montag");
-		montag.setBounds(115, 105, 30, 15);
+		montag.setBounds(115, 110, 60, 15);
 		
 		dienstag = new Button(dialog, SWT.CHECK);
 		dienstag.setText("Dienstag");	
-		dienstag.setBounds(135, 105, 30, 15);
+		dienstag.setBounds(195, 110, 70, 15);
 		
 		mittwoch = new Button(dialog, SWT.CHECK);
 		mittwoch.setText("Mittwoch");
-		mittwoch.setBounds(0, 0, 0, 0);
+		mittwoch.setBounds(115, 130, 60, 15);
 		
 		donerstag = new Button(dialog, SWT.CHECK);
 		donerstag.setText("Donerstag");
-		donerstag.setBounds(0, 0, 0, 0);
+		donerstag.setBounds(195, 130, 70, 15);
 		
 		freitag = new Button(dialog, SWT.CHECK);
 		freitag.setText("Freitag");
-		freitag.setBounds(0, 0, 0, 0);
+		freitag.setBounds(115, 150, 60, 15);
 		
 		samstag = new Button(dialog, SWT.CHECK);
 		samstag.setText("Samstag");
-		samstag.setBounds(0, 0, 0, 0);
+		samstag.setBounds(195, 150, 70, 15);
 		
 		sontag = new Button(dialog, SWT.CHECK);
 		sontag.setText("Sontag");
-		sontag.setBounds(0, 0, 0, 0);
+		sontag.setBounds(115, 170, 60, 15);
 		
 		alle = new Button(dialog, SWT.CHECK);
 		alle.setText("Alle");
-		alle.setBounds(0, 0, 0, 0);
+		alle.setBounds(195, 170, 70, 15);
 		// TitmeTable StartStation
 
 		Label startstation = new Label(dialog, SWT.NONE);
 		startstation.setText("Startstation : ");
-		startstation.setBounds(0, 0, 0, 0);
+		startstation.setBounds(5, 190, 100, 15);
 
 		comboStartstation = new Combo(dialog, SWT.READ_ONLY);
-		comboStartstation.setBounds(0, 0, 0, 0);
+		comboStartstation.setBounds(115, 190, 100, 15);
 
 		String[] items = AnimationControllerCanvas.getNodeNames();
 		comboStartstation.setItems(items);
@@ -243,10 +219,11 @@ public class TimetableEditDialog extends Dialog {
 
 		Label endstation = new Label(dialog, SWT.NONE);
 		endstation.setText("Endstation : ");
-		endstation.setBounds(0, 0, 0, 0);
+		endstation.setBounds(5, 223, 100, 15);
 
 		comboEndstation = new Combo(dialog, SWT.READ_ONLY);
 		comboEndstation.setItems(items);
+		comboEndstation.setBounds(115, 218, 100, 15);
 //		gridData.horizontalSpan = 2;
 //		comboEndstation.setLayoutData(gridData);
 
@@ -254,17 +231,16 @@ public class TimetableEditDialog extends Dialog {
 
 		Label middlestation = new Label(dialog, SWT.NONE);
 		middlestation.setText("Zwischenstationen : ");
+		middlestation.setBounds(5, 250, 100, 15);
 
 		comboMiddlestation = new Combo(dialog, SWT.READ_ONLY);
 		comboMiddlestation.setItems(items);
 		comboMiddlestation.select(0);
-
-		Composite middlestationButtonC = new Composite(dialog, SWT.NONE);
-		middlestationButtonC.setLayout(new FillLayout());
+		comboMiddlestation.setBounds(115, 245, 100, 15);
 
 		// Add Button
 
-		Button addButton = new Button(middlestationButtonC, SWT.NONE);
+		Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
 		addButton.setImage(ImageHelper.add);
 		;
@@ -286,7 +262,7 @@ public class TimetableEditDialog extends Dialog {
 
 		// Remove Button
 
-		Button removeButton = new Button(middlestationButtonC, SWT.NONE);
+		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
 		removeButton.setImage(ImageHelper.remove);
 		removeButton.addListener(SWT.Selection, new Listener() {
@@ -325,10 +301,7 @@ public class TimetableEditDialog extends Dialog {
 			}
 		});
 
-		Label room6 = new Label(dialog, SWT.NONE);
-		room6.setText("");
-
-		Composite tableComposite = new Composite(dialog, SWT.NONE);
+		
 //		gridData = new GridData();
 //		gridData.horizontalSpan = 2;
 //		gridData.horizontalAlignment = SWT.FILL;
@@ -337,7 +310,7 @@ public class TimetableEditDialog extends Dialog {
 //		tableComposite.setLayout(new FillLayout());
 	
 
-		midlestationTable = new Table(tableComposite, SWT.NONE);
+		midlestationTable = new Table(dialog, SWT.NONE);
 		
 		midlestationTable.setLinesVisible(true);
 
