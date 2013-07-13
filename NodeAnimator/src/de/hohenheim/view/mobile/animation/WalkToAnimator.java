@@ -157,7 +157,7 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 
 		NodeFigure start_node = this.animationFigure.getNodeFigure();
 		ArrayList<PathFigure> edges_start = map.getPaths().get(start_node);
-		System.out.println(this.animationFigure.getFigureId());
+	
 		try {
 			if (start_node.equals(end_node)) {
 				return null;
@@ -269,7 +269,10 @@ public class WalkToAnimator extends Observable implements Runnable, Animator {
 
 					// Set timetable info of train
 
-					tt.setDrived(false);
+	
+				    	tt.setDrived(false);
+                    
+					
 				} else {
 					tt.setVisits(tt.getVisits() -1);
 					tt.setBlocked(false);

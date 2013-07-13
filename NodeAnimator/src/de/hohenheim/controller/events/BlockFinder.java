@@ -42,13 +42,12 @@ public class BlockFinder implements Runnable {
 					.get(String.valueOf(train.getID()));
 			if (af != null) {
 				NodeFigure nextStation = null;
-				System.out.print("ZUg mit der ID :" + train.getID());
-				System.out.println("Gneau Visits" + tt.getVisits());
 				
 				if ((tt.getVisits())  == tt.getMiddlestations().size()) {
                     
 					nextStation = AnimationPlay.getMap().getNodes()
 							.get(String.valueOf(tt.getEndstation()));
+					train.setFinish(true);
 					
 				} else if (tt.getVisits() < tt.getMiddlestations().size()) {
 					nextStation = AnimationPlay
@@ -58,6 +57,8 @@ public class BlockFinder implements Runnable {
 									tt.getVisits())));
 				}
 				
+				
+				
 				if (af.getCurrentAnimation() instanceof BusyAnimator
 						&& nextStation == null) {
 					
@@ -65,24 +66,30 @@ public class BlockFinder implements Runnable {
 					finishedTrains.add(train);
 
 				
-				}else if(train.isFinish()){
+				}/*else if(train.isFinish()){
 					finishedTrains.add(train);
-				}
-				/*else if (nextStation == null) {
-				}
-					System.out.println("Finished Train hinzugefügt mit der ID " + train.getID());
+				}*/
+				else if (nextStation == null) {
 					finishedTrains.add(train);
+				
+				
+				
 
-				}*/ else if (af.getCurrentAnimation() instanceof BusyWaitAnimator){
+				} else if (af.getCurrentAnimation() instanceof BusyWaitAnimator){
                    
 					waitingTrains.add(train);
-				} /*else {
+				} else {
 					waitingTrains.add(train);
-				}*/
+				}
+				
+				
 			}
 			k++;
 		}
-        System.out.println("Size " + finishedTrains.size());
+    
+		System.out.println("grösser  der wartenden züge " +waitingTrains.size());
+		System.out.println("grösse der Fertigen Züge" + finishedTrains.size());
+		
 		// Check whether a finished Train block a Waiting Train
 		for (TrainData train : waitingTrains) {
 			
@@ -207,6 +214,7 @@ public class BlockFinder implements Runnable {
 
 		// Start walkTo random node
 
+		System.out.println("BLOCK AUFlösung gestarte ");
 		AnimationEvents.walkTo(
 				((TrainFigure) AnimationPlay.getMap().getMobileObjects()
 						.get(String.valueOf(finishedTrain.getID()))),

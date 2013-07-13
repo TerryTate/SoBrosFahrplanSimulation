@@ -620,12 +620,13 @@ public class TimeTableEvents {
 		for(Timetable tt: Main.getTimetableListAll()){
 			String drivingdaysItem = "";
 
+			System.out.println("Fahrtaggrösse" + tt.getDrivingdays().size());
 			for (int j = 0; j < tt.getDrivingdays().size(); j++) {
 
 				drivingdaysItem = drivingdaysItem + tt.getDrivingdays().get(j)
 						+ "; ";
 			}
-
+            System.out.println(drivingdaysItem);
 			String middleStationItems = "";
 
 			for (int i = 0; i < tt.getMiddlestations().size(); i++) {

@@ -228,7 +228,7 @@ public class XmlWriter {
 				rootTimeTable.addContent(name);
 				name.setText(String.valueOf(tD.getName()));
 
-				for (int i = 0; i < tD.getDrivingdays().size() - 1; i++) {
+				for (int i = 0; i < tD.getDrivingdays().size(); i++) {
 					drivingdays = new Element("DrivingDay" + (i + 1));
 					rootTimeTable.addContent(drivingdays);
 					drivingdays.setText(String.valueOf(tD.getDrivingdays().get(i)));

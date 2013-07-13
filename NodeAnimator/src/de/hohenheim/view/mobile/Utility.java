@@ -201,7 +201,7 @@ public class Utility {
 
 		Graph g2 = new Graph(list, map.getPaths());
 
-		HashMap<NodeFigure, Node> nodeMap = g.getNodeHashMap();
+		HashMap<NodeFigure, Node> nodeMap = g2.getNodeHashMap();
 		ArrayList<Node> nodes = g2.getShortestPath(nodeMap.get(start),
 				nodeMap.get(end), new ArrayList<Node>());
 		ArrayList<NodeFigure> nodeFigures = new ArrayList<NodeFigure>();

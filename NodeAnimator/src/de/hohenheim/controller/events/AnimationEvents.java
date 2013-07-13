@@ -132,8 +132,10 @@ public class AnimationEvents {
 		while (walkingpath.hasNext()) {
 			trainFigure.waitFor(State.statemap
 					.get(walkingpath.next().getName()));
+			
 		}
 
+		
 		trainFigure.walkTo(nodeFigure);
 		trainFigure.busy(4);
 		trainFigure.startAnimation();

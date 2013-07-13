@@ -107,7 +107,7 @@ public class CompositeTimeTable extends Composite {
 							String[] values = { items[i].getText(0),
 									items[i].getText(1), items[i].getText(2),
 									items[i].getText(3), items[i].getText(4),
-									items[i].getText(5) };
+									items[i].getText(5), items[i].getText(6) };
 							items[i].dispose();
 							TableItem item = new TableItem(timeTableTable,
 									SWT.NONE, j);
@@ -133,7 +133,7 @@ public class CompositeTimeTable extends Composite {
 							String[] values = { items[i].getText(0),
 									items[i].getText(1), items[i].getText(2),
 									items[i].getText(3), items[i].getText(4),
-									items[i].getText(5) };
+									items[i].getText(5), items[i].getText(6) };
 							items[i].dispose();
 							TableItem item = new TableItem(timeTableTable,
 									SWT.NONE, j);
@@ -159,7 +159,7 @@ public class CompositeTimeTable extends Composite {
 							String[] values = { items[i].getText(0),
 									items[i].getText(1), items[i].getText(2),
 									items[i].getText(3), items[i].getText(4),
-									items[i].getText(5) };
+									items[i].getText(5), items[i].getText(6) };
 							items[i].dispose();
 							TableItem item = new TableItem(timeTableTable,
 									SWT.NONE, j);
@@ -185,7 +185,7 @@ public class CompositeTimeTable extends Composite {
 							String[] values = { items[i].getText(0),
 									items[i].getText(1), items[i].getText(2),
 									items[i].getText(3), items[i].getText(4),
-									items[i].getText(5) };
+									items[i].getText(5), items[i].getText(6)};
 							items[i].dispose();
 							TableItem item = new TableItem(timeTableTable,
 									SWT.NONE, j);
