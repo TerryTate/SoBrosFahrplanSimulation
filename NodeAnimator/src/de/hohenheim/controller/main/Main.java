@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import de.hohenheim.controller.XmlReader;
 import de.hohenheim.controller.XmlWriter;
@@ -46,9 +45,9 @@ public class Main {
 	private static Composite tabComposite;
 	private static Composite bottomComposite;
 	private static TabFolder tabFolder;
-	private static ArrayList<TrainData> trainListAll = new ArrayList();
-	private static ArrayList<Timetable> timetableListAll = new ArrayList();
-	private static ArrayList<Project> projectListAll = new ArrayList();
+	private static ArrayList<TrainData> trainListAll = new ArrayList<TrainData>();
+	private static ArrayList<Timetable> timetableListAll = new ArrayList<Timetable>();
+	private static ArrayList<Project> projectListAll = new ArrayList<Project>();
 	private static Shell mainShell;
 	private static Display display;
 

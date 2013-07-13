@@ -207,7 +207,7 @@ public class AnimationPlay implements Runnable {
 	 * @param map2
 	 */
 	private void setMap(NodeMap map2) {
-		this.map = map2;
+		AnimationPlay.map = map2;
 
 	}
 
@@ -297,7 +297,7 @@ public class AnimationPlay implements Runnable {
 	 * @param p
 	 */
 	public void setP(Project p) {
-		this.p = p;
+		AnimationPlay.p = p;
 	}
 
 	/**

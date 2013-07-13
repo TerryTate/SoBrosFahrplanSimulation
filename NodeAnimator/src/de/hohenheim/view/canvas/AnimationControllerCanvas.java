@@ -204,7 +204,8 @@ public class AnimationControllerCanvas extends Canvas {
 		pause.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-
+            
+				if(!comboProjects.getText().equalsIgnoreCase("")){
 				Project p = null;
 				for (Project project : Main.getProjectListAll()) {
 
@@ -217,7 +218,7 @@ public class AnimationControllerCanvas extends Canvas {
 				}
 				setRun(false);
 				AnimationEvents.pause(map, p);
-
+				}
 			}
 		});
 
@@ -226,7 +227,7 @@ public class AnimationControllerCanvas extends Canvas {
 		stop.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-
+                if(!comboProjects.getText().equalsIgnoreCase("")){
 				Project p = null;
 				for (Project project : Main.getProjectListAll()) {
 
@@ -239,6 +240,7 @@ public class AnimationControllerCanvas extends Canvas {
 				}
 				setRun(false);
 				AnimationEvents.stop(map, p, comboDrivingday.getText());
+                }
 			}
 		});
 

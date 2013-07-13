@@ -319,9 +319,10 @@ public class TimetableEditDialog extends Dialog {
 
 		tableComposite.setLayoutData(gridData);
 		tableComposite.setLayout(new FillLayout());
+	
 
 		midlestationTable = new Table(tableComposite, SWT.NONE);
-
+		
 		midlestationTable.setLinesVisible(true);
 
 		TableColumn midleStations = new TableColumn(midlestationTable, SWT.None);

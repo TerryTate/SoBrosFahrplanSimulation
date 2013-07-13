@@ -48,7 +48,7 @@ public class TrainEvents {
 		TrainData train = new TrainData(id, speed,
 				TrainAddDialog.comboTypOfTrain.getText(),
 				TrainAddDialog.comboLadungen.getText(),
-				TrainAddDialog.comboPriority.getText());
+				TrainAddDialog.comboPriority.getText(), false);
 
 		Main.getTrainListAll().add(train);
 
@@ -238,6 +238,11 @@ public class TrainEvents {
 		return check;
 	}
 
+	/**
+	 * 
+	 * Methode importAllTrains load one or more then one Train into the Program when it starts
+	 * 
+	 */
 	public static void importAllTrain(){
 		
 		for(TrainData td : Main.getTrainListAll()){

@@ -42,8 +42,10 @@ public class BlockFinder implements Runnable {
 					.get(String.valueOf(train.getID()));
 			if (af != null) {
 				NodeFigure nextStation = null;
+				System.out.print("ZUg mit der ID :" + train.getID());
+				System.out.println("Gneau Visits" + tt.getVisits());
 				
-				if (tt.getVisits() == tt.getMiddlestations().size() + 1) {
+				if ((tt.getVisits())  == tt.getMiddlestations().size()) {
                     
 					nextStation = AnimationPlay.getMap().getNodes()
 							.get(String.valueOf(tt.getEndstation()));
@@ -55,36 +57,43 @@ public class BlockFinder implements Runnable {
 							.get(String.valueOf(tt.getMiddlestations().get(
 									tt.getVisits())));
 				}
-
+				
 				if (af.getCurrentAnimation() instanceof BusyAnimator
 						&& nextStation == null) {
-					 
+					
+					train.setFinish(true); 
 					finishedTrains.add(train);
 
 				
-				} else if (nextStation == null) {
-					 
+				}else if(train.isFinish()){
+					finishedTrains.add(train);
+				}
+				/*else if (nextStation == null) {
+				}
+					System.out.println("Finished Train hinzugefügt mit der ID " + train.getID());
 					finishedTrains.add(train);
 
-				} else {
-
+				}*/ else if (af.getCurrentAnimation() instanceof BusyWaitAnimator){
+                   
 					waitingTrains.add(train);
-				}
+				} /*else {
+					waitingTrains.add(train);
+				}*/
 			}
 			k++;
 		}
-
+        System.out.println("Size " + finishedTrains.size());
 		// Check whether a finished Train block a Waiting Train
 		for (TrainData train : waitingTrains) {
+			
 			for (TrainData finishedTrain : finishedTrains) {
-				if (getWaitingForNodes(
-						AnimationPlay.getMap().getMobileObjects()
-								.get(String.valueOf(train.getID()))
+				
+				if (getWaitingForNodes(AnimationPlay.getMap().getMobileObjects().get(String.valueOf(train.getID()))
 								.getAnimationList()).contains(
 						AnimationPlay.getMap().getMobileObjects()
 								.get(String.valueOf(finishedTrain.getID()))
 								.getNodeFigure())) {
-
+					
 					List<TrainData> block = new Vector<TrainData>();
 					block.add(train);
 					block.add(finishedTrain);
@@ -188,13 +197,13 @@ public class BlockFinder implements Runnable {
 
 		AnimationPlay.getP().getTimetable(finishedTrain.getID())
 				.setBlocked(true);
-		AnimationPlay
-				.getP()
-				.getTimetable(finishedTrain.getID())
-				.setVisits(
-						AnimationPlay.getP()
-								.getTimetable(finishedTrain.getID())
-								.getMiddlestations().size());
+//		AnimationPlay
+//				.getP()
+//				.getTimetable(finishedTrain.getID())
+//				.setVisits(
+//						AnimationPlay.getP()
+//								.getTimetable(finishedTrain.getID())
+//								.getMiddlestations().size());
 
 		// Start walkTo random node
 
@@ -202,6 +211,7 @@ public class BlockFinder implements Runnable {
 				((TrainFigure) AnimationPlay.getMap().getMobileObjects()
 						.get(String.valueOf(finishedTrain.getID()))),
 				unblockedNodes.get(index), AnimationPlay.getMap());
+		
 
 	}
 

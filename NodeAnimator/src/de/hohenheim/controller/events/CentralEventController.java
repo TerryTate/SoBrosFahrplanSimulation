@@ -1,6 +1,8 @@
 package de.hohenheim.controller.events;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TableItem;
@@ -396,6 +398,7 @@ public class CentralEventController {
 		String[] filterExt = { "*.xml" };
 		fd.setFilterExtensions(filterExt);
 		String selected = fd.open();
+		if(selected != null){
 
 		if (openDialog == 0) {
 
@@ -422,6 +425,7 @@ public class CentralEventController {
 
 			ProjectEvents.importProject(p);
 
+		}
 		}
 
 	}

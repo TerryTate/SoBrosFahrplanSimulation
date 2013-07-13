@@ -6,6 +6,7 @@ import de.hohenheim.modell.State;
 import de.hohenheim.modell.Train;
 import de.hohenheim.modell.project.Project;
 import de.hohenheim.modell.timetable.Timetable;
+import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.map.NodeMap;
 import de.hohenheim.view.mobile.AnimationFigure;
 import de.hohenheim.view.mobile.TrainFigure;
@@ -134,7 +135,7 @@ public class AnimationEvents {
 		}
 
 		trainFigure.walkTo(nodeFigure);
-		trainFigure.busy(2);
+		trainFigure.busy(4);
 		trainFigure.startAnimation();
 	}
 
@@ -173,6 +174,9 @@ public class AnimationEvents {
 				tt.setVisits(0);
 				tt.setBlocked(false);
 				tt.setDrived(false);
+			}
+			for (TrainData td : p.getTraindataProjectList()){
+				td.setFinish(false);
 			}
 			setNodesUnblocked(map);
 		}

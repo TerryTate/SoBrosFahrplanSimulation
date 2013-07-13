@@ -285,7 +285,7 @@ public class XmlWriter {
 						trainList.get(t).getSpeed(), 
 						trainList.get(t).getTypOfTrain(), 
 						trainList.get(t).getLadung(), 
-						trainList.get(t).getPriority());
+						trainList.get(t).getPriority(), false);
 				
 				
 				Element rootSingleTrain = new Element("Train");

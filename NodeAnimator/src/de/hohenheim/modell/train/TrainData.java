@@ -16,6 +16,7 @@ public class TrainData {
 	String typOfTrain;
 	private String ladung;
 	private String priority;
+	private boolean finish = false;
 
 	/**
 	 * Constructor for Train
@@ -28,12 +29,13 @@ public class TrainData {
 	 * @param anim
 	 */
 	public TrainData(int id, int speed, String typOfTrain, String ladung,
-			String priority) {
+			String priority, Boolean finish) {
 		this.id = id;
 		this.speed = speed;
 		this.typOfTrain = typOfTrain;
 		this.setLadung(ladung);
 		this.setPriority(priority);
+		this.setFinish(finish);
 
 	}
 
@@ -126,5 +128,14 @@ public class TrainData {
 	public void setPriority(String priority) {
 		this.priority = priority;
 	}
+
+	public boolean isFinish() {
+		return finish;
+	}
+
+	public void setFinish(boolean finish) {
+		this.finish = finish;
+	}
+
 
 }

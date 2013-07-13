@@ -77,7 +77,7 @@ public class XmlReader {
 
 			for (int i = 0; i < trains.getChildren().size(); i++) {
 
-				TrainData addingTrain = new TrainData(0, 0, null, null, null);
+				TrainData addingTrain = new TrainData(0, 0, null, null, null, false);
 
 				Element train = trains.getChildren().get(i);
 
@@ -273,7 +273,7 @@ public class XmlReader {
 		try {
 		for (int z = 0; z < rootOfAllTrain.getChildren().size(); z++){
 			
-			TrainData returnTrain = new TrainData(0, 0, null, null, null);
+			TrainData returnTrain = new TrainData(0, 0, null, null, null, false);
 			
 			Element root = rootOfAllTrain.getChildren().get(z);
 			
@@ -339,7 +339,7 @@ public class XmlReader {
 
 		}
 
-		TrainData returnTrain = new TrainData(0, 0, null, null, null);
+		TrainData returnTrain = new TrainData(0, 0, null, null, null, false);
 		try {
 			Element id = root.getChild("ID");
 			int iDValue = Integer.parseInt(id.getValue());
@@ -488,7 +488,7 @@ public class XmlReader {
 
 		for (int i = 0; i < trains.getChildren().size(); i++) {
 
-			TrainData addingTrain = new TrainData(0, 0, null, null, null);
+			TrainData addingTrain = new TrainData(0, 0, null, null, null, false);
 
 			Element train = trains.getChildren().get(i);
 

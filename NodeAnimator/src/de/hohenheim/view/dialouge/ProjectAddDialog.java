@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.Text;
 import de.hohenheim.controller.events.ProjectEvents;
 import de.hohenheim.controller.main.Main;
 import de.hohenheim.modell.timetable.Timetable;
-import de.hohenheim.modell.train.TrainData;
 import de.hohenheim.view.canvas.AnimationControllerCanvas;
 import de.hohenheim.view.mobile.ImageHelper;
 

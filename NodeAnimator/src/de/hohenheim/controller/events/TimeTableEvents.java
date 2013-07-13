@@ -609,7 +609,12 @@ public class TimeTableEvents {
 
 		return check;
 	}
-
+	
+	/**
+	 * 
+	 * Methode importAllTimetable load one or more then one Timetable into the Program when it starts
+	 * 
+	 */
 	public static void importAllTimetable(){
 		
 		for(Timetable tt: Main.getTimetableListAll()){

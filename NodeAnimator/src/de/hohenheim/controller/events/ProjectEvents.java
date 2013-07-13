@@ -320,7 +320,12 @@ public class ProjectEvents {
 		return check;
 
 	}
-
+	
+	/**
+	 * 
+	 * Methode importAllProjects load one or more then one Projects into the Program when it starts
+	 * 
+	 */
 	public static void importAllProjects(){
 		
 		for(Project p : Main.getProjectListAll()){
