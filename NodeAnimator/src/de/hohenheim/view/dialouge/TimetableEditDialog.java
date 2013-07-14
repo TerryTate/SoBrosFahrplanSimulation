@@ -81,7 +81,7 @@ public class TimetableEditDialog extends Dialog {
 	public void open(final boolean menu) {
 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-		dialog.setSize(400, 440);
+		dialog.setSize(330, 460);
 
 		// Set the window in the middle
 
@@ -224,8 +224,7 @@ public class TimetableEditDialog extends Dialog {
 		comboEndstation = new Combo(dialog, SWT.READ_ONLY);
 		comboEndstation.setItems(items);
 		comboEndstation.setBounds(115, 218, 100, 15);
-//		gridData.horizontalSpan = 2;
-//		comboEndstation.setLayoutData(gridData);
+
 
 		// Timetable MiddleStation
 
@@ -243,7 +242,7 @@ public class TimetableEditDialog extends Dialog {
 		Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
 		addButton.setImage(ImageHelper.add);
-		addButton.setBounds(x, y, width, height);
+		addButton.setBounds(220, 245, 95, 40);
 		;
 		addButton.addListener(SWT.Selection, new Listener() {
 
@@ -266,7 +265,7 @@ public class TimetableEditDialog extends Dialog {
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
 		removeButton.setImage(ImageHelper.remove);
-		removeButton.setBounds(x, y, width, height);
+		removeButton.setBounds(220, 290, 95, 40);
 		removeButton.addListener(SWT.Selection, new Listener() {
 
 			public void handleEvent(Event arg0) {
@@ -303,22 +302,14 @@ public class TimetableEditDialog extends Dialog {
 			}
 		});
 
-		
-//		gridData = new GridData();
-//		gridData.horizontalSpan = 2;
-//		gridData.horizontalAlignment = SWT.FILL;
-//
-//		tableComposite.setLayoutData(gridData);
-//		tableComposite.setLayout(new FillLayout());
-	
-
 		midlestationTable = new Table(dialog, SWT.NONE);
 		
 		midlestationTable.setLinesVisible(true);
-
+        midlestationTable.setBounds(115, 280, 100, 100);
+		
 		TableColumn midleStations = new TableColumn(midlestationTable, SWT.None);
 
-		midleStations.setWidth(180);
+		midleStations.setWidth(80);
 
 		if (menu == false) {
 
@@ -395,22 +386,13 @@ public class TimetableEditDialog extends Dialog {
 
 		}
 
-		// Button Composite
-
-		Composite buttonComposite = new Composite(dialog, SWT.NONE);
-		GridLayout gridLayout2 = new GridLayout();
-		gridLayout2.numColumns = 2;
-		buttonComposite.setLayout(gridLayout2);
-
+		
 		// OK Button
 
 		Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
 		okButton.setImage(ImageHelper.ok);
-		okButton.setBounds(x, y, width, height);
-//		gridData = new GridData();
-//		gridData.horizontalAlignment = SWT.CENTER;
-//		okButton.setLayoutData(gridData);
+		okButton.setBounds(80, 385, 100, 40);
 
 		okButton.addListener(SWT.Selection, new Listener() {
 
@@ -432,10 +414,7 @@ public class TimetableEditDialog extends Dialog {
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
 		cancelButton.setImage(ImageHelper.cancel);
-		cancelButton.setBounds(x, y, width, height);
-//		gridData = new GridData();
-//		gridData.horizontalAlignment = SWT.CENTER;
-//		cancelButton.setLayoutData(gridData);
+		cancelButton.setBounds(185, 385, 100, 40);
 
 		cancelButton.addListener(SWT.Selection, new Listener() {
 
