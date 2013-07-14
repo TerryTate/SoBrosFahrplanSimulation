@@ -243,6 +243,7 @@ public class TimetableEditDialog extends Dialog {
 		Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
 		addButton.setImage(ImageHelper.add);
+		addButton.setBounds(x, y, width, height);
 		;
 		addButton.addListener(SWT.Selection, new Listener() {
 
@@ -265,6 +266,7 @@ public class TimetableEditDialog extends Dialog {
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
 		removeButton.setImage(ImageHelper.remove);
+		removeButton.setBounds(x, y, width, height);
 		removeButton.addListener(SWT.Selection, new Listener() {
 
 			public void handleEvent(Event arg0) {
@@ -405,6 +407,7 @@ public class TimetableEditDialog extends Dialog {
 		Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
 		okButton.setImage(ImageHelper.ok);
+		okButton.setBounds(x, y, width, height);
 //		gridData = new GridData();
 //		gridData.horizontalAlignment = SWT.CENTER;
 //		okButton.setLayoutData(gridData);
@@ -429,6 +432,7 @@ public class TimetableEditDialog extends Dialog {
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
 		cancelButton.setImage(ImageHelper.cancel);
+		cancelButton.setBounds(x, y, width, height);
 //		gridData = new GridData();
 //		gridData.horizontalAlignment = SWT.CENTER;
 //		cancelButton.setLayoutData(gridData);
