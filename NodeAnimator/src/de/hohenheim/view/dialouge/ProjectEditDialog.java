@@ -70,7 +70,7 @@ public class ProjectEditDialog extends Dialog {
 	public void open() {
 
 		dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-		dialog.setSize(320, 310);
+		dialog.setSize(325, 295);
 
 		// Set the window in the middle of the window
 
@@ -82,9 +82,6 @@ public class ProjectEditDialog extends Dialog {
 
 		dialog.setText("Projekt bearbeiten");
 		dialog.setImage(ImageHelper.edit);
-		GridLayout gridLayout = new GridLayout();
-		gridLayout.numColumns = 3;
-		dialog.setLayout(gridLayout);
 
 		TableItem[] rowData = CompositeProject.getProjectTable().getSelection();
 
@@ -92,43 +89,37 @@ public class ProjectEditDialog extends Dialog {
 
 		Label id = new Label(dialog, SWT.NONE);
 		id.setText("ID : ");
+		id.setBounds(10, 10, 100, 15);
 
 		idText = new Text(dialog, SWT.NONE);
-		GridData gridData = new GridData();
-		gridData.horizontalSpan = 2;
-		gridData.horizontalAlignment = SWT.FILL;
-		idText.setLayoutData(gridData);
-
+		idText.setBounds(110, 10, 100, 15);
 		// Project Name
 
 		Label name = new Label(dialog, SWT.NONE);
 		name.setText("Name : ");
+		name.setBounds(10, 30, 100, 15);
 
 		nameText = new Text(dialog, SWT.NONE);
-		gridData = new GridData();
-		gridData.horizontalSpan = 2;
-		gridData.horizontalAlignment = SWT.FILL;
-		nameText.setLayoutData(gridData);
+		nameText.setBounds(110, 30, 100, 15);
 
 		// Choose Train
 
 		Label chooseTrain = new Label(dialog, SWT.NONE);
 		chooseTrain.setText("Zug wählen : ");
+		chooseTrain.setBounds(10, 55, 100, 15);
 
 		comboChooseTrain = new Combo(dialog, SWT.READ_ONLY);
 		String[] trainsID = new String[Main.getTrainListAll().size()];
 		comboChooseTrain.setItems(loadTrainList(trainsID));
 		comboChooseTrain.select(0);
-		gridData = new GridData();
-
-		gridData.horizontalAlignment = SWT.FILL;
-		comboChooseTrain.setLayoutData(gridData);
+		comboChooseTrain.setBounds(110, 50, 100, 15);
 
 		// Add Button
 
 		Button addButton = new Button(dialog, SWT.NONE);
 		addButton.setText("Add");
 		addButton.setImage(ImageHelper.addPlus);
+		addButton.setBounds(215, 50, 100, 40);
 		addButton.addListener(SWT.Selection, new Listener() {
 
 			public void handleEvent(Event arg0) {
@@ -153,21 +144,20 @@ public class ProjectEditDialog extends Dialog {
 
 		Label chooseTimeTable = new Label(dialog, SWT.NONE);
 		chooseTimeTable.setText("Fahrplan wählen : ");
+		chooseTimeTable.setBounds(10, 85, 100, 15);
 
 		comboChooseTimeTable = new Combo(dialog, SWT.READ_ONLY);
 		String[] timetableID2 = new String[Main.getTimetableListAll().size()];
 		comboChooseTimeTable.setItems(loadTimetableList(timetableID2));
 		comboChooseTimeTable.select(0);
-		gridData = new GridData();
-
-		gridData.horizontalAlignment = SWT.FILL;
-		comboChooseTimeTable.setLayoutData(gridData);
+		comboChooseTimeTable.setBounds(110, 80, 100, 15);
 
 		// Remove Button
 
 		Button removeButton = new Button(dialog, SWT.NONE);
 		removeButton.setText("Remove");
 		removeButton.setImage(ImageHelper.remove);
+		removeButton.setBounds(215, 95, 100, 40);
 		removeButton.addListener(SWT.Selection, new Listener() {
 
 			public void handleEvent(Event arg0) {
@@ -205,40 +195,22 @@ public class ProjectEditDialog extends Dialog {
 		});
 
 		// Linked List
-		Label room6 = new Label(dialog, SWT.NONE);
-		room6.setText("");
 
-		Composite tableComposite = new Composite(dialog, SWT.NONE);
-		gridData = new GridData();
-		gridData.horizontalSpan = 2;
-		gridData.horizontalAlignment = SWT.FILL;
-		tableComposite.setLayoutData(gridData);
-		tableComposite.setLayout(new FillLayout());
-
-		linkTable = new Table(tableComposite, SWT.NONE);
-
+		linkTable = new Table(dialog, SWT.NONE);
+ 
 		linkTable.setLinesVisible(true);
-
-		TableColumn trains = new TableColumn(linkTable, SWT.None);
+        linkTable.setBounds(55, 110, 150, 100); 
+ 		TableColumn trains = new TableColumn(linkTable, SWT.None);
 		TableColumn timetable = new TableColumn(linkTable, SWT.NONE);
-		trains.setWidth(100);
-		timetable.setWidth(100);
-
-		// Button Composite
-
-		Composite buttonComposite = new Composite(dialog, SWT.NONE);
-		GridLayout gridLayout2 = new GridLayout();
-		gridLayout2.numColumns = 2;
-		buttonComposite.setLayout(gridLayout2);
+		trains.setWidth(65);
+		timetable.setWidth(65);
 
 		// OK Button
 
 		Button okButton = new Button(dialog, SWT.NONE);
 		okButton.setText("OK");
 		okButton.setImage(ImageHelper.ok);
-		gridData = new GridData();
-		gridData.horizontalAlignment = SWT.CENTER;
-		okButton.setLayoutData(gridData);
+		okButton.setBounds(60, 220, 100, 40);
 
 		okButton.addListener(SWT.Selection, new Listener() {
 
@@ -259,9 +231,7 @@ public class ProjectEditDialog extends Dialog {
 		Button cancelButton = new Button(dialog, SWT.NONE);
 		cancelButton.setText("Cancel");
 		cancelButton.setImage(ImageHelper.cancel);
-		gridData = new GridData();
-		gridData.horizontalAlignment = SWT.CENTER;
-		cancelButton.setLayoutData(gridData);
+		cancelButton.setBounds(165, 220, 100, 40);
 
 		cancelButton.addListener(SWT.Selection, new Listener() {
 
