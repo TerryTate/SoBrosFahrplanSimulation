@@ -29,7 +29,7 @@ public class State {
 	/**
 	 * Constructor. Creates a new state object and assigns a object to this state object.
 	 * The new state object is automatically added to the static HashMap statemap.
-	 * @param {@link Object} o - the object to which this state belongs. 
+	 * @param o - {@link Object} the object to which this state belongs. 
 	 */
 	public State(Object o) {
 	  state=0;	
@@ -47,7 +47,7 @@ public class State {
 	
 	/**
 	 * Sets the state. 
-	 * @param int state - only the values 0=BLOCKED or 1=UNBLOCKED are allowed.
+	 * @param state - int only the values 0=BLOCKED or 1=UNBLOCKED are allowed.
 	 * @throws IllegalArgumentException - if value is not 0 or 1.
 	 */
 	public void setState(int state) throws IllegalArgumentException {

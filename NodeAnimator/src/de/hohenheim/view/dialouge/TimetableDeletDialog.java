@@ -120,8 +120,8 @@ public class TimetableDeletDialog extends Dialog {
 	/**
 	 * Load the timetableId's into a String[]
 	 * 
-	 * @param timetableID
-	 * @return timetableID - the id's of the trains
+	 * @param timetablesID
+	 * @return timetablesID - the id's of the trains
 	 */
 	private String[] loadTrainList(String[] timetablesID) {
 

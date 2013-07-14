@@ -67,7 +67,7 @@ public class Timetable {
 	/**
 	 * Getter for middlestations
 	 * 
-	 * @return
+	 * @return Arraylist Middlestation
 	 */
 	public ArrayList<Integer> getMiddlestations() {
 		return middlestations;
@@ -85,7 +85,7 @@ public class Timetable {
 	/**
 	 * Getter for start hour
 	 * 
-	 * @return
+	 * @return int startHouer
 	 */
 	public int getStartHouer() {
 		return startHouer;
@@ -103,7 +103,7 @@ public class Timetable {
 	/**
 	 * Getter for startMinutes
 	 * 
-	 * @return
+	 * @return int startminutes
 	 */
 	public int getStartMinutes() {
 		return startMinutes;
@@ -121,7 +121,7 @@ public class Timetable {
 	/**
 	 * Getter for ID
 	 * 
-	 * @return
+	 * @return int Id
 	 */
 	public int getId() {
 		return id;
@@ -139,7 +139,7 @@ public class Timetable {
 	/**
 	 * Getter for Name
 	 * 
-	 * @return
+	 * @return String name
 	 */
 	public String getName() {
 		return name;
@@ -157,7 +157,7 @@ public class Timetable {
 	/**
 	 * Getter for startstation
 	 * 
-	 * @return
+	 * @return int Startstation
 	 */
 	public int getStartstation() {
 		return startstation;
@@ -175,7 +175,7 @@ public class Timetable {
 	/**
 	 * Getter for endstation
 	 * 
-	 * @return
+	 * @return int Endstation
 	 */
 	public int getEndstation() {
 		return endstation;
@@ -193,7 +193,7 @@ public class Timetable {
 	/**
 	 * Getter for drivingdays
 	 * 
-	 * @return
+	 * @return Arraylist drivingdays
 	 */
 	public ArrayList<String> getDrivingdays() {
 		return drivingdays;
@@ -211,7 +211,7 @@ public class Timetable {
 	/**
 	 * Getter for visits
 	 * 
-	 * @return
+	 * @return int Visits
 	 */
 	public int getVisits() {
 		return visits;
@@ -229,7 +229,7 @@ public class Timetable {
 	/**
 	 * Getter for drive
 	 * 
-	 * @return
+	 * @return boolean drive
 	 */
 	public boolean isDrived() {
 		return drive;
@@ -248,7 +248,7 @@ public class Timetable {
 	/**
 	 * Getter for blocked
 	 * 
-	 * @return
+	 * @return boolean Blocked
 	 */
 	public boolean isBlocked() {
 		return blocked;

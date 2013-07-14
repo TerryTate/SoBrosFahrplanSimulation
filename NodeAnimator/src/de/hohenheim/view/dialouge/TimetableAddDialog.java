@@ -343,7 +343,7 @@ public class TimetableAddDialog extends Dialog {
 
 	/**
 	 * 
-	 * @return
+	 * @return boolean - Fahrplannamn Check
 	 */
 	protected boolean farplannameCheck() {
 
@@ -391,7 +391,7 @@ public class TimetableAddDialog extends Dialog {
 
 	/**
 	 * 
-	 * @return
+	 * @return boolean - Timetable Check
 	 */
 	protected boolean timetableCheck() {
 

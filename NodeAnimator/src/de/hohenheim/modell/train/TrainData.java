@@ -26,7 +26,7 @@ public class TrainData {
 	 * @param typOfTrain
 	 * @param ladung
 	 * @param priority
-	 * @param anim
+	 * 	
 	 */
 	public TrainData(int id, int speed, String typOfTrain, String ladung,
 			String priority, Boolean finish) {
@@ -42,7 +42,7 @@ public class TrainData {
 	/**
 	 * Getter for ID
 	 * 
-	 * @return
+	 * @return int - TrainID
 	 */
 	public int getID() {
 		return id;
@@ -51,7 +51,7 @@ public class TrainData {
 	/**
 	 * Getter for Speed
 	 * 
-	 * @return
+	 * @return int - TrainSpeed
 	 */
 	public int getSpeed() {
 		return speed;
@@ -60,7 +60,7 @@ public class TrainData {
 	/**
 	 * Getter for Typ of Train
 	 * 
-	 * @return
+	 * @return String - TypOfTrain
 	 */
 	public String getTypOfTrain() {
 		return typOfTrain;
@@ -96,7 +96,7 @@ public class TrainData {
 	/**
 	 * Getter for ladung
 	 * 
-	 * @return
+	 * @return String - TrainLadung
 	 */
 	public String getLadung() {
 		return ladung;
@@ -114,7 +114,7 @@ public class TrainData {
 	/**
 	 * Getter for Priority
 	 * 
-	 * @return
+	 * @return String - Train Priority
 	 */
 	public String getPriority() {
 		return priority;

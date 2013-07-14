@@ -133,7 +133,7 @@ public class AnimationProcess {
 	 * Method getValue return the Value of the Priority
 	 * 
 	 * @param priority
-	 * @return
+	 * @return int - Value
 	 */
 	private static int getValue(String priority) {
 

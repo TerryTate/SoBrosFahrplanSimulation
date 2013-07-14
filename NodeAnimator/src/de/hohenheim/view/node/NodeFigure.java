@@ -27,11 +27,10 @@ public class NodeFigure extends Figure {
 	private Image backgroundImage = null;
 
 	/**
-	 * Constructor. Creates a room with a name. The Name will be displayed in
+	 *  * Constructor. Creates a room with a name. The Name will be displayed in
 	 * the center of the figure.
 	 * 
-	 * @param String
-	 *            roomName
+	 * @param modellObject - String NodeFigure name
 	 */
 	public NodeFigure(Object modellObject) {
 		setModelObject(modellObject);

@@ -21,7 +21,7 @@ public class Map {
 	 * 
 	 * @param number
 	 *            - the node numbers in the map
-	 * @param args
+	 * @param c
 	 * @return map - the node map
 	 */
 	public static NodeMap createMap(Canvas c, int number) {

@@ -131,7 +131,7 @@ public class AnimationPlay implements Runnable {
 	/**
 	 * Getter for hour
 	 * 
-	 * @return
+	 * @return int hour
 	 */
 	private int getHoure() {
 		return houre;
@@ -140,7 +140,7 @@ public class AnimationPlay implements Runnable {
 	/**
 	 * Getter for the minutes
 	 * 
-	 * @return
+	 * @return int min 
 	 */
 	private int getMin() {
 		return min;
@@ -243,7 +243,7 @@ public class AnimationPlay implements Runnable {
 	/**
 	 * Getter for pause
 	 * 
-	 * @return
+	 * @return boolean - Pause
 	 */
 	public boolean isPause() {
 		return pause;
@@ -285,7 +285,7 @@ public class AnimationPlay implements Runnable {
 	/**
 	 * Getter for Project
 	 * 
-	 * @return
+	 * @return Project
 	 */
 	public static Project getP() {
 		return p;
@@ -303,7 +303,7 @@ public class AnimationPlay implements Runnable {
 	/**
 	 * Setter for map
 	 * 
-	 * @return
+	 * @return map
 	 */
 	public static NodeMap getMap() {
 		return map;

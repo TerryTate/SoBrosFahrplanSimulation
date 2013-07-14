@@ -297,7 +297,7 @@ public class BlockFinder implements Runnable {
 	 * Convert the Priority to a Value
 	 * 
 	 * @param priority
-	 * @return
+	 * @return int
 	 */
 	private int getValue(String priority) {
 
@@ -318,7 +318,7 @@ public class BlockFinder implements Runnable {
 	 * other Train.
 	 * 
 	 * @param animationList
-	 * @return
+	 * @return waitingForNodes
 	 */
 	private List<NodeFigure> getWaitingForNodes(
 			ArrayList<Animator> animationList) {

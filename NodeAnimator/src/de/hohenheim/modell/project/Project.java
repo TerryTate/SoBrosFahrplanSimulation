@@ -45,7 +45,7 @@ public class Project {
 	/**
 	 * Getter for ID
 	 * 
-	 * @return
+	 * @return int ID
 	 */
 	public int getId() {
 		return id;
@@ -63,7 +63,7 @@ public class Project {
 	/**
 	 * Getter for Name
 	 * 
-	 * @return
+	 * @return String name
 	 */
 	public String getName() {
 		return name;
@@ -81,7 +81,7 @@ public class Project {
 	/**
 	 * Getter for Train list
 	 * 
-	 * @return
+	 * @return TraindataProjectList
 	 */
 	public ArrayList<TrainData> getTraindataProjectList() {
 		return TraindataProjectList;
@@ -100,7 +100,7 @@ public class Project {
 	/**
 	 * Getter for Timetable list
 	 * 
-	 * @return
+	 * @return TimetableProjectList
 	 */
 	public ArrayList<Timetable> getTimeTableProjectList() {
 		return TimeTableProjectList;
@@ -120,7 +120,7 @@ public class Project {
 	 * Method get the timetable witch is part of the TrainID
 	 * 
 	 * @param figureId
-	 * @return
+	 * @return Timetable
 	 */
 	public Timetable getTimetable(int figureId) {
 		int k = 0;

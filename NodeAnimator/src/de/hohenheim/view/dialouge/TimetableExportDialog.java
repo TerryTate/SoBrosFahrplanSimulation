@@ -125,8 +125,8 @@ public class TimetableExportDialog {
 	/**
 	 * Load the timetableID's into a String[]
 	 * 
-	 * @param timetableID
-	 * @return timetableID - the id's of the timetables
+	 * @param timetablesID
+	 * @return timetablesID - the id's of the timetables
 	 */
 	private String[] loadTimetableList(String[] timetablesID) {
 
